@@ -14,34 +14,63 @@
     body {
       margin: 0;
       background-color: #111;
+      color: white;
+      font-family: sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
-      font-family: sans-serif;
-      color: white;
+      min-height: 100vh;
     }
     img {
       max-width: 95%;
-      max-height: 95vh;
+      max-height: 80vh;
       border-radius: 16px;
+      margin-top: 40px;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     }
+    .buttons {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .buttons a {
+      text-decoration: none;
+      color: #111;
+      background-color: #fff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+    .buttons a:hover {
+      background-color: #ddd;
+    }
     footer {
-      position: absolute;
-      bottom: 10px;
+      margin-top: auto;
+      margin-bottom: 20px;
       font-size: 0.85rem;
       color: #aaa;
       text-align: center;
+      padding: 10px;
     }
   </style>
 </head>
 <body>
-  <img src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" alt="GoldenJDM">
-  
+
+  <img src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" alt="Banner">
+
+  <div class="buttons">
+    <a href="https://t.me/GoldenJDM" target="_blank">تماس در تلگرام</a>
+    <a href="https://t.me/GoldenJDMBOT" target="_blank">ارسال گزارش یا پیام</a>
+    <a href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank">پروفایل من در ویکی‌پدیا</a>
+    <a href="https://github.com/GoldenJDM" target="_blank">صفحه گیت‌هاب من</a>
+  </div>
+
   <footer>
     © 2025 — All intellectual and digital rights of this website are strictly reserved and protected under applicable international standards.
   </footer>
+
 </body>
 </html>
