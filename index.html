@@ -5,72 +5,77 @@
   <title>GoldenJDM | Amirhossein Zarniyan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="وبسایت رسمی GoldenJDM - Amirhossein Zarniyan، ادیتور ویکی‌پدیا و دانش‌آموز" />
-  <meta name="keywords" content="GoldenJDM, Amirhossein Zarniyan, ویکی‌پدیا, سایت شخصی, golden jdm" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://goldenjdm.vercel.app/" />
   <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
-  
-  <!-- Open Graph tags -->
-  <meta property="og:title" content="GoldenJDM | Amirhossein Zarniyan" />
-  <meta property="og:description" content="وبسایت رسمی Amirhossein Zarniyan، دانش‌آموز و ویکی‌پدیانویس" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://goldenjdm.vercel.app/" />
-  <meta property="og:image" content="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" />
-
-  <!-- Schema.org Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Amirhossein Zarniyan",
-    "url": "https://goldenjdm.vercel.app/",
-    "sameAs": [
-      "https://t.me/GoldenJDM",
-      "https://fa.wikipedia.org/wiki/کاربر:GoldenJDM",
-      "https://github.com/GoldenJDM"
-    ],
-    "jobTitle": "Wikipedia Editor",
-    "description": "وبسایت رسمی Amirhossein Zarniyan"
-  }
-  </script>
 
   <style>
     * { box-sizing: border-box; margin:0; padding:0; }
     body {
       font-family: "Vazirmatn", sans-serif;
-      background-color: #0e0e0e;
+      background: linear-gradient(135deg, #0e0e0e, #1a1a1a, #101820);
       color: #eaeaea;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
     header { text-align:center; margin-bottom:30px; }
     header img {
-      width:150px; height:150px; border-radius:50%;
+      width:160px; height:160px; border-radius:50%;
       object-fit:cover;
-      box-shadow:0 0 25px rgba(255,255,255,0.1);
+      box-shadow:0 0 30px rgba(255,255,255,0.15);
+      transition: transform .4s ease;
     }
-    h1 { font-size:2rem; margin-top:15px; }
+    header img:hover { transform: scale(1.05); }
+    h1 { font-size:2.2rem; margin-top:15px; }
     p.tagline { font-size:1rem; color:#bbb; margin-top:5px; }
-    h2 { font-size: 1.5rem; margin: 20px 0 10px; color: #eee; }
+
+    h2 { 
+      font-size: 1.4rem; 
+      margin: 20px 0 15px; 
+      color: #eee;
+      position: relative;
+    }
+    h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #eaeaea;
+      margin: 8px auto 0;
+      border-radius: 3px;
+    }
+
     .buttons {
-      display:flex; flex-direction:column; gap:12px;
-      margin-top:30px; width:100%; max-width:400px;
+      display:flex; flex-direction:column; gap:14px;
+      margin-top:20px; width:100%; max-width:420px;
     }
     .buttons a {
       text-decoration:none; color:#0e0e0e;
-      background:#eaeaea; padding:14px; border-radius:12px;
+      background:#eaeaea; padding:14px; border-radius:14px;
       font-weight:bold; text-align:center; transition:all .3s ease;
+      box-shadow:0 3px 10px rgba(0,0,0,0.3);
     }
-    .buttons a:hover { background:#ccc; }
+    .buttons a:hover { 
+      background:#fff; 
+      box-shadow:0 0 15px rgba(255,255,255,0.5);
+      transform: translateY(-3px);
+    }
+
     footer {
       margin-top:auto; padding:20px 0;
       font-size:0.8rem; text-align:center; color:#777;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      width:100%;
     }
+
     @media (max-width:600px){
-      h1{ font-size:1.5rem; }
+      h1{ font-size:1.6rem; }
       .buttons a{ padding:12px; font-size:0.95rem; }
     }
   </style>
@@ -80,7 +85,7 @@
 <header>
   <img src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" alt="عکس Amirhossein Zarniyan" />
   <h1>GoldenJDM</h1>
-  <p class="tagline">Amirhossein Zarniyan | ادیتور ویکی‌پدیا، دانش‌آموز</p>
+  <p class="tagline">Amirhossein Zarniyan | ادیتور ویکی‌پدیا، دانش‌آموز</p>
 </header>
 
 <h2>دسترسی سریع</h2>
@@ -96,4 +101,6 @@
 </footer>
 
 </body>
+</html>
+
 </html>
