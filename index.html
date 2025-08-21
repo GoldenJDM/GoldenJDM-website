@@ -62,6 +62,7 @@
     }
     a{color:inherit;text-decoration:none}
     .wrap{width:min(100%, var(--max)); margin-inline:auto; padding-inline:clamp(16px,4vw,32px)}
+
     /* Nav */
     nav{
       position:sticky; top:0; z-index:50;
@@ -74,10 +75,6 @@
       height:64px;
     }
     .brand{font-weight:800; letter-spacing:.3px}
-    .brand .grad{
-      background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
     .links{display:flex; gap:18px; font-weight:600}
     .links a{opacity:.9}
     .links a:hover{opacity:1}
@@ -101,13 +98,19 @@
       line-height:1.15;
       letter-spacing:-.4px;
     }
+    .grad-hero{
+      background: var(--grad1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
     .subtitle{
       color:var(--muted);
       font-size:clamp(15px,2.5vw,18px);
       max-width:60ch; margin-inline:auto;
     }
     .cta{
-      display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:10px;
+      display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:10px;
     }
     .btn{
       padding:12px 18px; border-radius:14px; border:1px solid var(--border);
@@ -157,7 +160,7 @@
       padding:6px 10px; border-radius:999px; backdrop-filter: blur(6px);
     }
     .credit a{text-decoration:underline}
-    /* Reduced motion */
+
     @media (prefers-reduced-motion: no-preference){
       .pulse{
         position:absolute; inset:0; pointer-events:none; z-index:-1;
@@ -175,7 +178,7 @@
 <body>
   <nav>
     <div class="wrap nav-inner">
-      <div class="brand">Golden<span class="grad">JDM</span></div>
+      <div class="brand">امیرحسین زرنیان — <span class="grad-hero">GoldenJDM</span></div>
       <div class="links">
         <a href="#work">پروژه‌ها</a>
         <a href="#writing">لینک‌ها</a>
@@ -191,7 +194,7 @@
     <!-- HERO -->
     <section class="hero" id="home">
       <img class="avatar" src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" alt="Amirhossein Zarniyan">
-      <h1>امیرحسین زرنیان — <span class="grad" style="-webkit-background-clip:text;background-clip:text;background:var(--grad1);color:transparent;">GoldenJDM</span></h1>
+      <h1>امیرحسین زرنیان — <span class="grad-hero">GoldenJDM</span></h1>
       <p class="subtitle">
         ویکی‌پدیانویس و دانش‌آموز؛ عاشق پروژه‌های کوچکِ تمیز، مستندات خوب، و وبِ سریع.
       </p>
@@ -210,18 +213,18 @@
           <h3>وبسایت شخصی</h3>
           <p>نسخه‌ی مینیمال با تمرکز بر سرعت، سئو و دسترس‌پذیری.</p>
         </a>
-        <a class="card" href="https://github.com/GoldenJDM" target="_blank" rel="noopener">
-          <h3>بوت تلگرام</h3>
+        <a class="card" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener">
+          <h3>ربات تلگرام</h3>
           <p>مدیریت پیام ناشناس، آمار و امکانات مدیریتی سبک.</p>
         </a>
-        <a class="card" href="#" target="_blank" rel="noopener">
+        <div class="card">
           <h3>صفحه تبریک تعاملی</h3>
           <p>جشنِ Confetti با اسکرول/کلیک؛ خالصِ HTML+CSS+JS.</p>
-        </a>
-        <a class="card" href="#" target="_blank" rel="noopener">
+        </div>
+        <div class="card">
           <h3>مستندسازی ویکی</h3>
           <p>راهنماها و الگوها برای بهبود کیفیت مقالات فارسی.</p>
-        </a>
+        </div>
       </div>
     </section>
 
@@ -229,13 +232,13 @@
     <section id="writing">
       <h2 class="title">نوشته‌ها و لینک‌ها</h2>
       <div class="grid">
-        <a class="card" href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener">
+        <a class="card" href="https://fa.m.wikipedia.org/wiki/%D9%88%DB%8C%DA%98%D9%87:%D9%85%D8%B4%D8%A7%D8%B1%DA%A9%D8%AA%E2%80%8C%D9%87%D8%A7/GoldenJDM" target="_blank" rel="noopener">
           <h3>ویرایش‌های اخیر ویکی‌پدیا</h3>
-          <p>پیگیری ویرایش‌ها و مشارکت‌ها در دانشنامه.</p>
+          <p>پیگیری مشارکت‌ها و ویرایش‌های اخیر من در ویکی‌پدیا فارسی.</p>
         </a>
         <a class="card" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">
-          <h3>کانال/تماس</h3>
-          <p>اخبار پروژه‌ها، ارتباط مستقیم و بازخورد.</p>
+          <h3>کانال Daily</h3>
+          <p>کانال شخصی Daily با پست‌ها، موزیک‌ها و اشتراک تجربه‌های روزانه.</p>
         </a>
       </div>
     </section>
@@ -254,5 +257,17 @@
     <!-- CONTACT -->
     <section id="contact">
       <h2 class="title">ارتباط</h2>
-      <div class="card">
-        <p style="margin:0
+      <div class="cta">
+        <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">تلگرام</a>
+        <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener">ربات تلگرام</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="wrap">
+    <p>© 2025 — تمامی حقوق این وبسایت محفوظ است.</p>
+    <div class="credit">Made with ❤️ by GoldenJDM</div>
+  </footer>
+</body>
+</html>
