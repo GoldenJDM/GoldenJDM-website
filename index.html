@@ -81,16 +81,31 @@
 
     /* Hero */
     .hero{
+      position: relative;
       padding-block: clamp(48px,10vh,120px);
       display:grid; gap:32px;
       grid-template-columns: 1fr;
       place-items:center;
       text-align:center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png') center/cover no-repeat;
+      filter: blur(12px) brightness(0.3);
+      z-index: -1;
+      transform: scale(1.1);
     }
     .avatar{
-      width:120px; height:120px; border-radius:50%;
-      object-fit:cover; box-shadow: var(--shadow);
+      width:120px; 
+      height:120px; 
+      border-radius:50%;
+      object-fit: contain; /* تمام بخش‌های عکس دیده شود */
+      box-shadow: var(--shadow);
       border:1px solid var(--border);
+      background: rgba(255,255,255,0.05);
     }
     h1{
       margin:0;
