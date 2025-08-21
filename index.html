@@ -1,77 +1,72 @@
 <!DOCTYPE html>
 <html lang="fa">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GoldenJDM</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: sans-serif;
-        background: #0a0a0a;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        text-align: center;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GoldenJDM</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Vazirmatn", sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      text-align: center;
+    }
 
-      .container {
-        max-width: 600px;
-        padding: 20px;
-      }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-      .name-gradient {
-        background: linear-gradient(90deg, #7f00ff, #e100ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        display: inline-block; /* این خط باعث میشه کادر حذف بشه */
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin: 0;
-      }
+    .name-gradient {
+      background: linear-gradient(90deg, #7f00ff, #e100ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 0;
+    }
 
-      .subtitle {
-        margin-top: 10px;
-        font-size: 1.1rem;
-        color: #aaa;
-      }
+    .subtitle {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #aaa;
+    }
 
-      .links {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
 
-      .link-btn {
-        padding: 12px 20px;
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 8px;
-        color: #fff;
-        text-decoration: none;
-        transition: background 0.3s, transform 0.2s;
-      }
+    footer a {
+      color: #aaa;
+      text-decoration: none;
+    }
 
-      .link-btn:hover {
-        background: #7f00ff;
-        transform: translateY(-2px);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1 class="name-gradient">امیرحسین زرنیان</h1>
-      <p class="subtitle">GoldenJDM | Developer & Creator</p>
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="name-gradient">GoldenJDM</h1>
+    <p class="subtitle">Developer & Creator</p>
+  </div>
 
-      <div class="links">
-        <a href="#" class="link-btn">About</a>
-        <a href="#" class="link-btn">Projects</a>
-        <a href="#" class="link-btn">Blog</a>
-        <a href="#" class="link-btn">Contact</a>
-      </div>
-    </div>
-  </body>
+  <footer>
+    <p>© 2025 GoldenJDM. تمامی حقوق محفوظ است.</p>
+    <p>Made with ❤️ by <a href="#">GoldenJDM</a></p>
+  </footer>
+</body>
 </html>
