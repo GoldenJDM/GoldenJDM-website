@@ -1,127 +1,258 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoldenJDM</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GoldenJDM — Amirhossein Zarniyan</title>
+  <meta name="description" content="پروندهٔ شخصی امیرحسین زرنیان (GoldenJDM). پروژه‌ها، نوشته‌ها و راه‌های تماس." />
+  <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="GoldenJDM — Amirhossein Zarniyan">
+  <meta property="og:description" content="پروژه‌ها، لینک‌ها و راه‌های تماس">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://goldenjdm.vercel.app/">
+  <meta property="og:image" content="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Amirhossein Zarniyan",
+    "alternateName":"GoldenJDM",
+    "url":"https://goldenjdm.vercel.app/",
+    "sameAs":[
+      "https://t.me/GoldenJDM",
+      "https://fa.wikipedia.org/wiki/کاربر:GoldenJDM",
+      "https://github.com/GoldenJDM"
+    ],
+    "jobTitle":"Wikipedia Editor / Student",
+    "image":"https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png"
+  }
+  </script>
+
   <style>
-    body {
-      margin: 0;
-      font-family: "Vazirmatn", sans-serif;
-      background: #fafafa;
-      color: #111;
-      line-height: 1.8;
-      direction: rtl;
+    :root{
+      --bg: #0b0b0f;
+      --fg: #e9e9ef;
+      --muted:#a7a7b3;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.12);
+      --max: 1080px;
+      --radius: 24px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --grad1: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #a78bfa, #f472b6, #6ee7ff);
     }
-    header {
-      padding: 4rem 2rem;
-      text-align: center;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Vazirmatn",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(1200px 800px at 80% -10%, #3b82f610 30%, transparent 60%) no-repeat,
+        radial-gradient(1000px 700px at -10% 10%, #f472b610 30%, transparent 60%) no-repeat,
+        var(--bg);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin: 0;
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(100%, var(--max)); margin-inline:auto; padding-inline:clamp(16px,4vw,32px)}
+    /* Nav */
+    nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(10,10,14,.6);
+      border-bottom:1px solid var(--border);
     }
-    header p {
-      margin-top: .5rem;
-      color: #555;
-      font-size: 1.1rem;
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
     }
-    .grad {
-      background: linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .brand{font-weight:800; letter-spacing:.3px}
+    .brand .grad{
+      background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
     }
-    section {
-      padding: 4rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
+    .links{display:flex; gap:18px; font-weight:600}
+    .links a{opacity:.9}
+    .links a:hover{opacity:1}
+
+    /* Hero */
+    .hero{
+      padding-block: clamp(48px,10vh,120px);
+      display:grid; gap:32px;
+      grid-template-columns: 1fr;
+      place-items:center;
+      text-align:center;
     }
-    section h2.title {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
+    .avatar{
+      width:120px; height:120px; border-radius:50%;
+      object-fit:cover; box-shadow: var(--shadow);
+      border:1px solid var(--border);
     }
-    .card {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      margin-bottom: 1.5rem;
+    h1{
+      margin:0;
+      font-size:clamp(28px,5vw,56px);
+      line-height:1.15;
+      letter-spacing:-.4px;
     }
-    a {
-      color: #3b82f6;
-      text-decoration: none;
+    .subtitle{
+      color:var(--muted);
+      font-size:clamp(15px,2.5vw,18px);
+      max-width:60ch; margin-inline:auto;
     }
-    a:hover {
-      text-decoration: underline;
+    .cta{
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:10px;
     }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #f1f1f1;
-      margin-top: 2rem;
+    .btn{
+      padding:12px 18px; border-radius:14px; border:1px solid var(--border);
+      background:var(--card);
+      font-weight:700; transition:.25s transform, .25s box-shadow, .25s background;
     }
-    .credit {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #888;
-      margin-bottom: 1rem;
+    .btn:hover{transform:translateY(-2px); box-shadow: var(--shadow)}
+    .btn.primary{
+      background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
+      border:none; color:#0b0b0f;
+    }
+
+    /* Sections */
+    section{padding-block: clamp(48px,10vh,96px)}
+    .title{
+      font-size: clamp(22px,4vw,28px);
+      margin:0 0 18px 0;
+    }
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns: 1fr;
+    }
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:18px 20px; transition:.25s transform, .25s border-color, .25s background;
+    }
+    .card:hover{transform:translateY(-4px); border-color:#ffffff33; background:rgba(255,255,255,.08)}
+    .card h3{margin:0 0 6px 0; font-size:18px}
+    .card p{margin:0; color:var(--muted); line-height:1.8}
+
+    @media (min-width: 800px){
+      .hero{grid-template-columns: .9fr; }
+      .grid{grid-template-columns: repeat(2,1fr)}
+    }
+
+    /* Footer / credit */
+    footer{
+      border-top:1px solid var(--border);
+      color:#b6b6c2;
+      padding:28px 0 60px;
+      font-size:14px;
+    }
+    .credit{
+      position:fixed; inset-inline-start:10px; inset-block-end:10px;
+      font-size:12px; color:#9aa0aa; opacity:.9;
+      background:rgba(255,255,255,.06); border:1px solid var(--border);
+      padding:6px 10px; border-radius:999px; backdrop-filter: blur(6px);
+    }
+    .credit a{text-decoration:underline}
+    /* Reduced motion */
+    @media (prefers-reduced-motion: no-preference){
+      .pulse{
+        position:absolute; inset:0; pointer-events:none; z-index:-1;
+        background: radial-gradient(500px 300px at 30% -10%, #60a5fa22, transparent 60%),
+                    radial-gradient(500px 300px at 80% 110%, #f472b622, transparent 60%);
+        animation: floaty 8s ease-in-out infinite alternate;
+      }
+      @keyframes floaty{
+        from{transform:translateY(0)}
+        to{transform:translateY(12px)}
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>
-      امیرحسین زرنیان — <span class="grad">GoldenJDM</span>
-    </h1>
-    <p>برنامه‌نویس • خالق محتوا • علاقه‌مند به تکنولوژی</p>
-  </header>
+  <nav>
+    <div class="wrap nav-inner">
+      <div class="brand">Golden<span class="grad">JDM</span></div>
+      <div class="links">
+        <a href="#work">پروژه‌ها</a>
+        <a href="#writing">لینک‌ها</a>
+        <a href="#about">درباره</a>
+        <a href="#contact">ارتباط</a>
+      </div>
+    </div>
+  </nav>
 
-  <section id="about">
-    <h2 class="title">درباره من</h2>
-    <div class="card">
-      <p>
-        من امیرحسین زرنیان هستم، با نام مستعار <strong>GoldenJDM</strong>.  
-        عاشق یادگیری تکنولوژی‌های جدید و خلق پروژه‌های متفاوت.  
-        هدفم ایجاد چیزهایی است که بتونن هم سرگرم‌کننده باشن و هم مفید.
+  <main class="wrap">
+    <div class="pulse" aria-hidden="true"></div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <img class="avatar" src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" alt="Amirhossein Zarniyan">
+      <h1>امیرحسین زرنیان — <span class="grad" style="-webkit-background-clip:text;background-clip:text;background:var(--grad1);color:transparent;">GoldenJDM</span></h1>
+      <p class="subtitle">
+        ویکی‌پدیانویس و دانش‌آموز؛ عاشق پروژه‌های کوچکِ تمیز، مستندات خوب، و وبِ سریع.
       </p>
-    </div>
-  </section>
+      <div class="cta">
+        <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">تماس در تلگرام</a>
+        <a class="btn" href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener">پروفایل ویکی‌پدیا</a>
+        <a class="btn" href="https://github.com/GoldenJDM" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
 
-  <section id="projects">
-    <h2 class="title">پروژه‌ها</h2>
-    <div class="card">
-      <p>
-        🔹 پروژه ۱ — توضیحات کوتاه درباره پروژه اول  
-        🔹 پروژه ۲ — توضیحات کوتاه درباره پروژه دوم  
-        🔹 پروژه ۳ — توضیحات کوتاه درباره پروژه سوم
-      </p>
-    </div>
-  </section>
+    <!-- WORK -->
+    <section id="work">
+      <h2 class="title">منتخب پروژه‌ها</h2>
+      <div class="grid">
+        <a class="card" href="https://goldenjdm.vercel.app/" target="_blank" rel="noopener">
+          <h3>وبسایت شخصی</h3>
+          <p>نسخه‌ی مینیمال با تمرکز بر سرعت، سئو و دسترس‌پذیری.</p>
+        </a>
+        <a class="card" href="https://github.com/GoldenJDM" target="_blank" rel="noopener">
+          <h3>بوت تلگرام</h3>
+          <p>مدیریت پیام ناشناس، آمار و امکانات مدیریتی سبک.</p>
+        </a>
+        <a class="card" href="#" target="_blank" rel="noopener">
+          <h3>صفحه تبریک تعاملی</h3>
+          <p>جشنِ Confetti با اسکرول/کلیک؛ خالصِ HTML+CSS+JS.</p>
+        </a>
+        <a class="card" href="#" target="_blank" rel="noopener">
+          <h3>مستندسازی ویکی</h3>
+          <p>راهنماها و الگوها برای بهبود کیفیت مقالات فارسی.</p>
+        </a>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2 class="title">ارتباط</h2>
-    <div class="card">
-      <p style="margin:0">
-        برای تماس مستقیم می‌تونید از  
-        <a href="https://t.me/GoldenJDM" target="_blank">تلگرام</a> استفاده کنید،  
-        یا به  
-        <a href="https://github.com/GoldenJDM" target="_blank">GitHub</a> سر بزنید.
-      </p>
-    </div>
-  </section>
+    <!-- WRITING / LINKS -->
+    <section id="writing">
+      <h2 class="title">نوشته‌ها و لینک‌ها</h2>
+      <div class="grid">
+        <a class="card" href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener">
+          <h3>ویرایش‌های اخیر ویکی‌پدیا</h3>
+          <p>پیگیری ویرایش‌ها و مشارکت‌ها در دانشنامه.</p>
+        </a>
+        <a class="card" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">
+          <h3>کانال/تماس</h3>
+          <p>اخبار پروژه‌ها، ارتباط مستقیم و بازخورد.</p>
+        </a>
+      </div>
+    </section>
 
-  <footer>
-    <div class="wrap">
-      <p>© 2025 GoldenJDM — تمامی حقوق محفوظ است.</p>
-    </div>
-  </footer>
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="title">درباره من</h2>
+      <div class="card">
+        <p style="margin:0">
+          من امیرحسین (GoldenJDM) هستم. روی پروژه‌های کوچک اما باکیفیت کار می‌کنم؛
+          تمرکزم روی نظم، سادگی، و تجربه کاربریه. اگر همکاری یا ایده‌ای داری خوشحال می‌شم بشنوم.
+        </p>
+      </div>
+    </section>
 
-  <div class="credit">
-    ساخته شده توسط <a href="https://goldenjdm.vercel.app/">GoldenJDM</a>
-  </div>
-</body>
-</html></body>
-</html>
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="title">ارتباط</h2>
+      <div class="card">
+        <p style="margin:0
