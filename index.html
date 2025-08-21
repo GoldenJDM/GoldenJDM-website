@@ -1,72 +1,127 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GoldenJDM</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: "Vazirmatn", sans-serif;
-      background-color: #0d0d0d;
-      color: #fff;
+      background: #fafafa;
+      color: #111;
+      line-height: 1.8;
+      direction: rtl;
+    }
+    header {
+      padding: 4rem 2rem;
       text-align: center;
     }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .name-gradient {
-      background: linear-gradient(90deg, #7f00ff, #e100ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-      font-size: 3rem;
-      font-weight: bold;
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
       margin: 0;
     }
-
-    .subtitle {
-      margin-top: 10px;
-      font-size: 1.2rem;
-      color: #aaa;
+    header p {
+      margin-top: .5rem;
+      color: #555;
+      font-size: 1.1rem;
     }
-
-    footer {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
+    .grad {
+      background: linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    section {
+      padding: 4rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    section h2.title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
       text-align: center;
-      font-size: 0.9rem;
-      color: #666;
     }
-
-    footer a {
-      color: #aaa;
+    .card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 1.5rem;
+    }
+    a {
+      color: #3b82f6;
       text-decoration: none;
     }
-
-    footer a:hover {
-      color: #fff;
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #f1f1f1;
+      margin-top: 2rem;
+    }
+    .credit {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="name-gradient">GoldenJDM</h1>
-    <p class="subtitle">Developer & Creator</p>
-  </div>
+  <header>
+    <h1>
+      امیرحسین زرنیان — <span class="grad">GoldenJDM</span>
+    </h1>
+    <p>برنامه‌نویس • خالق محتوا • علاقه‌مند به تکنولوژی</p>
+  </header>
+
+  <section id="about">
+    <h2 class="title">درباره من</h2>
+    <div class="card">
+      <p>
+        من امیرحسین زرنیان هستم، با نام مستعار <strong>GoldenJDM</strong>.  
+        عاشق یادگیری تکنولوژی‌های جدید و خلق پروژه‌های متفاوت.  
+        هدفم ایجاد چیزهایی است که بتونن هم سرگرم‌کننده باشن و هم مفید.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="title">پروژه‌ها</h2>
+    <div class="card">
+      <p>
+        🔹 پروژه ۱ — توضیحات کوتاه درباره پروژه اول  
+        🔹 پروژه ۲ — توضیحات کوتاه درباره پروژه دوم  
+        🔹 پروژه ۳ — توضیحات کوتاه درباره پروژه سوم
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="title">ارتباط</h2>
+    <div class="card">
+      <p style="margin:0">
+        برای تماس مستقیم می‌تونید از  
+        <a href="https://t.me/GoldenJDM" target="_blank">تلگرام</a> استفاده کنید،  
+        یا به  
+        <a href="https://github.com/GoldenJDM" target="_blank">GitHub</a> سر بزنید.
+      </p>
+    </div>
+  </section>
 
   <footer>
-    <p>© 2025 GoldenJDM. تمامی حقوق محفوظ است.</p>
-    <p>Made with ❤️ by <a href="#">GoldenJDM</a></p>
+    <div class="wrap">
+      <p>© 2025 GoldenJDM — تمامی حقوق محفوظ است.</p>
+    </div>
   </footer>
+
+  <div class="credit">
+    ساخته شده توسط <a href="https://goldenjdm.vercel.app/">GoldenJDM</a>
+  </div>
 </body>
+</html></body>
 </html>
