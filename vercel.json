@@ -1,12 +1,1 @@
-{
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [
-        { "type": "host", "value": "www.goldenjdm.vercel.app" }
-      ],
-      "destination": "https://goldenjdm.vercel.app/:1",
-      "permanent": true
-    }
-  ]
-}
+
