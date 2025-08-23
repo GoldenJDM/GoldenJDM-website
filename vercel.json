@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://goldenjdm.vercel.app/$1",
+      "permanent": true
+    }
+  ]
+}
