@@ -117,17 +117,19 @@
       display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:10px;
     }
     .btn{
+      display:flex; align-items:center; gap:8px;
       padding:12px 18px; border-radius:14px; border:1px solid var(--border);
       background:var(--card);
       font-weight:700; transition:.25s transform, .25s box-shadow, .25s background;
-      display: inline-flex; align-items: center; gap:8px;
+    }
+    .btn img{
+      width:20px; height:20px;
     }
     .btn:hover{transform:translateY(-2px); box-shadow: var(--shadow)}
     .btn.primary{
       background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
       border:none; color:#0b0b0f;
     }
-    .btn img{width:20px; height:20px; display:inline-block;}
 
     /* Sections */
     section{padding-block: clamp(48px,10vh,96px)}
@@ -158,12 +160,7 @@
       color:#b6b6c2;
       padding:28px 0 60px;
       font-size:14px;
-      text-align:center;
     }
-    .footer-icons{
-      margin-top:12px; display:flex; gap:18px; justify-content:center;
-    }
-    .footer-icons img{width:28px; height:28px; filter:invert(1);}
     .credit{
       position:fixed; inset-inline-start:10px; inset-block-end:10px;
       font-size:12px; color:#9aa0aa; opacity:.9;
@@ -214,11 +211,11 @@
           <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="Telegram">
           تماس در تلگرام
         </a>
-        <a class="btn" href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener">
+        <a class="btn primary" href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener">
           <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/wikipedia-logotype-of-earth-puzzle-svgrepo-com.svg" alt="Wikipedia">
           پروفایل ویکی‌پدیا
         </a>
-        <a class="btn" href="https://github.com/GoldenJDM" target="_blank" rel="noopener">
+        <a class="btn primary" href="https://github.com/GoldenJDM" target="_blank" rel="noopener">
           <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/github-mark.svg" alt="GitHub">
           GitHub
         </a>
@@ -282,7 +279,10 @@
           <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="Telegram">
           تلگرام
         </a>
-        <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener">🤖 ربات تلگرام</a>
+        <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="Telegram Bot">
+          ربات تلگرام
+        </a>
       </div>
     </section>
   </main>
@@ -290,17 +290,6 @@
   <!-- FOOTER -->
   <footer class="wrap">
     <p>© 2025 — تمامی حقوق این وبسایت محفوظ است.</p>
-    <div class="footer-icons">
-      <a href="https://t.me/GoldenJDM" target="_blank">
-        <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="Telegram">
-      </a>
-      <a href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank">
-        <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/wikipedia-logotype-of-earth-puzzle-svgrepo-com.svg" alt="Wikipedia">
-      </a>
-      <a href="https://github.com/GoldenJDM" target="_blank">
-        <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/github-mark.svg" alt="GitHub">
-      </a>
-    </div>
     <div class="credit">Made with ❤️ by GoldenJDM</div>
   </footer>
 </body>
