@@ -50,7 +50,6 @@
       --radius: 24px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --grad1: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #a78bfa, #f472b6, #6ee7ff);
-      --btn-color: linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -85,17 +84,18 @@
     .links a:hover{opacity:1}
 
     /* Hero */
-    .hero {
-      position: relative;
-      background: url('https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png') center/cover no-repeat;
+    .hero{
       padding-block: clamp(48px,10vh,120px);
-      display: grid;
-      gap: 32px;
-      place-items: center;
-      text-align: center;
-      color: white;
+      display:grid; gap:32px;
+      grid-template-columns: 1fr;
+      place-items:center;
+      text-align:center;
     }
-    .hero img.avatar { display:none; }
+    .avatar{
+      width:120px; height:120px; border-radius:50%;
+      object-fit:cover; box-shadow: var(--shadow);
+      border:1px solid var(--border);
+    }
     h1{
       margin:0;
       font-size:clamp(28px,5vw,56px);
@@ -109,7 +109,7 @@
       color: transparent;
     }
     .subtitle{
-      color:white;
+      color:var(--muted);
       font-size:clamp(15px,2.5vw,18px);
       max-width:60ch; margin-inline:auto;
     }
@@ -117,17 +117,19 @@
       display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:10px;
     }
     .btn{
-      padding:12px 18px; border-radius:14px; border:none;
-      background: var(--btn-color);
-      color:#0b0b0f;
+      display:flex; align-items:center; gap:8px;
+      padding:12px 18px; border-radius:14px; border:1px solid var(--border);
+      background:var(--card);
       font-weight:700; transition:.25s transform, .25s box-shadow, .25s background;
-      display:flex; align-items:center;
     }
     .btn img{
-      width:20px;
-      margin-inline-end:8px;
+      width:20px; height:20px;
     }
     .btn:hover{transform:translateY(-2px); box-shadow: var(--shadow)}
+    .btn.primary{
+      background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
+      border:none; color:#0b0b0f;
+    }
 
     /* Sections */
     section{padding-block: clamp(48px,10vh,96px)}
@@ -148,6 +150,7 @@
     .card p{margin:0; color:var(--muted); line-height:1.8}
 
     @media (min-width: 800px){
+      .hero{grid-template-columns: .9fr; }
       .grid{grid-template-columns: repeat(2,1fr)}
     }
 
@@ -198,18 +201,22 @@
 
     <!-- HERO -->
     <section class="hero" id="home">
+      <img class="avatar" src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" alt="GoldenJDM">
       <h1><span class="grad-hero">GoldenJDM</span></h1>
       <p class="subtitle">
         ویکی‌پدیانویس و دانش‌آموز؛ عاشق پروژه‌های کوچکِ تمیز، مستندات خوب، و وبِ سریع.
       </p>
       <div class="cta">
         <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">
-          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt=""> تلگرام
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="Telegram">
+          تماس در تلگرام
         </a>
         <a class="btn primary" href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener">
-          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/wikipedia-logotype-of-earth-puzzle-svgrepo-com.svg" alt=""> ویکی‌پدیا
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/wikipedia-logotype-of-earth-puzzle-svgrepo-com.svg" alt="Wikipedia">
+          پروفایل ویکی‌پدیا
         </a>
         <a class="btn primary" href="https://github.com/GoldenJDM" target="_blank" rel="noopener">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/github-mark.svg" alt="GitHub">
           GitHub
         </a>
       </div>
@@ -268,8 +275,14 @@
     <section id="contact">
       <h2 class="title">ارتباط</h2>
       <div class="cta">
-        <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">تلگرام</a>
-        <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener">ربات تلگرام</a>
+        <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="Telegram">
+          تلگرام
+        </a>
+        <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="Telegram Bot">
+          ربات تلگرام
+        </a>
       </div>
     </section>
   </main>
@@ -280,4 +293,4 @@
     <div class="credit">Made with ❤️ by GoldenJDM</div>
   </footer>
 </body>
-                                       </html>
+  </html>
