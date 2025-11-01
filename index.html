@@ -6,6 +6,8 @@
 <title>GoldenJDM - Amirhossein Zarniyan</title>
 <meta name="description" content="پروندهٔ شخصی امیرحسین زرنیان (GoldenJDM). پروژه‌ها، نوشته‌ها، علایق و راه‌های تماس." />
 <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -18,6 +20,7 @@
   --radius: 24px;
   --shadow: 0 10px 30px rgba(0,0,0,.35);
 }
+*{box-sizing:border-box}
 body {
   margin: 0;
   font-family: "Vazirmatn", sans-serif;
@@ -25,15 +28,18 @@ body {
   color: var(--fg);
   padding-top: 64px;
 }
+a{color:inherit;text-decoration:none}
 .wrap {
   width: min(100%, 1080px);
   margin: 0 auto;
-  padding-inline: 24px;
+  padding-inline: clamp(16px,4vw,32px);
 }
+
+/* Navigation */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px) saturate(140%);
   background: rgba(10,10,14,.6);
   border-bottom: 1px solid var(--border);
   z-index: 100;
@@ -49,33 +55,68 @@ nav {
   align-items: center;
   gap: 8px;
 }
-.brand img { width: 48px; height: 48px; border-radius: 50%; }
+.brand img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
 .lang-toggle {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 6px 10px;
-  color: var(--fg);
+  border-radius: 12px;
+  padding: 6px 12px;
   font-weight: 700;
+  color: var(--fg);
   cursor: pointer;
   transition: .2s background, .2s transform;
 }
 .lang-toggle:hover {
-  background: rgba(255,255,255,.12);
+  background: rgba(255,255,255,.1);
   transform: translateY(-1px);
 }
-.links { display: flex; gap: 18px; font-weight: 600; flex-wrap: wrap; }
-.links a { color: inherit; text-decoration: none; opacity: .9; transition: opacity .2s; }
-.links a:hover { opacity: 1; }
-section { margin-top: 80px; }
-h1, h2 { line-height: 1.4; }
-p { line-height: 1.8; color: var(--muted); }
+.links {
+  display: flex;
+  gap: 18px;
+  font-weight: 600;
+}
+.links a {
+  opacity: .9;
+  transition: opacity .2s;
+}
+.links a:hover {opacity:1}
+
+/* Content */
+section {padding-block: clamp(48px,10vh,96px);}
+h1, h2 {line-height: 1.3; margin: 0 0 18px 0;}
+p {line-height: 1.8; color: var(--muted);}
+.grid {display: grid; gap: 16px; grid-template-columns: 1fr;}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: .25s transform, .25s border-color, .25s background;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #ffffff33;
+  background: rgba(255,255,255,.08);
+}
+
+/* Footer */
 footer {
   border-top: 1px solid var(--border);
   text-align: center;
-  margin-top: 80px;
-  padding: 24px;
   color: var(--muted);
+  padding: 32px 0 60px;
+  font-size: 14px;
+}
+footer a {color: #60a5fa;}
+footer a:hover {opacity:.8}
+
+/* Responsive */
+@media (min-width: 800px){
+  .grid{grid-template-columns: repeat(2,1fr);}
 }
 </style>
 </head>
@@ -90,7 +131,7 @@ footer {
     <div class="links">
       <a href="#about" data-fa="درباره" data-en="About">درباره</a>
       <a href="#projects" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</a>
-      <a href="#gallery" data-fa="گالری" data-en="Gallery">گالری</a>
+      <a href="#writing" data-fa="نوشته‌ها" data-en="Writings">نوشته‌ها</a>
       <a href="#contact" data-fa="ارتباط" data-en="Contact">ارتباط</a>
     </div>
   </div>
@@ -99,59 +140,97 @@ footer {
 <main class="wrap">
 
   <section id="about">
-    <h1 data-fa="چرا GoldenJDM؟" data-en="Why GoldenJDM?">چرا GoldenJDM؟</h1>
-    <p data-fa="جی‌دی‌ام به خودروهای ژاپنی اشاره دارد و Golden به دوران طلایی این ماشین‌ها در دهه ۹۰ میلادی برمی‌گردد، که نشان‌دهنده علاقه عمیق من به این ماشین‌هاست. افزون بر این، GoldenJDM تنها یک نام نیست، بلکه بخشی از هویت من در دنیای دیجیتال است."
-       data-en="JDM refers to Japanese cars, and Golden recalls their golden era — the 1990s — representing my deep passion for these machines. Moreover, GoldenJDM is not just a name; it’s a part of my identity in the digital world.">
-      جی‌دی‌ام به خودروهای ژاپنی اشاره دارد و Golden به دوران طلایی این ماشین‌ها در دهه ۹۰ میلادی برمی‌گردد، که نشان‌دهنده علاقه عمیق من به این ماشین‌هاست. افزون بر این، GoldenJDM تنها یک نام نیست، بلکه بخشی از هویت من در دنیای دیجیتال است.
+    <h1 data-fa="درباره من" data-en="About Me">درباره من</h1>
+    <p data-fa="من امیرحسین زرنیان هستم (GoldenJDM). ویکی‌پدیانویس و دانش‌آموز؛ علاقه‌مند به وب‌، خلبانی، خودروهای ژاپنی و دنیای تکنولوژی."
+       data-en="I'm Amirhossein Zarniyan (GoldenJDM) — a Wikipedia editor and student, passionate about the web, aviation, Japanese cars, and technology.">
+       من امیرحسین زرنیان هستم (GoldenJDM). ویکی‌پدیانویس و دانش‌آموز؛ علاقه‌مند به وب‌، خلبانی، خودروهای ژاپنی و دنیای تکنولوژی.
     </p>
-
-    <p data-fa="من عاشق ایران و فرهنگش هستم. علاقه‌مند به خلبانی جت، ماشین‌های ژاپنی و دریفت، دنیای نظامی و اسلحه. دوست دارم به مردم کمک کنم و در اینترنت کاوش کنم. شیفته‌ی اشعار فلسفی و عاشقانه‌ام و معتقدم که هر خط کدی که می‌نویسیم می‌تواند دنیا را کمی بهتر کند."
-       data-en="I love Iran and its culture. I'm passionate about jet aviation, Japanese cars and drifting, the military world, and firearms. I enjoy helping people and exploring the internet. I’m fascinated by philosophical and romantic poetry, and I believe that every line of code we write can make the world a bit better.">
-      من عاشق ایران و فرهنگش هستم. علاقه‌مند به خلبانی جت، ماشین‌های ژاپنی و دریفت، دنیای نظامی و اسلحه. دوست دارم به مردم کمک کنم و در اینترنت کاوش کنم. شیفته‌ی اشعار فلسفی و عاشقانه‌ام و معتقدم که هر خط کدی که می‌نویسیم می‌تواند دنیا را کمی بهتر کند.
+    <p data-fa="به کدنویسی به عنوان یک هنر نگاه می‌کنم، چون هر خط کد می‌تونه دنیا رو کمی بهتر کنه."
+       data-en="I see coding as an art, because every line of code can make the world a bit better.">
+       به کدنویسی به عنوان یک هنر نگاه می‌کنم، چون هر خط کد می‌تونه دنیا رو کمی بهتر کنه.
     </p>
   </section>
 
   <section id="projects">
     <h2 data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</h2>
-    <p data-fa="در حال حاضر روی چند پروژه شخصی و پژوهشی در زمینه طراحی وب، امنیت سایبری و تولید محتوای آزاد کار می‌کنم."
-       data-en="I’m currently working on several personal and research projects related to web design, cybersecurity, and open-content creation.">
-      در حال حاضر روی چند پروژه شخصی و پژوهشی در زمینه طراحی وب، امنیت سایبری و تولید محتوای آزاد کار می‌کنم.
-    </p>
+    <div class="grid">
+      <a class="card" href="https://goldenjdm.vercel.app/" target="_blank" rel="noopener">
+        <h3 data-fa="🌐 وبسایت شخصی" data-en="🌐 Personal Website">🌐 وبسایت شخصی</h3>
+        <p data-fa="نسخه‌ای مینیمال با تمرکز بر سرعت و سئو." data-en="Minimal version focused on speed and SEO.">
+          نسخه‌ای مینیمال با تمرکز بر سرعت و سئو.
+        </p>
+      </a>
+      <a class="card" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener">
+        <h3 data-fa="🤖 ربات تلگرام" data-en="🤖 Telegram Bot">🤖 ربات تلگرام</h3>
+        <p data-fa="رباتی سبک برای مدیریت پیام‌های ناشناس و آمار کاربران."
+           data-en="A lightweight bot for managing anonymous messages and user stats.">
+           رباتی سبک برای مدیریت پیام‌های ناشناس و آمار کاربران.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <section id="writing">
+    <h2 data-fa="نوشته‌ها" data-en="Writings">نوشته‌ها</h2>
+    <div class="grid">
+      <a class="card" href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank">
+        <h3 data-fa="📚 ویکی‌پدیا" data-en="📚 Wikipedia">📚 ویکی‌پدیا</h3>
+        <p data-fa="مشارکت در ویکی‌پدیای فارسی و نگارش مقالات مستند."
+           data-en="Contributing to Persian Wikipedia and writing documented articles.">
+           مشارکت در ویکی‌پدیای فارسی و نگارش مقالات مستند.
+        </p>
+      </a>
+      <a class="card" href="https://t.me/Holy_LoveAM" target="_blank">
+        <h3 data-fa="📱 کانال شخصی" data-en="📱 Personal Channel">📱 کانال شخصی</h3>
+        <p data-fa="کانال روزانه شامل نوشته‌ها، موزیک‌ها و دیدگاه‌ها."
+           data-en="Daily channel featuring writings, music, and reflections.">
+           کانال روزانه شامل نوشته‌ها، موزیک‌ها و دیدگاه‌ها.
+        </p>
+      </a>
+    </div>
   </section>
 
   <section id="contact">
     <h2 data-fa="ارتباط با من" data-en="Contact Me">ارتباط با من</h2>
-    <p data-fa="می‌توانید از طریق ویکی‌مدیا یا شبکه‌های اجتماعی با من در ارتباط باشید."
-       data-en="You can reach me through Wikimedia or social media.">
-      می‌توانید از طریق ویکی‌مدیا یا شبکه‌های اجتماعی با من در ارتباط باشید.
+    <p data-fa="می‌تونید از طریق تلگرام یا ویکی‌پدیا با من تماس بگیرید."
+       data-en="You can contact me via Telegram or Wikipedia.">
+       می‌تونید از طریق تلگرام یا ویکی‌پدیا با من تماس بگیرید.
     </p>
+    <div class="grid">
+      <a class="card" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">Telegram</a>
+      <a class="card" href="https://github.com/GoldenJDM" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </section>
 
 </main>
 
 <footer>
-  <p data-fa="© ۲۰۲۵ GoldenJDM - تمامی حقوق محفوظ است." data-en="© 2025 GoldenJDM - All rights reserved.">
-    © ۲۰۲۵ GoldenJDM - تمامی حقوق محفوظ است.
+  <p data-fa="© ۲۰۲۵ GoldenJDM — تحت مجوز CC BY-SA 4.0"
+     data-en="© 2025 GoldenJDM — Licensed under CC BY-SA 4.0">
+     © ۲۰۲۵ GoldenJDM — تحت مجوز CC BY-SA 4.0
   </p>
 </footer>
 
 <script>
 const langBtn = document.getElementById('langBtn');
-let currentLang = 'fa';
+let currentLang = localStorage.getItem('lang') || 'fa';
 
-langBtn.addEventListener('click', () => {
-  const newLang = currentLang === 'fa' ? 'en' : 'fa';
-  document.documentElement.lang = newLang;
-  document.documentElement.dir = newLang === 'fa' ? 'rtl' : 'ltr';
-  langBtn.textContent = newLang === 'fa' ? 'EN' : 'FA';
-
-  document.querySelectorAll('[data-fa]').forEach(el => {
-    el.textContent = el.getAttribute(`data-${newLang}`);
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+  langBtn.textContent = lang === 'fa' ? 'EN' : 'FA';
+  document.querySelectorAll('[data-fa]').forEach(el=>{
+    el.textContent = el.getAttribute(`data-${lang}`);
   });
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+}
 
-  currentLang = newLang;
+langBtn.addEventListener('click', ()=>{
+  setLang(currentLang === 'fa' ? 'en' : 'fa');
 });
-</script>
 
+setLang(currentLang);
+</script>
 </body>
 </html>
