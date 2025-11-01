@@ -84,16 +84,17 @@
     }
     .brand{font-weight:800; letter-spacing:.3px; display:flex; align-items:center; gap:8px}
     .brand img{width:144px; height:144px}
-    /* language toggle button next to logo */
+    /* language toggle button next to logo - rectangular with "فارسی" / "English" */
     .lang-toggle{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:12px;
-      padding:8px 10px;
+      border-radius:10px;
+      padding:8px 12px;
       font-weight:700;
       cursor:pointer;
       color:var(--fg);
       margin-inline-start:6px;
+      white-space:nowrap;
     }
     .lang-toggle:focus{outline:2px solid #60a5fa; outline-offset:4px; border-radius:6px}
     .links{display:flex; gap:18px; font-weight:600; flex-wrap:wrap}
@@ -207,6 +208,15 @@
     }
     .credit a{text-decoration:underline}
 
+    /* gradient text helper for link (use same grad as logo) */
+    .grad-link{
+      background: var(--grad1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight:700;
+    }
+
     /* Animations */
     @media (prefers-reduced-motion: no-preference){
       .pulse{
@@ -261,7 +271,7 @@
         <button class="lang-toggle" id="langBtn"
                 aria-label="تغییر زبان / Toggle language"
                 data-aria-fa="تغییر زبان"
-                data-aria-en="Toggle language">EN</button>
+                data-aria-en="Toggle language">English</button>
       </div>
 
       <div class="links">
@@ -454,7 +464,7 @@
              data-aria-en="Join my Telegram channel">
             <h3 data-fa="📱 کانال Daily" data-en="📱 Daily channel">📱 کانال Daily</h3>
             <p data-fa="کانال شخصی Daily با پست‌ها، موزیک‌ها و اشتراک تجربه‌های روزانه."
-               data-en="Personal Daily channel with posts, music and shared experiences.">
+               data-en="Personal Daily channel with posts, music and reflections.">
                کانال شخصی Daily با پست‌ها، موزیک‌ها و اشتراک تجربه‌های روزانه.
             </p>
           </a>
@@ -507,12 +517,12 @@
   <footer class="wrap" role="contentinfo">
     <p data-fa="© 2025 — CC BY-SA 4.0 — GoldenJDM" data-en="© 2025 — CC BY-SA 4.0 — GoldenJDM">
       © 2025 — 
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" target="_blank" rel="noopener noreferrer" class="grad-hero" aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" class="grad-link"
          data-aria-fa="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
          data-aria-en="More about CC BY-SA 4.0">
         CC BY-SA 4.0
       </a>
-      GoldenJDM
+      — <span data-fa="GoldenJDM" data-en="GoldenJDM">GoldenJDM</span>
     </p>
   </footer>
 
@@ -536,8 +546,9 @@
     function setLang(lang) {
       document.documentElement.lang = lang;
       document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-      // Toggle button label: show opposite language shorthand (EN when fa active).
-      langBtn.textContent = lang === 'fa' ? 'EN' : 'FA';
+      // Button label: when site is fa -> show "English" (to switch to English)
+      // when site is en -> show "فارسی"
+      langBtn.textContent = lang === 'fa' ? 'English' : 'فارسی';
 
       // Update textual content for elements that have data-fa / data-en
       document.querySelectorAll('[data-fa]').forEach(el => {
