@@ -1,1 +1,1 @@
-# GoldenJDM-miniApp
+# GoldenJDM.ir
