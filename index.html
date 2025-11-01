@@ -1,236 +1,575 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GoldenJDM - Amirhossein Zarniyan</title>
-<meta name="description" content="پروندهٔ شخصی امیرحسین زرنیان (GoldenJDM). پروژه‌ها، نوشته‌ها، علایق و راه‌های تماس." />
-<link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="google-site-verification" content="-IjHVx5TFQqkoOjs1QUAaW2ivrcGuZkh4frfkfD0VKU" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GoldenJDM - Amirhossein Zarniyan</title>
+  <meta name="description" content="پروندهٔ شخصی امیرحسین زرنیان (GoldenJDM). پروژه‌ها، نوشته‌ها و راه‌های تماس." />
+  <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Mastodon verification -->
+  <link rel="me" href="https://mastodon.de/@GoldenJDM">
+  <!-- Open Graph -->
+  <meta property="og:title" content="GoldenJDM — Amirhossein Zarniyan">
+  <meta property="og:description" content="پروژه‌ها، لینک‌ها و راه‌های تماس">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://goldenjdm.vercel.app/">
+  <meta property="og:image" content="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png">
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Amirhossein Zarniyan",
+    "alternateName":"GoldenJDM",
+    "url":"https://goldenjdm.vercel.app/",
+    "sameAs":[
+      "https://t.me/GoldenJDM",
+      "https://fa.wikipedia.org/wiki/کاربر:GoldenJDM",
+      "https://github.com/GoldenJDM"
+    ],
+    "jobTitle":"Wikipedia Editor / Student",
+    "image":"https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png"
+  }
+  </script>
 
-<style>
-:root {
-  --bg: #0b0b0f;
-  --fg: #e9e9ef;
-  --muted: #a7a7b3;
-  --border: rgba(255,255,255,.12);
-  --card: rgba(255,255,255,.06);
-  --radius: 24px;
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-*{box-sizing:border-box}
-body {
-  margin: 0;
-  font-family: "Vazirmatn", sans-serif;
-  background: var(--bg);
-  color: var(--fg);
-  padding-top: 64px;
-}
-a{color:inherit;text-decoration:none}
-.wrap {
-  width: min(100%, 1080px);
-  margin: 0 auto;
-  padding-inline: clamp(16px,4vw,32px);
-}
+  <style>
+    :root{
+      --bg: #0b0b0f;
+      --fg: #e9e9ef;
+      --muted:#a7a7b3;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.12);
+      --max: 1080px;
+      --radius: 24px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --grad1: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #a78bfa, #f472b6, #6ee7ff);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Vazirmatn",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(1200px 800px at 80% -10%, #3b82f610 30%, transparent 60%) no-repeat,
+        radial-gradient(1000px 700px at -10% 10%, #f472b610 30%, transparent 60%) no-repeat,
+        var(--bg);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      /* to prevent content hiding under fixed nav */
+      padding-top:64px;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(100%, var(--max)); margin-inline:auto; padding-inline:clamp(16px,4vw,32px)}
 
-/* Navigation */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  backdrop-filter: blur(10px) saturate(140%);
-  background: rgba(10,10,14,.6);
-  border-bottom: 1px solid var(--border);
-  z-index: 100;
-}
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.brand img {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-}
-.lang-toggle {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 6px 12px;
-  font-weight: 700;
-  color: var(--fg);
-  cursor: pointer;
-  transition: .2s background, .2s transform;
-}
-.lang-toggle:hover {
-  background: rgba(255,255,255,.1);
-  transform: translateY(-1px);
-}
-.links {
-  display: flex;
-  gap: 18px;
-  font-weight: 600;
-}
-.links a {
-  opacity: .9;
-  transition: opacity .2s;
-}
-.links a:hover {opacity:1}
+    /* Nav (fixed so it never disappears) */
+    nav{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(10,10,14,.6);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .brand{font-weight:800; letter-spacing:.3px; display:flex; align-items:center; gap:8px}
+    .brand img{width:144px; height:144px}
+    /* language toggle button next to logo */
+    .lang-toggle{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:8px 10px;
+      font-weight:700;
+      cursor:pointer;
+      color:var(--fg);
+      margin-inline-start:6px;
+    }
+    .lang-toggle:focus{outline:2px solid #60a5fa; outline-offset:4px; border-radius:6px}
+    .links{display:flex; gap:18px; font-weight:600; flex-wrap:wrap}
+    .links a{opacity:.9; transition:opacity .2s}
+    .links a:hover{opacity:1}
+    .links a:focus{outline:2px solid #60a5fa; outline-offset:4px; border-radius:4px}
 
-/* Content */
-section {padding-block: clamp(48px,10vh,96px);}
-h1, h2 {line-height: 1.3; margin: 0 0 18px 0;}
-p {line-height: 1.8; color: var(--muted);}
-.grid {display: grid; gap: 16px; grid-template-columns: 1fr;}
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  transition: .25s transform, .25s border-color, .25s background;
-}
-.card:hover {
-  transform: translateY(-4px);
-  border-color: #ffffff33;
-  background: rgba(255,255,255,.08);
-}
+    /* Hero */
+    .hero{
+      padding-block: clamp(48px,10vh,120px);
+      display:grid; gap:32px;
+      grid-template-columns: 1fr;
+      place-items:center;
+      text-align:center;
+    }
+    .avatar{
+      width:120px; height:120px; border-radius:50%;
+      object-fit:cover; box-shadow: var(--shadow);
+      border:1px solid var(--border);
+    }
+    h1{
+      margin:0;
+      font-size:clamp(28px,5vw,56px);
+      line-height:1.15;
+      letter-spacing:-.4px;
+    }
+    .grad-hero{
+      background: var(--grad1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .subtitle{
+      color:var(--muted);
+      font-size:clamp(15px,2.5vw,18px);
+      max-width:60ch; margin-inline:auto;
+      line-height:1.7;
+    }
+    .cta{
+      display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:10px;
+    }
+    .btn{
+      display:flex; align-items:center; gap:8px;
+      padding:12px 18px; border-radius:14px; border:1px solid var(--border);
+      background:var(--card);
+      font-weight:700;
+      transition:.25s transform, .25s box-shadow, .25s background, .25s filter;
+      cursor:pointer;
+    }
+    .btn img{ width:20px; height:20px; }
+    .btn:hover{transform:translateY(-2px); box-shadow: var(--shadow)}
+    .btn:focus{outline:2px solid #60a5fa; outline-offset:4px}
+    .btn.primary{ background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6); border:none; color:#0b0b0f; }
+    .btn.primary:hover{filter:brightness(1.1)}
+    .btn.primary:active{transform:translateY(0); filter:brightness(.95)}
 
-/* Footer */
-footer {
-  border-top: 1px solid var(--border);
-  text-align: center;
-  color: var(--muted);
-  padding: 32px 0 60px;
-  font-size: 14px;
-}
-footer a {color: #60a5fa;}
-footer a:hover {opacity:.8}
+    /* Sections */
+    section{padding-block: clamp(48px,10vh,96px)}
+    .title{
+      font-size: clamp(22px,4vw,28px);
+      margin:0 0 18px 0;
+    }
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns: 1fr;
+    }
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:18px 20px;
+      transition:.25s transform, .25s border-color, .25s background;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      background:linear-gradient(135deg, transparent, rgba(96,165,250,.05));
+      opacity:0;
+      transition:opacity .3s;
+      pointer-events:none;
+    }
+    .card:hover::before{opacity:1}
+    .card:hover{transform:translateY(-4px); border-color:#ffffff33; background:rgba(255,255,255,.08)}
+    .card:focus-within{outline:2px solid #60a5fa; outline-offset:4px}
+    .card h3{margin:0 0 6px 0; font-size:18px; display:flex; align-items:center; gap:8px}
+    .card p{margin:0; color:var(--muted); line-height:1.8}
+    .card .meta{font-size:13px; color:#8888a0; margin-top:8px; font-weight:600}
 
-/* Responsive */
-@media (min-width: 800px){
-  .grid{grid-template-columns: repeat(2,1fr);}
-}
-</style>
+    @media (min-width: 800px){
+      .hero{grid-template-columns: .9fr; }
+      .grid{grid-template-columns: repeat(2,1fr)}
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid var(--border);
+      color:#b6b6c2;
+      padding:28px 0 60px;
+      font-size:14px;
+      text-align:center;
+    }
+    footer a{transition:opacity .2s}
+    footer a:hover{opacity:.8}
+    .credit{
+      position:fixed; inset-inline-start:10px; inset-block-end:10px;
+      font-size:12px; color:#9aa0aa; opacity:.9;
+      background:rgba(255,255,255,.06); border:1px solid var(--border);
+      padding:6px 10px; border-radius:999px; backdrop-filter: blur(6px);
+      z-index:10;
+    }
+    .credit a{text-decoration:underline}
+
+    /* Animations */
+    @media (prefers-reduced-motion: no-preference){
+      .pulse{
+        position:absolute; inset:0; pointer-events:none; z-index:-1;
+        background: radial-gradient(500px 300px at 30% -10%, #60a5fa22, transparent 60%),
+                    radial-gradient(500px 300px at 80% 110%, #f472b622, transparent 60%);
+        animation: floaty 8s ease-in-out infinite alternate;
+      }
+      @keyframes floaty{
+        from{transform:translateY(0)}
+        to{transform:translateY(12px)}
+      }
+
+      .fade-in{
+        animation: fadeIn .6s ease-out forwards;
+        opacity:0;
+      }
+      @keyframes fadeIn{
+        to{opacity:1}
+      }
+    }
+
+    /* Skip to content link for accessibility */
+    .skip-link{
+      position:absolute;
+      top:-40px;
+      left:0;
+      background:#60a5fa;
+      color:#0b0b0f;
+      padding:8px 16px;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:0 0 8px 0;
+      z-index:100;
+    }
+    .skip-link:focus{
+      top:0;
+    }
+  </style>
 </head>
-
 <body>
-<nav>
-  <div class="wrap nav-inner">
-    <div class="brand">
-      <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg" alt="GoldenJDM Logo">
-      <button class="lang-toggle" id="langBtn">EN</button>
+  <a href="#main" class="skip-link" data-fa="پرش به محتوا" data-en="Skip to content">پرش به محتوا</a>
+
+  <nav role="navigation" aria-label="منوی اصلی">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg"
+             alt="لوگو GoldenJDM"
+             data-fa-alt="لوگو GoldenJDM"
+             data-en-alt="GoldenJDM logo"
+             width="144" height="144">
+        <button class="lang-toggle" id="langBtn"
+                aria-label="تغییر زبان / Toggle language"
+                data-aria-fa="تغییر زبان"
+                data-aria-en="Toggle language">EN</button>
+      </div>
+
+      <div class="links">
+        <a href="#work"
+           data-fa="پروژه‌ها"
+           data-en="Projects"
+           data-aria-fa="مشاهده پروژه‌ها"
+           data-aria-en="View projects"
+           aria-label="مشاهده پروژه‌ها">پروژه‌ها</a>
+
+        <a href="gallery.html"
+           data-fa="گالری"
+           data-en="Gallery"
+           data-aria-fa="مشاهده گالری"
+           data-aria-en="View gallery"
+           aria-label="مشاهده گالری">گالری</a>
+
+        <a href="musics.html"
+           data-fa="موزیک‌ها"
+           data-en="Musics"
+           data-aria-fa="مشاهده موزیک‌ها"
+           data-aria-en="View musics"
+           aria-label="مشاهده موزیک‌ها">موزیک‌ها</a>
+
+        <a href="#about"
+           data-fa="درباره"
+           data-en="About"
+           data-aria-fa="درباره من"
+           data-aria-en="About me"
+           aria-label="درباره من">درباره</a>
+
+        <a href="#contact"
+           data-fa="ارتباط"
+           data-en="Contact"
+           data-aria-fa="راه‌های ارتباطی"
+           data-aria-en="Contact"
+           aria-label="راه‌های ارتباطی">ارتباط</a>
+      </div>
     </div>
-    <div class="links">
-      <a href="#about" data-fa="درباره" data-en="About">درباره</a>
-      <a href="#projects" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</a>
-      <a href="#writing" data-fa="نوشته‌ها" data-en="Writings">نوشته‌ها</a>
-      <a href="#contact" data-fa="ارتباط" data-en="Contact">ارتباط</a>
+  </nav>
+
+  <main id="main">
+    <div class="wrap">
+      <div class="pulse" aria-hidden="true"></div>
+
+      <!-- HERO -->
+      <section class="hero fade-in" id="home">
+        <img class="avatar"
+             src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png"
+             alt="تصویر پروفایل امیرحسین زرنیان"
+             data-fa-alt="تصویر پروفایل امیرحسین زرنیان"
+             data-en-alt="Profile photo of Amirhossein Zarniyan"
+             loading="eager"
+             width="120" height="120">
+
+        <div>
+          <h1>
+            <span class="grad-hero"
+                  data-fa="GoldenJDM"
+                  data-en="GoldenJDM">GoldenJDM</span>
+          </h1>
+
+          <p class="subtitle"
+             data-fa="ویکی‌پدیانویس و دانش‌آموز؛ عاشق پروژه‌های کوچکِ تمیز، مستندات خوب، و وبِ سریع."
+             data-en="Wikipedia editor and student; fond of small clean projects, good documentation, and fast web.">
+            ویکی‌پدیانویس و دانش‌آموز؛ عاشق پروژه‌های کوچکِ تمیز، مستندات خوب، و وبِ سریع.
+          </p>
+
+          <div class="cta">
+            <a class="btn primary"
+               href="https://t.me/GoldenJDM"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="تماس با من از طریق تلگرام"
+               data-aria-fa="تماس با من از طریق تلگرام"
+               data-aria-en="Contact me on Telegram">
+              <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg"
+                   alt=""
+                   aria-hidden="true">
+              <span data-fa="تماس در تلگرام" data-en="Contact on Telegram">تماس در تلگرام</span>
+            </a>
+
+            <a class="btn primary"
+               href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="مشاهده پروفایل من در ویکی‌پدیا"
+               data-aria-fa="مشاهده پروفایل من در ویکی‌پدیا"
+               data-aria-en="View my Wikipedia profile">
+              <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/wikipedia-logotype-of-earth-puzzle-svgrepo-com.svg"
+                   alt=""
+                   aria-hidden="true">
+              <span data-fa="پروفایل ویکی‌پدیا" data-en="Wikipedia profile">پروفایل ویکی‌پدیا</span>
+            </a>
+
+            <a class="btn primary"
+               href="https://github.com/GoldenJDM"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="مشاهده پروژه‌های من در گیت‌هاب"
+               data-aria-fa="مشاهده پروژه‌های من در گیت‌هاب"
+               data-aria-en="View my projects on GitHub">
+              <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/github-mark.svg"
+                   alt=""
+                   aria-hidden="true">
+              <span data-fa="GitHub" data-en="GitHub">GitHub</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- WORK -->
+      <section id="work" class="fade-in">
+        <h2 class="title" data-fa="منتخب پروژه‌ها" data-en="Selected Projects">منتخب پروژه‌ها</h2>
+        <div class="grid">
+          <a class="card"
+             href="https://goldenjdm.vercel.app/"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="مشاهده وبسایت شخصی"
+             data-aria-fa="مشاهده وبسایت شخصی"
+             data-aria-en="View personal website">
+            <h3 data-fa="🌐 وبسایت شخصی" data-en="🌐 Personal Website">🌐 وبسایت شخصی</h3>
+            <p data-fa="نسخه‌ی مینیمال با تمرکز بر سرعت، سئو و دسترس‌پذیری."
+               data-en="A minimal version focused on speed, SEO and accessibility.">
+               نسخه‌ی مینیمال با تمرکز بر سرعت، سئو و دسترس‌پذیری.
+            </p>
+            <div class="meta">2024 - فعال</div>
+          </a>
+
+          <a class="card"
+             href="https://t.me/GoldenJDMbot"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="استفاده از ربات تلگرام"
+             data-aria-fa="استفاده از ربات تلگرام"
+             data-aria-en="Use the Telegram bot">
+            <h3 data-fa="🤖 ربات تلگرام" data-en="🤖 Telegram Bot">🤖 ربات تلگرام</h3>
+            <p data-fa="مدیریت پیام ناشناس، آمار و امکانات مدیریتی سبک."
+               data-en="Anonymous message handling, stats and light admin features.">
+               مدیریت پیام ناشناس، آمار و امکانات مدیریتی سبک.
+            </p>
+            <div class="meta">2024 - فعال</div>
+          </a>
+
+          <div class="card">
+            <h3 data-fa="🎉 صفحه تبریک تعاملی" data-en="🎉 Interactive celebration page">🎉 صفحه تبریک تعاملی</h3>
+            <p data-fa="جشنِ Confetti با اسکرول/کلیک؛ خالصِ HTML+CSS+JS."
+               data-en="Confetti celebration on scroll/click; pure HTML+CSS+JS.">
+               جشنِ Confetti با اسکرول/کلیک؛ خالصِ HTML+CSS+JS.
+            </p>
+            <div class="meta">2024</div>
+          </div>
+
+          <div class="card">
+            <h3 data-fa="📚 مستندسازی ویکی" data-en="📚 Wiki documentation">📚 مستندسازی ویکی</h3>
+            <p data-fa="راهنماها و الگوها برای بهبود کیفیت مقالات فارسی."
+               data-en="Guides and templates to improve Persian articles.">
+               راهنماها و الگوها برای بهبود کیفیت مقالات فارسی.
+            </p>
+            <div class="meta">در حال توسعه</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WRITING / LINKS -->
+      <section id="writing" class="fade-in">
+        <h2 class="title" data-fa="نوشته‌ها و لینک‌ها" data-en="Writings & Links">نوشته‌ها و لینک‌ها</h2>
+        <div class="grid">
+          <a class="card"
+             href="https://fa.m.wikipedia.org/wiki/%D9%88%DB%8C%DA%98%D9%87:%D9%85%D8%B4%D8%A7%D8%B1%DA%A9%D8%AA%E2%80%8C%D9%87%D8%A7/GoldenJDM"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="مشاهده ویرایش‌های اخیر من در ویکی‌پدیا"
+             data-aria-fa="مشاهده ویرایش‌های اخیر من در ویکی‌پدیا"
+             data-aria-en="View my recent Wikipedia edits">
+            <h3 data-fa="✏️ ویرایش‌های اخیر ویکی‌پدیا" data-en="✏️ Recent Wikipedia edits">✏️ ویرایش‌های اخیر ویکی‌پدیا</h3>
+            <p data-fa="پیگیری مشارکت‌ها و ویرایش‌های اخیر من در ویکی‌پدیا فارسی."
+               data-en="Track my contributions and recent edits on Persian Wikipedia.">
+               پیگیری مشارکت‌ها و ویرایش‌های اخیر من در ویکی‌پدیا فارسی.
+            </p>
+          </a>
+
+          <a class="card"
+             href="https://t.me/Holy_LoveAM"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="عضویت در کانال تلگرام من"
+             data-aria-fa="عضویت در کانال تلگرام من"
+             data-aria-en="Join my Telegram channel">
+            <h3 data-fa="📱 کانال Daily" data-en="📱 Daily channel">📱 کانال Daily</h3>
+            <p data-fa="کانال شخصی Daily با پست‌ها، موزیک‌ها و اشتراک تجربه‌های روزانه."
+               data-en="Personal Daily channel with posts, music and shared experiences.">
+               کانال شخصی Daily با پست‌ها، موزیک‌ها و اشتراک تجربه‌های روزانه.
+            </p>
+          </a>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="fade-in">
+        <h2 class="title" data-fa="درباره من" data-en="About Me">درباره من</h2>
+        <div class="card">
+          <p style="margin:0; line-height:1.9"
+             data-fa="چرا GoldenJDM؟ واژه‌ی JDM به خودروهای اصیل ژاپنی اشاره دارد، و Golden نمادی از دوران طلایی این ماشین‌هاست — دهه‌ای که مهندسی، زیبایی و اصالت در کنار هم معنا پیدا کردند. این ترکیب برای من فقط یک نام نیست؛ نشانه‌ی شور و اشتیاقی است که به دنیای مکانیک، طراحی و سرعت دارم. من عاشق ایران و فرهنگ غنی‌اش هستم؛ سرزمینی که در هر گوشه‌اش می‌توان رد پای شعر، تاریخ و احساس را یافت. به خلبانی جت و پرواز در آسمان بی‌پایان علاقه‌مندم، همان‌قدر که عاشق ماشین‌های ژاپنی و دریفت هستم. دنیای نظامی و اسلحه برایم جذاب است، نه از زاویه‌ی جنگ، بلکه از دید دقت، نظم و فناوری. دوست دارم به مردم کمک کنم، تجربه‌هایم را به اشتراک بگذارم و در دنیای بی‌انتها و گاه ناشناخته‌ی اینترنت کاوش کنم. شیفته‌ی اشعار فلسفی و عاشقانه‌ام، زیرا باور دارم که در میان واژه‌ها می‌توان روح انسان را یافت. و در نهایت، به کدنویسی نه صرفاً به‌عنوان یک مهارت، بلکه به‌عنوان هنری برای ساختن نگاه می‌کنم؛ هنری که هر خط آن می‌تواند دنیا را—even if just a little—بهتر، زیباتر و هوشمندانه‌تر کند."
+             data-en="Why GoldenJDM? The term JDM refers to authentic Japanese cars, and Golden symbolizes the golden era of these machines — a decade where engineering, beauty, and authenticity came together. For me, this name is more than a label; it represents my passion for mechanics, design and speed. I love Iran and its rich culture — a land where traces of poetry, history, and feeling can be found in every corner. I am passionate about jet aviation and flying through the endless sky, just as I love Japanese cars and drifting. The military world and firearms interest me not from the angle of conflict, but for precision, discipline and technology. I enjoy helping people, sharing my experiences, and exploring the vast and sometimes unfamiliar world of the internet. I am fascinated by philosophical and romantic poetry because I believe you can find the human spirit among words. Finally, I view coding not merely as a skill but as an art of crafting perspective; each line of code can make the world — even if just a little — better, more beautiful, and smarter.">
+            چرا GoldenJDM؟ واژه‌ی JDM به خودروهای اصیل ژاپنی اشاره دارد، و Golden نمادی از دوران طلایی این ماشین‌هاست — دهه‌ای که مهندسی، زیبایی و اصالت در کنار هم معنا پیدا کردند. این ترکیب برای من فقط یک نام نیست؛ نشانه‌ی شور و اشتیاقی است که به دنیای مکانیک، طراحی و سرعت دارم. من عاشق ایران و فرهنگ غنی‌اش هستم؛ سرزمینی که در هر گوشه‌اش می‌توان رد پای شعر، تاریخ و احساس را یافت. به خلبانی جت و پرواز در آسمان بی‌پایان علاقه‌مندم، همان‌قدر که عاشق ماشین‌های ژاپنی و دریفت هستم. دنیای نظامی و اسلحه برایم جذاب است، نه از زاویه‌ی جنگ، بلکه از دید دقت، نظم و فناوری. دوست دارم به مردم کمک کنم، تجربه‌هایم را به اشتراک بگذارم و در دنیای بی‌انتها و گاه ناشناخته‌ی اینترنت کاوش کنم. شیفته‌ی اشعار فلسفی و عاشقانه‌ام، زیرا باور دارم که در میان واژه‌ها می‌توان روح انسان را یافت. و در نهایت، به کدنویسی نه صرفاً به‌عنوان یک مهارت، بلکه به‌عنوان هنری برای ساختن نگاه می‌کنم؛ هنری که هر خط آن می‌تواند دنیا را—even if just a little—بهتر، زیباتر و هوشمندانه‌تر کند.
+          </p>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="fade-in">
+        <h2 class="title" data-fa="ارتباط" data-en="Contact">ارتباط</h2>
+        <div class="cta">
+          <a class="btn primary"
+             href="https://t.me/GoldenJDM"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="ارسال پیام به من در تلگرام"
+             data-aria-fa="ارسال پیام به من در تلگرام"
+             data-aria-en="Send me a message on Telegram">
+            <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="" aria-hidden="true">
+            <span data-fa="تلگرام" data-en="Telegram">تلگرام</span>
+          </a>
+
+          <a class="btn primary"
+             href="https://t.me/GoldenJDMbot"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="استفاده از ربات تلگرام من"
+             data-aria-fa="استفاده از ربات تلگرام من"
+             data-aria-en="Use my Telegram bot">
+            <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="" aria-hidden="true">
+            <span data-fa="ربات تلگرام" data-en="Telegram bot">ربات تلگرام</span>
+          </a>
+        </div>
+      </section>
     </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="wrap" role="contentinfo">
+    <p data-fa="© 2025 — CC BY-SA 4.0 — GoldenJDM" data-en="© 2025 — CC BY-SA 4.0 — GoldenJDM">
+      © 2025 — 
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" target="_blank" rel="noopener noreferrer" class="grad-hero" aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
+         data-aria-fa="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
+         data-aria-en="More about CC BY-SA 4.0">
+        CC BY-SA 4.0
+      </a>
+      GoldenJDM
+    </p>
+  </footer>
+
+  <div class="credit">
+    Made with <span aria-label="love">❤️</span> by 
+    <a href="#home" data-fa="GoldenJDM" data-en="GoldenJDM">GoldenJDM</a>
   </div>
-</nav>
 
-<main class="wrap">
+  <script>
+    // Language toggle with persistence and ARIA updates.
+    const langBtn = document.getElementById('langBtn');
+    const initial = localStorage.getItem('lang') || 'fa';
+    let currentLang = initial;
 
-  <section id="about">
-    <h1 data-fa="درباره من" data-en="About Me">درباره من</h1>
-    <p data-fa="من امیرحسین زرنیان هستم (GoldenJDM). ویکی‌پدیانویس و دانش‌آموز؛ علاقه‌مند به وب‌، خلبانی، خودروهای ژاپنی و دنیای تکنولوژی."
-       data-en="I'm Amirhossein Zarniyan (GoldenJDM) — a Wikipedia editor and student, passionate about the web, aviation, Japanese cars, and technology.">
-       من امیرحسین زرنیان هستم (GoldenJDM). ویکی‌پدیانویس و دانش‌آموز؛ علاقه‌مند به وب‌، خلبانی، خودروهای ژاپنی و دنیای تکنولوژی.
-    </p>
-    <p data-fa="به کدنویسی به عنوان یک هنر نگاه می‌کنم، چون هر خط کد می‌تونه دنیا رو کمی بهتر کنه."
-       data-en="I see coding as an art, because every line of code can make the world a bit better.">
-       به کدنویسی به عنوان یک هنر نگاه می‌کنم، چون هر خط کد می‌تونه دنیا رو کمی بهتر کنه.
-    </p>
-  </section>
+    function setAttributeIfPresent(el, attr, value) {
+      if (!el) return;
+      if (value === null || value === undefined) return;
+      el.setAttribute(attr, value);
+    }
 
-  <section id="projects">
-    <h2 data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</h2>
-    <div class="grid">
-      <a class="card" href="https://goldenjdm.vercel.app/" target="_blank" rel="noopener">
-        <h3 data-fa="🌐 وبسایت شخصی" data-en="🌐 Personal Website">🌐 وبسایت شخصی</h3>
-        <p data-fa="نسخه‌ای مینیمال با تمرکز بر سرعت و سئو." data-en="Minimal version focused on speed and SEO.">
-          نسخه‌ای مینیمال با تمرکز بر سرعت و سئو.
-        </p>
-      </a>
-      <a class="card" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener">
-        <h3 data-fa="🤖 ربات تلگرام" data-en="🤖 Telegram Bot">🤖 ربات تلگرام</h3>
-        <p data-fa="رباتی سبک برای مدیریت پیام‌های ناشناس و آمار کاربران."
-           data-en="A lightweight bot for managing anonymous messages and user stats.">
-           رباتی سبک برای مدیریت پیام‌های ناشناس و آمار کاربران.
-        </p>
-      </a>
-    </div>
-  </section>
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      // Toggle button label: show opposite language shorthand (EN when fa active).
+      langBtn.textContent = lang === 'fa' ? 'EN' : 'FA';
 
-  <section id="writing">
-    <h2 data-fa="نوشته‌ها" data-en="Writings">نوشته‌ها</h2>
-    <div class="grid">
-      <a class="card" href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank">
-        <h3 data-fa="📚 ویکی‌پدیا" data-en="📚 Wikipedia">📚 ویکی‌پدیا</h3>
-        <p data-fa="مشارکت در ویکی‌پدیای فارسی و نگارش مقالات مستند."
-           data-en="Contributing to Persian Wikipedia and writing documented articles.">
-           مشارکت در ویکی‌پدیای فارسی و نگارش مقالات مستند.
-        </p>
-      </a>
-      <a class="card" href="https://t.me/Holy_LoveAM" target="_blank">
-        <h3 data-fa="📱 کانال شخصی" data-en="📱 Personal Channel">📱 کانال شخصی</h3>
-        <p data-fa="کانال روزانه شامل نوشته‌ها، موزیک‌ها و دیدگاه‌ها."
-           data-en="Daily channel featuring writings, music, and reflections.">
-           کانال روزانه شامل نوشته‌ها، موزیک‌ها و دیدگاه‌ها.
-        </p>
-      </a>
-    </div>
-  </section>
+      // Update textual content for elements that have data-fa / data-en
+      document.querySelectorAll('[data-fa]').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text !== null) el.textContent = text;
+      });
 
-  <section id="contact">
-    <h2 data-fa="ارتباط با من" data-en="Contact Me">ارتباط با من</h2>
-    <p data-fa="می‌تونید از طریق تلگرام یا ویکی‌پدیا با من تماس بگیرید."
-       data-en="You can contact me via Telegram or Wikipedia.">
-       می‌تونید از طریق تلگرام یا ویکی‌پدیا با من تماس بگیرید.
-    </p>
-    <div class="grid">
-      <a class="card" href="https://t.me/GoldenJDM" target="_blank" rel="noopener">Telegram</a>
-      <a class="card" href="https://github.com/GoldenJDM" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </section>
+      // Update aria-labels where translations provided
+      document.querySelectorAll('[data-aria-fa]').forEach(el => {
+        const aria = el.getAttribute(`data-aria-${lang}`);
+        if (aria !== null) el.setAttribute('aria-label', aria);
+      });
 
-</main>
+      // Update image alts if provided via data-fa-alt / data-en-alt
+      document.querySelectorAll('img[data-fa-alt]').forEach(img => {
+        const alt = img.getAttribute(`data-${lang}-alt`);
+        if (alt !== null) img.setAttribute('alt', alt);
+      });
 
-<footer>
-  <p data-fa="© ۲۰۲۵ GoldenJDM — تحت مجوز CC BY-SA 4.0"
-     data-en="© 2025 GoldenJDM — Licensed under CC BY-SA 4.0">
-     © ۲۰۲۵ GoldenJDM — تحت مجوز CC BY-SA 4.0
-  </p>
-</footer>
+      // store preference
+      localStorage.setItem('lang', lang);
+      currentLang = lang;
+    }
 
-<script>
-const langBtn = document.getElementById('langBtn');
-let currentLang = localStorage.getItem('lang') || 'fa';
+    // Toggle handler
+    langBtn.addEventListener('click', () => {
+      const next = currentLang === 'fa' ? 'en' : 'fa';
+      setLang(next);
+    });
 
-function setLang(lang){
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-  langBtn.textContent = lang === 'fa' ? 'EN' : 'FA';
-  document.querySelectorAll('[data-fa]').forEach(el=>{
-    el.textContent = el.getAttribute(`data-${lang}`);
-  });
-  currentLang = lang;
-  localStorage.setItem('lang', lang);
-}
-
-langBtn.addEventListener('click', ()=>{
-  setLang(currentLang === 'fa' ? 'en' : 'fa');
-});
-
-setLang(currentLang);
-</script>
+    // Initialize on load
+    setLang(currentLang);
+  </script>
 </body>
 </html>
