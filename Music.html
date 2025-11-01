@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>موزیک‌ها - GoldenJDM</title>
+  <meta name="description" content="مجموعه موزیک‌های امیرحسین زرنیان (GoldenJDM)" />
+  <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0b0f;
+      --fg: #e9e9ef;
+      --muted:#a7a7b3;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.12);
+      --max: 1080px;
+      --radius: 24px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --grad1: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #a78bfa, #f472b6, #6ee7ff);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Vazirmatn",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(1200px 800px at 80% -10%, #3b82f610 30%, transparent 60%) no-repeat,
+        radial-gradient(1000px 700px at -10% 10%, #f472b610 30%, transparent 60%) no-repeat,
+        var(--bg);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(100%, var(--max)); margin-inline:auto; padding-inline:clamp(16px,4vw,32px)}
+
+    /* Nav */
+    nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(10,10,14,.6);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .brand{font-weight:800; letter-spacing:.3px; display:flex; align-items:center; gap:8px}
+    .brand img{width:144px; height:144px}
+    .links{display:flex; gap:18px; font-weight:600; flex-wrap:wrap}
+    .links a{opacity:.9; transition:opacity .2s}
+    .links a:hover{opacity:1}
+    .links a:focus{outline:2px solid #60a5fa; outline-offset:4px; border-radius:4px}
+
+    /* Title */
+    .title{
+      font-size: clamp(28px,5vw,42px);
+      margin:48px 0 32px 0;
+      text-align:center;
+    }
+    .grad-hero{
+      background: var(--grad1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Now Playing */
+    .now-playing{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px;
+      text-align:center;
+      margin-bottom:32px;
+      position:relative;
+      overflow:hidden;
+    }
+    .now-playing::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      background:linear-gradient(135deg, rgba(96,165,250,.08), rgba(244,114,182,.08));
+      opacity:0;
+      transition:opacity .3s;
+      pointer-events:none;
+    }
+    .now-playing.playing::before{opacity:1}
+    .now-playing h2{
+      font-size:clamp(20px,4vw,24px);
+      margin:0 0 12px 0;
+    }
+    .now-playing p{
+      color:var(--muted);
+      margin:0;
+      font-size:15px;
+    }
+    .equalizer{
+      display:flex;
+      justify-content:center;
+      gap:6px;
+      margin-top:20px;
+      height:40px;
+      align-items:flex-end;
+    }
+    .bar{
+      width:4px;
+      background: linear-gradient(to top, #60a5fa, #a78bfa);
+      border-radius:4px;
+      animation: wave 0.8s ease-in-out infinite;
+      opacity:0;
+    }
+    .now-playing.playing .bar{opacity:1}
+    .bar:nth-child(1){animation-delay:0s; height:20px}
+    .bar:nth-child(2){animation-delay:0.1s; height:30px}
+    .bar:nth-child(3){animation-delay:0.2s; height:25px}
+    .bar:nth-child(4){animation-delay:0.3s; height:35px}
+    .bar:nth-child(5){animation-delay:0.4s; height:28px}
+    @keyframes wave{
+      0%, 100%{transform:scaleY(0.5)}
+      50%{transform:scaleY(1.2)}
+    }
+
+    /* Music List */
+    .music-list{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      margin-bottom:80px;
+    }
+    .music-item{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
+      transition:.25s transform, .25s border-color, .25s background;
+      position:relative;
+    }
+    .music-item::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      background:linear-gradient(135deg, transparent, rgba(96,165,250,.05));
+      opacity:0;
+      transition:opacity .3s;
+      pointer-events:none;
+    }
+    .music-item:hover::before{opacity:1}
+    .music-item:hover{
+      transform:translateY(-2px);
+      border-color:#ffffff33;
+      background:rgba(255,255,255,.08)
+    }
+    .music-header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:14px;
+    }
+    .music-cover{
+      width:70px;
+      height:70px;
+      border-radius:12px;
+      object-fit:cover;
+      border:1px solid var(--border);
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    }
+    .music-info h3{
+      margin:0 0 4px 0;
+      font-size:18px;
+    }
+    .music-info p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    audio{
+      width:100%;
+      height:40px;
+      border-radius:20px;
+      outline:none;
+    }
+    .music-meta{
+      display:flex;
+      justify-content:space-between;
+      margin-top:12px;
+      font-size:13px;
+      color:#8888a0;
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid var(--border);
+      color:#b6b6c2;
+      padding:28px 0 60px;
+      font-size:14px;
+      text-align:center;
+    }
+    footer a{transition:opacity .2s}
+    footer a:hover{opacity:.8}
+
+    .pulse{
+      position:absolute; inset:0; pointer-events:none; z-index:-1;
+      background: radial-gradient(500px 300px at 30% -10%, #60a5fa22, transparent 60%),
+                  radial-gradient(500px 300px at 80% 110%, #f472b622, transparent 60%);
+    }
+
+    @media (prefers-reduced-motion: no-preference){
+      .fade-in{
+        animation: fadeIn .6s ease-out forwards;
+        opacity:0;
+      }
+      @keyframes fadeIn{
+        to{opacity:1}
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav role="navigation" aria-label="منوی اصلی">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <a href="index.html">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg" 
+               alt="لوگو GoldenJDM" 
+               width="144" 
+               height="144">
+        </a>
+      </div>
+      <div class="links">
+        <a href="index.html">خانه</a>
+        <a href="gallery.html">گالری</a>
+        <a href="musics.html" aria-current="page">موزیک‌ها</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap">
+      <div class="pulse" aria-hidden="true"></div>
+
+      <h1 class="title fade-in">
+        <span class="grad-hero">🎵 موزیک‌ها</span>
+      </h1>
+
+      <!-- Now Playing -->
+      <div class="now-playing fade-in" id="nowPlaying">
+        <h2>در حال پخش</h2>
+        <p id="currentTrack">هیچ آهنگی در حال پخش نیست</p>
+        <div class="equalizer">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+
+      <!-- Music List -->
+      <div class="music-list fade-in">
+        <!-- آهنگ 1 -->
+        <div class="music-item">
+          <div class="music-header">
+            <img src="https://picsum.photos/70/70?random=11" alt="کاور آهنگ" class="music-cover">
+            <div class="music-info">
+              <h3>نام آهنگ 1</h3>
+              <p>نام هنرمند</p>
+            </div>
+          </div>
+          <audio controls 
+                 onplay="updateNowPlaying(this, 'نام آهنگ 1', 'نام هنرمند')"
+                 onpause="clearNowPlaying()">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
+          </audio>
+          <div class="music-meta">
+            <span>⏱️ 3:45</span>
+            <span>👁️ 1,234 بازدید</span>
+          </div>
+        </div>
+
+        <!-- آهنگ 2 -->
+        <div class="music-item">
+          <div class="music-header">
+            <img src="https://picsum.photos/70/70?random=12" alt="کاور آهنگ" class="music-cover">
+            <div class="music-info">
+              <h3>نام آهنگ 2</h3>
+              <p>نام هنرمند</p>
+            </div>
+          </div>
+          <audio controls 
+                 onplay="updateNowPlaying(this, 'نام آهنگ 2', 'نام هنرمند')"
+                 onpause="clearNowPlaying()">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
+          </audio>
+          <div class="music-meta">
+            <span>⏱️ 4:12</span>
+            <span>👁️ 2,567 بازدید</span>
+          </div>
+        </div>
+
+        <!-- آهنگ 3 -->
+        <div class="music-item">
+          <div class="music-header">
+            <img src="https://picsum.photos/70/70?random=13" alt="کاور آهنگ" class="music-cover">
+            <div class="music-info">
+              <h3>نام آهنگ 3</h3>
+              <p>نام هنرمند</p>
+            </div>
+          </div>
+          <audio controls 
+                 onplay="updateNowPlaying(this, 'نام آهنگ 3', 'نام هنرمند')"
+                 onpause="clearNowPlaying()">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
+          </audio>
+          <div class="music-meta">
+            <span>⏱️ 5:20</span>
+            <span>👁️ 3,890 بازدید</span>
+          </div>
+        </div>
+
+        <!-- آهنگ 4 -->
+        <div class="music-item">
+          <div class="music-header">
+            <img src="https://picsum.photos/70/70?random=14" alt="کاور آهنگ" class="music-cover">
+            <div class="music-info">
+              <h3>نام آهنگ 4</h3>
+              <p>نام هنرمند</p>
+            </div>
+          </div>
+          <audio controls 
+                 onplay="updateNowPlaying(this, 'نام آهنگ 4', 'نام هنرمند')"
+                 onpause="clearNowPlaying()">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
+          </audio>
+          <div class="music-meta">
+            <span>⏱️ 3:58</span>
+            <span>👁️ 4,123 بازدید</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="wrap" role="contentinfo">
+    <p>
+      © 2025 — 
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="grad-hero">
+        CC BY-SA 4.0
+      </a> 
+      GoldenJDM
+    </p>
+  </footer>
+
+  <script>
+    const audios = document.querySelectorAll('audio');
+    const nowPlaying = document.getElementById('nowPlaying');
+    const currentTrack = document.getElementById('currentTrack');
+
+    // توقف سایر آهنگ‌ها هنگام پخش یک آهنگ
+    audios.forEach(audio => {
+      audio.addEventListener('play', function() {
+        audios.forEach(otherAudio => {
+          if (otherAudio !== audio) {
+            otherAudio.pause();
+          }
+        });
+      });
+    });
+
+    // بروزرسانی نام آهنگ در حال پخش
+    function updateNowPlaying(audio, title, artist) {
+      currentTrack.textContent = `${title} - ${artist}`;
+      nowPlaying.classList.add('playing');
+    }
+
+    // پاک کردن نام آهنگ
+    function clearNowPlaying() {
+      setTimeout(() => {
+        const isPlaying = Array.from(audios).some(a => !a.paused);
+        if (!isPlaying) {
+          currentTrack.textContent = 'هیچ آهنگی در حال پخش نیست';
+          nowPlaying.classList.remove('playing');
+        }
+      }, 100);
+    }
+  </script>
+</body>
+            </html>
