@@ -10,13 +10,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Mastodon verification -->
   <link rel="me" href="https://mastodon.de/@GoldenJDM">
+  <!-- Open Graph -->
   <meta property="og:title" content="GoldenJDM — Amirhossein Zarniyan">
   <meta property="og:description" content="پروژه‌ها، لینک‌ها و راه‌های تماس">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://goldenjdm.ir/">
   <meta property="og:image" content="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png">
 
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -34,8 +37,10 @@
   }
   </script>
 
+  <!-- ====== Content Security Policy (CSP) - مهم برای جلوگیری از XSS ====== -->
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; img-src 'self' https://i.postimg.cc https://raw.githubusercontent.com data: blob:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; media-src 'self' https://i.postimg.cc;">
+  <!-- =================================================================== -->
 
   <style>
     :root{
@@ -62,12 +67,13 @@
         var(--bg);
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
-      padding-top:60px;
+      /* to prevent content hiding under fixed nav */
+      padding-top:64px;
     }
     a{color:inherit;text-decoration:none}
     .wrap{width:min(100%, var(--max)); margin-inline:auto; padding-inline:clamp(16px,4vw,32px)}
 
-    /* Nav - بهینه‌سازی برای موبایل */
+    /* Nav (fixed so it never disappears) */
     nav{
       position:fixed;
       top:0;
@@ -75,133 +81,48 @@
       right:0;
       z-index:50;
       backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(10,10,14,.85);
+      background:rgba(10,10,14,.6);
       border-bottom:1px solid var(--border);
     }
     .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      min-height:60px;
-      padding-block:8px;
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
     }
-    .brand{
-      font-weight:800;
-      letter-spacing:.3px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex-shrink:0;
-    }
-    .brand img{
-      width:40px;
-      height:40px;
-    }
-    
-    /* دکمه تغییر زبان */
+    .brand{font-weight:800; letter-spacing:.3px; display:flex; align-items:center; gap:8px}
+    .brand img{width:144px; height:144px}
+    /* language toggle button next to logo */
     .lang-toggle{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:8px;
-      padding:6px 12px;
+      border-radius:12px;
+      padding:8px 10px;
       font-weight:700;
-      font-size:13px;
       cursor:pointer;
       color:var(--fg);
       margin-inline-start:6px;
-      flex-shrink:0;
     }
-    .lang-toggle:focus{outline:2px solid #60a5fa; outline-offset:2px; border-radius:6px}
-
-    /* منوی موبایل - hamburger */
-    .menu-toggle{
-      display:none;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:8px;
-      padding:8px 10px;
-      cursor:pointer;
-      color:var(--fg);
-      font-size:20px;
-      line-height:1;
-      flex-shrink:0;
-    }
-    .menu-toggle:focus{outline:2px solid #60a5fa; outline-offset:2px}
-
-    /* لینک‌های ناوبری */
-    .links{
-      display:flex;
-      gap:clamp(12px, 3vw, 20px);
-      font-weight:600;
-      font-size:clamp(13px, 2.5vw, 15px);
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .links a{
-      opacity:.9;
-      transition:opacity .2s;
-      white-space:nowrap;
-    }
+    .lang-toggle:focus{outline:2px solid #60a5fa; outline-offset:4px; border-radius:6px}
+    .links{display:flex; gap:18px; font-weight:600; flex-wrap:wrap}
+    .links a{opacity:.9; transition:opacity .2s}
     .links a:hover{opacity:1}
     .links a:focus{outline:2px solid #60a5fa; outline-offset:4px; border-radius:4px}
 
-    /* رسپانسیو موبایل */
-    @media (max-width: 768px){
-      .menu-toggle{display:block}
-      
-      .links{
-        position:fixed;
-        top:60px;
-        left:0;
-        right:0;
-        background:rgba(10,10,14,.95);
-        backdrop-filter:saturate(140%) blur(10px);
-        flex-direction:column;
-        padding:20px;
-        gap:16px;
-        border-bottom:1px solid var(--border);
-        max-height:0;
-        overflow:hidden;
-        transition:max-height .3s ease-out, padding .3s ease-out;
-      }
-      
-      .links.active{
-        max-height:400px;
-        padding:20px;
-      }
-      
-      .links a{
-        font-size:16px;
-        padding:8px;
-        width:100%;
-        text-align:center;
-      }
-      
-      body{
-        padding-top:60px;
-      }
-    }
-
     /* Hero */
     .hero{
-      padding-block: clamp(32px,8vh,80px);
-      display:grid;
-      gap:24px;
+      padding-block: clamp(48px,10vh,120px);
+      display:grid; gap:32px;
       grid-template-columns: 1fr;
       place-items:center;
       text-align:center;
     }
     .avatar{
-      width:clamp(90px, 20vw, 120px);
-      height:clamp(90px, 20vw, 120px);
-      border-radius:50%;
-      object-fit:cover;
-      box-shadow: var(--shadow);
+      width:120px; height:120px; border-radius:50%;
+      object-fit:cover; box-shadow: var(--shadow);
       border:1px solid var(--border);
     }
     h1{
       margin:0;
-      font-size:clamp(24px,6vw,56px);
+      font-size:clamp(28px,5vw,56px);
       line-height:1.15;
       letter-spacing:-.4px;
     }
@@ -213,61 +134,41 @@
     }
     .subtitle{
       color:var(--muted);
-      font-size:clamp(14px,3vw,18px);
-      max-width:60ch;
-      margin-inline:auto;
+      font-size:clamp(15px,2.5vw,18px);
+      max-width:60ch; margin-inline:auto;
       line-height:1.7;
     }
     .cta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      justify-content:center;
-      margin-top:16px;
+      display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:10px;
     }
     .btn{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:clamp(10px, 2vw, 12px) clamp(14px, 3vw, 18px);
-      border-radius:12px;
-      border:1px solid var(--border);
+      display:flex; align-items:center; gap:8px;
+      padding:12px 18px; border-radius:14px; border:1px solid var(--border);
       background:var(--card);
       font-weight:700;
-      font-size:clamp(13px, 2.5vw, 15px);
       transition:.25s transform, .25s box-shadow, .25s background, .25s filter;
       cursor:pointer;
     }
-    .btn img{
-      width:18px;
-      height:18px;
-    }
+    .btn img{ width:20px; height:20px; }
     .btn:hover{transform:translateY(-2px); box-shadow: var(--shadow)}
     .btn:focus{outline:2px solid #60a5fa; outline-offset:4px}
-    .btn.primary{
-      background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);
-      border:none;
-      color:#0b0b0f;
-    }
+    .btn.primary{ background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6); border:none; color:#0b0b0f; }
     .btn.primary:hover{filter:brightness(1.1)}
     .btn.primary:active{transform:translateY(0); filter:brightness(.95)}
 
     /* Sections */
-    section{padding-block: clamp(32px,8vh,72px)}
+    section{padding-block: clamp(48px,10vh,96px)}
     .title{
-      font-size: clamp(20px,4.5vw,28px);
+      font-size: clamp(22px,4vw,28px);
       margin:0 0 18px 0;
     }
     .grid{
-      display:grid;
-      gap:14px;
+      display:grid; gap:16px;
       grid-template-columns: 1fr;
     }
     .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:clamp(16px, 3vw, 24px);
-      padding:clamp(14px, 3vw, 18px) clamp(16px, 3.5vw, 20px);
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:18px 20px;
       transition:.25s transform, .25s border-color, .25s background;
       position:relative;
       overflow:hidden;
@@ -282,29 +183,14 @@
       pointer-events:none;
     }
     .card:hover::before{opacity:1}
-    .card:hover{transform:translateY(-2px); border-color:#ffffff33; background:rgba(255,255,255,.08)}
+    .card:hover{transform:translateY(-4px); border-color:#ffffff33; background:rgba(255,255,255,.08)}
     .card:focus-within{outline:2px solid #60a5fa; outline-offset:4px}
-    .card h3{
-      margin:0 0 6px 0;
-      font-size:clamp(15px, 3vw, 18px);
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
-    .card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.8;
-      font-size:clamp(13px, 2.5vw, 15px);
-    }
-    .card .meta{
-      font-size:clamp(12px, 2vw, 13px);
-      color:#8888a0;
-      margin-top:8px;
-      font-weight:600;
-    }
+    .card h3{margin:0 0 6px 0; font-size:18px; display:flex; align-items:center; gap:8px}
+    .card p{margin:0; color:var(--muted); line-height:1.8}
+    .card .meta{font-size:13px; color:#8888a0; margin-top:8px; font-weight:600}
 
-    @media (min-width: 640px){
+    @media (min-width: 800px){
+      .hero{grid-template-columns: .9fr; }
       .grid{grid-template-columns: repeat(2,1fr)}
     }
 
@@ -312,24 +198,17 @@
     footer{
       border-top:1px solid var(--border);
       color:#b6b6c2;
-      padding:24px 0 50px;
-      font-size:clamp(12px, 2.5vw, 14px);
+      padding:28px 0 60px;
+      font-size:14px;
       text-align:center;
     }
     footer a{transition:opacity .2s}
     footer a:hover{opacity:.8}
     .credit{
-      position:fixed;
-      inset-inline-start:10px;
-      inset-block-end:10px;
-      font-size:clamp(11px, 2vw, 12px);
-      color:#9aa0aa;
-      opacity:.9;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      padding:5px 8px;
-      border-radius:999px;
-      backdrop-filter: blur(6px);
+      position:fixed; inset-inline-start:10px; inset-block-end:10px;
+      font-size:12px; color:#9aa0aa; opacity:.9;
+      background:rgba(255,255,255,.06); border:1px solid var(--border);
+      padding:6px 10px; border-radius:999px; backdrop-filter: blur(6px);
       z-index:10;
     }
     .credit a{text-decoration:underline}
@@ -356,6 +235,7 @@
       }
     }
 
+    /* Skip to content link for accessibility */
     .skip-link{
       position:absolute;
       top:-40px;
@@ -383,15 +263,14 @@
              alt="لوگو GoldenJDM"
              data-fa-alt="لوگو GoldenJDM"
              data-en-alt="GoldenJDM logo"
-             width="40" height="40">
+             width="144" height="144">
         <button class="lang-toggle" id="langBtn"
                 aria-label="تغییر زبان / Toggle language"
                 data-aria-fa="تغییر زبان"
                 data-aria-en="Toggle language">EN</button>
-        <button class="menu-toggle" id="menuBtn" aria-label="باز کردن منو" aria-expanded="false">☰</button>
       </div>
 
-      <div class="links" id="navLinks">
+      <div class="links">
         <a href="#work"
            data-fa="پروژه‌ها"
            data-en="Projects"
@@ -468,7 +347,7 @@
               <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg"
                    alt=""
                    aria-hidden="true">
-              <span data-fa="تلگرام" data-en="Telegram">تلگرام</span>
+              <span data-fa="تماس در تلگرام" data-en="Contact on Telegram">تماس در تلگرام</span>
             </a>
 
             <a class="btn primary"
@@ -481,7 +360,7 @@
               <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/wikipedia-logotype-of-earth-puzzle-svgrepo-com.svg"
                    alt=""
                    aria-hidden="true">
-              <span data-fa="ویکی‌پدیا" data-en="Wikipedia">ویکی‌پدیا</span>
+              <span data-fa="پروفایل ویکی‌پدیا" data-en="Wikipedia profile">پروفایل ویکی‌پدیا</span>
             </a>
 
             <a class="btn primary"
@@ -593,7 +472,7 @@
         <h2 class="title" data-fa="درباره من" data-en="About Me">درباره من</h2>
         <div class="card">
           <p style="margin:0; line-height:1.9"
-             data-fa="چرا GoldenJDM؟ واژه‌ی JDM به خودروهای اصیل ژاپنی اشاره دارد، و Golden نمادی از دوران طلایی این ماشین‌هاست — دهه‌ای که مهندسی، زیبایی و اصالت در کنار هم معنا پیدا کردند. این ترکیب برای من فقط یک نام نیست؛ نشانه‌ی شور و اشتیاقی است که به دنیای مکانیک، طراحی و سرعت دارم. من عاشق ایران و فرهنگ غنی‌اش هستم؛ سرزمینی که در هر گوشه‌اش می‌توان رد پای شعر، تاریخ و احساس را یافت. به خلبانی جت و پرواز در آسمان بی‌پایان علاقه‌مندم، همان‌قدر که عاشق ماشین‌های ژاپنی و دریفت هستم. دنیای نظامی و اسلحه برایم جذاب است، نه از زاویه‌ی جنگ، بلکه از دید دقت، نظم و فناوری. دوست دارم به مردم کمک کنم، تجربه‌هایم را به اشتراک بگذارم و در دنیای بی‌انتها و گاه ناشناخته‌ی اینترنت کاوش کنم. شیفته‌ی اشعار فلسفی و عاشقانه‌ام، زیرا باور دارم که در میان واژه‌ها می‌توان روح انسان را یافت. و در نهایت، به کدنویسی نه صرفاً به‌عنوان یک مهارت، بلکه به‌عنوان هنری برای ساختن نگاه می‌کنم؛ هنری که هر خط آن می‌تواند دنیا را—even if just a little—بهتر، زیباتر و هوشمندانه‌تر کند."
+             data-fa="چرا GoldenJDM؟ واژه‌ی JDM به خودروهای اصیل ژاپنی اشاره دارد، و Golden نمادی از دوران طلایی این ماشین‌هاست — دهه‌ای که مهندسی، زیبایی و اصالت در کنار هم معنا پیدا کردند. این ترکیب برای من فقط یک نام نیست؛ نشانه‌ی شور و اشتیاقی است که به دنیای مکانیک، طراحی و سرعت دارم. من عاشق ایران و فرهنگ غنی‌اش هستم؛ سرزمینی که در هر گوشه‌اش می‌توان رد پای شعر، تاریخ و احساس را یافت. به خلبانی جت و پرواز در آسمان بی‌پایان علاقه‌مندم، همان‌قدر که عاشق ماشین‌های ژاپنی و دریفت هستم. دنیای نظامی و اسلحه برایم جذاب است، نه از زاویه‌ی جنگ، بلکه از دید دقت، نظم و فناوری. دوست دارم به مردم کمک کنم، تجربه‌هایم را به اشتراک بگذارم و در دنیای بی‌انتها و گاه ناشناخته‌ی اینترنت کاوش کنم. شیفته‌ی اشعار فلسفی و عاشقانه‌ام، زیرا باور دارم که در میان واژه‌ها می‌توان روح انسان را یافت. و در نهایت، به کدنویسی نه صرفاً به‌عنوان یک مهارت، بلکه به‌عنوان هنری برای ساختن نگاه می‌کنم؛ هنری که هر خط آن می‌تواند دنیا را—even if just a little—بهتر، زیباتر، و هوشمندانه‌تر کند."
              data-en="Why GoldenJDM? The term JDM refers to authentic Japanese cars, and Golden symbolizes the golden era of these machines — a decade where engineering, beauty, and authenticity came together. For me, this name is more than a label; it represents my passion for mechanics, design and speed. I love Iran and its rich culture — a land where traces of poetry, history, and feeling can be found in every corner. I am passionate about jet aviation and flying through the endless sky, just as I love Japanese cars and drifting. The military world and firearms interest me not from the angle of conflict, but for precision, discipline and technology. I enjoy helping people, sharing my experiences, and exploring the vast and sometimes unfamiliar world of the internet. I am fascinated by philosophical and romantic poetry because I believe you can find the human spirit among words. Finally, I view coding not merely as a skill but as an art of crafting perspective; each line of code can make the world — even if just a little — better, more beautiful, and smarter.">
             چرا GoldenJDM؟ واژه‌ی JDM به خودروهای اصیل ژاپنی اشاره دارد، و Golden نمادی از دوران طلایی این ماشین‌هاست — دهه‌ای که مهندسی، زیبایی و اصالت در کنار هم معنا پیدا کردند. این ترکیب برای من فقط یک نام نیست؛ نشانه‌ی شور و اشتیاقی است که به دنیای مکانیک، طراحی و سرعت دارم. من عاشق ایران و فرهنگ غنی‌اش هستم؛ سرزمینی که در هر گوشه‌اش می‌توان رد پای شعر، تاریخ و احساس را یافت. به خلبانی جت و پرواز در آسمان بی‌انتها علاقه‌مندم، همان‌قدر که عاشق ماشین‌های ژاپنی و دریفت هستم. دنیای نظامی و اسلحه برایم جذاب است، نه از زاویه‌ی جنگ، بلکه از دید دقت، نظم و فناوری. دوست دارم به مردم کمک کنم، تجربه‌هایم را به اشتراک بگذارم و در دنیای بی‌انتها و گاه ناشناخته‌ی اینترنت کاوش کنم. شیفته‌ی اشعار فلسفی و عاشقانه‌ام، زیرا باور دارم که در میان واژه‌ها می‌توان روح انسان را یافت. و در نهایت، به کدنویسی نه صرفاً به‌عنوان یک مهارت، بلکه به‌عنوان هنری برای ساختن نگاه می‌کنم؛ هنری که هر خط آن می‌تواند دنیا را—even if just a little—بهتر، زیباتر و هوشمندانه‌تر کند.
           </p>
@@ -649,78 +528,57 @@
   </div>
 
   <script>
-    // Language toggle with persistence and ARIA updates
+    // Language toggle with persistence and ARIA updates.
     const langBtn = document.getElementById('langBtn');
     const initial = localStorage.getItem('lang') || 'fa';
     let currentLang = initial;
 
+    function setAttributeIfPresent(el, attr, value) {
+      if (!el) return;
+      if (value === null || value === undefined) return;
+      el.setAttribute(attr, value);
+    }
+
     function setLang(lang) {
       document.documentElement.lang = lang;
       document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      // Toggle button label: show opposite language shorthand (EN when fa active).
       langBtn.textContent = lang === 'fa' ? 'EN' : 'FA';
 
-      // Update textual content
+      // Update textual content for elements that have data-fa / data-en
       document.querySelectorAll('[data-fa]').forEach(el => {
         const text = el.getAttribute(`data-${lang}`);
         if (text !== null) el.textContent = text;
       });
 
-      // Update aria-labels
+      // Update aria-labels where translations provided
       document.querySelectorAll('[data-aria-fa]').forEach(el => {
         const aria = el.getAttribute(`data-aria-${lang}`);
         if (aria !== null) el.setAttribute('aria-label', aria);
       });
 
-      // Update image alts
+      // Update image alts if provided via data-fa-alt / data-en-alt
       document.querySelectorAll('img[data-fa-alt]').forEach(img => {
         const alt = img.getAttribute(`data-${lang}-alt`);
         if (alt !== null) img.setAttribute('alt', alt);
       });
 
+      // store preference
       localStorage.setItem('lang', lang);
       currentLang = lang;
     }
 
+    // Toggle handler
     langBtn.addEventListener('click', () => {
       const next = currentLang === 'fa' ? 'en' : 'fa';
       setLang(next);
     });
 
+    // Initialize on load
     setLang(currentLang);
-
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menuBtn');
-    const navLinks = document.getElementById('navLinks');
-
-    menuBtn.addEventListener('click', () => {
-      const isActive = navLinks.classList.toggle('active');
-      menuBtn.setAttribute('aria-expanded', isActive);
-      menuBtn.setAttribute('aria-label', isActive ? 'بستن منو' : 'باز کردن منو');
-      menuBtn.textContent = isActive ? '✕' : '☰';
-    });
-
-    // Close menu when clicking on a link
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.setAttribute('aria-label', 'باز کردن منو');
-        menuBtn.textContent = '☰';
-      });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
-        navLinks.classList.remove('active');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.setAttribute('aria-label', 'باز کردن منو');
-        menuBtn.textContent = '☰';
-      }
-    });
   </script>
 
-  <!-- Vercel Web Analytics -->
+  <!-- Vercel Web Analytics (برای سایت‌های استاتیک: کافیست این اسکریپت باشد) -->
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
-</html>
+              </html>
