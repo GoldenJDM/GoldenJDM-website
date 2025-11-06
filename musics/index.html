@@ -6,7 +6,6 @@
   <title>موزیک‌ها | GoldenJDM</title>
   <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
 
-  <!-- استایل اصلی سایت -->
   <style>
     :root{
       --bg: #0b0b0f;
@@ -19,6 +18,7 @@
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --grad1: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #a78bfa, #f472b6, #6ee7ff);
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     html,body{height:100%}
@@ -49,43 +49,23 @@
       height:64px;
     }
     .brand{
-      font-weight:800;
-      letter-spacing:.3px;
-      display:flex; align-items:center; gap:8px;
+      font-weight:800; display:flex; align-items:center; gap:8px;
     }
-    .brand img{width:40px; height:40px; border-radius:50%}
-
-    .hamburger {
-      display:none;
-      flex-direction:column;
-      cursor:pointer;
-      background:none;
-      border:none;
-      padding:5px;
-      z-index:60;
-    }
-    .hamburger span {
-      width:25px; height:3px;
-      background-color:var(--fg);
-      margin:3px 0;
-      border-radius:3px;
-      transition:0.3s;
-    }
-    .hamburger.active span:nth-child(1){
-      transform:rotate(45deg) translate(5px,5px);
-    }
-    .hamburger.active span:nth-child(2){
-      opacity:0;
-    }
-    .hamburger.active span:nth-child(3){
-      transform:rotate(-45deg) translate(5px,-5px);
+    .brand img{
+      width:56px; 
+      height:56px; 
+      border-radius:50%;
+      object-fit:cover;
     }
 
-    .links{
-      display:flex; gap:18px; font-weight:600; flex-wrap:wrap;
-    }
-    .links a{opacity:.9; transition:opacity .2s;}
-    .links a:hover{opacity:1}
+    .hamburger{display:none;flex-direction:column;cursor:pointer;background:none;border:none;padding:5px;z-index:60;}
+    .hamburger span{width:25px;height:3px;background-color:var(--fg);margin:3px 0;border-radius:3px;transition:0.3s;}
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+    .hamburger.active span:nth-child(2){opacity:0;}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+    .links{display:flex;gap:18px;font-weight:600;}
+    .links a{opacity:.9;transition:opacity .2s;}
+    .links a:hover{opacity:1;}
 
     @media (max-width:768px){
       .hamburger{display:flex;}
@@ -103,30 +83,51 @@
         border-top:1px solid var(--border);
       }
       .links.active{right:0;}
-      .links a{
-        display:block;
-        padding:1.2rem 0;
-        border-bottom:1px solid var(--border);
-        font-size:1.1rem;
-      }
+      .links a{display:block;padding:1.2rem 0;border-bottom:1px solid var(--border);font-size:1.1rem;}
       .links a:last-child{border-bottom:none;}
     }
 
-    /* Cards */
+    /* Music Cards */
     main{padding-block:clamp(48px,10vh,96px);}
     h1{text-align:center;font-size:clamp(26px,5vw,38px);margin-bottom:32px;}
+    .grad-hero{
+      background: var(--grad1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
     .grid{display:grid;gap:16px;grid-template-columns:1fr;}
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      gap:20px;
       padding:18px 20px;
-      transition:.25s transform, .25s background;
+      transition:.25s transform,.25s background;
     }
-    .card:hover{transform:translateY(-4px);background:rgba(255,255,255,.08)}
-    .card h3{margin-top:0;}
-    .card p{color:var(--muted);}
-    audio{width:100%;margin-top:10px;}
+    .card:hover{transform:translateY(-4px);background:rgba(255,255,255,.08);}
+    .cover{
+      width:120px; height:120px;
+      border-radius:12px;
+      object-fit:cover;
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
+      flex-shrink:0;
+    }
+    .info{flex:1;}
+    .info h3{margin-top:0;margin-bottom:8px;}
+    .info p{margin:0 0 10px;color:var(--muted);}
+    audio{width:100%;}
+
+    @media(max-width:700px){
+      .card{flex-direction:column;align-items:center;text-align:center;}
+      .cover{width:100%;max-width:280px;height:auto;}
+      .info{width:100%;}
+    }
 
     footer{
       border-top:1px solid var(--border);
@@ -161,14 +162,19 @@
 
   <main class="wrap">
     <h1 class="grad-hero">🎧 موزیک‌ها</h1>
+
     <div class="grid">
+      <!-- آهنگ ۱ -->
       <div class="card">
-        <h3>Moonwalking in Calabasas (feat. Blueface) [Remix]</h3>
-        <p>پخش مستقیم از سرور GitHub</p>
-        <audio controls>
-          <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/11.%20Moonwalking%20in%20Calabasas%20(feat.%20Blueface)%20%5BRemix%5D.mp3" type="audio/mpeg">
-          مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-        </audio>
+        <img class="cover" src="https://i.postimg.cc/9QMFrgW0/moonwalking.jpg" alt="Cover of Moonwalking in Calabasas">
+        <div class="info">
+          <h3>Moonwalking in Calabasas (feat. Blueface) [Remix]</h3>
+          <p>DDG</p>
+          <audio controls>
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/11.%20Moonwalking%20in%20Calabasas%20(feat.%20Blueface)%20%5BRemix%5D.mp3" type="audio/mpeg">
+            مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
+          </audio>
+        </div>
       </div>
     </div>
   </main>
@@ -177,17 +183,13 @@
     © 2025 — GoldenJDM — CC BY-SA 4.0
   </footer>
 
-  <!-- ✅ اسکریپت فعال‌سازی منوی همبرگری -->
   <script>
     const hamburger = document.getElementById("hamburger");
     const navMenu = document.getElementById("navMenu");
-
     hamburger.addEventListener("click", () => {
       hamburger.classList.toggle("active");
       navMenu.classList.toggle("active");
-
-      const expanded = hamburger.classList.contains("active");
-      hamburger.setAttribute("aria-expanded", expanded);
+      hamburger.setAttribute("aria-expanded", hamburger.classList.contains("active"));
     });
   </script>
 </body>
