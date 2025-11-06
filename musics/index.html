@@ -3,129 +3,148 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>موزیک‌ها — GoldenJDM</title>
+  <title>موزیک‌ها | GoldenJDM</title>
   <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- استایل اصلی سایت -->
   <style>
-    body {
-      font-family: "Vazirmatn", sans-serif;
-      margin: 0;
-      padding-top: 64px;
-      background: #0b0b0f;
-      color: #e9e9ef;
-      text-align: center;
+    :root{
+      --bg: #0b0b0f;
+      --fg: #e9e9ef;
+      --muted:#a7a7b3;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.12);
+      --max: 1080px;
+      --radius: 24px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --grad1: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #a78bfa, #f472b6, #6ee7ff);
     }
-    .wrap { width: min(100%, 900px); margin: auto; padding: 0 20px; }
-    h1 { margin-top: 40px; font-size: 28px; }
-    .audio-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 20px;
-      margin: 20px 0;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Vazirmatn",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(1200px 800px at 80% -10%, #3b82f610 30%, transparent 60%) no-repeat,
+        radial-gradient(1000px 700px at -10% 10%, #f472b610 30%, transparent 60%) no-repeat,
+        var(--bg);
+      padding-top:64px;
     }
-    audio { width: 100%; outline: none; margin-top: 10px; }
-    
-    /* ===== ناوبری ===== */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px) saturate(140%);
-      background: rgba(10,10,14,.6);
-      border-bottom: 1px solid rgba(255,255,255,.12);
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      padding: 0 16px; /* بهینه برای موبایل */
-    }
-    .brand {
-      font-weight: 800;
-      font-size: 20px;
-      white-space: nowrap;
-    }
-    .links a {
-      margin-inline: 10px;
-      color: inherit;
-      text-decoration: none;
-      opacity: .9;
-    }
-    .links a:hover { opacity: 1; }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(100%, var(--max)); margin-inline:auto; padding-inline:clamp(16px,4vw,32px)}
 
-    /* ===== همبرگری ===== */
+    /* Nav */
+    nav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(10,10,14,.6);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:.3px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .brand img{width:40px; height:40px; border-radius:50%}
+
     .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 5px;
-      z-index: 100;
+      display:none;
+      flex-direction:column;
+      cursor:pointer;
+      background:none;
+      border:none;
+      padding:5px;
+      z-index:60;
     }
     .hamburger span {
-      width: 25px; height: 3px;
-      background-color: #e9e9ef;
-      margin: 3px 0;
-      border-radius: 3px;
-      transition: 0.3s;
+      width:25px; height:3px;
+      background-color:var(--fg);
+      margin:3px 0;
+      border-radius:3px;
+      transition:0.3s;
     }
-    .hamburger.active span:nth-child(1) {
-      transform: translateY(6px) rotate(45deg);
+    .hamburger.active span:nth-child(1){
+      transform:rotate(45deg) translate(5px,5px);
     }
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
+    .hamburger.active span:nth-child(2){
+      opacity:0;
     }
-    .hamburger.active span:nth-child(3) {
-      transform: translateY(-6px) rotate(-45deg);
-    }
-
-    /* ===== حالت موبایل ===== */
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-
-      .links {
-        position: fixed;
-        inset: 0;
-        top: 64px;
-        background: rgba(10,10,14,.98);
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0;
-        padding-top: 1rem;
-        transition: transform 0.3s ease;
-        transform: translateX(100%);
-      }
-      .links.active {
-        transform: translateX(0);
-      }
-      .links a {
-        width: 100%;
-        padding: 1.2rem 0;
-        border-bottom: 1px solid rgba(255,255,255,.12);
-        font-size: 1.1rem;
-      }
+    .hamburger.active span:nth-child(3){
+      transform:rotate(-45deg) translate(5px,-5px);
     }
 
-    footer {
-      border-top: 1px solid rgba(255,255,255,.12);
-      color: #b6b6c2;
-      padding: 24px 0 40px;
-      font-size: 14px;
-      margin-top: 40px;
+    .links{
+      display:flex; gap:18px; font-weight:600; flex-wrap:wrap;
+    }
+    .links a{opacity:.9; transition:opacity .2s;}
+    .links a:hover{opacity:1}
+
+    @media (max-width:768px){
+      .hamburger{display:flex;}
+      .links{
+        position:fixed;
+        right:-100%;
+        top:64px;
+        flex-direction:column;
+        background:rgba(10,10,14,.98);
+        backdrop-filter:saturate(140%) blur(20px);
+        width:100%;
+        text-align:center;
+        transition:.3s;
+        padding:2rem 0;
+        border-top:1px solid var(--border);
+      }
+      .links.active{right:0;}
+      .links a{
+        display:block;
+        padding:1.2rem 0;
+        border-bottom:1px solid var(--border);
+        font-size:1.1rem;
+      }
+      .links a:last-child{border-bottom:none;}
+    }
+
+    /* Cards */
+    main{padding-block:clamp(48px,10vh,96px);}
+    h1{text-align:center;font-size:clamp(26px,5vw,38px);margin-bottom:32px;}
+    .grid{display:grid;gap:16px;grid-template-columns:1fr;}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px 20px;
+      transition:.25s transform, .25s background;
+    }
+    .card:hover{transform:translateY(-4px);background:rgba(255,255,255,.08)}
+    .card h3{margin-top:0;}
+    .card p{color:var(--muted);}
+    audio{width:100%;margin-top:10px;}
+
+    footer{
+      border-top:1px solid var(--border);
+      color:#b6b6c2;
+      padding:28px 0 60px;
+      font-size:14px;
+      text-align:center;
     }
   </style>
 </head>
 
 <body>
-  <nav>
-    <div class="nav-inner">
-      <div class="brand">GoldenJDM</div>
+  <nav role="navigation">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg" alt="GoldenJDM logo">
+        <span>GoldenJDM</span>
+      </div>
 
       <button class="hamburger" id="hamburger" aria-label="منوی اصلی" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -133,28 +152,29 @@
 
       <div class="links" id="navMenu">
         <a href="/">خانه</a>
-        <a href="/gallery">گالری</a>
-        <a href="/musics">موزیک‌ها</a>
+        <a href="/gallery.html">گالری</a>
+        <a href="/musics.html">موزیک‌ها</a>
         <a href="/#contact">ارتباط</a>
       </div>
     </div>
   </nav>
 
   <main class="wrap">
-    <h1>🎧 موزیک‌ها</h1>
-    <p>در این بخش می‌توانید موزیک‌های مورد علاقه‌ام را گوش کنید.</p>
-
-    <div class="audio-card">
-      <h3>11. Moonwalking in Calabasas (feat. Blueface) [Remix]</h3>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/11.%20Moonwalking%20in%20Calabasas%20(feat.%20Blueface)%20%5BRemix%5D.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
+    <h1 class="grad-hero">🎧 موزیک‌ها</h1>
+    <div class="grid">
+      <div class="card">
+        <h3>Moonwalking in Calabasas (feat. Blueface) [Remix]</h3>
+        <p>پخش مستقیم از سرور GitHub</p>
+        <audio controls>
+          <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/11.%20Moonwalking%20in%20Calabasas%20(feat.%20Blueface)%20%5BRemix%5D.mp3" type="audio/mpeg">
+          مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
+        </audio>
+      </div>
     </div>
   </main>
 
-  <footer class="wrap">
-    <p>© 2025 — GoldenJDM</p>
+  <footer>
+    © 2025 — GoldenJDM — CC BY-SA 4.0
   </footer>
 
   <!-- ✅ اسکریپت فعال‌سازی منوی همبرگری -->
@@ -165,6 +185,7 @@
     hamburger.addEventListener("click", () => {
       hamburger.classList.toggle("active");
       navMenu.classList.toggle("active");
+
       const expanded = hamburger.classList.contains("active");
       hamburger.setAttribute("aria-expanded", expanded);
     });
