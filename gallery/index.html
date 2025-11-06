@@ -166,10 +166,18 @@
     <img id="lightbox-img" src="" alt="">
   </div>
 
-  <footer class="wrap">
-    <p>© 2025 —
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" target="_blank" rel="noopener noreferrer" class="grad-hero">
-        CC BY-SA 4.0
+  <!-- FOOTER -->
+  <footer class="wrap" role="contentinfo">
+    <p data-fa="© 2025 — CC BY-SA 4.0 — GoldenJDM" data-en="© 2025 — CC BY-SA 4.0 — GoldenJDM">
+      © 2025 — 
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="grad-hero"
+         aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
+         data-aria-fa="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
+         data-aria-en="More about CC BY-SA 4.0">
+         CC BY-SA 4.0
       </a>
       — GoldenJDM
     </p>
@@ -177,31 +185,76 @@
 
   <div class="credit">
     Made with <span aria-label="love">❤️</span> by 
-    <a href="#home">GoldenJDM</a>
+    <a href="#home" data-fa="GoldenJDM" data-en="GoldenJDM">GoldenJDM</a>
   </div>
 
   <script>
-    const hamburger=document.getElementById("hamburger");
-    const navMenu=document.getElementById("navMenu");
-    hamburger.addEventListener("click",()=>{
-      hamburger.classList.toggle("active");
-      navMenu.classList.toggle("active");
-    });
+    // Language toggle with persistence and ARIA updates.
+    const langBtn = document.getElementById('langBtn');
+    const initial = localStorage.getItem('lang') || 'fa';
+    let currentLang = initial;
 
-    // Lightbox
-    const galleryImages=document.querySelectorAll(".gallery img");
-    const lightbox=document.getElementById("lightbox");
-    const lightboxImg=document.getElementById("lightbox-img");
-    const closeBtn=document.getElementById("closeBtn");
+    function setAttributeIfPresent(el, attr, value) {
+      if (!el) return;
+      if (value === null || value === undefined) return;
+      el.setAttribute(attr, value);
+    }
 
-    galleryImages.forEach(img=>{
-      img.addEventListener("click",()=>{
-        lightbox.classList.add("active");
-        lightboxImg.src=img.src;
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      // Toggle button label: show opposite language shorthand (EN when fa active).
+      langBtn.textContent = lang === 'fa' ? 'EN' : 'FA';
+
+      // Update textual content for elements that have data-fa / data-en
+      document.querySelectorAll('[data-fa]').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text !== null) el.textContent = text;
       });
+
+      // Update aria-labels where translations provided
+      document.querySelectorAll('[data-aria-fa]').forEach(el => {
+        const aria = el.getAttribute(`data-aria-${lang}`);
+        if (aria !== null) el.setAttribute('aria-label', aria);
+      });
+
+      // Update image alts if provided via data-fa-alt / data-en-alt
+      document.querySelectorAll('img[data-fa-alt]').forEach(img => {
+        const alt = img.getAttribute(`data-${lang}-alt`);
+        if (alt !== null) img.setAttribute('alt', alt);
+      });
+
+      // store preference
+      localStorage.setItem('lang', lang);
+      currentLang = lang;
+    }
+
+    // Toggle handler
+    langBtn.addEventListener('click', () => {
+      const next = currentLang === 'fa' ? 'en' : 'fa';
+      setLang(next);
     });
-    closeBtn.addEventListener("click",()=>lightbox.classList.remove("active"));
-    window.addEventListener("keydown",e=>{if(e.key==="Escape")lightbox.classList.remove("active");});
+
+    // Initialize on load
+    setLang(currentLang);
   </script>
+<!-- ✅ اسکریپت فعال‌سازی منوی همبرگری (نسخه‌ی متقارن و بهینه) -->
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
+
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+
+    // تغییر وضعیت ARIA برای دسترس‌پذیری
+    const expanded = hamburger.classList.contains("active");
+    hamburger.setAttribute("aria-expanded", expanded);
+  });
+</script>
+
+  
+  <!-- Vercel Web Analytics (برای سایت‌های استاتیک: کافیست این اسکریپت باشد) -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
-</html>
+              </html>
