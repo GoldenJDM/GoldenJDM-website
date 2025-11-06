@@ -666,20 +666,21 @@
     // Initialize on load
     setLang(currentLang);
   </script>
-<!-- ✅ اسکریپت فعال‌سازی منوی همبرگری -->
-  <script>
-    const hamburger = document.getElementById("hamburger");
-    const navMenu = document.getElementById("navMenu");
+<!-- ✅ اسکریپت فعال‌سازی منوی همبرگری (نسخه‌ی متقارن و بهینه) -->
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
 
-    hamburger.addEventListener("click", () => {
-      hamburger.classList.toggle("active");
-      navMenu.classList.toggle("active");
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
 
-      // تغییر وضعیت ARIA برای دسترس‌پذیری
-      const expanded = hamburger.classList.contains("active");
-      hamburger.setAttribute("aria-expanded", expanded);
-    });
-  </script>
+    // تغییر وضعیت ARIA برای دسترس‌پذیری
+    const expanded = hamburger.classList.contains("active");
+    hamburger.setAttribute("aria-expanded", expanded);
+  });
+</script>
+
   
   <!-- Vercel Web Analytics (برای سایت‌های استاتیک: کافیست این اسکریپت باشد) -->
   <script defer src="/_vercel/insights/script.js"></script>
