@@ -1,83 +1,173 @@
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 50;
-  backdrop-filter: blur(10px) saturate(140%);
-  background: rgba(10,10,14,.6);
-  border-bottom: 1px solid rgba(255,255,255,.12);
-}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>موزیک‌ها — GoldenJDM</title>
+  <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  padding: 0 16px; /* ← کمتر شد برای جاگیری بهتر در موبایل */
-}
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Vazirmatn", sans-serif;
+      margin: 0;
+      padding-top: 64px;
+      background: #0b0b0f;
+      color: #e9e9ef;
+      text-align: center;
+    }
+    .wrap { width: min(100%, 900px); margin: auto; padding: 0 20px; }
+    h1 { margin-top: 40px; font-size: 28px; }
+    .audio-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    audio { width: 100%; outline: none; margin-top: 10px; }
+    
+    /* ===== ناوبری ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px) saturate(140%);
+      background: rgba(10,10,14,.6);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: 0 16px; /* بهینه برای موبایل */
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 20px;
+      white-space: nowrap;
+    }
+    .links a {
+      margin-inline: 10px;
+      color: inherit;
+      text-decoration: none;
+      opacity: .9;
+    }
+    .links a:hover { opacity: 1; }
 
-.brand {
-  font-weight: 800;
-  font-size: 20px;
-  white-space: nowrap;
-}
+    /* ===== همبرگری ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 5px;
+      z-index: 100;
+    }
+    .hamburger span {
+      width: 25px; height: 3px;
+      background-color: #e9e9ef;
+      margin: 3px 0;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
 
-.links a {
-  margin-inline: 10px;
-  color: inherit;
-  text-decoration: none;
-  opacity: .9;
-}
-.links a:hover { opacity: 1; }
+    /* ===== حالت موبایل ===== */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
 
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 5px;
-  z-index: 100; /* ← بالاتر از منو */
-}
-.hamburger span {
-  width: 25px; height: 3px;
-  background-color: #e9e9ef;
-  margin: 3px 0; border-radius: 3px;
-  transition: 0.3s;
-}
-.hamburger.active span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
+      .links {
+        position: fixed;
+        inset: 0;
+        top: 64px;
+        background: rgba(10,10,14,.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0;
+        padding-top: 1rem;
+        transition: transform 0.3s ease;
+        transform: translateX(100%);
+      }
+      .links.active {
+        transform: translateX(0);
+      }
+      .links a {
+        width: 100%;
+        padding: 1.2rem 0;
+        border-bottom: 1px solid rgba(255,255,255,.12);
+        font-size: 1.1rem;
+      }
+    }
 
-/* 📱 اصلاح کامل حالت موبایل */
-@media (max-width: 768px) {
-  .hamburger { display: flex; }
+    footer {
+      border-top: 1px solid rgba(255,255,255,.12);
+      color: #b6b6c2;
+      padding: 24px 0 40px;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
 
-  .links {
-    position: fixed;
-    inset: 0; /* ← از همه طرف صفحه را بگیرد */
-    top: 64px; /* زیر نوار بالا */
-    background: rgba(10,10,14,.98);
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0;
-    padding-top: 1rem;
-    transition: right 0.3s ease;
-    transform: translateX(100%);
-  }
-  .links.active {
-    transform: translateX(0);
-  }
-  .links a {
-    width: 100%;
-    padding: 1.2rem 0;
-    border-bottom: 1px solid rgba(255,255,255,.12);
-    font-size: 1.1rem;
-  }
-}
+<body>
+  <nav>
+    <div class="nav-inner">
+      <div class="brand">GoldenJDM</div>
+
+      <button class="hamburger" id="hamburger" aria-label="منوی اصلی" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="links" id="navMenu">
+        <a href="/">خانه</a>
+        <a href="/gallery">گالری</a>
+        <a href="/musics">موزیک‌ها</a>
+        <a href="/#contact">ارتباط</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <h1>🎧 موزیک‌ها</h1>
+    <p>در این بخش می‌توانید موزیک‌های مورد علاقه‌ام را گوش کنید.</p>
+
+    <div class="audio-card">
+      <h3>11. Moonwalking in Calabasas (feat. Blueface) [Remix]</h3>
+      <audio controls>
+        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/11.%20Moonwalking%20in%20Calabasas%20(feat.%20Blueface)%20%5BRemix%5D.mp3" type="audio/mpeg">
+        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
+      </audio>
+    </div>
+  </main>
+
+  <footer class="wrap">
+    <p>© 2025 — GoldenJDM</p>
+  </footer>
+
+  <!-- ✅ اسکریپت فعال‌سازی منوی همبرگری -->
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+      const expanded = hamburger.classList.contains("active");
+      hamburger.setAttribute("aria-expanded", expanded);
+    });
+  </script>
+</body>
+</html>
