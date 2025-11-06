@@ -2,9 +2,9 @@
   "builds": [
     { "src": "**/*.html", "use": "@vercel/static" }
   ],
-  "routes": [
-    { "src": "/gallery/?", "dest": "/gallery/index.html" },
-    { "src": "/music/?", "dest": "/music/index.html" }
+  "rewrites": [
+    { "source": "/gallery", "destination": "/gallery/index.html" },
+    { "source": "/music", "destination": "/music/index.html" }
   ],
   "headers": [
     {
