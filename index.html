@@ -597,40 +597,117 @@
         </div>
       </section>
 
-      <!-- FOOTER -->
-      <footer class="wrap" role="contentinfo">
-        <div style="display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:16px;">
-          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/445552d970bdaf7a0f588ad12ceaac68ebf13c1d/Signature.svg"
-               alt="امضای دیجیتال امیرحسین زرنیان"
-               data-fa-alt="امضای دیجیتال امیرحسین زرنیان"
-               data-en-alt="Digital signature of Amirhossein Zarniyan"
-               width="200"
-               height="60"
-               style="height: auto; max-width: 100%;">
-        </div>
-        <p data-fa="© 2025 — CC BY-SA 4.0 — GoldenJDM" data-en="© 2025 — CC BY-SA 4.0 — GoldenJDM">
-          © 2025 — 
-          <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"
-             target="_blank"
-             rel="noopener noreferrer"
-             class="grad-hero"
-             aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
-             data-aria-fa="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
-             data-aria-en="More about CC BY-SA 4.0">
-             CC BY-SA 4.0
-          </a>
-          — GoldenJDM
-        </p>
-      </footer>
+<!-- FOOTER -->
+<footer class="wrap" role="contentinfo">
+  <div class="footer-content" style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+  ">
+    <!-- بلوک اصلی: درخت + دکمه‌ها -->
+    <div class="footer-top" style="
+      display: flex;
+      flex-direction: row-reverse; /* چون RTL است: راست = محتوای اصلی */
+      justify-content: center;
+      align-items: flex-start;
+      gap: 24px;
+      width: 100%;
+      max-width: 600px;
+    ">
+      <!-- درخت ساکورا (راست در دسکتاپ) -->
+      <div class="footer-tree" style="
+        flex-shrink: 0;
+        text-align: center;
+      ">
+        <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/refs/heads/main/vecteezy_cherry-blossom-tree-with-pink-flowers_7511525.svg"
+             alt="درخت ساکورای ژاپنی"
+             style="height: auto; max-width: 160px; max-height: 120px; filter: opacity(0.92);">
+      </div>
 
-      <div class="credit">
-        Made with <span aria-label="love">❤️</span> by 
-        <a data-fa="GoldenJDM" data-en="GoldenJDM">GoldenJDM</a>
+      <!-- دکمه‌های ارتباطی (چپ در دسکتاپ) -->
+      <div class="footer-links" style="
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: flex-start;
+        align-items: flex-start;
+      ">
+        <a class="btn"
+           href="https://t.me/GoldenJDM"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="تلگرام"
+           style="padding:8px 14px; font-size:14px; font-weight:600;">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="" aria-hidden="true" style="width:16px; height:16px; vertical-align:middle; margin-inline-end:6px;">
+          تلگرام
+        </a>
+        <a class="btn"
+           href="https://t.me/GoldenJDMbot"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="ربات تلگرام"
+           style="padding:8px 14px; font-size:14px; font-weight:600;">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="" aria-hidden="true" style="width:16px; height:16px; vertical-align:middle; margin-inline-end:6px;">
+          ربات
+        </a>
+        <a class="btn"
+           href="mailto:owner@goldenjdm.ir"
+           aria-label="ایمیل"
+           style="padding:8px 14px; font-size:14px; font-weight:600;">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/refs/heads/main/email-black-envelope-back-svgrepo-com.svg" alt="" aria-hidden="true" style="width:16px; height:16px; vertical-align:middle; margin-inline-end:6px;">
+          ایمیل
+        </a>
       </div>
     </div>
-  </main>
 
-  <!-- Scripts -->
+    <!-- امضای دیجیتال (همیشه پایین‌ترین بخش محتوایی) -->
+    <div class="footer-signature" style="text-align: center; margin-top: 8px;">
+      <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/refs/heads/main/signature.svg"
+           alt="امضا"
+           style="height: auto; max-width: 200px;">
+    </div>
+  </div>
+
+  <!-- کپی‌رایت -->
+  <p data-fa="© 2025 — CC BY-SA 4.0 — GoldenJDM" data-en="© 2025 — CC BY-SA 4.0 — GoldenJDM" style="text-align: center;">
+    © 2025 — 
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="grad-hero"
+       aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
+       data-aria-fa="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
+       data-aria-en="More about CC BY-SA 4.0">
+       CC BY-SA 4.0
+    </a>
+    — GoldenJDM
+  </p>
+</footer>
+
+<style>
+  @media (max-width: 768px) {
+    .footer-top {
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+    .footer-tree,
+    .footer-links {
+      text-align: center !important;
+      align-items: center !important;
+      width: 100%;
+    }
+    .footer-links {
+      align-items: center !important;
+    }
+    .footer-links a {
+      width: fit-content;
+    }
+  }
+</style>
+
+<!-- Scripts -->
   <script>
     // Language toggle
     const langBtn = document.getElementById('langBtn');
