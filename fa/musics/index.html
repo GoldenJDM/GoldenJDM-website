@@ -3,9 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Musics</title>
-  <link rel="icon" href="gw9o7a01.svg" type="image/svg+xml" />
-
+  <title>موزیک‌ها | GoldenJDM</title>
+  <meta name="description" content="مجموعه موزیک‌های GoldenJDM - پروندهٔ شخصی امیرحسین زرنیان">
+  
+  <!-- ✅ Fixed paths for subfolder -->
+  <link rel="icon" href="../../gw9o7a01.svg" type="image/svg+xml" />
+  
+  <!-- ✅ Added Vazirmatn font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- SEO: hreflang tags -->
+  <link rel="alternate" hreflang="en" href="https://goldenjdm.ir/en/musics/" />
+  <link rel="alternate" hreflang="fa" href="https://goldenjdm.ir/fa/musics/" />
+  <link rel="canonical" href="https://goldenjdm.ir/fa/musics/" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="موزیک‌ها | GoldenJDM">
+  <meta property="og:description" content="مجموعه موزیک‌های GoldenJDM">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://goldenjdm.ir/fa/musics/">
+  
   <style>
     :root{
       --bg: #0b0b0f;
@@ -17,10 +36,17 @@
       --radius: 24px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --grad1: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #a78bfa, #f472b6, #6ee7ff);
+      /* ✅ Liquid Glass iOS 26 Variables */
+      --glass-bg: rgba(20, 10, 35, 0.35);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --glass-border-hover: rgba(240, 171, 252, 0.45);
+      --glass-blur: blur(40px) saturate(200%) brightness(1.08);
+      --glass-shadow-inset: inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.20);
+      --glass-shadow-outer: 0 8px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.05);
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;overflow-x:hidden}
     html,body{height:100%}
     body{
       margin:0;
@@ -31,18 +57,26 @@
         radial-gradient(1000px 700px at -10% 10%, #f472b610 30%, transparent 60%) no-repeat,
         var(--bg);
       padding-top:64px;
+      overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
     .wrap{width:min(100%, var(--max)); margin-inline:auto; padding-inline:clamp(16px,4vw,32px)}
 
-    /* Nav */
+    /* ✅ Nav - Liquid Glass iOS 26 Style */
     nav{
       position:fixed;
       top:0; left:0; right:0;
       z-index:50;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(10,10,14,.6);
-      border-bottom:1px solid var(--border);
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow-inset), var(--glass-shadow-outer);
+      transition: background .3s ease, box-shadow .3s ease;
+    }
+    nav.scrolled {
+      background: rgba(20, 10, 35, 0.55);
+      box-shadow: var(--glass-shadow-inset), 0 4px 60px rgba(0,0,0,0.5);
     }
     .nav-inner{
       display:flex; align-items:center; justify-content:space-between;
@@ -52,37 +86,48 @@
       font-weight:800; display:flex; align-items:center; gap:8px;
     }
     .brand img{
-      width:56px; 
-      height:56px; 
+      width:48px; 
+      height:48px; 
       border-radius:50%;
       object-fit:cover;
+      transition:transform .2s ease;
     }
+    .brand img:hover{transform:scale(1.05)}
 
-    .hamburger{display:none;flex-direction:column;cursor:pointer;background:none;border:none;padding:5px;z-index:60;}
-    .hamburger span{width:25px;height:3px;background-color:var(--fg);margin:3px 0;border-radius:3px;transition:0.3s;}
-    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+    .hamburger{display:none;flex-direction:column;cursor:pointer;background:none;border:none;padding:8px;z-index:60;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
+    .hamburger span{width:24px;height:3px;background-color:var(--fg);margin:3px 0;border-radius:3px;transition:0.3s;display:block;}
+    .hamburger.active span:nth-child(1){transform:rotate(-45deg) translate(-5px,6px);}
     .hamburger.active span:nth-child(2){opacity:0;}
-    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+    .hamburger.active span:nth-child(3){transform:rotate(45deg) translate(-5px,-6px);}
+    
     .links{display:flex;gap:18px;font-weight:600;}
-    .links a{opacity:.9;transition:opacity .2s;}
-    .links a:hover{opacity:1;}
+    .links a{opacity:.9;transition:opacity .2s,color .2s;}
+    .links a:hover{opacity:1;color:#f0abfc;}
+    .links a:focus{outline:2px solid rgba(168,85,247,0.7);outline-offset:4px}
 
     @media (max-width:768px){
       .hamburger{display:flex;}
       .links{
         position:fixed;
-        right:-100%;
+        left:0;
         top:64px;
         flex-direction:column;
-        background:rgba(10,10,14,.98);
-        backdrop-filter:saturate(140%) blur(20px);
+        background:rgba(20,10,35,.98);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border-top:1px solid var(--glass-border);
+        border-bottom:1px solid var(--glass-border);
         width:100%;
         text-align:center;
-        transition:.3s;
+        transition:transform .3s ease;
         padding:2rem 0;
-        border-top:1px solid var(--border);
+        gap:0;
+        z-index:45;
+        transform:translateX(-100%);
+        visibility:hidden;
+        overflow:hidden;
       }
-      .links.active{right:0;}
+      .links.active{transform:translateX(0);visibility:visible;}
       .links a{display:block;padding:1.2rem 0;border-bottom:1px solid var(--border);font-size:1.1rem;}
       .links a:last-child{border-bottom:none;}
     }
@@ -108,8 +153,14 @@
       gap:20px;
       padding:18px 20px;
       transition:.25s transform,.25s background;
+      position:relative;
+      overflow:hidden;
     }
-    .card:hover{transform:translateY(-4px);background:rgba(255,255,255,.08);}
+    .card:hover{
+      transform:translateY(-4px);
+      background:rgba(255,255,255,.08);
+      border-color:var(--glass-border-hover);
+    }
     .cover{
       width:120px; height:120px;
       border-radius:12px;
@@ -119,9 +170,11 @@
       flex-shrink:0;
     }
     .info{flex:1;}
-    .info h3{margin-top:0;margin-bottom:8px;}
+    .info h3{margin-top:0;margin-bottom:8px;font-size:18px;}
     .info p{margin:0 0 10px;color:var(--muted);}
-    audio{width:100%;}
+    audio{width:100%;outline:none;}
+    audio::-webkit-media-controls-panel{background-color:rgba(255,255,255,.1)}
+    audio::-webkit-media-controls-play-button{filter:brightness(0) saturate(100%)}
 
     @media(max-width:700px){
       .card{flex-direction:column;align-items:center;text-align:center;}
@@ -136,25 +189,48 @@
       font-size:14px;
       text-align:center;
     }
+    footer a{transition:opacity .2s}
+    footer a:hover{opacity:.8}
+    
+    .credit{
+      position:fixed;inset-inline-start:10px;inset-block-end:10px;
+      font-size:12px;color:#9aa0aa;opacity:.9;
+      background:rgba(255,255,255,.06);border:1px solid var(--border);
+      padding:6px 10px;border-radius:999px;backdrop-filter:blur(6px);
+      z-index:10;
+    }
+    
+    @supports not (backdrop-filter: blur(10px)) {
+      nav, .links {
+        background: rgba(30, 20, 50, 0.95);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-color: rgba(255,255,255,0.2);
+      }
+    }
   </style>
 </head>
 
 <body>
-  <nav role="navigation">
+  <nav role="navigation" aria-label="منوی اصلی">
     <div class="wrap nav-inner">
       <div class="brand">
-        <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg" alt="GoldenJDM logo">
+        <a href="../../fa/">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg" alt="لوگو GoldenJDM">
+        </a>
         <span>GoldenJDM</span>
       </div>
 
-      <button class="hamburger" id="hamburger" aria-label="منوی اصلی" aria-expanded="false">
+      <button class="hamburger" id="hamburger" aria-label="منوی اصلی" aria-expanded="false" aria-controls="navMenu">
         <span></span><span></span><span></span>
       </button>
 
       <div class="links" id="navMenu">
-        <a href="/">خانه</a>
-        <a href="/gallery">گالری</a>
-        <a href="/#contact">ارتباط</a>
+        <!-- ✅ Absolute paths from root - NO more /fa/fa/ bug! -->
+        <a href="/fa/">خانه</a>
+        <a href="/fa/gallery/">گالری</a>
+        <a href="/fa/musics/">موزیک‌ها</a>
+        <a href="/fa/#contact">ارتباط</a>
       </div>
     </div>
   </nav>
@@ -165,493 +241,459 @@
     <div class="grid">
       <!-- آهنگ ۱ -->
       <div class="card">
-        <img class="cover" src="https://i.postimg.cc/9QMFrgW0/moonwalking.jpg" alt="Cover of Moonwalking in Calabasas">
+        <img class="cover" src="https://i.postimg.cc/9QMFrgW0/moonwalking.jpg" alt="کاور آهنگ Moonwalking in Calabasas">
         <div class="info">
           <h3>Moonwalking in Calabasas (feat. Blueface) [Remix]</h3>
           <p>DDG</p>
-          <audio controls>
+          <audio controls preload="none">
             <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/11.%20Moonwalking%20in%20Calabasas%20(feat.%20Blueface)%20%5BRemix%5D.mp3" type="audio/mpeg">
-            مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
           </audio>
         </div>
       </div>
-            <!-- آهنگ 2 -->
+      
+      <!-- آهنگ ۲ -->
       <div class="card">
-        <img class="cover" src="https://i.postimg.cc/sD87fWrH/dreams.jpg" alt="Cover of Dreams">
+        <img class="cover" src="https://i.postimg.cc/sD87fWrH/dreams.jpg" alt="کاور آهنگ Dreams">
         <div class="info">
           <h3>Dreams</h3>
           <p>Loreen</p>
-          <audio controls>
-            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/4_5999324036901897304.mp3">
-            مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/4_5999324036901897304.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
           </audio>
         </div>
       </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/zX27NT9M/Skyfall-Drill-Remix.jpg
-" alt="Cover of Skyfall (Drill Remix)">
-    <div class="info">
-      <h3>Skyfall (Drill Remix)</h3>
-      <p>Adele</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Adele%20%20%20@AHANG_SiSTEM%20-%20Skyfall%20(Drill%20Remix).mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/zX27NT9M/Skyfall-Drill-Remix.jpg" alt="کاور آهنگ Skyfall (Drill Remix)">
+        <div class="info">
+          <h3>Skyfall (Drill Remix)</h3>
+          <p>Adele</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Adele%20%20%20@AHANG_SiSTEM%20-%20Skyfall%20(Drill%20Remix).mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/SN1d4cwB/UNDERGROUND-2.jpg
-" alt="Cover of UNDERGROUND">
-    <div class="info">
-      <h3>UNDERGROUND</h3>
-      <p>DARKWOLE</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/DARKWOLE%20%20%20@AHANG_SiSTEM%20-%20UNDERGROUND%202.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/SN1d4cwB/UNDERGROUND-2.jpg" alt="کاور آهنگ UNDERGROUND">
+        <div class="info">
+          <h3>UNDERGROUND</h3>
+          <p>DARKWOLE</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/DARKWOLE%20%20%20@AHANG_SiSTEM%20-%20UNDERGROUND%202.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/SNxdHgtK/All-Night.jpg" alt="Cover of All Nigh">
-    <div class="info">
-      <h3>All Night</h3>
-      <p>Emrah Karaduman</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Emrah%20Karaduman%20%20%20@AHANG_SiSTEM%20-%20All%20Night.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/SNxdHgtK/All-Night.jpg" alt="کاور آهنگ All Night">
+        <div class="info">
+          <h3>All Night</h3>
+          <p>Emrah Karaduman</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Emrah%20Karaduman%20%20%20@AHANG_SiSTEM%20-%20All%20Night.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/RFxG89jK/Attachments-Ft-Taliban-Glizzy.jpg" alt="Cover of Attachments Ft. Taliban Glizzy">
-    <div class="info">
-      <h3>Attachments Ft. Taliban Glizzy</h3>
-      <p>Pressa</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Pressa_-_Attachments_Ft_Taliban_Glizzy_SkinnyGistcom.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/RFxG89jK/Attachments-Ft-Taliban-Glizzy.jpg" alt="کاور آهنگ Attachments Ft. Taliban Glizzy">
+        <div class="info">
+          <h3>Attachments Ft. Taliban Glizzy</h3>
+          <p>Pressa</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Pressa_-_Attachments_Ft_Taliban_Glizzy_SkinnyGistcom.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/nh534q23/Bezdna.jpg" alt="Cover of Бездна">
-    <div class="info">
-      <h3>Бездна</h3>
-      <p>SUNAMI</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/%D0%91%D0%B5%D0%B7%D0%B4%D0%BD%D0%B0%20-%20SUNAMI%20_%20@AHANG_SiSTEM.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/nh534q23/Bezdna.jpg" alt="کاور آهنگ Бездна">
+        <div class="info">
+          <h3>Бездна</h3>
+          <p>SUNAMI</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/%D0%91%D0%B5%D0%B7%D0%B4%D0%BD%D0%B0%20-%20SUNAMI%20_%20@AHANG_SiSTEM.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/X7YLtsDc/CLOUD.jpg" alt="Cover of CLOUD">
-    <div class="info">
-      <h3>CLOUD</h3>
-      <p>Dxrk ダーク</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20CLOUD.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/X7YLtsDc/CLOUD.jpg" alt="کاور آهنگ CLOUD">
+        <div class="info">
+          <h3>CLOUD</h3>
+          <p>Dxrk ダーク</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20CLOUD.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/C5F7h7My/Crystal-Moet.jpg" alt="Cover of Crystal & Moët">
-    <div class="info">
-      <h3>Crystal & Moët</h3>
-      <p>MORGENSHTERN</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20-%20Cristal%20&%20Mo%C3%ABt%20320%20%5BWWW.VIPREMIX.IR%5D.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/C5F7h7My/Crystal-Moet.jpg" alt="کاور آهنگ Crystal & Moët">
+        <div class="info">
+          <h3>Crystal & Moët</h3>
+          <p>MORGENSHTERN</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20-%20Cristal%20&%20Mo%C3%ABt%20320%20%5BWWW.VIPREMIX.IR%5D.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/85gw3Dq8/Didn-t-I-Say-feat-Siavash-Mx.jpg" alt="Cover of Didn’t I Say (feat. Siavash Mx)">
-    <div class="info">
-      <h3>Didn’t I Say (feat. Siavash Mx)</h3>
-      <p>Richrosebaby</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Richrosebaby%20%E2%80%93%20Didn%E2%80%99t%20I%20Say%20(feat.%20Siavash%20Mx).mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/85gw3Dq8/Didn-t-I-Say-feat-Siavash-Mx.jpg" alt="کاور آهنگ Didn't I Say (feat. Siavash Mx)">
+        <div class="info">
+          <h3>Didn't I Say (feat. Siavash Mx)</h3>
+          <p>Richrosebaby</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Richrosebaby%20%E2%80%93%20Didn%E2%80%99t%20I%20Say%20(feat.%20Siavash%20Mx).mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/XqQ8p5Xq/Dni-i-noci-feat-Real-Girl.jpg" alt="Cover of Дни и ночи (feat. Real Girl)">
-    <div class="info">
-      <h3>Дни и ночи (feat. Real Girl)</h3>
-      <p>LȺ</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/L%C8%BA%20%20%20@AHANG_SiSTEM%20-%20%D0%94%D0%BD%D0%B8%20%D0%B8%20%D0%BD%D0%BE%D1%87%D0%B8%20(feat.%20Real%20Girl).mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/XqQ8p5Xq/Dni-i-noci-feat-Real-Girl.jpg" alt="کاور آهنگ Дни и ночи (feat. Real Girl)">
+        <div class="info">
+          <h3>Дни и ночи (feat. Real Girl)</h3>
+          <p>LȺ</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/L%C8%BA%20%20%20@AHANG_SiSTEM%20-%20%D0%94%D0%BD%D0%B8%20%D0%B8%20%D0%BD%D0%BE%D1%87%D0%B8%20(feat.%20Real%20Girl).mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/hvSsDsDM/El-Problema.jpg" alt="Cover of El Problemá">
-    <div class="info">
-      <h3>El Problemá</h3>
-      <p>MORGENSHTERN & Timati</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20Ft%20Timati%20-%20El%20Problem%C3%A1.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/y8JP8kK6/El-Problema.jpg" alt="کاور آهنگ El Problemá">
+        <div class="info">
+          <h3>El Problemá</h3>
+          <p>MORGENSHTERN & Timati</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20Ft%20Timati%20-%20El%20Problem%C3%A1.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/y8JP8kK6/EX.jpg" alt="Cover of EX.">
-    <div class="info">
-      <h3>EX.</h3>
-      <p>2Scratch</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/2Scratch%20%20%20@AHANG_SiSTEM%20-%20EX.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/2jwTHsTL/Gata-Only.jpg" alt="کاور آهنگ Gata Only">
+        <div class="info">
+          <h3>Gata Only</h3>
+          <p>FloyyMenor</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/FloyyMenor%20%20%20@AHANG_SiSTEM%20-%20Gata%20Only.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/2jwTHsTL/Gata-Only.jpg" alt="Cover of Gata Only">
-    <div class="info">
-      <h3>Gata Only</h3>
-      <p>FloyyMenor</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/FloyyMenor%20%20%20@AHANG_SiSTEM%20-%20Gata%20Only.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/WzXnhZt0/Hatred-S-GMA.jpg" alt="کاور آهنگ Hatred · S!GMA">
+        <div class="info">
+          <h3>Hatred · S!GMA</h3>
+          <p>Z1FiR</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Hatred%20%C2%B7%20S!GMA.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/WzXnhZt0/Hatred-S-GMA.jpg" alt="Cover of Hatred · S!GMA">
-    <div class="info">
-      <h3>Hatred · S!GMA</h3>
-      <p>Z1FiR</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Hatred%20%C2%B7%20S!GMA.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/pTMk7xgn/Hit-The-Bucket.jpg" alt="کاور آهنگ Hit The Bucket">
+        <div class="info">
+          <h3>Hit The Bucket</h3>
+          <p>Priya Ragu</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Priya%20Ragu%20%20@Faravahr_Sound%20%E2%80%93%20Hit%20The%20Bucket.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/pTMk7xgn/Hit-The-Bucket.jpg" alt="Cover of Hit The Bucket">
-    <div class="info">
-      <h3>Hit The Bucket</h3>
-      <p>Priya Ragu</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Priya%20Ragu%20%20@Faravahr_Sound%20%E2%80%93%20Hit%20The%20Bucket.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/NFgDsDGQ/ICE.jpg" alt="کاور آهنگ ICE">
+        <div class="info">
+          <h3>ICE</h3>
+          <p>MORGENSHTERN</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20%20%20@AHANG_SiSTEM%20-%20ICE.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/NFgDsDGQ/ICE.jpg
-" alt="Cover of ICE">
-    <div class="info">
-      <h3>ICE</h3>
-      <p>MORGENSHTERN</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20%20%20@AHANG_SiSTEM%20-%20ICE.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/HnB2VMjH/Idu-na-bedu.jpg" alt="کاور آهنگ Иду на беду">
+        <div class="info">
+          <h3>Иду на беду</h3>
+          <p>Mikey</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Mikey%20%20%20@AHANG_SiSTEM%20-%20%D0%98%D0%B4%D1%83%20%D0%BD%D0%B0%20%D0%B1%D0%B5%D0%B4%D1%83.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/HnB2VMjH/Idu-na-bedu.jpg" alt="Cover of Иду на беду">
-    <div class="info">
-      <h3>Иду на беду</h3>
-      <p>Mikey</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Mikey%20%20%20@AHANG_SiSTEM%20-%20%D0%98%D0%B4%D1%83%20%D0%BD%D0%B0%20%D0%B1%D0%B5%D0%B4%D1%83.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/HnB2VMjs/Kamin.jpg" alt="کاور آهنگ Kamin">
+        <div class="info">
+          <h3>Kamin</h3>
+          <p>Emin, Jony</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Kamin.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/HnB2VMjs/Kamin.jpg
-" alt="Cover of Kamin">
-    <div class="info">
-      <h3>Kamin</h3>
-      <p>Emin , Jony</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Kamin.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/ydCn5Bw8/kolybelnaa.jpg" alt="کاور آهنگ колыбельная">
+        <div class="info">
+          <h3>колыбельная</h3>
+          <p>Rauf & Faik</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Rauf%20%20%20Faik%20%20%20@AHANG_SiSTEM%20-%20%D0%BA%D0%BE%D0%BB%D1%8B%D0%B1%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/ydCn5Bw8/kolybelnaa.jpg
-" alt="Cover of колыбельная">
-    <div class="info">
-      <h3>колыбельная</h3>
-      <p>Rauf & Faik</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Rauf%20%20%20Faik%20%20%20@AHANG_SiSTEM%20-%20%D0%BA%D0%BE%D0%BB%D1%8B%D0%B1%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/0jcfbSrb/KRUSH-GIRL.jpg" alt="کاور آهنگ KRUSH GIRL">
+        <div class="info">
+          <h3>KRUSH GIRL</h3>
+          <p>Kute & killanoia & Tokyomane</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/KRUSH%20GIRL.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/0jcfbSrb/KRUSH-GIRL.jpg
-" alt="Cover of KRUSH GIRL">
-    <div class="info">
-      <h3>KRUSH GIRL</h3>
-      <p>Kute & killanoia & Tokyomane</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/KRUSH%20GIRL.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/NM8bvScp/Let-Me-Die.jpg" alt="کاور آهنگ Let Me Die">
+        <div class="info">
+          <h3>Let Me Die</h3>
+          <p>Lil Happy Lil Sad</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Nightcore%20-%20Let%20Me%20Die%20Lil%20Happy%20Lil%20Sad.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/NM8bvScp/Let-Me-Die.jpg
-" alt="Cover of Let Me Die">
-    <div class="info">
-      <h3>Let Me Die</h3>
-      <p>Lil Happy Lil Sad</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Nightcore%20-%20Let%20Me%20Die%20Lil%20Happy%20Lil%20Sad.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/QCXm8mNd/Love-Your-Voice.jpg" alt="کاور آهنگ Love Your Voice">
+        <div class="info">
+          <h3>Love Your Voice</h3>
+          <p>JONY</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Love%20Your%20Voice.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/QCXm8mNd/Love-Your-Voice.jpg
-" alt="Cover of Love Your Voice">
-    <div class="info">
-      <h3>Love Your Voice</h3>
-      <p>JONY</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Love%20Your%20Voice.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/MpcDpvwJ/Moonlight.jpg" alt="کاور آهنگ Moonlight">
+        <div class="info">
+          <h3>Moonlight</h3>
+          <p>dhruv</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/4_5814605125657823782.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/MpcDpvwJ/Moonlight.jpg
-" alt="Cover of Moonlight">
-    <div class="info">
-      <h3>Moonlight</h3>
-      <p>dhruv</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/4_5814605125657823782.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/QC0bH7Vk/Mugshot-Rockstar.jpg" alt="کاور آهنگ Mugshot (Rockstar)">
+        <div class="info">
+          <h3>Mugshot (Rockstar)</h3>
+          <p>Hex</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Hex%20%20%20@AHANG_SiSTEM%20-%20Mugshot%20(Rockstar).mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/QC0bH7Vk/Mugshot-Rockstar.jpg
-" alt="Cover of Mugshot (Rockstar)">
-    <div class="info">
-      <h3>Mugshot (Rockstar)</h3>
-      <p>Hex</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Hex%20%20%20@AHANG_SiSTEM%20-%20Mugshot%20(Rockstar).mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/Jn3KCvLq/My-Life-Is-Going-On.jpg" alt="کاور آهنگ My Life Is Going On">
+        <div class="info">
+          <h3>My Life Is Going On</h3>
+          <p>Cecilia Krull</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/My%20Life%20Is%20Going%20On%20%20%20Cecilia%20Krull.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/Jn3KCvLq/My-Life-Is-Going-On.jpg
-" alt="Cover of My Life Is Going On">
-    <div class="info">
-      <h3>My Life Is Going On</h3>
-      <p>Cecilia Krull</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/My%20Life%20Is%20Going%20On%20%20%20Cecilia%20Krull.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/qMvwW1ZC/Options.jpg" alt="کاور آهنگ Options">
+        <div class="info">
+          <h3>Options</h3>
+          <p>EARTHGANG & Wale</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/EARTHGANG%20%20%20Wale%20-%20Options.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/qMvwW1ZC/Options.jpg
-" alt="Cover of Options">
-    <div class="info">
-      <h3>Options</h3>
-      <p>EARTHGANG & Wale</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/EARTHGANG%20%20%20Wale%20-%20Options.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/qRcQHSTn/Overseas.jpg" alt="کاور آهنگ Overseas">
+        <div class="info">
+          <h3>Overseas</h3>
+          <p>Prznt</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Overseas%20-%20Prznt.m4a" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/qRcQHSTn/Overseas.jpg
-" alt="Cover of Overseas">
-    <div class="info">
-      <h3>Overseas</h3>
-      <p>Prznt</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Overseas%20-%20Prznt.m4a" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/153BbvY7/Phonk-Web.jpg" alt="کاور آهنگ Phonk Web">
+        <div class="info">
+          <h3>Phonk Web</h3>
+          <p>Dxrk ダーク</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20Phonk%20Web.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/153BbvY7/Phonk-Web.jpg
-" alt="Cover of Phonk Web">
-    <div class="info">
-      <h3>Phonk Web</h3>
-      <p>Dxrk ダーク</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20Phonk%20Web.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/vH2hy5Jb/Scitalocka.jpg" alt="کاور آهنگ Считалочка">
+        <div class="info">
+          <h3>Считалочка</h3>
+          <p>MORGENSHTERN</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/1704650889612.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/vH2hy5Jb/Scitalocka.jpg" alt="Cover of Считалочка">
-    <div class="info">
-      <h3>Считалочка</h3>
-      <p>MORGENSHTERN</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/1704650889612.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/vBwXjMpD/Solas.jpg" alt="کاور آهنگ Solas">
+        <div class="info">
+          <h3>Solas</h3>
+          <p>Jamie Duffy</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Solas.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/vBwXjMpD/Solas.jpg
-" alt="Cover of Solas">
-    <div class="info">
-      <h3>Solas</h3>
-      <p>Jamie Duffy</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Solas.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/sXCK8ybt/Stay.jpg" alt="کاور آهنگ Stay">
+        <div class="info">
+          <h3>Stay</h3>
+          <p>Przn & 2SCratch</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Stay%20-%20Prznt%20and%202scratch.m4a" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/sXCK8ybt/Stay.jpg
-" alt="Cover of Stay">
-    <div class="info">
-      <h3>Stay</h3>
-      <p>Przn & 2SCratch</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Stay%20-%20Prznt%20and%202scratch.m4a" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/wv5FYZpk/Stronger.jpg" alt="کاور آهنگ Stronger">
+        <div class="info">
+          <h3>Stronger</h3>
+          <p>Otnicka</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Otnicka%20%20%20@AHANG_SiSTEM%20-%20Stronger.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/wv5FYZpk/Stronger.jpg
-" alt="Cover of Stronger">
-    <div class="info">
-      <h3>Stronger</h3>
-      <p>Otnicka</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Otnicka%20%20%20@AHANG_SiSTEM%20-%20Stronger.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/yY8j2LrP/SUSPIRIA.jpg" alt="کاور آهنگ SUSPIRIA">
+        <div class="info">
+          <h3>SUSPIRIA</h3>
+          <p>ARTIST_NAME_2</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20SUSPIRIA.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/yY8j2LrP/SUSPIRIA.jpg
-" alt="Cover of SUSPIRIA">
-    <div class="info">
-      <h3>SUSPIRIA</h3>
-      <p>ARTIST_NAME_2</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20SUSPIRIA.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/XN8x2Rx0/The-Alchemist.jpg" alt="کاور آهنگ The Alchemist">
+        <div class="info">
+          <h3>The Alchemist</h3>
+          <p>Haarper</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Haarper%20%20%20@AHANG_SiSTEM%20-%20The%20Alchemist.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/XN8x2Rx0/The-Alchemist.jpg
-" alt="Cover of The Alchemist">
-    <div class="info">
-      <h3>The Alchemist</h3>
-      <p>Haarper</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Haarper%20%20%20@AHANG_SiSTEM%20-%20The%20Alchemist.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/XJ6xh3T4/The-Silence.jpg" alt="کاور آهنگ The Silence">
+        <div class="info">
+          <h3>The Silence</h3>
+          <p>Manchester Orchestra</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/The%20Silence.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/XJ6xh3T4/The-Silence.jpg
-" alt="Cover of The Silence">
-    <div class="info">
-      <h3>The Silence</h3>
-      <p>Manchester Orchestra</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/The%20Silence.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/KjZfGfGJ/Tokyo-Revengers.jpg" alt="کاور آهنگ Tokyo Revengers">
+        <div class="info">
+          <h3>Tokyo Revengers</h3>
+          <p>Mupp</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Mupp%20%20%20@AHANG_SiSTEM%20-%20Tokyo%20Revengers.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/KjZfGfGJ/Tokyo-Revengers.jpg
-" alt="Cover of Tokyo Revengers">
-    <div class="info">
-      <h3>Tokyo Revengers</h3>
-      <p>Mupp</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Mupp%20%20%20@AHANG_SiSTEM%20-%20Tokyo%20Revengers.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/y6PnfMnd/Yakuza.jpg" alt="کاور آهنگ Yakuza">
+        <div class="info">
+          <h3>Yakuza</h3>
+          <p>Free Flow Flava</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Free%20Flow%20Flava%20%20%20@AHANG_SiSTEM%20-%20Yakuza.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
+        </div>
+      </div>
 
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/y6PnfMnd/Yakuza.jpg
-" alt="Cover of Yakuza">
-    <div class="info">
-      <h3>Yakuza</h3>
-      <p>Free Flow Flava</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Free%20Flow%20Flava%20%20%20@AHANG_SiSTEM%20-%20Yakuza.mp3" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="cover" src="https://i.postimg.cc/kgky6qMF/You-Aint-Worth-It.jpg
-" alt="Cover of You Ain't Worth It">
-    <div class="info">
-      <h3>You Ain't Worth It</h3>
-      <p>Melii & 6LACK</p>
-      <audio controls>
-        <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/01%20You%20Ain't%20Worth%20It.m4a" type="audio/mpeg">
-        مرورگر شما پخش موزیک را پشتیبانی نمی‌کند.
-      </audio>
+      <div class="card">
+        <img class="cover" src="https://i.postimg.cc/kgky6qMF/You-Aint-Worth-It.jpg" alt="کاور آهنگ You Ain't Worth It">
+        <div class="info">
+          <h3>You Ain't Worth It</h3>
+          <p>Melii & 6LACK</p>
+          <audio controls preload="none">
+            <source src="https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/01%20You%20Ain't%20Worth%20It.m4a" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی‌کند.
+          </audio>
         </div>
       </div>
     </div>
@@ -659,15 +701,13 @@
 
   <!-- FOOTER -->
   <footer class="wrap" role="contentinfo">
-    <p data-fa="© 2025 — CC BY-SA 4.0 — GoldenJDM" data-en="© 2025 — CC BY-SA 4.0 — GoldenJDM">
-      © 2025 — 
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+    <p>
+      © ۱۴۰۵ — 
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fa"
          target="_blank"
          rel="noopener noreferrer"
          class="grad-hero"
-         aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
-         data-aria-fa="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0"
-         data-aria-en="More about CC BY-SA 4.0">
+         aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0">
          CC BY-SA 4.0
       </a>
       — GoldenJDM
@@ -675,77 +715,38 @@
   </footer>
 
   <div class="credit">
-    Made with <span aria-label="love">❤️</span> by 
-    <a data-fa="GoldenJDM" data-en="GoldenJDM">GoldenJDM</a>
+    ساخته شده با <span aria-label="love">❤️</span> توسط 
+    <a href="../../fa/">GoldenJDM</a>
   </div>
 
+  <!-- ✅ Hamburger Menu Script -->
   <script>
-    // Language toggle with persistence and ARIA updates.
-    const langBtn = document.getElementById('langBtn');
-    const initial = localStorage.getItem('lang') || 'fa';
-    let currentLang = initial;
-
-    function setAttributeIfPresent(el, attr, value) {
-      if (!el) return;
-      if (value === null || value === undefined) return;
-      el.setAttribute(attr, value);
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+    if (hamburger && navMenu) {
+      hamburger.addEventListener("click", () => {
+        const active = hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+        hamburger.setAttribute("aria-expanded", active);
+      });
+      navMenu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          hamburger.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", "false");
+        });
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest("nav") && navMenu.classList.contains("active")) {
+          navMenu.classList.remove("active");
+          hamburger.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", "false");
+        }
+      });
     }
-
-    function setLang(lang) {
-      document.documentElement.lang = lang;
-      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-      // Toggle button label: show opposite language shorthand (EN when fa active).
-      langBtn.textContent = lang === 'fa' ? 'EN' : 'FA';
-
-      // Update textual content for elements that have data-fa / data-en
-      document.querySelectorAll('[data-fa]').forEach(el => {
-        const text = el.getAttribute(`data-${lang}`);
-        if (text !== null) el.textContent = text;
-      });
-
-      // Update aria-labels where translations provided
-      document.querySelectorAll('[data-aria-fa]').forEach(el => {
-        const aria = el.getAttribute(`data-aria-${lang}`);
-        if (aria !== null) el.setAttribute('aria-label', aria);
-      });
-
-      // Update image alts if provided via data-fa-alt / data-en-alt
-      document.querySelectorAll('img[data-fa-alt]').forEach(img => {
-        const alt = img.getAttribute(`data-${lang}-alt`);
-        if (alt !== null) img.setAttribute('alt', alt);
-      });
-
-      // store preference
-      localStorage.setItem('lang', lang);
-      currentLang = lang;
-    }
-
-    // Toggle handler
-    langBtn.addEventListener('click', () => {
-      const next = currentLang === 'fa' ? 'en' : 'fa';
-      setLang(next);
-    });
-
-    // Initialize on load
-    setLang(currentLang);
   </script>
-<!-- ✅ اسکریپت فعال‌سازی منوی همبرگری (نسخه‌ی متقارن و بهینه) -->
-<script>
-  const hamburger = document.getElementById("hamburger");
-  const navMenu = document.getElementById("navMenu");
-
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-
-    // تغییر وضعیت ARIA برای دسترس‌پذیری
-    const expanded = hamburger.classList.contains("active");
-    hamburger.setAttribute("aria-expanded", expanded);
-  });
-</script>
-
   
-  <!-- Vercel Web Analytics (برای سایت‌های استاتیک: کافیست این اسکریپت باشد) -->
+  <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
-              </html>
+</html>
