@@ -260,7 +260,7 @@
     <div style="display:flex;flex-direction:column;align-items:center;gap:20px;margin-bottom:24px">
       <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/refs/heads/main/signature.svg" alt="امضا" style="height:auto;max-width:200px" width="200" height="60">
     </div>
-    <p style="text-align:center">© 2025 — <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" target="_blank" rel="noopener noreferrer" class="grad-hero" aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0">CC BY-SA 4.0</a> — GoldenJDM</p>
+    <p style="text-align:center">© 2026 — <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" target="_blank" rel="noopener noreferrer" class="grad-hero" aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0">CC BY-SA 4.0</a> — GoldenJDM</p>
   </footer>
 
   <!-- 🎨 LIQUID AURORA ANIMATION - FIXED: No reset on scroll -->
@@ -308,7 +308,6 @@
     }
     
     function tick(timestamp) {
-      // ✅ استفاده از elapsed time به‌جای timestamp مستقیم
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
       
@@ -317,7 +316,6 @@
       ctx.fillRect(0, 0, W, H);
       
       for (const b of blobs) {
-        // ✅ استفاده از elapsed برای حرکت پیوسته
         const angle = elapsed * b.speed + b.offset;
         const x = b.cx + Math.cos(angle) * b.ax;
         const y = b.cy + Math.sin(angle * 0.71) * b.ay;
@@ -350,8 +348,6 @@
     resize();
     init();
     raf = requestAnimationFrame(tick);
-    
-    // ✅ Resize handler - Debounced (جلوگیری از ریست با هر تغییر کوچک)
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
@@ -360,9 +356,7 @@
         init();
       }, 250);
     }, { passive: true });
-    
-    // ✅ Pause when tab is not visible (بهینه‌سازی باتری)
-    document.addEventListener('visibilitychange', () => {
+        document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         cancelAnimationFrame(raf);
       } else {
