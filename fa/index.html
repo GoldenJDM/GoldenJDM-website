@@ -1,33 +1,23 @@
-<html lang="fa" dir="rtl"><head></head><body>
-
-
+<html lang="fa" dir="rtl"><head>
   <meta charset="utf-8">
   <meta name="google-site-verification" content="-IjHVx5TFQqkoOjs1QUAaW2ivrcGuZkh4frfkfD0VKU">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GoldenJDM - Amirhossein Zarniyan</title>
+  <title>GoldenJDM - امیرحسین زرنیان</title>
   <meta name="description" content="پروندهٔ شخصی امیرحسین زرنیان (GoldenJDM). پروژه‌ها، نوشته‌ها و راه‌های تماس.">
-  
-  <!-- ✅ Fixed favicon path for subfolder -->
+  <meta name="theme-color" content="#0b0b0f">
   <link rel="icon" href="../gw9o7a01.svg" type="image/svg+xml">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&amp;display=swap" rel="stylesheet">
   <link rel="me" href="https://mastodon.de/@GoldenJDM">
-  
-  <!-- Open Graph Tags -->
   <meta property="og:title" content="GoldenJDM — امیرحسین زرنیان">
   <meta property="og:description" content="پروژه‌ها، لینک‌ها و راه‌های تماس">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://goldenjdm.ir/fa/">
   <meta property="og:image" content="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png">
-  
-  <!-- SEO: hreflang tags -->
   <link rel="alternate" hreflang="en" href="https://goldenjdm.ir/en/">
   <link rel="alternate" hreflang="fa" href="https://goldenjdm.ir/fa/">
   <link rel="canonical" href="https://goldenjdm.ir/fa/">
-  
-  <!-- JSON-LD Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -109,7 +99,7 @@
       padding-inline:clamp(16px,4vw,32px);
     }
     
-    /* NAV */
+    /* NAV - Liquid Glass iOS 26 */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:50;
       background:var(--glass-bg);
@@ -284,31 +274,50 @@
     
     .skip-link{position:absolute;top:-40px;left:0;background:#60a5fa;color:#0b0b0f;padding:8px 16px;text-decoration:none;font-weight:700;border-radius:0 0 8px 0;z-index:100}
     .skip-link:focus{top:0}
-  </style>  
+    
+    .credit{
+      position:fixed;
+      inset-inline-start:10px;
+      inset-block-end:10px;
+      font-size:12px;
+      color:#9aa0aa;
+      opacity:.9;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      padding:6px 10px;
+      border-radius:999px;
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+      z-index:10;
+      transition:opacity .2s ease;
+    }
+    .credit:hover{opacity:1}
+    .credit a{color:var(--fg);text-decoration:none;font-weight:600}
+    .credit a:hover{color:#f0abfc}
+  </style>
+</head>
+<body>  
   <nav role="navigation" aria-label="منوی اصلی">
     <div class="wrap nav-inner">
       <div class="brand">
         <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg" alt="لوگو GoldenJDM" class="brand-logo" width="48" height="48">
-        <!-- ✅ Language toggle links to English version -->
         <a href="../en/" class="lang-toggle">EN</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="منوی اصلی" aria-expanded="false" aria-controls="navMenu">
         <span></span><span></span><span></span>
       </button>
       <div class="links" id="navMenu">
-        <!-- ✅ Fixed internal links with ./ prefix -->
-        <a href="./#work" aria-label="مشاهده پروژه‌ها">پروژه‌ها</a>
-        <a href="./gallery/" aria-label="مشاهده گالری">گالری</a>
-        <a href="./musics/" aria-label="مشاهده موزیک‌ها">موزیک‌ها</a>
-        <a href="./#about" aria-label="درباره من">درباره</a>
-        <a href="./#contact" aria-label="راه‌های ارتباطی">ارتباط</a>
+        <a href="/fa/" aria-label="خانه">خانه</a>
+        <a href="/fa/gallery/" aria-label="مشاهده گالری">گالری</a>
+        <a href="/fa/musics/" aria-label="مشاهده موزیک‌ها">موزیک‌ها</a>
+        <a href="/fa/#about" aria-label="درباره من">درباره</a>
+        <a href="/fa/#contact" aria-label="راه‌های ارتباطی">ارتباط</a>
       </div>
     </div>
   </nav>
 
   <main id="main">
     <section id="home">
-      <!-- ✅ Canvas for Liquid Aurora Animation -->
       <canvas id="hero-canvas" aria-hidden="true" width="600" height="697"></canvas>
       <div class="hero-content fade-in-trigger fade-in-visible">
         <img class="avatar" src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" alt="تصویر پروفایل امیرحسین زرنیان" loading="eager" width="120" height="120">
@@ -384,15 +393,15 @@
       <section id="contact" class="fade-in-trigger fade-in-visible">
         <h2 class="title">ارتباط</h2>
         <div class="cta">
-          <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener noreferrer" aria-label="ارسال پیام به من در تلگرام" src="" alt="" placeholder="" id="" name="" style="color: rgb(11, 11, 15); background-color: rgb(205, 150, 253); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
+          <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener noreferrer" aria-label="ارسال پیام به من در تلگرام" src="" alt="" placeholder="" id="" name="" style="color: rgb(11, 11, 15); background-color: rgb(205, 154, 249); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
             <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="" aria-hidden="true" width="20" height="20">
             <span>تلگرام</span>
           </a>
-          <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener noreferrer" aria-label="استفاده از ربات تلگرام من" src="" alt="" placeholder="" id="" name="" style="color: rgb(11, 11, 15); background-color: rgb(205, 150, 253); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
+          <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener noreferrer" aria-label="استفاده از ربات تلگرام من" src="" alt="" placeholder="" id="" name="" style="color: rgb(11, 11, 15); background-color: rgb(205, 154, 249); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
             <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="" aria-hidden="true" width="20" height="20">
             <span>ربات تلگرام</span>
           </a>
-          <a class="btn primary" href="mailto:owner@goldenjdm.ir" aria-label="ارسال ایمیل به من" src="" alt="" placeholder="" id="" name="" target="" style="color: rgb(11, 11, 15); background-color: rgb(205, 150, 253); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
+          <a class="btn primary" href="/cdn-cgi/l/email-protection#89e6fee7ecfbc9eee6e5edece7e3ede4a7e0fb" aria-label="ارسال ایمیل به من" src="" alt="" placeholder="" id="" name="" target="" style="color: rgb(11, 11, 15); background-color: rgb(205, 154, 249); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
             <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/refs/heads/main/email-black-envelope-back-svgrepo-com.svg" alt="" aria-hidden="true" width="20" height="20">
             <span>ایمیل</span>
           </a>
@@ -407,6 +416,12 @@
     </div>
     <p style="text-align:center">© ۱۴۰۵ — <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fa" target="_blank" rel="noopener noreferrer" class="grad-hero" aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0">CC BY-SA 4.0</a> — GoldenJDM</p>
   </footer>
+
+  <!-- ✅ Credit Badge - Like Musics Page -->
+  <div class="credit">
+    ساخته شده با <span aria-label="love">❤️</span> توسط 
+    <a href="/fa/">GoldenJDM</a>
+  </div>
 
   <!-- 🎨 LIQUID AURORA ANIMATION - FIXED & WORKING -->
   <script>
