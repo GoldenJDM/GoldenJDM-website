@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoldenJDM</title>
+  <meta name="description" content="Personal portfolio of Amirhossein Zarniyan">
+  
+  <!-- SEO: Prevent duplicate content -->
+  <link rel="alternate" hreflang="fa" href="https://goldenjdm.ir/fa/">
+  <link rel="alternate" hreflang="en" href="https://goldenjdm.ir/en/">
+  
+  <!-- فوری: ریدایرکت متا برای مرورگرهای بدون جاوااسکریپت (پیش‌فرض: فارسی) -->
+  <meta http-equiv="refresh" content="0; url=/fa/">
+  
+  <style>
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,sans-serif;
+      background:#0b0b0f;
+      color:#e9e9ef;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      text-align:center;
+      padding:20px;
+    }
+    .container{max-width:400px}
+    h1{margin:0 0 16px;font-size:24px}
+    p{margin:0 0 24px;color:#a7a7b3;line-height:1.6}
+    .links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{
+      padding:10px 20px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      transition:transform .2s,background .2s;
+      background:rgba(255,255,255,.1);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.2);
+    }
+    .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.2)}
+    .btn.primary{background:linear-gradient(135deg,#a78bfa,#f472b6);border:none}
+  </style>
+  
+  <script>
+    // ✅ تشخیص زبان و ریدایرکت هوشمند
+    (function() {
+      const lang = navigator.language || navigator.userLanguage;
+      // اگر زبان با 'en' شروع شود → انگلیسی، در غیر این صورت → فارسی
+      const target = lang.startsWith('en') ? '/en/' : '/fa/';
+      // استفاده از replace برای جلوگیری از بازگشت با دکمه Back
+      window.location.replace(target);
+    })();
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>GoldenJDM</h1>
+    <p>Redirecting you to the best version for your language...<br>اگر منتقل نشدید، زبان مورد نظر را انتخاب کنید:</p>
+    
+    <div class="links">
+      <a href="/fa/" class="btn primary">فارسی</a>
+      <a href="/en/" class="btn">English</a>
+    </div>
+    
+    <!-- Fallback for no-JS users -->
+    <noscript>
+      <p style="margin-top:20px;font-size:14px">
+        JavaScript is disabled. Please choose your language:<br>
+        <a href="/fa/" style="color:#a78bfa">فارسی</a> | 
+        <a href="/en/" style="color:#a78bfa">English</a>
+      </p>
+    </noscript>
+  </div>
+</body>
+</html>
