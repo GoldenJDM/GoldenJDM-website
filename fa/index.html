@@ -61,7 +61,60 @@
     a{color:inherit;text-decoration:none}
     .wrap{width:min(100%,var(--max));margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
     
-    /* HERO - Fixed for animation */
+    /* === SPLASH SCREEN - هوشمند با localStorage === */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+    }
+    .splash-logo {
+      width: clamp(100px, 20vw, 180px);
+      height: auto;
+      filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4));
+      animation: splashEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      opacity: 0;
+      transform: scale(0.9) translateY(10px);
+    }
+    .splash-tagline {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: clamp(14px, 2vw, 16px);
+      font-weight: 300;
+      opacity: 0;
+      animation: splashFadeIn 0.6s ease-out 0.4s forwards;
+      letter-spacing: 0.5px;
+    }
+    .splash-glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+    @keyframes splashEnter {
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes splashFadeIn { to { opacity: 1; } }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.1); opacity: 0.3; }
+    }
+    #splash-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    body.splash-active { overflow: hidden; }
+    
+    /* HERO */
     #home{
       position:relative;
       overflow:hidden;
@@ -99,7 +152,7 @@
       padding-inline:clamp(16px,4vw,32px);
     }
     
-    /* NAV - Liquid Glass iOS 26 */
+    /* NAV */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:50;
       background:var(--glass-bg);
@@ -137,7 +190,6 @@
     }
     .lang-toggle:focus{outline:2px solid rgba(168,85,247,.7);outline-offset:4px}
     
-    /* Hamburger - Desktop: Hidden */
     .hamburger{
       display:none;flex-direction:column;cursor:pointer;
       background:none;border:none;padding:8px;z-index:60;
@@ -153,7 +205,6 @@
     .links a:hover{opacity:1;color:#f0abfc}
     .links a:focus{outline:2px solid rgba(168,85,247,.7);outline-offset:4px}
     
-    /* Mobile Menu */
     @media(max-width:768px){
       .hamburger{display:flex}
       .links{
@@ -170,7 +221,6 @@
       .links a:last-child{border-bottom:none}
     }
     
-    /* Avatar & Typography */
     .avatar{
       width:120px;height:120px;border-radius:50%;
       object-fit:cover;
@@ -182,7 +232,6 @@
     .subtitle{color:var(--muted);font-size:clamp(15px,2.5vw,18px);max-width:60ch;margin-inline:auto;line-height:1.7}
     .cta{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:10px}
     
-    /* BUTTONS - Black Text */
     .btn{
       display:flex;align-items:center;gap:8px;
       padding:12px 22px;border-radius:100px;
@@ -216,12 +265,10 @@
       transform:translateY(-2px);
     }
     
-    /* Sections */
     section{padding-block:clamp(48px,10vh,96px)}
     .title{font-size:clamp(22px,4vw,28px);margin:0 0 18px 0}
     .grid{display:grid;gap:16px;grid-template-columns:1fr}
     
-    /* CARDS - Liquid Glass */
     .card{
       background:var(--glass-bg);
       backdrop-filter:var(--glass-blur);
@@ -296,7 +343,16 @@
     .credit a:hover{color:#f0abfc}
   </style>
 </head>
-<body>  
+<body>
+
+  <!-- ✨ SPLASH SCREEN START -->
+  <div id="splash-screen" aria-hidden="true" class="hidden" style="display: none;">
+    <div class="splash-glow"></div>
+    <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg" alt="GoldenJDM Logo" class="splash-logo" width="180" height="180" loading="eager">
+    <div class="splash-tagline">خوش آمدید</div>
+  </div>
+  <!-- ✨ SPLASH SCREEN END -->
+
   <nav role="navigation" aria-label="منوی اصلی">
     <div class="wrap nav-inner">
       <div class="brand">
@@ -393,15 +449,15 @@
       <section id="contact" class="fade-in-trigger fade-in-visible">
         <h2 class="title">ارتباط</h2>
         <div class="cta">
-          <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener noreferrer" aria-label="ارسال پیام به من در تلگرام" src="" alt="" placeholder="" id="" name="" style="color: rgb(11, 11, 15); background-color: rgb(205, 154, 249); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
+          <a class="btn primary" href="https://t.me/GoldenJDM" target="_blank" rel="noopener noreferrer" aria-label="ارسال پیام به من در تلگرام" src="" alt="" placeholder="" id="" name="" style="color: rgb(11, 11, 15); background-color: rgb(202, 151, 247); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1; padding: 12px 22px; margin: 0px;">
             <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="" aria-hidden="true" width="20" height="20">
             <span>تلگرام</span>
           </a>
-          <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener noreferrer" aria-label="استفاده از ربات تلگرام من" src="" alt="" placeholder="" id="" name="" style="color: rgb(11, 11, 15); background-color: rgb(205, 154, 249); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
+          <a class="btn primary" href="https://t.me/GoldenJDMbot" target="_blank" rel="noopener noreferrer" aria-label="استفاده از ربات تلگرام من" src="" alt="" placeholder="" id="" name="" style="color: rgb(11, 11, 15); background-color: rgb(202, 151, 247); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1; padding: 12px 22px; margin: 0px;">
             <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-miniApp/main/telegram-svgrepo-com%20(1).svg" alt="" aria-hidden="true" width="20" height="20">
             <span>ربات تلگرام</span>
           </a>
-          <a class="btn primary" href="mailto:owner@goldenjdm.ir" aria-label="ارسال ایمیل به من" src="" alt="" placeholder="" id="" name="" target="" style="color: rgb(11, 11, 15); background-color: rgb(205, 154, 249); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; padding: 12px 22px; margin: 0px; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1;">
+          <a class="btn primary" href="mailto:owner@goldenjdm.ir" aria-label="ارسال ایمیل به من" src="" alt="" placeholder="" id="" name="" target="" style="color: rgb(11, 11, 15); background-color: rgb(202, 151, 247); font-size: 16px; font-weight: 700; font-family: Vazirmatn, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Arial, sans-serif; line-height: normal; letter-spacing: normal; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: 100px; opacity: 1; padding: 12px 22px; margin: 0px;">
             <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/refs/heads/main/email-black-envelope-back-svgrepo-com.svg" alt="" aria-hidden="true" width="20" height="20">
             <span>ایمیل</span>
           </a>
@@ -420,8 +476,6 @@
     ساخته شده با <span aria-label="love">❤️</span> توسط 
     <a href="/fa/">GoldenJDM</a>
   </div>
-
-  <!-- 🎨 LIQUID AURORA ANIMATION - FIXED & WORKING -->
   <script>
   (function() {
     const canvas = document.getElementById('hero-canvas');
@@ -500,19 +554,16 @@
       raf = requestAnimationFrame(tick);
     }
     
-    // Initialize
     resize();
     init();
     raf = requestAnimationFrame(tick);
     
-    // Resize handler - debounced
     let rt;
     window.addEventListener('resize', () => {
       clearTimeout(rt);
       rt = setTimeout(() => { resize(); init(); }, 250);
     }, { passive: true });
     
-    // Pause when tab is not visible
     document.addEventListener('visibilitychange', () => {
       document.hidden ? cancelAnimationFrame(raf) : (startTime = null, raf = requestAnimationFrame(tick));
     });
@@ -567,6 +618,44 @@
   } else {
     document.querySelectorAll('.fade-in-trigger').forEach(el => el.classList.add('fade-in-visible'));
   }
+  </script>
+
+  <!-- ✨ SPLASH SCREEN LOGIC with localStorage -->
+  <script>
+  (function() {
+    const splash = document.getElementById('splash-screen');
+    if (!splash) return;
+    
+    // اگر کاربر قبلاً اسپلش را دیده، حذفش کن
+    if (localStorage.getItem('goldenjdm_splash_seen')) {
+      splash.remove();
+      return;
+    }
+    
+    // در غیر این صورت: نمایش اسپلش + قفل اسکرول
+    document.body.classList.add('splash-active');
+    
+    // تایمر ۲ ثانیه‌ای
+    setTimeout(() => {
+      splash.classList.add('hidden');
+      
+      // بعد از پایان انیمیشن مخفی‌شدن
+      setTimeout(() => {
+        splash.style.display = 'none';
+        splash.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('splash-active');
+        
+        // ذخیره در localStorage که کاربر اسپلش را دیده
+        try {
+          localStorage.setItem('goldenjdm_splash_seen', 'true');
+        } catch(e) {
+          // اگر localStorage در دسترس نبود، خطا نده
+          console.log('localStorage not available');
+        }
+      }, 600); // باید با transition در CSS برابر باشد
+      
+    }, 2000); // ⏱ زمان نمایش: ۲۰۰۰ میلی‌ثانیه = ۲ ثانیه
+  })();
   </script>
 
   <!-- Vercel Analytics -->
@@ -704,4 +793,136 @@
   function r2h(s){if(!s||s.startsWith('#'))return s||'';var m=s.match(/\d+/g);if(!m||m.length<3)return s;return'#'+m.slice(0,3).map(function(x){return parseInt(x).toString(16).padStart(2,'0');}).join('');}
 })();
 </script>
-</body></html>
+
+<script id="__ve">
+(function(){
+  var vm=false, sel=null, ov=null;
+  window.addEventListener('message',function(e){
+    var d=e.data; if(!d||!d.t) return;
+    if(d.t==='mode'){vm=d.v; document.body.style.cursor=vm?'crosshair':''; if(!vm&&ov){ov.remove();ov=null;}}
+    if(d.t==='apply') applyProps(d.p);
+    if(d.t==='del'){if(sel){sel.remove();sel=null;emit();}}
+    if(d.t==='dup'){if(sel){var c=sel.cloneNode(true);sel.parentNode.insertBefore(c,sel.nextSibling);emit();}}
+    if(d.t==='up'){if(sel&&sel.previousElementSibling){sel.parentNode.insertBefore(sel,sel.previousElementSibling);emit();}}
+    if(d.t==='dn'){if(sel&&sel.nextElementSibling){sel.parentNode.insertBefore(sel.nextElementSibling,sel);emit();}}
+    if(d.t==='wrap'){if(sel){var w=document.createElement('div');w.style.cssText='padding:10px;border:1px dashed #aaa;';sel.parentNode.insertBefore(w,sel);w.appendChild(sel);emit();}}
+  });
+  function applyProps(p){
+    if(!sel) return;
+    if(p.textContent!==undefined && sel.childElementCount===0) sel.textContent=p.textContent;
+    if(p.innerHTML!==undefined) sel.innerHTML=p.innerHTML;
+    var smap={color:'color',bg:'backgroundColor',fontSize:'fontSize',fontWeight:'fontWeight',
+      fontFamily:'fontFamily',textAlign:'textAlign',lineHeight:'lineHeight',letterSpacing:'letterSpacing',
+      padding:'padding',paddingTop:'paddingTop',paddingRight:'paddingRight',paddingBottom:'paddingBottom',paddingLeft:'paddingLeft',
+      margin:'margin',marginTop:'marginTop',marginRight:'marginRight',marginBottom:'marginBottom',marginLeft:'marginLeft',
+      width:'width',height:'height',maxWidth:'maxWidth',minHeight:'minHeight',display:'display',
+      flexDirection:'flexDirection',justifyContent:'justifyContent',alignItems:'alignItems',gap:'gap',
+      borderRadius:'borderRadius',border:'border',boxShadow:'boxShadow',opacity:'opacity',transform:'transform'};
+    Object.keys(smap).forEach(function(k){if(p[k]!==undefined) sel.style[smap[k]]=p[k];});
+    if(p.href!==undefined) sel.setAttribute('href',p.href);
+    if(p.src!==undefined)  sel.setAttribute('src',p.src);
+    if(p.alt!==undefined)  sel.setAttribute('alt',p.alt);
+    if(p.placeholder!==undefined) sel.setAttribute('placeholder',p.placeholder);
+    if(p.value!==undefined) sel.value=p.value;
+    if(p.id!==undefined) sel.id=p.id;
+    if(p.name!==undefined) sel.setAttribute('name',p.name);
+    if(p.type!==undefined && sel.tagName==='INPUT') sel.type=p.type;
+    if(p.target!==undefined) sel.setAttribute('target',p.target);
+    if(p.className!==undefined) sel.className=p.className;
+    emit();
+  }
+  function emit(){
+    window.parent.postMessage({t:'html',html:document.documentElement.outerHTML},'*');
+  }
+  function getPath(el){
+    var parts=[],cur=el;
+    while(cur&&cur!==document.body&&cur.tagName){
+      var idx=Array.from(cur.parentNode?cur.parentNode.children:[]).indexOf(cur);
+      parts.unshift(cur.tagName.toLowerCase()+(idx>0?'['+idx+']':''));
+      cur=cur.parentNode;
+    }
+    return parts.join(' > ');
+  }
+  function getCS(el,prop){return window.getComputedStyle(el)[prop]||'';}
+  document.addEventListener('mouseover',function(e){
+    if(!vm) return; e.stopPropagation();
+    if(ov){ov.remove();}
+    var el=e.target;
+    if(el===document.body||el===document.documentElement) return;
+    var r=el.getBoundingClientRect();
+    ov=document.createElement('div');
+    Object.assign(ov.style,{position:'fixed',pointerEvents:'none',zIndex:'99999',
+      top:r.top+'px',left:r.left+'px',width:r.width+'px',height:r.height+'px',
+      outline:'2px solid #e8a838',background:'rgba(232,168,56,.06)'});
+    var label=document.createElement('div');
+    Object.assign(label.style,{position:'absolute',top:'-20px',right:'0',
+      background:'#e8a838',color:'#000',fontSize:'10px',padding:'1px 6px',
+      fontFamily:'monospace',whiteSpace:'nowrap'});
+    label.textContent='<'+el.tagName.toLowerCase()+'>';
+    ov.appendChild(label);
+    document.body.appendChild(ov);
+    window.parent.postMessage({t:'hover',tag:el.tagName.toLowerCase()},'*');
+  },true);
+  document.addEventListener('mouseout',function(){
+    if(ov){ov.remove();ov=null;}
+    window.parent.postMessage({t:'hover',tag:null},'*');
+  },true);
+  document.addEventListener('click',function(e){
+    if(!vm) return; e.preventDefault(); e.stopPropagation();
+    sel=e.target;
+    var cs=window.getComputedStyle(sel);
+    function gs(p){return sel.style[p]||cs[p]||'';}
+    window.parent.postMessage({t:'sel',
+      tag:sel.tagName.toLowerCase(),
+      path:getPath(sel),
+      textContent:sel.childElementCount===0?sel.textContent:'',
+      innerHTML:sel.innerHTML,
+      href:sel.getAttribute('href')||'',
+      src:sel.getAttribute('src')||'',
+      alt:sel.getAttribute('alt')||'',
+      placeholder:sel.getAttribute('placeholder')||'',
+      value:sel.value||'',
+      id:sel.id||'',
+      name:sel.getAttribute('name')||'',
+      type:sel.getAttribute('type')||'',
+      target:sel.getAttribute('target')||'',
+      className:sel.className||'',
+      style:{
+        color:sel.style.color||r2h(cs.color),
+        bg:sel.style.backgroundColor||r2h(cs.backgroundColor),
+        fontSize:sel.style.fontSize||cs.fontSize,
+        fontWeight:sel.style.fontWeight||cs.fontWeight,
+        fontFamily:sel.style.fontFamily||cs.fontFamily,
+        textAlign:sel.style.textAlign||cs.textAlign,
+        lineHeight:sel.style.lineHeight||cs.lineHeight,
+        letterSpacing:sel.style.letterSpacing||cs.letterSpacing,
+        padding:sel.style.padding||'',
+        paddingTop:sel.style.paddingTop||cs.paddingTop,
+        paddingRight:sel.style.paddingRight||cs.paddingRight,
+        paddingBottom:sel.style.paddingBottom||cs.paddingBottom,
+        paddingLeft:sel.style.paddingLeft||cs.paddingLeft,
+        margin:sel.style.margin||'',
+        marginTop:sel.style.marginTop||cs.marginTop,
+        marginRight:sel.style.marginRight||cs.marginRight,
+        marginBottom:sel.style.marginBottom||cs.marginBottom,
+        marginLeft:sel.style.marginLeft||cs.marginLeft,
+        width:sel.style.width||'',
+        height:sel.style.height||'',
+        maxWidth:sel.style.maxWidth||'',
+        minHeight:sel.style.minHeight||'',
+        display:sel.style.display||cs.display,
+        flexDirection:sel.style.flexDirection||cs.flexDirection,
+        justifyContent:sel.style.justifyContent||cs.justifyContent,
+        alignItems:sel.style.alignItems||cs.alignItems,
+        gap:sel.style.gap||cs.gap||'',
+        borderRadius:sel.style.borderRadius||cs.borderRadius,
+        border:sel.style.border||'',
+        boxShadow:sel.style.boxShadow||'',
+        opacity:sel.style.opacity||cs.opacity,
+        transform:sel.style.transform||'',
+      }
+    },'*');
+  },true);
+  function r2h(s){if(!s||s.startsWith('#'))return s||'';var m=s.match(/\d+/g);if(!m||m.length<3)return s;return'#'+m.slice(0,3).map(function(x){return parseInt(x).toString(16).padStart(2,'0');}).join('');}
+})();
+</script></body></html>
