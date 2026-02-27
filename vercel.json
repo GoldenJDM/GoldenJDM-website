@@ -16,10 +16,6 @@
       "destination": "/music/index.html"
     }
   ],
-  "errorPages": {
-    "404": "/404.html",
-    "500": "/fa/errors/500.html"
-  },
   "headers": [
     {
       "source": "/(.*)",
@@ -48,4 +44,3 @@
     }
   ]
 }
-
