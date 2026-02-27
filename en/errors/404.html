@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — Page Not Found | GoldenJDM</title>
+  <meta name="description" content="The page you're looking for doesn't exist or has been moved.">
+  <meta name="theme-color" content="#0b0b0f">
+  <link rel="icon" href="../../gw9o7a01.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{
+      --bg:#0b0b0f;--fg:#e9e9ef;--muted:#a7a7b3;
+      --border:rgba(255,255,255,.12);--radius:24px;
+      --grad1:conic-gradient(from 180deg at 50% 50%,#f0abfc,#a78bfa,#f472b6,#c026d3,#f0abfc);
+      --glass-bg:rgba(20,10,35,.35);--glass-border:rgba(255,255,255,.15);
+      --glass-border-hover:rgba(240,171,252,.45);
+      --glass-blur:blur(40px) saturate(200%) brightness(1.08);
+      --glass-shadow-inset:inset 0 1px 0 rgba(255,255,255,.15),inset 0 -1px 0 rgba(0,0,0,.2);
+      --glass-shadow-outer:0 8px 40px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.05);
+      --glass-highlight:radial-gradient(120% 80% at 50% -20%,rgba(255,255,255,.12),transparent 60%);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Vazirmatn",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--fg);background:var(--bg);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:20px;overflow:hidden;position:relative;
+    }
+    .error-bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 50%,rgba(168,85,247,0.15) 0%,transparent 70%);animation:pulse 4s ease-in-out infinite}
+    @keyframes pulse{0%,100%{transform:scale(1);opacity:0.6}50%{transform:scale(1.1);opacity:0.3}}
+    .particles{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    .particle{position:absolute;width:4px;height:4px;background:rgba(240,171,252,0.3);border-radius:50%;animation:float 15s infinite}
+    .particle:nth-child(1){left:10%;animation-delay:0s}.particle:nth-child(2){left:20%;animation-delay:2s}.particle:nth-child(3){left:30%;animation-delay:4s}.particle:nth-child(4){left:40%;animation-delay:6s}.particle:nth-child(5){left:50%;animation-delay:8s}.particle:nth-child(6){left:60%;animation-delay:10s}.particle:nth-child(7){left:70%;animation-delay:12s}.particle:nth-child(8){left:80%;animation-delay:14s}
+    @keyframes float{0%,100%{transform:translateY(100vh) scale(0);opacity:0}50%{opacity:1}100%{transform:translateY(-100vh) scale(1);opacity:0}}
+    .error-card{background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:var(--glass-shadow-inset),var(--glass-shadow-outer);padding:clamp(32px,6vw,64px);max-width:500px;width:100%;animation:slideIn 0.6s cubic-bezier(0.34,1.56,0.64,1);position:relative;overflow:hidden}
+    .error-card::before{content:'';position:absolute;inset:0;background:var(--glass-highlight);opacity:0;transition:opacity .3s ease;pointer-events:none}
+    .error-card:hover::before{opacity:1}
+    @keyframes slideIn{from{opacity:0;transform:translateY(30px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .error-code{font-size:clamp(80px,15vw,140px);font-weight:800;background:var(--grad1);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:16px;filter:drop-shadow(0 0 30px rgba(168,85,247,0.4))}
+    .error-title{font-size:clamp(20px,4vw,28px);font-weight:700;margin-bottom:12px;color:var(--fg)}
+    .error-desc{color:var(--muted);font-size:clamp(14px,2.5vw,16px);line-height:1.8;margin-bottom:32px}
+    .btn-home{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:rgba(140,60,220,.45);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(220,150,255,.45);border-radius:100px;color:var(--bg);font-weight:700;text-decoration:none;transition:.25s transform,.25s box-shadow,.25s background,.25s border-color;box-shadow:var(--glass-shadow-inset),0 4px 24px rgba(140,60,220,.45)}
+    .btn-home:hover{background:rgba(160,70,240,.65);border-color:var(--glass-border-hover);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),0 8px 32px rgba(192,38,211,.55);transform:translateY(-2px)}
+    .btn-home svg{width:20px;height:20px}
+    .error-footer{position:fixed;bottom:20px;left:0;right:0;text-align:center;font-size:12px;color:#6b6b7b}
+    .error-footer a{color:var(--muted);text-decoration:none}
+    .error-footer a:hover{color:#f0abfc}
+  </style>
+</head>
+<body>
+  <div class="error-bg"></div>
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+  </div>
+
+  <div class="error-card">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-desc">
+      The page you're looking for doesn't exist or has been moved. 
+      You may have entered the wrong address or the page has been removed.
+    </p>
+    
+    <a href="/en/" class="btn-home">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+      </svg>
+      Back to Home
+    </a>
+  </div>
+
+  <div class="error-footer">
+    <a href="/en/">GoldenJDM</a> — © 2026
+  </div>
+</body>
+</html>
