@@ -639,7 +639,7 @@
     setTimeout(() => {
       splash.classList.add('hidden');
       
-      // بعد از پایان انیمیشن مخفی‌شدن
+      // بعد از پایان انیمی��ن مخفی‌شدن
       setTimeout(() => {
         splash.style.display = 'none';
         splash.setAttribute('aria-hidden', 'true');
@@ -925,4 +925,11 @@
   },true);
   function r2h(s){if(!s||s.startsWith('#'))return s||'';var m=s.match(/\d+/g);if(!m||m.length<3)return s;return'#'+m.slice(0,3).map(function(x){return parseInt(x).toString(16).padStart(2,'0');}).join('');}
 })();
-</script></body></html>
+</script>
+
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body></html>
