@@ -801,4 +801,10 @@
   function r2h(s){if(!s||s.startsWith('#'))return s||'';var m=s.match(/\d+/g);if(!m||m.length<3)return s;return'#'+m.slice(0,3).map(function(x){return parseInt(x).toString(16).padStart(2,'0');}).join('');}
 })();
 </script>
+
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </body></html>
