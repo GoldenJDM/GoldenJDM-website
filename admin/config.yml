@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: GoldenJDM/GoldenJDM-website
   branch: main
 
 media_folder: "public/images/blog"
@@ -14,9 +15,8 @@ collections:
     editor:
       preview: false
     fields:
-      - { label: "تاریخ انتشار", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
-      - { label: "عنوان پست", name: "title", widget: "string" }
-      - { label: "خلاصه (برای لیست)", name: "excerpt", widget: "text", required: false }
+      - { label: "تاریخ", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "عنوان", name: "title", widget: "string" }
+      - { label: "خلاصه", name: "excerpt", widget: "text", required: false }
       - { label: "تگ‌ها", name: "tags", widget: "list", default: ["عمومی"], required: false }
-      - { label: "تصویر شاخص", name: "image", widget: "image", required: false }
-      - { label: "محتوای اصلی", name: "body", widget: "markdown" }
+      - { label: "متن اصلی", name: "body", widget: "markdown" }
