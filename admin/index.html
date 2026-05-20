@@ -4,8 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>پنل مدیریت | GoldenJDM</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://unpkg.com https://api.github.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://unpkg.com;">
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
+  <style>
+    body{background:#0b0b0f;color:#e9e9ef;font-family:Vazirmatn,system-ui,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;text-align:center}
+    .status{padding:40px}
+    .status h2{color:#a78bfa;margin-bottom:12px}
+    .status p{color:#a0a0b8;font-size:14px}
+    .error{display:none;background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.4);border-radius:12px;padding:16px;margin-top:20px;max-width:500px;text-align:right}
+  </style>
 </head>
-<body></body>
+<body>
+  <div class="status">
+    <h2>⏳ در حال بارگذاری پنل...</h2>
+    <p>اگر این پیام بیش از ۱۰ ثانیه ماند، لطفاً کلید <code>F12</code> را بزنید و تب <code>Console</code> را چک کنید.</p>
+    <div class="error" id="errBox"></div>
+  </div>
+
+  <script>
+    // عیب‌یابی خودکار
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.CMS) {
+          document.getElementById('errBox').style.display = 'block';
+          document.getElementById('errBox').innerHTML = `
+            <strong>⚠️ خطا:</strong> اسکریپت Decap CMS لود نشد.<br>
+            ۱. اینترنت خود را چک کنید<br>
+            ۲. کلید F12 > تب Network > ببینید decap-cms.js وضعیت 200 دارد یا خیر<br>
+            ۳. از فیلترشکن استفاده کنید و دوباره تست کنید
+          `;
+        }
+      }, 5000);
+    });
+  </script>
+</body>
 </html>
