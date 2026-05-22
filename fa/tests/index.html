@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>موزیک‌ها | GoldenJDM</title>
+  <meta name="description" content="مجموعه موزیک‌های GoldenJDM - پروندهٔ شخصی امیرحسین زرنیان">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="GoldenJDM" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="alternate" hreflang="en" href="https://goldenjdm.ir/en/musics/" />
+  <link rel="alternate" hreflang="fa" href="https://goldenjdm.ir/fa/musics/" />
+  <link rel="canonical" href="https://goldenjdm.ir/fa/musics/" />
+  <meta property="og:title" content="موزیک‌ها | GoldenJDM">
+  <meta property="og:description" content="مجموعه موزیک‌های GoldenJDM">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://goldenjdm.ir/fa/musics/">
+  
+  <style>
+    :root{
+      --bg: #0b0b0f;
+      --fg: #e9e9ef;
+      --muted:#a7a7b3;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.12);
+      --max: 1080px;
+      --radius: 24px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --grad1: conic-gradient(from 180deg at 50% 50%, #6ee7ff, #a78bfa, #f472b6, #6ee7ff);
+      --glass-bg: rgba(20, 10, 35, 0.35);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --glass-border-hover: rgba(240, 171, 252, 0.45);
+      --glass-blur: blur(40px) saturate(200%) brightness(1.08);
+      --glass-shadow-inset: inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.20);
+      --glass-shadow-outer: 0 8px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.05);
+      --glass-highlight: radial-gradient(120% 80% at 50% -20%, rgba(255,255,255,.12), transparent 60%);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Vazirmatn",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(1200px 800px at 80% -10%, #3b82f610 30%, transparent 60%) no-repeat,
+        radial-gradient(1000px 700px at -10% 10%, #f472b610 30%, transparent 60%) no-repeat,
+        var(--bg);
+      padding-top:64px;
+      overflow-x:hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(100%, var(--max)); margin-inline:auto; padding-inline:clamp(16px,4vw,32px)}
+
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:50;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow-inset), var(--glass-shadow-outer);
+      transition: background .3s ease, box-shadow .3s ease;
+    }
+    nav.scrolled {
+      background: rgba(20, 10, 35, 0.55);
+      box-shadow: var(--glass-shadow-inset), 0 4px 60px rgba(0,0,0,0.5);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .brand{font-weight:800;display:flex;align-items:center;gap:8px;}
+    .brand img{width:48px;height:48px;border-radius:50%;object-fit:cover;transition:transform .2s ease;}
+    .brand img:hover{transform:scale(1.05)}
+
+    .hamburger{display:none;flex-direction:column;cursor:pointer;background:none;border:none;padding:8px;z-index:60;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
+    .hamburger span{width:24px;height:3px;background-color:var(--fg);margin:3px 0;border-radius:3px;transition:0.3s;display:block;}
+    .hamburger.active span:nth-child(1){transform:rotate(-45deg) translate(-5px,6px);}
+    .hamburger.active span:nth-child(2){opacity:0;}
+    .hamburger.active span:nth-child(3){transform:rotate(45deg) translate(-5px,-6px);}
+    
+    .links{display:flex;gap:18px;font-weight:600;}
+    .links a{opacity:.9;transition:opacity .2s,color .2s;}
+    .links a:hover{opacity:1;color:#f0abfc;}
+    .links a:focus{outline:2px solid rgba(168,85,247,0.7);outline-offset:4px}
+
+    @media (max-width:768px){
+      .hamburger{display:flex;}
+      .links{
+        position:fixed;left:0;top:64px;flex-direction:column;
+        background:rgba(20,10,35,.98);backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);
+        width:100%;text-align:center;transition:transform .3s ease;padding:2rem 0;gap:0;z-index:45;
+        transform:translateX(-100%);visibility:hidden;overflow:hidden;
+      }
+      .links.active{transform:translateX(0);visibility:visible;}
+      .links a{display:block;padding:1.2rem 0;border-bottom:1px solid var(--border);font-size:1.1rem;}
+      .links a:last-child{border-bottom:none;}
+    }
+
+    /* === MAIN PLAYER LAYOUT === */
+    main{padding-block:clamp(48px,10vh,96px); flex: 1; display: flex; flex-direction: column; align-items: center; }
+    h1{text-align:center;font-size:clamp(26px,5vw,38px);margin-bottom:32px;}
+    .grad-hero{background: var(--grad1);-webkit-background-clip: text;background-clip: text;color: transparent;}
+
+    .player-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    /* === MUSIC PLAYER - EXACT STRUCTURE === */
+    .music-player {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--glass-shadow-inset), var(--glass-shadow-outer);
+      padding: 24px;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      overflow: hidden;
+      background-image: var(--glass-highlight);
+      background-size: 200% 200%;
+      background-position: 0 0;
+      transition: all 0.35s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    .music-player:hover {
+      transform: translateY(-4px);
+      border-color: var(--glass-border-hover);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 20px 60px rgba(140,60,220,.35), 0 0 0 1px rgba(240,171,252,.15);
+      background-position: 100% 100%;
+    }
+
+    .music-player::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, transparent 30%, rgba(240,171,252,.3) 50%, transparent 70%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .music-player:hover::after { opacity: 1; }
+
+    /* Album Artwork */
+    .player-artwork {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 280px;
+      margin: 0 auto 20px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.1);
+    }
+
+    .artwork-glow {
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(ellipse at center, rgba(168,85,247,.25) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .artwork-image {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .music-player:hover .artwork-image { transform: scale(1.04); }
+
+    .vinyl-spin {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .music-player:hover .vinyl-spin { opacity: 1; }
+
+    .vinyl-spin::before {
+      content: '';
+      width: 92%; height: 92%;
+      border-radius: 50%;
+      border: 2px dashed rgba(240,171,252,.35);
+      animation: spin 20s linear infinite;
+    }
+
+    .vinyl-center {
+      position: absolute;
+      width: 22%; height: 22%;
+      background: rgba(20,10,35,.9);
+      border-radius: 50%;
+      border: 3px solid var(--glass-border-hover);
+      box-shadow: 0 0 20px rgba(168,85,247,.4);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(1.12); }
+    }
+
+    /* Track Info */
+    .track-info {
+      text-align: center;
+      margin-bottom: 22px;
+      padding: 0 10px;
+    }
+
+    .track-title {
+      margin: 0 0 6px;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--fg);
+      text-shadow: 0 2px 4px rgba(0,0,0,.3);
+      letter-spacing: -0.3px;
+    }
+
+    .track-artist {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .track-artist::before { content: '• '; color: #f0abfc; }
+
+    /* Progress Bar */
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,.12);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .progress-bar:hover,
+    .progress-bar:focus {
+      height: 8px;
+      background: rgba(255,255,255,.18);
+    }
+
+    .progress-bar:focus {
+      box-shadow: 0 0 0 3px rgba(168,85,247,.4);
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--grad1));
+      border-radius: 4px;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 15px rgba(192,38,211,.5);
+    }
+
+    .progress-thumb {
+      position: absolute;
+      right: -7px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px; height: 14px;
+      background: var(--fg);
+      border-radius: 50%;
+      opacity: 0;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 12px rgba(0,0,0,.4), 0 0 0 2px rgba(240,171,252,.5);
+      z-index: 2;
+    }
+
+    .progress-bar:hover .progress-thumb,
+    .progress-bar:focus .progress-thumb {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.15);
+    }
+
+    /* Controls */
+    .player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding: 0 5px;
+    }
+
+    .ctrl-btn {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--glass-border);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(.25,.46,.45,.94);
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .ctrl-btn svg { width: 20px; height: 20px; stroke-width: 2; }
+
+    .ctrl-btn:hover {
+      background: rgba(255,255,255,.16);
+      border-color: var(--glass-border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(168,85,247,.35);
+    }
+
+    .ctrl-btn:active { transform: translateY(-1px); }
+
+    .ctrl-btn.primary {
+      background: rgba(140,60,220,.35);
+      border-color: rgba(220,150,255,.45);
+    }
+
+    .ctrl-btn.primary:hover {
+      background: rgba(160,70,240,.55);
+      border-color: var(--glass-border-hover);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 10px 28px rgba(192,38,211,.45);
+    }
+
+    .play-pause {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, #a78bfa, #f472b6, #c026d3);
+      border: 2px solid rgba(255,255,255,.3);
+      box-shadow: 0 8px 32px rgba(192,38,211,.55), inset 0 1px 0 rgba(255,255,255,.2);
+      transition: all 0.3s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    .play-pause:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 45px rgba(192,38,211,.75), inset 0 2px 0 rgba(255,255,255,.3);
+    }
+
+    .play-pause:active { transform: scale(1.05); }
+    .play-pause svg { width: 26px; height: 26px; filter: brightness(0) saturate(100%) invert(1); }
+
+    .pause-icon { display: none; }
+    .playing .play-icon { display: none; }
+    .playing .pause-icon { display: block; }
+
+    /* Volume */
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 10px 20px;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 4px;
+    }
+
+    .volume-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--glass-border);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .volume-btn svg { width: 19px; height: 19px; }
+    .volume-btn:hover {
+      background: rgba(255,255,255,.16);
+      border-color: var(--glass-border-hover);
+      transform: translateY(-2px);
+    }
+
+    .vol-mute { display: none; }
+    .muted .vol-high { display: none; }
+    .muted .vol-mute { display: block; }
+
+    .volume-slider {
+      flex: 1;
+      height: 5px;
+      -webkit-appearance: none;
+      background: rgba(255,255,255,.12);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      transition: height 0.2s ease;
+    }
+
+    .volume-slider:hover { height: 7px; }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 15px; height: 15px;
+      background: var(--fg);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,.35), 0 0 0 2px rgba(240,171,252,.4);
+      border: 2px solid var(--bg);
+    }
+
+    .volume-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 3px 15px rgba(0,0,0,.45), 0 0 0 3px rgba(240,171,252,.6);
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 15px; height: 15px;
+      background: var(--fg);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--bg);
+      box-shadow: 0 2px 10px rgba(0,0,0,.35), 0 0 0 2px rgba(240,171,252,.4);
+    }
+
+    /* Playlist Toggle */
+    .playlist-toggle {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 38px; height: 38px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--glass-border);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+      z-index: 10;
+    }
+
+    [dir="ltr"] .playlist-toggle { left: auto; right: 18px; }
+
+    .playlist-toggle:hover {
+      background: rgba(255,255,255,.16);
+      border-color: var(--glass-border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(168,85,247,.3);
+    }
+
+    .playlist-toggle svg { width: 19px; height: 19px; }
+    .playlist-toggle.active {
+      background: rgba(140,60,220,.4);
+      border-color: var(--glass-border-hover);
+    }
+
+    /* Playlist Panel */
+    .playlist-panel {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--glass-shadow-inset), var(--glass-shadow-outer);
+      margin-top: 16px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(.25,.46,.45,.94);
+      opacity: 0;
+      transform: translateY(-10px);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .playlist-panel[aria-hidden="false"] {
+      max-height: 420px;
+      padding: 18px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .playlist-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--glass-border);
+      margin-bottom: 14px;
+    }
+
+    .playlist-header h4 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .playlist-header h4::before { content: '🎵 '; }
+
+    .playlist-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.6rem;
+      font-weight: 300;
+      cursor: pointer;
+      padding: 0 6px;
+      transition: all 0.2s ease;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .playlist-close:hover {
+      color: var(--fg);
+      background: rgba(255,255,255,.1);
+    }
+
+    .playlist-items {
+      list-style: none;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 290px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    [dir="ltr"] .playlist-items { padding-right: 0; padding-left: 4px; }
+
+    .playlist-items::-webkit-scrollbar { width: 5px; }
+    .playlist-items::-webkit-scrollbar-track { background: transparent; }
+    .playlist-items::-webkit-scrollbar-thumb {
+      background: rgba(240,171,252,.35);
+      border-radius: 3px;
+      transition: background 0.2s ease;
+    }
+    .playlist-items::-webkit-scrollbar-thumb:hover {
+      background: rgba(240,171,252,.55);
+    }
+
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .playlist-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, transparent, rgba(240,171,252,.08), transparent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .playlist-item:hover { background: rgba(255,255,255,.06); }
+    .playlist-item:hover::before { opacity: 1; }
+
+    .playlist-item.active {
+      background: linear-gradient(135deg, rgba(140,60,220,.25), rgba(192,38,211,.15));
+      border: 1px solid rgba(220,150,255,.35);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 4px 20px rgba(140,60,220,.2);
+    }
+
+    .playlist-item.active::after {
+      content: '▶';
+      position: absolute;
+      left: 12px;
+      color: #f0abfc;
+      font-size: 0.7rem;
+      animation: bounce 1s ease infinite;
+    }
+
+    [dir="ltr"] .playlist-item.active::after { left: auto; right: 12px; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(3px); }
+    }
+
+    .track-num {
+      width: 26px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .playlist-item.active .track-num {
+      color: #f0abfc;
+      text-shadow: 0 0 10px rgba(240,171,252,.5);
+    }
+
+    .playlist-track { flex: 1; min-width: 0; }
+
+    .pt-title {
+      display: block;
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--fg);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+
+    .playlist-item.active .pt-title { color: #fff; }
+
+    .pt-artist {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      opacity: 0.85;
+    }
+
+    .pt-duration {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 500;
+      flex-shrink: 0;
+      background: rgba(255,255,255,.06);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .playlist-item.active .pt-duration {
+      background: rgba(240,171,252,.15);
+      color: #f0abfc;
+    }
+
+    /* Equalizer */
+    .equalizer {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+      margin-left: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    [dir="ltr"] .equalizer { margin-left: 0; margin-right: 8px; }
+    .playing .equalizer { opacity: 1; }
+
+    .eq-bar {
+      width: 3px;
+      background: linear-gradient(to top, #a78bfa, #f472b6);
+      border-radius: 2px;
+      animation: eqPulse 0.6s ease-in-out infinite alternate;
+    }
+
+    .eq-bar:nth-child(2) { animation-delay: -0.4s; }
+    .eq-bar:nth-child(3) { animation-delay: -0.2s; }
+    .eq-bar:nth-child(4) { animation-delay: -0.1s; }
+
+    @keyframes eqPulse {
+      from { height: 4px; opacity: 0.6; }
+      to { height: 16px; opacity: 1; }
+    }
+
+    /* Focus States */
+    .ctrl-btn:focus,
+    .volume-btn:focus,
+    .playlist-toggle:focus,
+    .playlist-close:focus,
+    .playlist-item:focus,
+    .progress-bar:focus {
+      outline: 2px solid rgba(168,85,247,.75);
+      outline-offset: 3px;
+    }
+
+    .volume-slider:focus {
+      outline: 2px solid rgba(168,85,247,.75);
+      outline-offset: 2px;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .music-player { padding: 20px 18px; border-radius: 22px; }
+      .player-artwork { max-width: 250px; margin-bottom: 16px; }
+      .track-title { font-size: 1.2rem; }
+      .track-artist { font-size: 0.9rem; }
+      .player-controls { gap: 10px; }
+      .ctrl-btn { width: 42px; height: 42px; }
+      .play-pause { width: 54px; height: 54px; }
+      .play-pause svg { width: 24px; height: 24px; }
+      .volume-control { gap: 10px; padding: 16px 8px 18px; }
+      .volume-btn { width: 36px; height: 36px; }
+    }
+
+    /* Background Particles */
+    .bg-particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: rgba(240,171,252,.4);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Footer & Credit */
+    footer{border-top:1px solid var(--border);color:#b6b6c2;padding:28px 0 60px;font-size:14px;text-align:center;}
+    footer a{transition:opacity .2s}
+    footer a:hover{opacity:.8}
+    
+    .credit{
+      position:fixed;inset-inline-start:10px;inset-block-end:10px;
+      font-size:12px;color:#9aa0aa;opacity:.9;
+      background:rgba(255,255,255,.06);border:1px solid var(--border);
+      padding:6px 10px;border-radius:999px;backdrop-filter:blur(6px);z-index:10;
+    }
+    
+    @supports not (backdrop-filter: blur(10px)) {
+      nav, .links {
+        background: rgba(30, 20, 50, 0.95);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-color: rgba(255,255,255,0.2);
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vnyjem18db");
+  </script>
+</head>
+
+<body>
+  <!-- Background Particles -->
+  <div class="bg-particles" aria-hidden="true"></div>
+
+  <nav role="navigation" aria-label="منوی اصلی">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <a href="../../fa/">
+          <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/main/Picsart_25-11-01_17-11-59-234%5B1%5D.svg" alt="لوگو GoldenJDM">
+        </a>
+        <span>GoldenJDM</span>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="منوی اصلی" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="links" id="navMenu">
+        <a href="/fa/">خانه</a>
+        <a href="/fa/gallery/">گالری</a>
+        <a href="/fa/musics/">موزیک‌ها</a>
+        <a href="/fa/#contact">ارتباط</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <h1 class="grad-hero">موزیک‌ها</h1>
+
+    <!-- Player Wrapper -->
+    <div class="player-wrapper">
+      
+      <!-- 🎵 MUSIC PLAYER - EXACT STRUCTURE AS REQUESTED -->
+      <div class="music-player" role="region" aria-label="Music Player" id="musicPlayer">
+        
+        <!-- Album Art with Glow -->
+        <div class="player-artwork">
+          <div class="artwork-glow"></div>
+          <img src="https://i.postimg.cc/6pLpvt1k/Picsart-25-07-16-21-08-17-215.png" 
+               alt="Album Art" 
+               class="artwork-image"
+               loading="lazy"
+               id="artworkImage">
+          <div class="vinyl-spin">
+            <div class="vinyl-center"></div>
+          </div>
+        </div>
+
+        <!-- Track Info -->
+        <div class="track-info">
+          <h3 class="track-title" id="trackTitle">Moonwalking in Calabasas (feat. Blueface) [Remix]</h3>
+          <p class="track-artist" id="trackArtist">DDG</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <span class="time current" id="currentTime">0:00</span>
+          <div class="progress-bar" role="slider" aria-label="Seek" tabindex="0" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-thumb"></div>
+          </div>
+          <span class="time duration" id="duration">3:45</span>
+        </div>
+
+        <!-- Controls -->
+        <div class="player-controls">
+          <button class="ctrl-btn" aria-label="Shuffle" title="Shuffle" id="shuffleBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
+            </svg>
+          </button>
+          
+          <button class="ctrl-btn primary" aria-label="Previous" title="Previous" id="prevBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+            </svg>
+          </button>
+          
+          <button class="ctrl-btn play-pause" aria-label="Play" title="Play/Pause" id="playBtn">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+          </button>
+          
+          <button class="ctrl-btn primary" aria-label="Next" title="Next" id="nextBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+            </svg>
+          </button>
+          
+          <button class="ctrl-btn" aria-label="Repeat" title="Repeat" id="repeatBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Equalizer Indicator -->
+        <div class="equalizer" aria-hidden="true">
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+        </div>
+
+        <!-- Volume Control -->
+        <div class="volume-control">
+          <button class="volume-btn" aria-label="Toggle mute" title="Mute" id="volumeBtn">
+            <svg class="vol-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
+            </svg>
+            <svg class="vol-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+              <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6"/>
+            </svg>
+          </button>
+          <input type="range" class="volume-slider" min="0" max="100" value="80" aria-label="Volume" id="volumeSlider">
+        </div>
+
+        <!-- Playlist Toggle -->
+        <button class="playlist-toggle" aria-label="Toggle playlist" title="Playlist" id="playlistToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+          </svg>
+        </button>
+
+      </div>
+
+      <!-- Playlist Panel (Collapsible) - EXACT STRUCTURE AS REQUESTED -->
+      <div class="playlist-panel" aria-hidden="true" id="playlistPanel">
+        <div class="playlist-header">
+          <h4>Up Next</h4>
+          <button class="playlist-close" aria-label="Close playlist">&times;</button>
+        </div>
+        <ul class="playlist-items" id="playlistItems">
+          <!-- Playlist items will be injected by JavaScript -->
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Hidden Audio Element for Playback -->
+    <audio id="audioPlayer" preload="none"></audio>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="wrap" role="contentinfo">
+    <p>
+      © ۱۴۰۵ — 
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fa"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="grad-hero"
+         aria-label="اطلاعات بیشتر درباره مجوز CC BY-SA 4.0">
+         CC BY-SA 4.0
+      </a>
+      — GoldenJDM
+    </p>
+  </footer>
+
+  <div class="credit">
+    ساخته شده با <span aria-label="love">❤️</span> توسط 
+    <a href="../../fa/">GoldenJDM</a>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    (function() {
+      'use strict';
+
+      // === TRACK DATA - From your second code block ===
+      const tracks = [
+        {
+          title: "Moonwalking in Calabasas (feat. Blueface) [Remix]",
+          artist: "DDG",
+          cover: "https://i.postimg.cc/9QMFrgW0/moonwalking.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/11.%20Moonwalking%20in%20Calabasas%20(feat.%20Blueface)%20%5BRemix%5D.mp3",
+          duration: "3:45"
+        },
+        {
+          title: "Dreams",
+          artist: "Loreen",
+          cover: "https://i.postimg.cc/sD87fWrH/dreams.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/4_5999324036901897304.mp3",
+          duration: "4:12"
+        },
+        {
+          title: "Skyfall (Drill Remix)",
+          artist: "Adele",
+          cover: "https://i.postimg.cc/zX27NT9M/Skyfall-Drill-Remix.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Adele%20%20%20@AHANG_SiSTEM%20-%20Skyfall%20(Drill%20Remix).mp3",
+          duration: "3:28"
+        },
+        {
+          title: "UNDERGROUND",
+          artist: "DARKWOLE",
+          cover: "https://i.postimg.cc/SN1d4cwB/UNDERGROUND-2.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/DARKWOLE%20%20%20@AHANG_SiSTEM%20-%20UNDERGROUND%202.mp3",
+          duration: "4:01"
+        },
+        {
+          title: "All Night",
+          artist: "Emrah Karaduman",
+          cover: "https://i.postimg.cc/SNxdHgtK/All-Night.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Emrah%20Karaduman%20%20%20@AHANG_SiSTEM%20-%20All%20Night.mp3",
+          duration: "3:55"
+        },
+        {
+          title: "Attachments Ft. Taliban Glizzy",
+          artist: "Pressa",
+          cover: "https://i.postimg.cc/RFxG89jK/Attachments-Ft-Taliban-Glizzy.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Pressa_-_Attachments_Ft_Taliban_Glizzy_SkinnyGistcom.mp3",
+          duration: "3:30"
+        },
+        {
+          title: "Бездна",
+          artist: "SUNAMI",
+          cover: "https://i.postimg.cc/nh534q23/Bezdna.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/%D0%91%D0%B5%D0%B7%D0%B4%D0%BD%D0%B0%20-%20SUNAMI%20_%20@AHANG_SiSTEM.mp3",
+          duration: "3:18"
+        },
+        {
+          title: "CLOUD",
+          artist: "Dxrk ダーク",
+          cover: "https://i.postimg.cc/X7YLtsDc/CLOUD.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20CLOUD.mp3",
+          duration: "3:42"
+        },
+        {
+          title: "Crystal & Moët",
+          artist: "MORGENSHTERN",
+          cover: "https://i.postimg.cc/C5F7h7My/Crystal-Moet.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20-%20Cristal%20&%20Mo%C3%ABt%20320%20%5BWWW.VIPREMIX.IR%5D.mp3",
+          duration: "3:15"
+        },
+        {
+          title: "Didn't I Say (feat. Siavash Mx)",
+          artist: "Richrosebaby",
+          cover: "https://i.postimg.cc/85gw3Dq8/Didn-t-I-Say-feat-Siavash-Mx.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Richrosebaby%20%E2%80%93%20Didn%E2%80%99t%20I%20Say%20(feat.%20Siavash%20Mx).mp3",
+          duration: "3:50"
+        },
+        {
+          title: "Дни и ночи (feat. Real Girl)",
+          artist: "LȺ",
+          cover: "https://i.postimg.cc/XqQ8p5Xq/Dni-i-noci-feat-Real-Girl.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/L%C8%BA%20%20%20@AHANG_SiSTEM%20-%20%D0%94%D0%BD%D0%B8%20%D0%B8%20%D0%BD%D0%BE%D1%87%D0%B8%20(feat.%20Real%20Girl).mp3",
+          duration: "3:33"
+        },
+        {
+          title: "El Problemá",
+          artist: "MORGENSHTERN & Timati",
+          cover: "https://i.postimg.cc/y8JP8kK6/El-Problema.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20Ft%20Timati%20-%20El%20Problem%C3%A1.mp3",
+          duration: "3:20"
+        },
+        {
+          title: "Gata Only",
+          artist: "FloyyMenor",
+          cover: "https://i.postimg.cc/2jwTHsTL/Gata-Only.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/FloyyMenor%20%20%20@AHANG_SiSTEM%20-%20Gata%20Only.mp3",
+          duration: "2:58"
+        },
+        {
+          title: "Hatred · S!GMA",
+          artist: "Z1FiR",
+          cover: "https://i.postimg.cc/WzXnhZt0/Hatred-S-GMA.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Hatred%20%C2%B7%20S!GMA.mp3",
+          duration: "3:10"
+        },
+        {
+          title: "Hit The Bucket",
+          artist: "Priya Ragu",
+          cover: "https://i.postimg.cc/pTMk7xgn/Hit-The-Bucket.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Priya%20Ragu%20%20@Faravahr_Sound%20%E2%80%93%20Hit%20The%20Bucket.mp3",
+          duration: "3:25"
+        },
+        {
+          title: "ICE",
+          artist: "MORGENSHTERN",
+          cover: "https://i.postimg.cc/NFgDsDGQ/ICE.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Morgenshtern%20%20%20@AHANG_SiSTEM%20-%20ICE.mp3",
+          duration: "3:05"
+        },
+        {
+          title: "Иду на беду",
+          artist: "Mikey",
+          cover: "https://i.postimg.cc/HnB2VMjH/Idu-na-bedu.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Mikey%20%20%20@AHANG_SiSTEM%20-%20%D0%98%D0%B4%D1%83%20%D0%BD%D0%B0%20%D0%B1%D0%B5%D0%B4%D1%83.mp3",
+          duration: "3:38"
+        },
+        {
+          title: "Kamin",
+          artist: "Emin, Jony",
+          cover: "https://i.postimg.cc/HnB2VMjs/Kamin.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Kamin.mp3",
+          duration: "4:05"
+        },
+        {
+          title: "колыбельная",
+          artist: "Rauf & Faik",
+          cover: "https://i.postimg.cc/ydCn5Bw8/kolybelnaa.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Rauf%20%20%20Faik%20%20%20@AHANG_SiSTEM%20-%20%D0%BA%D0%BE%D0%BB%D1%8B%D0%B1%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F.mp3",
+          duration: "3:48"
+        },
+        {
+          title: "KRUSH GIRL",
+          artist: "Kute & killanoia & Tokyomane",
+          cover: "https://i.postimg.cc/0jcfbSrb/KRUSH-GIRL.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/KRUSH%20GIRL.mp3",
+          duration: "3:12"
+        },
+        {
+          title: "Let Me Die",
+          artist: "Lil Happy Lil Sad",
+          cover: "https://i.postimg.cc/NM8bvScp/Let-Me-Die.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Nightcore%20-%20Let%20Me%20Die%20Lil%20Happy%20Lil%20Sad.mp3",
+          duration: "3:35"
+        },
+        {
+          title: "Love Your Voice",
+          artist: "JONY",
+          cover: "https://i.postimg.cc/QCXm8mNd/Love-Your-Voice.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Love%20Your%20Voice.mp3",
+          duration: "3:52"
+        },
+        {
+          title: "Moonlight",
+          artist: "dhruv",
+          cover: "https://i.postimg.cc/MpcDpvwJ/Moonlight.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/4_5814605125657823782.mp3",
+          duration: "3:22"
+        },
+        {
+          title: "Mugshot (Rockstar)",
+          artist: "Hex",
+          cover: "https://i.postimg.cc/QC0bH7Vk/Mugshot-Rockstar.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Hex%20%20%20@AHANG_SiSTEM%20-%20Mugshot%20(Rockstar).mp3",
+          duration: "3:18"
+        },
+        {
+          title: "My Life Is Going On",
+          artist: "Cecilia Krull",
+          cover: "https://i.postimg.cc/Jn3KCvLq/My-Life-Is-Going-On.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/My%20Life%20Is%20Going%20On%20%20%20Cecilia%20Krull.mp3",
+          duration: "3:40"
+        },
+        {
+          title: "Options",
+          artist: "EARTHGANG & Wale",
+          cover: "https://i.postimg.cc/qMvwW1ZC/Options.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/EARTHGANG%20%20%20Wale%20-%20Options.mp3",
+          duration: "3:28"
+        },
+        {
+          title: "Overseas",
+          artist: "Prznt",
+          cover: "https://i.postimg.cc/qRcQHSTn/Overseas.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Overseas%20-%20Prznt.m4a",
+          duration: "3:15"
+        },
+        {
+          title: "Phonk Web",
+          artist: "Dxrk ダーク",
+          cover: "https://i.postimg.cc/153BbvY7/Phonk-Web.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20Phonk%20Web.mp3",
+          duration: "3:33"
+        },
+        {
+          title: "Считалочка",
+          artist: "MORGENSHTERN",
+          cover: "https://i.postimg.cc/vH2hy5Jb/Scitalocka.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/1704650889612.mp3",
+          duration: "3:08"
+        },
+        {
+          title: "Solas",
+          artist: "Jamie Duffy",
+          cover: "https://i.postimg.cc/vBwXjMpD/Solas.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Solas.mp3",
+          duration: "3:45"
+        },
+        {
+          title: "Stay",
+          artist: "Przn & 2SCratch",
+          cover: "https://i.postimg.cc/sXCK8ybt/Stay.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Stay%20-%20Prznt%20and%202scratch.m4a",
+          duration: "3:20"
+        },
+        {
+          title: "Stronger",
+          artist: "Otnicka",
+          cover: "https://i.postimg.cc/wv5FYZpk/Stronger.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Otnicka%20%20%20@AHANG_SiSTEM%20-%20Stronger.mp3",
+          duration: "3:55"
+        },
+        {
+          title: "SUSPIRIA",
+          artist: "Dxrk ダーク",
+          cover: "https://i.postimg.cc/yY8j2LrP/SUSPIRIA.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Dxrk%20%E3%83%80%E3%83%BC%E3%82%AF%20%20%20@AHANG_SiSTEM%20-%20SUSPIRIA.mp3",
+          duration: "3:42"
+        },
+        {
+          title: "The Alchemist",
+          artist: "Haarper",
+          cover: "https://i.postimg.cc/XN8x2Rx0/The-Alchemist.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Haarper%20%20%20@AHANG_SiSTEM%20-%20The%20Alchemist.mp3",
+          duration: "3:30"
+        },
+        {
+          title: "The Silence",
+          artist: "Manchester Orchestra",
+          cover: "https://i.postimg.cc/XJ6xh3T4/The-Silence.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/The%20Silence.mp3",
+          duration: "4:15"
+        },
+        {
+          title: "Tokyo Revengers",
+          artist: "Mupp",
+          cover: "https://i.postimg.cc/KjZfGfGJ/Tokyo-Revengers.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Mupp%20%20%20@AHANG_SiSTEM%20-%20Tokyo%20Revengers.mp3",
+          duration: "3:25"
+        },
+        {
+          title: "Yakuza",
+          artist: "Free Flow Flava",
+          cover: "https://i.postimg.cc/y6PnfMnd/Yakuza.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/Free%20Flow%20Flava%20%20%20@AHANG_SiSTEM%20-%20Yakuza.mp3",
+          duration: "3:38"
+        },
+        {
+          title: "You Ain't Worth It",
+          artist: "Melii & 6LACK",
+          cover: "https://i.postimg.cc/kgky6qMF/You-Aint-Worth-It.jpg",
+          src: "https://github.com/GoldenJDM/GoldenJDM-website/raw/refs/heads/main/musics/01%20You%20Ain't%20Worth%20It.m4a",
+          duration: "3:48"
+        }
+      ];
+
+      // === ELEMENTS ===
+      const player = document.getElementById('musicPlayer');
+      const audio = document.getElementById('audioPlayer');
+      const playBtn = document.getElementById('playBtn');
+      const progressBar = document.getElementById('progressBar');
+      const progressFill = document.getElementById('progressFill');
+      const currentTimeEl = document.getElementById('currentTime');
+      const durationEl = document.getElementById('duration');
+      const volumeSlider = document.getElementById('volumeSlider');
+      const volumeBtn = document.getElementById('volumeBtn');
+      const playlistToggle = document.getElementById('playlistToggle');
+      const playlistPanel = document.getElementById('playlistPanel');
+      const playlistClose = playlistPanel.querySelector('.playlist-close');
+      const playlistItems = document.getElementById('playlistItems');
+      const trackTitle = document.getElementById('trackTitle');
+      const trackArtist = document.getElementById('trackArtist');
+      const artworkImage = document.getElementById('artworkImage');
+      const shuffleBtn = document.getElementById('shuffleBtn');
+      const repeatBtn = document.getElementById('repeatBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      // === STATE ===
+      let currentTrackIndex = 0;
+      let isPlaying = false;
+      let isMuted = false;
+      let isShuffle = false;
+      let repeatMode = 0; // 0: off, 1: all, 2: one
+      let animationFrame = null;
+
+      // === BACKGROUND PARTICLES ===
+      function createParticles() {
+        const container = document.querySelector('.bg-particles');
+        for (let i = 0; i < 20; i++) {
+          const p = document.createElement('div');
+          p.className = 'particle';
+          p.style.left = Math.random() * 100 + '%';
+          p.style.animationDelay = Math.random() * 15 + 's';
+          p.style.animationDuration = (15 + Math.random() * 10) + 's';
+          container.appendChild(p);
+        }
+      }
+      createParticles();
+
+      // === FORMAT TIME ===
+      function formatTime(seconds) {
+        if (isNaN(seconds)) return "0:00";
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        return `${m}:${s.toString().padStart(2, '0')}`;
+      }
+
+      // === RENDER PLAYLIST ===
+      function renderPlaylist() {
+        playlistItems.innerHTML = tracks.map((track, i) => `
+          <li class="playlist-item ${i===0?'active':''}" data-index="${i}">
+            <span class="track-num">${i+1}</span>
+            <div class="playlist-track">
+              <span class="pt-title">${track.title}</span>
+              <span class="pt-artist">${track.artist}</span>
+            </div>
+            <span class="pt-duration">${track.duration}</span>
+          </li>
+        `).join('');
+      }
+
+      // === LOAD TRACK ===
+      function loadTrack(index) {
+        const track = tracks[index];
+        currentTrackIndex = index;
+        
+        // Update UI
+        trackTitle.textContent = track.title;
+        trackArtist.textContent = track.artist;
+        artworkImage.src = track.cover;
+        artworkImage.alt = `کاور آهنگ ${track.title}`;
+        durationEl.textContent = track.duration;
+        
+        // Update playlist active state
+        document.querySelectorAll('.playlist-item').forEach((item, i) => {
+          item.classList.toggle('active', i === index);
+        });
+        
+        // Load audio
+        audio.src = track.src;
+        audio.load();
+        
+        // Reset progress
+        progressFill.style.width = '0%';
+        currentTimeEl.textContent = '0:00';
+        progressBar.setAttribute('aria-valuenow', '0');
+      }
+
+      // === PLAY/PAUSE ===
+      function togglePlay() {
+        if (audio.paused) {
+          audio.play().then(() => {
+            isPlaying = true;
+            player.classList.add('playing');
+            animateProgress();
+          }).catch(e => console.log('Playback error:', e));
+        } else {
+          audio.pause();
+          isPlaying = false;
+          player.classList.remove('playing');
+          if (animationFrame) cancelAnimationFrame(animationFrame);
+        }
+      }
+      playBtn.addEventListener('click', togglePlay);
+
+      // === PROGRESS ===
+      function updateProgress() {
+        if (audio.duration) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          progressFill.style.width = percent + '%';
+          currentTimeEl.textContent = formatTime(audio.currentTime);
+          progressBar.setAttribute('aria-valuenow', Math.round(percent));
+        }
+        if (isPlaying) {
+          animationFrame = requestAnimationFrame(updateProgress);
+        }
+      }
+
+      function animateProgress() {
+        if (!isPlaying) return;
+        updateProgress();
+        animationFrame = requestAnimationFrame(animateProgress);
+      }
+
+      progressBar.addEventListener('click', (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        if (audio.duration) {
+          audio.currentTime = percent * audio.duration;
+          updateProgress();
+        }
+      });
+
+      progressBar.addEventListener('keydown', (e) => {
+        if (!audio.duration) return;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+          updateProgress();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          audio.currentTime = Math.max(0, audio.currentTime - 5);
+          updateProgress();
+        } else if (e.key === ' ') {
+          e.preventDefault();
+          togglePlay();
+        }
+      });
+
+      // === VOLUME ===
+      function updateVolumeIcon() {
+        const v = audio.volume;
+        volumeBtn.classList.toggle('muted', v === 0 || isMuted);
+      }
+
+      volumeSlider.addEventListener('input', (e) => {
+        audio.volume = e.target.value / 100;
+        isMuted = (audio.volume === 0);
+        updateVolumeIcon();
+      });
+
+      volumeBtn.addEventListener('click', () => {
+        if (isMuted || audio.volume === 0) {
+          audio.volume = 0.8;
+          volumeSlider.value = 80;
+          isMuted = false;
+        } else {
+          audio.volume = 0;
+          volumeSlider.value = 0;
+          isMuted = true;
+        }
+        updateVolumeIcon();
+      });
+
+      // === PLAYLIST TOGGLE ===
+      function togglePlaylist() {
+        const hidden = playlistPanel.getAttribute('aria-hidden') === 'true';
+        playlistPanel.setAttribute('aria-hidden', !hidden);
+        playlistToggle.classList.toggle('active', hidden);
+      }
+      playlistToggle.addEventListener('click', togglePlaylist);
+      playlistClose.addEventListener('click', () => {
+        playlistPanel.setAttribute('aria-hidden', 'true');
+        playlistToggle.classList.remove('active');
+      });
+
+      // === SELECT TRACK FROM PLAYLIST ===
+      playlistItems.addEventListener('click', (e) => {
+        const item = e.target.closest('.playlist-item');
+        if (item) {
+          const index = parseInt(item.dataset.index);
+          loadTrack(index);
+          if (!isPlaying) togglePlay();
+        }
+      });
+
+      // === CONTROL BUTTONS ===
+      shuffleBtn.addEventListener('click', () => {
+        isShuffle = !isShuffle;
+        shuffleBtn.style.borderColor = isShuffle ? 'var(--glass-border-hover)' : '';
+        shuffleBtn.style.boxShadow = isShuffle ? '0 0 15px rgba(168,85,247,.4)' : '';
+      });
+
+      repeatBtn.addEventListener('click', () => {
+        repeatMode = (repeatMode + 1) % 3;
+        const colors = ['', 'var(--glass-border-hover)', '#f0abfc'];
+        const shadows = ['', '0 0 15px rgba(168,85,247,.4)', '0 0 20px rgba(240,171,252,.6)'];
+        repeatBtn.style.borderColor = colors[repeatMode];
+        repeatBtn.style.boxShadow = shadows[repeatMode];
+      });
+
+      function playNext() {
+        let nextIndex;
+        if (isShuffle) {
+          nextIndex = Math.floor(Math.random() * tracks.length);
+        } else {
+          nextIndex = (currentTrackIndex + 1) % tracks.length;
+        }
+        loadTrack(nextIndex);
+        if (isPlaying) audio.play();
+      }
+
+      function playPrev() {
+        if (audio.currentTime > 3) {
+          audio.currentTime = 0;
+        } else {
+          const prevIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+          loadTrack(prevIndex);
+          if (isPlaying) audio.play();
+        }
+      }
+
+      prevBtn.addEventListener('click', playPrev);
+      nextBtn.addEventListener('click', playNext);
+
+      // === AUDIO EVENTS ===
+      audio.addEventListener('ended', () => {
+        if (repeatMode === 2) {
+          audio.currentTime = 0;
+          if (isPlaying) audio.play();
+        } else if (repeatMode === 1 || isShuffle) {
+          playNext();
+        } else {
+          isPlaying = false;
+          player.classList.remove('playing');
+          progressFill.style.width = '100%';
+          if (animationFrame) cancelAnimationFrame(animationFrame);
+        }
+      });
+
+      audio.addEventListener('loadedmetadata', () => {
+        durationEl.textContent = formatTime(audio.duration);
+      });
+
+      // === KEYBOARD SHORTCUTS ===
+      document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        
+        switch(e.key.toLowerCase()) {
+          case ' ':
+          case 'k':
+            e.preventDefault();
+            togglePlay();
+            break;
+          case 'arrowright':
+          case 'l':
+            e.preventDefault();
+            if (audio.duration) {
+              audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+              updateProgress();
+            }
+            break;
+          case 'arrowleft':
+          case 'j':
+            e.preventDefault();
+            if (audio.duration) {
+              audio.currentTime = Math.max(0, audio.currentTime - 10);
+              updateProgress();
+            }
+            break;
+          case 'arrowup':
+            e.preventDefault();
+            audio.volume = Math.min(1, audio.volume + 0.1);
+            volumeSlider.value = audio.volume * 100;
+            updateVolumeIcon();
+            break;
+          case 'arrowdown':
+            e.preventDefault();
+            audio.volume = Math.max(0, audio.volume - 0.1);
+            volumeSlider.value = audio.volume * 100;
+            updateVolumeIcon();
+            break;
+          case 'm':
+            e.preventDefault();
+            volumeBtn.click();
+            break;
+          case 'n':
+            e.preventDefault();
+            playNext();
+            break;
+          case 'p':
+            e.preventDefault();
+            playPrev();
+            break;
+        }
+      });
+
+      // === INIT ===
+      renderPlaylist();
+      loadTrack(0);
+      audio.volume = 0.8;
+      updateVolumeIcon();
+
+      // === CLEANUP ===
+      window.addEventListener('beforeunload', () => {
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+        audio.pause();
+      });
+
+    })();
+  </script>
+
+  <!-- Hamburger Menu Script -->
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+    if (hamburger && navMenu) {
+      hamburger.addEventListener("click", () => {
+        const active = hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+        hamburger.setAttribute("aria-expanded", active);
+      });
+      navMenu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          hamburger.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", "false");
+        });
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest("nav") && navMenu.classList.contains("active")) {
+          navMenu.classList.remove("active");
+          hamburger.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+  </script>
+  
+  <!-- Vercel Web Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Vercel Speed Insights -->
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
