@@ -17,6 +17,7 @@ body{
   margin:0;font-family:"Vazirmatn",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;padding-top:64px;overflow-x:hidden;
+  display:flex;flex-direction:column;
 }
 a{color:inherit;text-decoration:none}
 .wrap{width:min(100%,var(--max));margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
@@ -73,6 +74,61 @@ a{color:inherit;text-decoration:none}
   pointer-events: none;
 }
 body.splash-active { overflow: hidden; }
+
+/* === NAVIGATION === */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 12px 0;
+  background: rgba(11, 11, 15, 0.7);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.lang-toggle {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.lang-toggle:hover {
+  background: rgba(240, 171, 252, 0.15);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-1px);
+}
+
+/* === HERO & MAIN === */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hero-content {
+  text-align: center;
+  padding: clamp(40px, 12vh, 80px) 0;
+}
 .avatar{
   width:120px;height:120px;border-radius:50%;
   object-fit:cover;
@@ -164,7 +220,7 @@ section{padding-block:clamp(48px,10vh,96px)}
   }
 }
 
-footer{border-top:1px solid var(--border);color:#b6b6c2;padding:28px 0 60px;font-size:14px;text-align:center}
+footer{border-top:1px solid var(--border);color:#b6b6c2;padding:28px 0 60px;font-size:14px;text-align:center;background:rgba(11,11,15,0.4);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 footer a{transition:opacity .2s}
 footer a:hover{opacity:.8}
 
