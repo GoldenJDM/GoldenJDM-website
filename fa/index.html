@@ -54,8 +54,8 @@
   <!-- CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://i.postimg.cc https://raw.githubusercontent.com blob:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://vitals.vercel-insights.com; media-src 'self' https://i.postimg.cc;">
   
-  <!-- External CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <!-- External CSS - مسیر اصلاح‌شده -->
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
@@ -92,7 +92,11 @@
           </a>
         </div>
       </div>
-    </section>
+    </div>
+  </nav>
+
+  <!-- ✅ Main Content - تگ اصلی اضافه شد -->
+  <main id="main-content" class="main-wrapper">
 
     <div class="wrap">
       <section id="work" class="fade-in-trigger fade-in-visible">
@@ -162,15 +166,16 @@
         </div>
       </section>
     </div>
-  </main>
+
+  </main> <!-- ✅ پایان Main Content -->
 
   <!-- Footer -->
   <footer class="wrap" role="contentinfo">
     <div style="display:flex;flex-direction:column;align-items:center;gap:20px;margin-bottom:24px">
       <img src="https://raw.githubusercontent.com/GoldenJDM/GoldenJDM-website/refs/heads/main/signature.svg" alt="امضا" style="height:auto;max-width:200px" width="200" height="60">
     </div>
-<p style="text-align:center">© ۱۴۰۵ — 
-  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fa" target="_blank" rel="noopener noreferrer" class="grad-hero" aria-label="اطلاعات بیشتر درباره مجوز CC BY-NC-SA 4.0">CC BY-NC-SA 4.0</a> (محتوا) — کد: All Rights Reserved — GoldenJDM</p>
+    <p style="text-align:center">© ۱۴۰۵ — 
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fa" target="_blank" rel="noopener noreferrer" class="grad-hero" aria-label="اطلاعات بیشتر درباره مجوز CC BY-NC-SA 4.0">CC BY-NC-SA 4.0</a> (محتوا) — کد: All Rights Reserved — GoldenJDM</p>
   </footer>
   
   <div class="credit">
@@ -178,10 +183,10 @@
     <a href="/fa/">GoldenJDM</a>
   </div>
 
-  <!-- External JS -->
-  <script src="js/main.js" defer></script>
+  <!-- External JS - مسیر اصلاح‌شده -->
+  <script src="../js/main.js" defer></script>
   
-  <!-- Analytics (Keep as is) -->
+  <!-- Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
   <script type="text/javascript">
@@ -193,4 +198,3 @@
   </script>
 </body>
 </html>
- 
