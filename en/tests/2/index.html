@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Amirhossein Zarniyan — Wikipedia editor, student, developer. Passionate about clean code, fast web, JDM, aviation, and poetry.">
+    <meta name="author" content="Amirhossein Zarniyan">
+    <meta name="theme-color" content="#0b0b0f">
+    <title>GoldenJDM — Amirhossein Zarniyan</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-black': '#0b0b0f',
+                        'light-white': '#e9e9ef',
+                        'gray-text': '#a7a7b3',
+                        'accent-purple': '#a78bfa',
+                        'accent-pink': '#f472b6',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'fa': ['Vazirmatn', 'system-ui', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: rgba(167, 139, 250, 0.3);
+            color: #e9e9ef;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0b0b0f;
+            color: #e9e9ef;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        html[lang="fa"] body {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #a78bfa;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid rgba(167, 139, 250, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99998;
+            transition: all 0.15s ease-out;
+        }
+
+        .cursor-ring.hover {
+            transform: scale(1.5);
+            border-color: #f472b6;
+            background: rgba(244, 114, 182, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .cursor-dot, .cursor-ring { display: none; }
+            body { cursor: auto; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0b0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #a78bfa, #f472b6);
+            border-radius: 3px;
+        }
+
+        /* Noise overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Hero Canvas */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(11, 11, 15, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(167, 139, 250, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(11, 11, 15, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(167, 139, 250, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(167, 139, 250, 0.3);
+            background: rgba(11, 11, 15, 0.7);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px -10px rgba(167, 139, 250, 0.15),
+                        0 0 40px -10px rgba(244, 114, 182, 0.1);
+        }
+
+        /* Neon glow text */
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(167, 139, 250, 0.5),
+                         0 0 40px rgba(167, 139, 250, 0.2),
+                         0 0 80px rgba(167, 139, 250, 0.1);
+        }
+
+        .neon-pink-glow {
+            text-shadow: 0 0 10px rgba(244, 114, 182, 0.5),
+                         0 0 40px rgba(244, 114, 182, 0.2);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #f472b6 50%, #a78bfa 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 6s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: #a78bfa;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Section reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Magnetic button */
+        .magnetic-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(167, 139, 250, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .magnetic-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Floating elements */
+        .float-slow {
+            animation: floatSlow 8s ease-in-out infinite;
+        }
+
+        .float-medium {
+            animation: floatMedium 6s ease-in-out infinite;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        @keyframes floatMedium {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Line decoration */
+        .line-decoration {
+            position: relative;
+        }
+
+        .line-decoration::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa, #f472b6);
+            transition: width 0.4s ease;
+        }
+
+        .line-decoration:hover::after {
+            width: 100%;
+        }
+
+        /* Nav */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa, #f472b6);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* RTL support */
+        html[dir="rtl"] body {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        html[dir="rtl"] .typing-cursor {
+            margin-left: 0;
+            margin-right: 4px;
+        }
+
+        /* Project card status badge */
+        .status-active {
+            background: rgba(167, 139, 250, 0.15);
+            color: #a78bfa;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .status-progress {
+            background: rgba(244, 114, 182, 0.15);
+            color: #f472b6;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+        }
+
+        /* Ambient glow orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .orb-purple {
+            background: #a78bfa;
+        }
+
+        .orb-pink {
+            background: #f472b6;
+        }
+
+        /* Contact form */
+        .form-input {
+            background: rgba(11, 11, 15, 0.6);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #a78bfa;
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.1);
+            outline: none;
+        }
+
+        /* Sakura petals */
+        .sakura {
+            position: fixed;
+            top: -10px;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0;
+            animation: sakuraFall linear forwards;
+        }
+
+        @keyframes sakuraFall {
+            0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.5; }
+            100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+        }
+
+        /* Smooth language transition */
+        .lang-transition {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .lang-fade-out {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        html[dir="rtl"] .mobile-menu {
+            transform: translateX(-100%);
+        }
+
+        html[dir="rtl"] .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.3), transparent);
+        }
+
+        /* Loading screen */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0b0b0f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100000;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-bar {
+            width: 120px;
+            height: 2px;
+            background: rgba(167, 139, 250, 0.2);
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .loader-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, #a78bfa, #f472b6);
+            border-radius: 1px;
+            animation: loaderSlide 1s ease-in-out infinite;
+        }
+
+        @keyframes loaderSlide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        /* Hover card inner glow */
+        .card-inner-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(167, 139, 250, 0.06), transparent 40%);
+        }
+
+        .glass-card:hover .card-inner-glow {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="text-center">
+            <div class="text-accent-purple font-mono text-sm tracking-widest mb-4">GOLDENJDM</div>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-[9990] transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-purple to-accent-pink flex items-center justify-center text-deep-black font-bold text-xs transition-transform group-hover:scale-110">
+                    G
+                </div>
+                <span class="font-mono text-sm text-gray-text hidden sm:block">GoldenJDM</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link text-sm text-gray-text hover:text-light-white transition-colors" data-en="About" data-fa="درباره من">About</a>
+                <a href="#projects" class="nav-link text-sm text-gray-text hover:text-light-white transition-colors" data-en="Projects" data-fa="پروژه‌ها">Projects</a>
+                <a href="#writings" class="nav-link text-sm text-gray-text hover:text-light-white transition-colors" data-en="Writings" data-fa="نوشته‌ها">Writings</a>
+                <a href="#contact" class="nav-link text-sm text-gray-text hover:text-light-white transition-colors" data-en="Contact" data-fa="تماس">Contact</a>
+
+                <!-- Language Switcher -->
+                <button id="lang-switch" class="ml-4 px-3 py-1.5 rounded-full border border-accent-purple/30 text-xs font-mono text-accent-purple hover:bg-accent-purple/10 transition-all" aria-label="Switch language">
+                    FA / EN
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1.5" aria-label="Menu">
+                <span class="w-5 h-0.5 bg-light-white transition-all"></span>
+                <span class="w-5 h-0.5 bg-light-white transition-all"></span>
+                <span class="w-3 h-0.5 bg-light-white transition-all self-end"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-full h-full bg-deep-black/95 backdrop-blur-xl z-[9989] flex flex-col items-center justify-center gap-8">
+        <a href="#about" class="mobile-nav-link text-2xl text-gray-text hover:text-light-white transition-colors" data-en="About" data-fa="درباره من">About</a>
+        <a href="#projects" class="mobile-nav-link text-2xl text-gray-text hover:text-light-white transition-colors" data-en="Projects" data-fa="پروژه‌ها">Projects</a>
+        <a href="#writings" class="mobile-nav-link text-2xl text-gray-text hover:text-light-white transition-colors" data-en="Writings" data-fa="نوشته‌ها">Writings</a>
+        <a href="#contact" class="mobile-nav-link text-2xl text-gray-text hover:text-light-white transition-colors" data-en="Contact" data-fa="تماس">Contact</a>
+        <button id="mobile-lang-switch" class="mt-4 px-4 py-2 rounded-full border border-accent-purple/30 text-sm font-mono text-accent-purple hover:bg-accent-purple/10 transition-all">
+            FA / EN
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <canvas id="hero-canvas"></canvas>
+
+        <!-- Ambient Orbs -->
+        <div class="orb orb-purple w-96 h-96 -top-48 -left-48 float-slow"></div>
+        <div class="orb orb-pink w-72 h-72 bottom-20 -right-36 float-medium"></div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <div class="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent-purple/20 bg-accent-purple/5">
+                <span class="w-2 h-2 rounded-full bg-accent-purple animate-pulse"></span>
+                <span class="text-xs font-mono text-accent-purple" data-en="Available for collaboration" data-fa="آماده همکاری">Available for collaboration</span>
+            </div>
+
+            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight mb-6">
+                <span class="block text-light-white" data-en="Amirhossein" data-fa="امیرحسین">Amirhossein</span>
+                <span class="block gradient-text" data-en="Zarniyan" data-fa="زرنیان">Zarniyan</span>
+            </h1>
+
+            <div class="h-8 mb-8">
+                <p class="text-lg sm:text-xl text-gray-text font-light">
+                    <span id="typed-text"></span><span class="typing-cursor"></span>
+                </p>
+            </div>
+
+            <p class="text-gray-text text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed" data-en="Wikipedia editor & student; passionate about clean small projects, great docs, and a fast web." data-fa="ویرایشگر ویکی‌پدیا و دانش‌آموز؛ عاشق پروژه‌های کوچکِ تمیز، مستندات خوب، و وبِ سریع.">
+                Wikipedia editor & student; passionate about clean small projects, great docs, and a fast web.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#projects" class="magnetic-btn px-8 py-3 rounded-full bg-gradient-to-r from-accent-purple to-accent-pink text-deep-black font-semibold text-sm hover:shadow-lg hover:shadow-accent-purple/20 transition-all">
+                    <span data-en="View Projects" data-fa="مشاهده پروژه‌ها">View Projects</span>
+                </a>
+                <a href="https://t.me/GoldenJDM" target="_blank" rel="noopener" class="magnetic-btn px-8 py-3 rounded-full border border-light-white/20 text-light-white text-sm hover:border-accent-purple/50 hover:bg-accent-purple/5 transition-all">
+                    <span data-en="Message Me" data-fa="پیام به من">Message Me</span>
+                </a>
+            </div>
+
+            <!-- Social Links Row -->
+            <div class="mt-16 flex items-center justify-center gap-6">
+                <a href="https://t.me/GoldenJDM" target="_blank" rel="noopener" class="text-gray-text hover:text-accent-purple transition-colors" aria-label="Telegram">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                </a>
+                <a href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener" class="text-gray-text hover:text-accent-purple transition-colors" aria-label="Wikipedia">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.09 14.15V0h-1.16v14.15l-4.71-6.97H4.77l5.2 7.59-5.32 7.71h1.38l4.83-7.15V22.5h1.16v-7.17l4.83 7.17h1.38l-5.32-7.71 5.2-7.59h-1.35l-4.67 6.95z"/></svg>
+                </a>
+                <a href="https://github.com/GoldenJDM" target="_blank" rel="noopener" class="text-gray-text hover:text-accent-purple transition-colors" aria-label="GitHub">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span class="text-xs text-gray-text font-mono" data-en="scroll" data-fa="اسکرول">scroll</span>
+            <svg class="w-4 h-4 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-32 px-6 overflow-hidden">
+        <div class="orb orb-pink w-64 h-64 top-1/4 -right-32 float-medium opacity-20"></div>
+
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal">
+                <span class="text-accent-purple font-mono text-sm tracking-widest uppercase" data-en="01 — About" data-fa="۰۱ — درباره من">01 — About</span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4 mb-12" data-en="The story behind" data-fa="داستان پشت">
+                    <span class="text-light-white" data-en="The story behind" data-fa="داستان پشت">The story behind</span>
+                    <span class="gradient-text" data-en=" GoldenJDM" data-fa=" GoldenJDM"> GoldenJDM</span>
+                </h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div class="reveal">
+                    <div class="glass-card rounded-2xl p-8 relative overflow-hidden">
+                        <div class="card-inner-glow"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-xl font-semibold text-light-white mb-6" data-en="Why GoldenJDM?" data-fa="چرا GoldenJDM؟">Why GoldenJDM?</h3>
+                            <p class="text-gray-text leading-relaxed mb-4" data-en="JDM refers to authentic Japanese domestic market cars, and Golden symbolizes their golden era — a decade when engineering, beauty, and soul came together. For me, this isn't just a name; it represents the passion I have for mechanics, design, and speed." data-fa="واژه‌ی JDM به خودروهای اصیل ژاپنی اشاره دارد، و Golden نمادی از دوران طلایی این ماشین‌هاست — دهه‌ای که مهندسی، زیبایی و اصالت در کنار هم معنا پیدا کردند. این ترکیب برای من فقط یک نام نیست؛ نشانه‌ی شور و اشتیاقی است که به دنیای مکانیک، طراحی و سرعت دارم.">
+                                JDM refers to authentic Japanese domestic market cars, and Golden symbolizes their golden era — a decade when engineering, beauty, and soul came together. For me, this isn't just a name; it represents the passion I have for mechanics, design, and speed.
+                            </p>
+                            <p class="text-gray-text leading-relaxed mb-4" data-en="I love Iran and its rich culture; a land where poetry, history, and emotion can be found in every corner. I'm fascinated by jet aviation and flying through the endless sky, just as much as I love Japanese cars and drifting." data-fa="من عاشق ایران و فرهنگ غنی‌اش هستم؛ سرزمینی که در هر گوشه‌اش می‌توان رد پای شعر، تاریخ و احساس را یافت. به خلبانی جت و پرواز در آسمان بی‌پایان علاقه‌مندم، همان‌قدر که عاشق ماشین‌های ژاپنی و دریفت هستم.">
+                                I love Iran and its rich culture; a land where poetry, history, and emotion can be found in every corner. I'm fascinated by jet aviation and flying through the endless sky, just as much as I love Japanese cars and drifting.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal" style="transition-delay: 0.2s;">
+                    <div class="space-y-6">
+                        <div class="glass-card rounded-xl p-6 relative overflow-hidden">
+                            <div class="card-inner-glow"></div>
+                            <div class="relative z-10 flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-accent-purple/10 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-accent-purple text-lg">⚔️</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-light-white font-medium mb-1" data-en="Precision & Discipline" data-fa="دقت و نظم">Precision & Discipline</h4>
+                                    <p class="text-gray-text text-sm" data-en="The military world and firearms intrigue me — not from a warfare perspective, but through the lens of precision, discipline, and technology." data-fa="دنیای نظامی و اسلحه برایم جذاب است، نه از زاویه‌ی جنگ، بلکه از دید دقت، نظم و فناوری.">
+                                        The military world and firearms intrigue me — not from a warfare perspective, but through the lens of precision, discipline, and technology.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 relative overflow-hidden">
+                            <div class="card-inner-glow"></div>
+                            <div class="relative z-10 flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-accent-pink/10 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-accent-pink text-lg">🌸</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-light-white font-medium mb-1" data-en="Poetry & Soul" data-fa="شعر و روح">Poetry & Soul</h4>
+                                    <p class="text-gray-text text-sm" data-en="I'm drawn to philosophical and romantic poetry because I believe the human soul can be found between the words." data-fa="شیفته‌ی اشعار فلسفی و عاشقانه‌ام، زیرا باور دارم که در میان واژه‌ها می‌توان روح انسان را یافت.">
+                                        I'm drawn to philosophical and romantic poetry because I believe the human soul can be found between the words.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 relative overflow-hidden">
+                            <div class="card-inner-glow"></div>
+                            <div class="relative z-10 flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-accent-purple/10 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-accent-purple text-lg">✦</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-light-white font-medium mb-1" data-en="Code as Art" data-fa="کد به‌عنوان هنر">Code as Art</h4>
+                                    <p class="text-gray-text text-sm" data-en="I see coding not merely as a skill, but as an art of creation; an art where every line can make the world — even if just a little — better, more beautiful, and more intelligent." data-fa="به کدنویسی نه صرفاً به‌عنوان یک مهارت، بلکه به‌عنوان هنری برای ساختن نگاه می‌کنم؛ هنری که هر خط آن می‌تواند دنیا را — حتی اگر فقط کمی — بهتر، زیباتر، و هوشمندانه‌تر کند.">
+                                        I see coding not merely as a skill, but as an art of creation; an art where every line can make the world — even if just a little — better, more beautiful, and more intelligent.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 relative overflow-hidden">
+                            <div class="card-inner-glow"></div>
+                            <div class="relative z-10 flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-accent-pink/10 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-accent-pink text-lg">🌐</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-light-white font-medium mb-1" data-en="Exploring the Unknown" data-fa="کاوش در ناشناخته‌ها">Exploring the Unknown</h4>
+                                    <p class="text-gray-text text-sm" data-en="I enjoy helping people, sharing my experiences, and exploring the vast, sometimes unknown world of the internet." data-fa="دوست دارم به مردم کمک کنم، تجربه‌هایم را به اشتراک بگذارم و در دنیای بی‌انتها و گاه ناشناخته‌ی اینترنت کاوش کنم.">
+                                        I enjoy helping people, sharing my experiences, and exploring the vast, sometimes unknown world of the internet.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="relative py-32 px-6 overflow-hidden">
+        <div class="orb orb-purple w-80 h-80 bottom-0 -left-40 float-slow opacity-20"></div>
+
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal">
+                <span class="text-accent-purple font-mono text-sm tracking-widest uppercase" data-en="02 — Projects" data-fa="۰۲ — پروژه‌ها">02 — Projects</span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4 mb-4">
+                    <span class="text-light-white" data-en="Featured" data-fa="پروژه‌های">Featured</span>
+                    <span class="gradient-text" data-en=" Works" data-fa=" برجسته"> Works</span>
+                </h2>
+                <p class="text-gray-text text-lg max-w-xl" data-en="Small, clean projects built with care. Each one crafted with attention to detail, performance, and purpose." data-fa="پروژه‌های کوچک و تمیز با دقت ساخته شده. هر کدام با توجه به جزئیات، عملکرد و هدف.">
+                    Small, clean projects built with care. Each one crafted with attention to detail, performance, and purpose.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-16">
+                <!-- Project 1 -->
+                <div class="reveal glass-card rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-3xl">🌐</span>
+                            <span class="status-active text-xs px-3 py-1 rounded-full font-mono" data-en="Active" data-fa="فعال">Active</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-light-white mb-3" data-en="Personal Website" data-fa="وبسایت شخصی">Personal Website</h3>
+                        <p class="text-gray-text text-sm leading-relaxed mb-6" data-en="Minimal version focused on speed, SEO, and accessibility. Built with clean code and great documentation." data-fa="نسخه‌ی مینیمال با تمرکز بر سرعت، سئو و دسترس‌پذیری. ساخته شده با کد تمیز و مستندات عالی.">
+                            Minimal version focused on speed, SEO, and accessibility. Built with clean code and great documentation.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-text font-mono">2024</span>
+                            <a href="https://goldenjdm.ir" target="_blank" rel="noopener" class="text-accent-purple text-sm hover:text-accent-pink transition-colors flex items-center gap-1">
+                                <span data-en="Visit" data-fa="بازدید">Visit</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="reveal glass-card rounded-2xl p-8 relative overflow-hidden group" style="transition-delay: 0.1s;">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-3xl">🤖</span>
+                            <span class="status-active text-xs px-3 py-1 rounded-full font-mono" data-en="Active" data-fa="فعال">Active</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-light-white mb-3" data-en="Telegram Bot" data-fa="ربات تلگرام">Telegram Bot</h3>
+                        <p class="text-gray-text text-sm leading-relaxed mb-6" data-en="Anonymous messaging, stats, and lightweight admin tools. Supports receiving messages from reported accounts." data-fa="مدیریت پیام ناشناس، آمار و امکانات مدیریتی سبک. امکان دریافت پیام از اکانت‌های report شده در تلگرام.">
+                            Anonymous messaging, stats, and lightweight admin tools. Supports receiving messages from reported accounts.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-text font-mono">2024</span>
+                            <a href="#" class="text-accent-purple text-sm hover:text-accent-pink transition-colors flex items-center gap-1">
+                                <span data-en="Learn more" data-fa="بیشتر">Learn more</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="reveal glass-card rounded-2xl p-8 relative overflow-hidden group" style="transition-delay: 0.2s;">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-3xl">🎉</span>
+                            <span class="status-active text-xs px-3 py-1 rounded-full font-mono" data-en="Complete" data-fa="تکمیل">Complete</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-light-white mb-3" data-en="Interactive Greeting" data-fa="صفحه تبریک تعاملی">Interactive Greeting</h3>
+                        <p class="text-gray-text text-sm leading-relaxed mb-6" data-en="Confetti celebration triggered by scroll/click; pure HTML+CSS+JS. Lightweight and delightful." data-fa="جشنِ Confetti با اسکرول/کلیک؛ خالصِ HTML+CSS+JS. سبک و دلپذیر.">
+                            Confetti celebration triggered by scroll/click; pure HTML+CSS+JS. Lightweight and delightful.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-text font-mono">2024</span>
+                            <a href="#" class="text-accent-purple text-sm hover:text-accent-pink transition-colors flex items-center gap-1">
+                                <span data-en="View" data-fa="مشاهده">View</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="reveal glass-card rounded-2xl p-8 relative overflow-hidden group" style="transition-delay: 0.3s;">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-3xl">📚</span>
+                            <span class="status-progress text-xs px-3 py-1 rounded-full font-mono" data-en="In Progress" data-fa="در حال توسعه">In Progress</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-light-white mb-3" data-en="Wiki Documentation" data-fa="مستندسازی ویکی">Wiki Documentation</h3>
+                        <p class="text-gray-text text-sm leading-relaxed mb-6" data-en="Guides and templates for improving Persian articles. Adding sources for credibility. Translating English pages to Persian." data-fa="راهنماها و الگوها برای بهبود کیفیت مقالات فارسی. افزودن منابع برای باورپذیری. ترجمه‌ی صفحات انگلیسی به فارسی.">
+                            Guides and templates for improving Persian articles. Adding sources for credibility. Translating English pages to Persian.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-text font-mono">2024</span>
+                            <a href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener" class="text-accent-purple text-sm hover:text-accent-pink transition-colors flex items-center gap-1">
+                                <span data-en="Wiki Profile" data-fa="پروفایل ویکی">Wiki Profile</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- Writings & Links Section -->
+    <section id="writings" class="relative py-32 px-6 overflow-hidden">
+        <div class="orb orb-pink w-72 h-72 top-1/3 -right-36 float-medium opacity-15"></div>
+
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal">
+                <span class="text-accent-purple font-mono text-sm tracking-widest uppercase" data-en="03 — Writings & Links" data-fa="۰۳ — نوشته‌ها و لینک‌ها">03 — Writings & Links</span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4 mb-4">
+                    <span class="text-light-white" data-en="Where I" data-fa="جایی که">Where I</span>
+                    <span class="gradient-text" data-en=" Contribute" data-fa=" مشارکت می‌کنم"> Contribute</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-16">
+                <!-- Wikipedia Edits -->
+                <a href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener" class="reveal glass-card rounded-2xl p-8 relative overflow-hidden group block">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-accent-purple/10 flex items-center justify-center">
+                                <span class="text-2xl">✏️</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-light-white group-hover:text-accent-purple transition-colors" data-en="Recent Wikipedia Edits" data-fa="ویرایش‌های اخیر ویکی‌پدیا">Recent Wikipedia Edits</h3>
+                                <span class="text-xs text-gray-text font-mono">fa.wikipedia.org</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-text text-sm leading-relaxed" data-en="Track my recent contributions and edits on Persian Wikipedia. Improving articles, adding sources, and translating content." data-fa="پیگیری مشارکت‌ها و ویرایش‌های اخیر من در ویکی‌پدیا فارسی. بهبود مقالات، افزودن منابع و ترجمه محتوا.">
+                            Track my recent contributions and edits on Persian Wikipedia. Improving articles, adding sources, and translating content.
+                        </p>
+                        <div class="mt-6 flex items-center gap-2 text-accent-purple text-sm">
+                            <span data-en="View contributions" data-fa="مشاهده مشارکت‌ها">View contributions</span>
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Daily Channel -->
+                <a href="https://t.me/daily" target="_blank" rel="noopener" class="reveal glass-card rounded-2xl p-8 relative overflow-hidden group block" style="transition-delay: 0.1s;">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-accent-pink/10 flex items-center justify-center">
+                                <span class="text-2xl">📱</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-light-white group-hover:text-accent-pink transition-colors" data-en="Daily Channel" data-fa="کانال Daily">Daily Channel</h3>
+                                <span class="text-xs text-gray-text font-mono">t.me/daily</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-text text-sm leading-relaxed" data-en="Personal Daily channel with posts, music, and sharing everyday experiences. A space for thoughts, discoveries, and moments." data-fa="کانال شخصی Daily با پست‌ها، موزیک‌ها و اشتراک تجربه‌های روزانه. فضایی برای افکار، کشفیات و لحظه‌ها.">
+                            Personal Daily channel with posts, music, and sharing everyday experiences. A space for thoughts, discoveries, and moments.
+                        </p>
+                        <div class="mt-6 flex items-center gap-2 text-accent-pink text-sm">
+                            <span data-en="Join channel" data-fa="عضویت در کانال">Join channel</span>
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider max-w-4xl mx-auto"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-32 px-6 overflow-hidden">
+        <div class="orb orb-purple w-96 h-96 -bottom-48 left-1/2 -translate-x-1/2 float-slow opacity-15"></div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="reveal text-center">
+                <span class="text-accent-purple font-mono text-sm tracking-widest uppercase" data-en="04 — Contact" data-fa="۰۴ — ارتباط">04 — Contact</span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-4 mb-4">
+                    <span class="text-light-white" data-en="Let's" data-fa="بیایید">Let's</span>
+                    <span class="gradient-text" data-en=" Connect" data-fa=" ارتباط"> Connect</span>
+                </h2>
+                <p class="text-gray-text text-lg max-w-xl mx-auto" data-en="Have a project in mind, want to collaborate, or just say hello? I'd love to hear from you." data-fa="پروژه‌ای در ذهن دارید، می‌خواهید همکاری کنید، یا فقط سلام بگویید؟ خوشحال می‌شوم از شما بشنوم.">
+                    Have a project in mind, want to collaborate, or just say hello? I'd love to hear from you.
+                </p>
+            </div>
+
+            <div class="mt-16 grid md:grid-cols-3 gap-6">
+                <!-- Telegram -->
+                <a href="https://t.me/GoldenJDM" target="_blank" rel="noopener" class="reveal glass-card rounded-2xl p-6 text-center relative overflow-hidden group">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-accent-purple/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-accent-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        </div>
+                        <h3 class="text-light-white font-medium mb-1" data-en="Telegram" data-fa="تلگرام">Telegram</h3>
+                        <p class="text-gray-text text-sm">@GoldenJDM</p>
+                    </div>
+                </a>
+
+                <!-- Telegram Bot -->
+                <a href="https://t.me/GoldenJDM_Bot" target="_blank" rel="noopener" class="reveal glass-card rounded-2xl p-6 text-center relative overflow-hidden group" style="transition-delay: 0.1s;">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-accent-pink/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-accent-pink" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </div>
+                        <h3 class="text-light-white font-medium mb-1" data-en="Telegram Bot" data-fa="ربات تلگرام">Telegram Bot</h3>
+                        <p class="text-gray-text text-sm">@GoldenJDM_Bot</p>
+                    </div>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:contact@goldenjdm.ir" class="reveal glass-card rounded-2xl p-6 text-center relative overflow-hidden group" style="transition-delay: 0.2s;">
+                    <div class="card-inner-glow"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-accent-purple/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-accent-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="text-light-white font-medium mb-1" data-en="Email" data-fa="ایمیل">Email</h3>
+                        <p class="text-gray-text text-sm">contact@goldenjdm.ir</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="reveal mt-16 glass-card rounded-2xl p-8 relative overflow-hidden">
+                <div class="card-inner-glow"></div>
+                <div class="relative z-10">
+                    <h3 class="text-xl font-semibold text-light-white mb-6" data-en="Send a message" data-fa="ارسال پیام">Send a message</h3>
+                    <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs text-gray-text font-mono mb-2 block" data-en="Name" data-fa="نام">Name</label>
+                                <input type="text" name="name" required class="form-input w-full px-4 py-3 rounded-xl text-light-white text-sm" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="text-xs text-gray-text font-mono mb-2 block" data-en="Email" data-fa="ایمیل">Email</label>
+                                <input type="email" name="email" required class="form-input w-full px-4 py-3 rounded-xl text-light-white text-sm" placeholder="your@email.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-text font-mono mb-2 block" data-en="Message" data-fa="پیام">Message</label>
+                            <textarea name="message" rows="4" required class="form-input w-full px-4 py-3 rounded-xl text-light-white text-sm resize-none" placeholder="What's on your mind?"></textarea>
+                        </div>
+                        <button type="submit" class="magnetic-btn w-full md:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-accent-purple to-accent-pink text-deep-black font-semibold text-sm hover:shadow-lg hover:shadow-accent-purple/20 transition-all">
+                            <span data-en="Send Message" data-fa="ارسال پیام">Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-16 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-purple to-accent-pink flex items-center justify-center text-deep-black font-bold text-xs">
+                        G
+                    </div>
+                    <div>
+                        <p class="text-light-white text-sm font-medium">GoldenJDM</p>
+                        <p class="text-gray-text text-xs" data-en="Made with ❤️ and clean code" data-fa="ساخته شده با ❤️ و کد تمیز">Made with ❤️ and clean code</p>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex items-center gap-5">
+                    <a href="https://t.me/GoldenJDM" target="_blank" rel="noopener" class="text-gray-text hover:text-accent-purple transition-colors" aria-label="Telegram">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </a>
+                    <a href="https://github.com/GoldenJDM" target="_blank" rel="noopener" class="text-gray-text hover:text-accent-purple transition-colors" aria-label="GitHub">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    </a>
+                    <a href="https://fa.wikipedia.org/wiki/کاربر:GoldenJDM" target="_blank" rel="noopener" class="text-gray-text hover:text-accent-purple transition-colors" aria-label="Wikipedia">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.09 14.15V0h-1.16v14.15l-4.71-6.97H4.77l5.2 7.59-5.32 7.71h1.38l4.83-7.15V22.5h1.16v-7.17l4.83 7.17h1.38l-5.32-7.71 5.2-7.59h-1.35l-4.67 6.95z"/></svg>
+                    </a>
+                    <a href="https://mastodon.social/@GoldenJDM" target="_blank" rel="noopener me" class="text-gray-text hover:text-accent-purple transition-colors" aria-label="Mastodon">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.908 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.326.798 4.87.963 7.282.578.217-.033.43-.073.64-.12a14.24 14.24 0 0 0 1.506-.44c.16-.06.316-.12.47-.19l-.004-.002c1.5-.66 2.84-1.82 3.47-3.69a14.64 14.64 0 0 0 .474-2.07c.106-.62.16-1.25.19-1.88.05-1.07.06-2.15.01-3.22zM19.903 13.5h-2.79v-5.25c0-1.1-.462-1.656-1.386-1.656-1.022 0-1.533.662-1.533 1.97v2.87h-2.776V8.564c0-1.308-.51-1.97-1.533-1.97-.924 0-1.386.555-1.386 1.656V13.5H5.71V8.17c0-1.1.28-1.973.842-2.616.58-.644 1.336-.973 2.272-.973 1.085 0 1.904.416 2.445 1.248l.528.888.528-.888c.54-.832 1.36-1.248 2.445-1.248.936 0 1.692.33 2.272.973.562.643.842 1.516.842 2.616v5.33z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-gray-text text-xs font-mono">
+                    © 2024 GoldenJDM — <span data-en="All rights reserved" data-fa="تمامی حقوق محفوظ است">All rights reserved</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ========================
+        // LOADER
+        // ========================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // ========================
+        // CUSTOM CURSOR
+        // ========================
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX - 4 + 'px';
+            cursorDot.style.top = mouseY - 4 + 'px';
+        });
+
+        function animateRing() {
+            ringX += (mouseX - ringX) * 0.12;
+            ringY += (mouseY - ringY) * 0.12;
+            cursorRing.style.left = ringX - 20 + 'px';
+            cursorRing.style.top = ringY - 20 + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        // Hover effect on interactive elements
+        const hoverTargets = document.querySelectorAll('a, button, .glass-card, input, textarea');
+        hoverTargets.forEach(el => {
+            el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+        });
+
+        // ========================
+        // PARTICLE CANVAS (Hero)
+        // ========================
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.color = Math.random() > 0.5 ? '#a78bfa' : '#f472b6';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function initParticles() {
+            const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+            particles = [];
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = '#a78bfa';
+                        ctx.globalAlpha = (1 - dist / 120) * 0.08;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                        ctx.globalAlpha = 1;
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawConnections();
+            animationId = requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ========================
+        // TYPING EFFECT
+        // ========================
+        const typedEl = document.getElementById('typed-text');
+        const phrases = {
+            en: [
+                'Wikipedia Editor',
+                'Clean Code Enthusiast',
+                'JDM Culture Lover',
+                'Aviation Admirer',
+                'Poetry & Philosophy',
+                'Fast Web Advocate'
+            ],
+            fa: [
+                'ویرایشگر ویکی‌پدیا',
+                'عاشق کد تمیز',
+                'عاشق فرهنگ JDM',
+                'علاقه‌مند به هوانوردی',
+                'شعر و فلسفه',
+                'طرفدار وب سریع'
+            ]
+        };
+
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        let typingSpeed = 80;
+
+        function typeEffect() {
+            const lang = document.documentElement.lang || 'en';
+            const currentPhrases = phrases[lang] || phrases.en;
+            const current = currentPhrases[currentPhrase];
+
+            if (!isDeleting) {
+                typedEl.textContent = current.substring(0, currentChar + 1);
+                currentChar++;
+                if (currentChar === current.length) {
+                    isDeleting = true;
+                    typingSpeed = 2000;
+                } else {
+                    typingSpeed = 60 + Math.random() * 40;
+                }
+            } else {
+                typedEl.textContent = current.substring(0, currentChar - 1);
+                currentChar--;
+                if (currentChar === 0) {
+                    isDeleting = false;
+                    currentPhrase = (currentPhrase + 1) % currentPhrases.length;
+                    typingSpeed = 300;
+                } else {
+                    typingSpeed = 30;
+                }
+            }
+            setTimeout(typeEffect, typingSpeed);
+        }
+        typeEffect();
+
+        // ========================
+        // SCROLL REVEAL
+        // ========================
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ========================
+        // NAVBAR SCROLL EFFECT
+        // ========================
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('glass');
+                navbar.style.borderBottom = '1px solid rgba(167, 139, 250, 0.05)';
+            } else {
+                navbar.classList.remove('glass');
+                navbar.style.borderBottom = 'none';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // ========================
+        // MOBILE MENU
+        // ========================
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open');
+            mobileMenuBtn.children[0].style.transform = menuOpen ? 'rotate(45deg) translate(4px, 4px)' : '';
+            mobileMenuBtn.children[1].style.opacity = menuOpen ? '0' : '1';
+            mobileMenuBtn.children[2].style.transform = menuOpen ? 'rotate(-45deg) translate(2px, -2px)' : '';
+            mobileMenuBtn.children[2].style.width = menuOpen ? '20px' : '12px';
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                mobileMenuBtn.children[0].style.transform = '';
+                mobileMenuBtn.children[1].style.opacity = '1';
+                mobileMenuBtn.children[2].style.transform = '';
+                mobileMenuBtn.children[2].style.width = '12px';
+            });
+        });
+
+        // ========================
+        // LANGUAGE SWITCHER
+        // ========================
+        let currentLang = 'en';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const html = document.documentElement;
+
+            // Fade out
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.classList.add('lang-fade-out');
+            });
+
+            setTimeout(() => {
+                if (lang === 'fa') {
+                    html.lang = 'fa';
+                    html.dir = 'rtl';
+                    document.body.style.fontFamily = "'Vazirmatn', sans-serif";
+                } else {
+                    html.lang = 'en';
+                    html.dir = 'ltr';
+                    document.body.style.fontFamily = "'Inter', sans-serif";
+                }
+
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    const text = el.getAttribute(`data-${lang}`);
+                    if (text) el.textContent = text;
+                });
+
+                // Fade in
+                setTimeout(() => {
+                    document.querySelectorAll('[data-en]').forEach(el => {
+                        el.classList.remove('lang-fade-out');
+                    });
+                }, 50);
+            }, 300);
+        }
+
+        document.getElementById('lang-switch').addEventListener('click', () => {
+            switchLanguage(currentLang === 'en' ? 'fa' : 'en');
+        });
+
+        document.getElementById('mobile-lang-switch').addEventListener('click', () => {
+            switchLanguage(currentLang === 'en' ? 'fa' : 'en');
+        });
+
+        // ========================
+        // CARD MOUSE TRACKING (for inner glow)
+        // ========================
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+            });
+        });
+
+        // ========================
+        // SAKURA PETALS (occasional)
+        // ========================
+        function createSakura() {
+            const petal = document.createElement('div');
+            petal.className = 'sakura';
+            petal.innerHTML = '🌸';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.fontSize = (Math.random() * 10 + 8) + 'px';
+            petal.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 12000);
+        }
+
+        // Occasional sakura
+        setInterval(() => {
+            if (Math.random() > 0.7) createSakura();
+        }, 4000);
+
+        // ========================
+        // SMOOTH SCROLL for anchor links
+        // ========================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ========================
+        // ACTIVE NAV LINK
+        // ========================
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ========================
+        // FORM HANDLING
+        // ========================
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = currentLang === 'fa' ? '✓ ارسال شد!' : '✓ Sent!';
+            btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+                this.reset();
+            }, 3000);
+        });
+
+        // ========================
+        // PERFORMANCE: Pause particles when not visible
+        // ========================
+        const heroSection = document.getElementById('hero');
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    cancelAnimationFrame(animationId);
+                } else {
+                    animateParticles();
+                }
+            });
+        }, { threshold: 0 });
+        heroObserver.observe(heroSection);
+    </script>
+</body>
+</html>
