@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Amirhossein Zarniyan — GoldenJDM · Wikipedian, Student, Quiet Engineer of the Web</title>
+<meta name="description" content="Personal site of Amirhossein Zarniyan (GoldenJDM) — Wikipedia editor, student, and quiet builder of clean code, fast web, JDM cars, aviation, and Iranian poetry." />
+<meta property="og:title" content="GoldenJDM — Amirhossein Zarniyan" />
+<meta property="og:description" content="A cinematic personal portfolio. Wikipedia, code, JDM, aviation, poetry." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0b0b0f',
+        paper: '#e9e9ef',
+        ash: '#a7a7b3',
+        iris: '#a78bfa',
+        neon: '#f472b6',
+      },
+      fontFamily: {
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        serif: ['Instrument Serif', 'serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        fa: ['Vazirmatn', 'system-ui', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<style>
+  :root {
+    --ink: #0b0b0f;
+    --paper: #e9e9ef;
+    --ash: #a7a7b3;
+    --iris: #a78bfa;
+    --neon: #f472b6;
+  }
+  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+  html[dir="rtl"] body { font-family: 'Vazirmatn', system-ui, sans-serif; }
+
+  /* Cursor */
+  .cursor-dot, .cursor-ring {
+    position: fixed; top: 0; left: 0; pointer-events: none;
+    z-index: 9999; border-radius: 9999px;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+  }
+  .cursor-dot { width: 6px; height: 6px; background: var(--paper); transition: transform .15s ease; }
+  .cursor-ring { width: 36px; height: 36px; border: 1px solid rgba(233,233,239,.4); transition: transform .25s cubic-bezier(.22,1,.36,1), width .25s, height .25s, border-color .25s; }
+  .cursor-ring.hover { width: 64px; height: 64px; border-color: var(--iris); }
+  @media (max-width: 768px) { body { cursor: auto; } .cursor-dot, .cursor-ring { display: none; } }
+
+  /* Grain */
+  .grain::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100;
+    opacity: .06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.7'/></svg>");
+  }
+
+  /* Hero aurora */
+  .aurora {
+    position: absolute; inset: -20%;
+    background:
+      radial-gradient(600px 400px at 20% 30%, rgba(167,139,250,.28), transparent 60%),
+      radial-gradient(500px 500px at 80% 60%, rgba(244,114,182,.20), transparent 60%),
+      radial-gradient(700px 500px at 50% 90%, rgba(167,139,250,.15), transparent 60%);
+    filter: blur(20px);
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    0% { transform: translate(0,0) scale(1); }
+    100% { transform: translate(-4%, 3%) scale(1.06); }
+  }
+
+  .grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(233,233,239,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(233,233,239,.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+
+  .glass {
+    background: linear-gradient(180deg, rgba(233,233,239,.04), rgba(233,233,239,.015));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(233,233,239,.08);
+  }
+
+  .neon-glow {
+    box-shadow:
+      0 0 0 1px rgba(167,139,250,.35),
+      0 0 30px -5px rgba(167,139,250,.5),
+      0 0 60px -20px rgba(244,114,182,.4);
+  }
+
+  /* Text gradient */
+  .grad {
+    background: linear-gradient(135deg, #e9e9ef 0%, #a78bfa 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Underline link */
+  .ulink { position: relative; display: inline-block; }
+  .ulink::after {
+    content: ""; position: absolute; left: 0; bottom: -2px;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, var(--iris), var(--neon));
+    transform: scaleX(0); transform-origin: right;
+    transition: transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .ulink:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  /* Marquee */
+  .marquee { display: flex; gap: 3rem; animation: scroll 40s linear infinite; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* Project card hover */
+  .proj { transition: transform .6s cubic-bezier(.22,1,.36,1); }
+  .proj:hover { transform: translateY(-4px); }
+  .proj .cover { transition: transform 1.2s cubic-bezier(.22,1,.36,1), filter .6s; filter: grayscale(30%) brightness(.85); }
+  .proj:hover .cover { transform: scale(1.05); filter: grayscale(0%) brightness(1); }
+
+  /* Section number */
+  .snum { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ash); letter-spacing: .2em; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #0b0b0f; }
+  ::-webkit-scrollbar-thumb { background: #1e1e2a; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2a2a3a; }
+
+  /* Persian polish */
+  html[dir="rtl"] .snum { direction: ltr; display: inline-block; }
+  html[dir="rtl"] .font-serif { font-family: 'Vazirmatn', serif; font-weight: 300; }
+
+  /* Loader */
+  #loader {
+    position: fixed; inset: 0; z-index: 200; background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity .8s ease, visibility .8s;
+  }
+  #loader.done { opacity: 0; visibility: hidden; }
+  .loader-line { width: 200px; height: 1px; background: rgba(233,233,239,.1); position: relative; overflow: hidden; }
+  .loader-line::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, var(--iris), var(--neon));
+    animation: load 1.4s ease-in-out forwards;
+  }
+  @keyframes load { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+
+  /* Nav blur on scroll */
+  #nav.scrolled { background: rgba(11,11,15,.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(233,233,239,.06); }
+
+  /* Mobile menu */
+  #mobmenu { transition: transform .6s cubic-bezier(.22,1,.36,1), opacity .4s; }
+  #mobmenu.hidden-menu { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+  /* Blinking */
+  .blink { animation: blink 1.2s steps(2, start) infinite; }
+  @keyframes blink { to { visibility: hidden; } }
+
+  /* Chip */
+  .chip {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .35rem .75rem; border-radius: 9999px;
+    border: 1px solid rgba(233,233,239,.12);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--ash); letter-spacing: .05em;
+  }
+
+  .btn-primary {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .75rem;
+    padding: 1rem 1.75rem; border-radius: 9999px;
+    background: linear-gradient(135deg, var(--iris), var(--neon));
+    color: #0b0b0f; font-weight: 600;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 60px -10px rgba(167,139,250,.6); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: .75rem;
+    padding: 1rem 1.75rem; border-radius: 9999px;
+    border: 1px solid rgba(233,233,239,.15);
+    color: var(--paper); transition: all .3s;
+  }
+  .btn-ghost:hover { border-color: var(--iris); background: rgba(167,139,250,.08); }
+
+  input, textarea {
+    background: transparent; border: none; border-bottom: 1px solid rgba(233,233,239,.15);
+    padding: 1rem 0; color: var(--paper); width: 100%; outline: none;
+    transition: border-color .3s;
+    font-family: inherit;
+  }
+  input:focus, textarea:focus { border-color: var(--iris); }
+  label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ash); letter-spacing: .15em; text-transform: uppercase; }
+
+  .kb {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    padding: 2px 6px; border-radius: 4px;
+    background: rgba(233,233,239,.08); color: var(--ash);
+    border: 1px solid rgba(233,233,239,.1);
+  }
+</style>
+</head>
+<body class="grain">
+
+<div id="loader"><div class="loader-line"></div></div>
+
+<div class="cursor-ring"></div>
+<div class="cursor-dot"></div>
+
+<!-- NAV -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-10 py-5 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3 group" data-hover>
+      <div class="w-8 h-8 rounded-full relative flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full" style="background: conic-gradient(from 0deg, var(--iris), var(--neon), var(--iris)); animation: spin 8s linear infinite;"></div>
+        <div class="relative w-6 h-6 rounded-full bg-ink flex items-center justify-center">
+          <span class="text-[10px] font-mono text-paper">G</span>
+        </div>
+      </div>
+      <div class="hidden sm:block">
+        <div class="text-sm font-medium tracking-wide" data-en="GoldenJDM" data-fa="گلدن‌جی‌دی‌ام">GoldenJDM</div>
+        <div class="text-[10px] font-mono text-ash tracking-widest -mt-0.5">A. ZARNIYAN</div>
+      </div>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-sm">
+      <a href="#about" class="ulink text-ash hover:text-paper transition-colors" data-hover data-en="About" data-fa="درباره">About</a>
+      <a href="#work" class="ulink text-ash hover:text-paper transition-colors" data-hover data-en="Work" data-fa="کارها">Work</a>
+      <a href="#writings" class="ulink text-ash hover:text-paper transition-colors" data-hover data-en="Writings" data-fa="نوشته‌ها">Writings</a>
+      <a href="#contact" class="ulink text-ash hover:text-paper transition-colors" data-hover data-en="Contact" data-fa="تماس">Contact</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button id="langBtn" class="chip hover:border-iris/50 hover:text-paper transition-colors" data-hover>
+        <span id="langLabel">FA / فارسی</span>
+      </button>
+      <button id="menuBtn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5" data-hover>
+        <span class="w-5 h-px bg-paper transition-transform"></span>
+        <span class="w-5 h-px bg-paper transition-transform"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobmenu" class="hidden-menu fixed inset-0 z-40 bg-ink md:hidden flex flex-col items-center justify-center gap-8 text-3xl font-serif">
+  <a href="#about" class="mob-link" data-en="About" data-fa="درباره">About</a>
+  <a href="#work" class="mob-link" data-en="Work" data-fa="کارها">Work</a>
+  <a href="#writings" class="mob-link" data-en="Writings" data-fa="نوشته‌ها">Writings</a>
+  <a href="#contact" class="mob-link" data-en="Contact" data-fa="تماس">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="top" class="relative min-h-screen flex items-center overflow-hidden">
+  <div class="aurora"></div>
+  <div class="grid-lines"></div>
+
+  <div class="relative max-w-[1400px] mx-auto px-6 md:px-10 pt-32 pb-20 w-full">
+    <div class="reveal mb-8 flex items-center gap-3">
+      <span class="w-2 h-2 rounded-full bg-neon blink"></span>
+      <span class="snum" data-en="AVAILABLE · TEHRAN, IR · 2026" data-fa="در دسترس · تهران · ۱۴۰۴">AVAILABLE · TEHRAN, IR · 2026</span>
+    </div>
+
+    <h1 class="reveal font-serif text-[14vw] md:text-[9vw] lg:text-[8rem] leading-[0.95] tracking-tight mb-8">
+      <span class="block" data-en="Amirhossein" data-fa="امیرحسین">Amirhossein</span>
+      <span class="block grad italic" data-en="Zarniyan." data-fa="زرنیان.">Zarniyan.</span>
+    </h1>
+
+    <div class="reveal grid md:grid-cols-12 gap-8 items-end">
+      <p class="md:col-span-6 text-lg md:text-xl text-ash leading-relaxed max-w-xl"
+         data-en="Wikipedian, student, and quiet engineer of the web. I write about JDM machines, aviation, and Iranian poetry — and I build small, sharp things on the internet."
+         data-fa="ویکی‌پدیانویس، دانشجو و مهندسِ آرامِ وب. درباره‌ی خودروهای JDM، هوانوردی و شعر ایرانی می‌نویسم — و چیزهایی کوچک و تیز روی اینترنت می‌سازم.">
+        Wikipedian, student, and quiet engineer of the web. I write about JDM machines, aviation, and Iranian poetry — and I build small, sharp things on the internet.
+      </p>
+
+      <div class="md:col-span-6 md:justify-self-end flex flex-col gap-4">
+        <div class="flex flex-wrap gap-3">
+          <a href="#work" class="btn-primary" data-hover>
+            <span data-en="See selected work" data-fa="کارهای منتخب">See selected work</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn-ghost" data-hover>
+            <span data-en="Say hello" data-fa="سلام بگو">Say hello</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-6 text-xs font-mono text-ash mt-2">
+          <div><span class="text-paper text-lg font-serif italic">700+</span> <span data-en="edits on Wikipedia" data-fa="ویرایش در ویکی‌پدیا">edits on Wikipedia</span></div>
+          <div><span class="text-paper text-lg font-serif italic">6</span> <span data-en="years writing code" data-fa="سال کدنویسی">years writing code</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-6 md:left-10 flex items-center gap-3 text-xs font-mono text-ash">
+      <div class="w-8 h-px bg-ash/30"></div>
+      <span data-en="SCROLL" data-fa="پایین">SCROLL</span>
+    </div>
+    <div class="absolute bottom-8 right-6 md:right-10 text-right hidden sm:block">
+      <div class="text-xs font-mono text-ash mb-1">35.68°N · 51.38°E</div>
+      <div class="text-xs font-mono text-ash" id="clock">--:--:--</div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<section class="relative py-10 border-y border-paper/5 overflow-hidden">
+  <div class="marquee whitespace-nowrap text-6xl md:text-8xl font-serif italic text-paper/10 hover:text-paper/20 transition-colors">
+    <span class="flex gap-12 pr-12">
+      <span>Wikipedia</span><span>·</span>
+      <span class="text-iris/60">JDM</span><span>·</span>
+      <span>Aviation</span><span>·</span>
+      <span class="text-neon/60">Poetry</span><span>·</span>
+      <span>Clean Code</span><span>·</span>
+      <span>Fast Web</span><span>·</span>
+      <span class="text-iris/60">Documentation</span><span>·</span>
+      <span>Iran</span><span>·</span>
+    </span>
+    <span class="flex gap-12 pr-12" aria-hidden="true">
+      <span>Wikipedia</span><span>·</span>
+      <span class="text-iris/60">JDM</span><span>·</span>
+      <span>Aviation</span><span>·</span>
+      <span class="text-neon/60">Poetry</span><span>·</span>
+      <span>Clean Code</span><span>·</span>
+      <span>Fast Web</span><span>·</span>
+      <span class="text-iris/60">Documentation</span><span>·</span>
+      <span>Iran</span><span>·</span>
+    </span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="relative py-32 md:py-48">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+    <div class="grid md:grid-cols-12 gap-12 md:gap-20">
+      <div class="md:col-span-4 reveal">
+        <div class="snum mb-6">— 01 / <span data-en="ABOUT" data-fa="درباره">ABOUT</span></div>
+        <h2 class="font-serif text-5xl md:text-6xl leading-tight mb-8"
+            data-en="A quiet obsession with things done well."
+            data-fa="وسواسی آرام برای کارهای درست انجام‌شده.">
+          A quiet obsession with things done <em class="grad">well.</em>
+        </h2>
+
+        <div class="glass rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-ash" data-en="LOCATION" data-fa="مکان">LOCATION</span>
+            <span class="text-paper" data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</span>
+          </div>
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-ash" data-en="ROLES" data-fa="نقش‌ها">ROLES</span>
+            <span class="text-paper" data-en="Student · Editor · Dev" data-fa="دانشجو · ویراستار · توسعه‌دهنده">Student · Editor · Dev</span>
+          </div>
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-ash" data-en="FUEL" data-fa="سوخت">FUEL</span>
+            <span class="text-paper">Chai · RB26 · Rumi</span>
+          </div>
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-ash" data-en="STATUS" data-fa="وضعیت">STATUS</span>
+            <span class="text-neon flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-neon blink"></span> <span data-en="Reading & building" data-fa="در حال خواندن و ساختن">Reading & building</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-8 reveal space-y-6 text-lg leading-relaxed text-paper/85">
+        <p data-en="I'm Amirhossein — most people online know me as GoldenJDM. I'm a student in Tehran who fell in love with the internet through two very different doors: a battered copy of Wikipedia and a grainy VHS of a Skyline GT-R hunting the Wangan at 3 a.m."
+           data-fa="من امیرحسین هستم — بیشتر آدم‌ها روی اینترنت مرا با نام گلدن‌جی‌دی‌ام می‌شناسند. دانشجویی در تهران که از دو درِ کاملاً متفاوت عاشق اینترنت شد: یک نسخه‌ی کهنه از ویکی‌پدیا، و یک ویدیوی محو از اسکای‌لاین GT-R که ساعت سه بامداد در واگان می‌تاخت.">
+          I'm Amirhossein — most people online know me as <span class="text-paper font-medium">GoldenJDM</span>. I'm a student in Tehran who fell in love with the internet through two very different doors: a battered copy of Wikipedia and a grainy VHS of a Skyline GT-R hunting the Wangan at 3 a.m.
+        </p>
+        <p data-en="Since then, I've spent thousands of hours editing articles on the Persian and English Wikipedias — writing about cars, aviation history, engineers, and the small technical details most people scroll past. It taught me the discipline of citations, the ethics of neutrality, and the strange joy of fixing a broken sentence at midnight."
+           data-fa="از آن زمان هزاران ساعت را صرف ویرایش مقالات در ویکی‌پدیای فارسی و انگلیسی کرده‌ام — درباره‌ی خودرو، تاریخ هوانوردی، مهندسان، و همان جزئیات فنی کوچکی که بیشتر آدم‌ها از رویش رد می‌شوند. این کار به من نظمِ ارجاع‌دهی، اخلاقِ بی‌طرفی، و لذتِ عجیبِ تعمیر یک جمله‌ی شکسته در نیمه‌شب را آموخت.">
+          Since then, I've spent thousands of hours editing articles on the Persian and English Wikipedias — writing about cars, aviation history, engineers, and the small technical details most people scroll past. It taught me the discipline of citations, the ethics of neutrality, and the strange joy of fixing a broken sentence at midnight.
+        </p>
+        <p data-en="Beyond that, I build things — small, fast, honest websites. I care deeply about clean code, documentation nobody dreads reading, and pages that load before you finish blinking. In between, I read Hafez and Sohrab, watch NHK aviation documentaries, and argue politely about whether the R34 is truly the last real GT-R."
+           data-fa="در کنارش، چیز می‌سازم — سایت‌های کوچک، سریع و صادق. به کدِ تمیز، مستنداتی که خواندنش زجر نیست، و صفحاتی که پیش از یک پلک زدن بارگذاری شوند، عمیقاً اهمیت می‌دهم. در فاصله‌ها حافظ و سهراب می‌خوانم، مستندهای هوانوردی NHK می‌بینم و مؤدبانه بحث می‌کنم که آیا R34 واقعاً آخرین GT-R حقیقی است یا نه.">
+          Beyond that, I build things — small, fast, honest websites. I care deeply about clean code, documentation nobody dreads reading, and pages that load before you finish blinking. In between, I read <em class="font-serif">Hafez</em> and <em class="font-serif">Sohrab</em>, watch NHK aviation documentaries, and argue politely about whether the R34 is truly the last real GT-R.
+        </p>
+
+        <div class="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="glass rounded-xl p-5">
+            <div class="text-3xl font-serif italic text-iris mb-1">700+</div>
+            <div class="text-xs font-mono text-ash uppercase tracking-wider" data-en="Wiki edits" data-fa="ویرایش ویکی">Wiki edits</div>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="text-3xl font-serif italic text-neon mb-1">14</div>
+            <div class="text-xs font-mono text-ash uppercase tracking-wider" data-en="Articles authored" data-fa="مقاله نوشته‌شده">Articles authored</div>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="text-3xl font-serif italic text-iris mb-1">6y</div>
+            <div class="text-xs font-mono text-ash uppercase tracking-wider" data-en="Writing code" data-fa="کدنویسی">Writing code</div>
+          </div>
+          <div class="glass rounded-xl p-5">
+            <div class="text-3xl font-serif italic text-neon mb-1">∞</div>
+            <div class="text-xs font-mono text-ash uppercase tracking-wider" data-en="Cups of chai" data-fa="فنجان چای">Cups of chai</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="relative py-32 md:py-48 border-t border-paper/5">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      <div class="reveal">
+        <div class="snum mb-6">— 02 / <span data-en="SELECTED WORK" data-fa="کارهای منتخب">SELECTED WORK</span></div>
+        <h2 class="font-serif text-5xl md:text-7xl leading-none"
+            data-en="Featured projects"
+            data-fa="پروژه‌های منتخب">
+          Featured <em class="grad">projects</em>
+        </h2>
+      </div>
+      <p class="reveal max-w-sm text-ash"
+         data-en="A small, curated set. Each one built with an obsessive care for typography, speed, and detail."
+         data-fa="مجموعه‌ای کوچک و گزیده. هر کدام با وسواسی برای تایپوگرافی، سرعت و جزئیات ساخته شده‌اند.">
+        A small, curated set. Each one built with an obsessive care for typography, speed, and detail.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+
+      <!-- Project 1 -->
+      <a href="#" data-hover class="proj group reveal glass rounded-3xl p-6 md:p-8 relative overflow-hidden">
+        <div class="cover aspect-[16/10] rounded-2xl mb-6 relative overflow-hidden" style="background: radial-gradient(circle at 30% 30%, #2a1a3a, #0b0b0f 70%);">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg viewBox="0 0 200 120" class="w-3/4 opacity-80">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+              </defs>
+              <path d="M20,90 Q40,40 100,60 T180,50" stroke="url(#g1)" stroke-width="2" fill="none"/>
+              <circle cx="180" cy="50" r="4" fill="#f472b6"/>
+              <text x="20" y="30" fill="#e9e9ef" font-family="JetBrains Mono" font-size="10">wangan.log</text>
+            </svg>
+          </div>
+          <div class="absolute top-4 right-4 chip"><span class="w-1.5 h-1.5 rounded-full bg-iris"></span> LIVE</div>
+        </div>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <div class="snum mb-2">2025 · WEB</div>
+            <h3 class="font-serif text-2xl md:text-3xl mb-2" data-en="Wangan Archive" data-fa="آرشیو واگان">Wangan Archive</h3>
+            <p class="text-ash text-sm max-w-md"
+               data-en="A love letter to Japan's midnight tuning culture — an interactive archive of JDM icons, engine notes, and forgotten builds."
+               data-fa="نامه‌ای عاشقانه به فرهنگِ تیونینگِ نیمه‌شبِ ژاپن — آرشیوی تعاملی از نمادهای JDM و ساخت‌های فراموش‌شده.">A love letter to Japan's midnight tuning culture — an interactive archive of JDM icons, engine notes, and forgotten builds.</p>
+          </div>
+          <div class="w-10 h-10 rounded-full border border-paper/15 flex items-center justify-center group-hover:border-iris group-hover:bg-iris/10 group-hover:rotate-45 transition-all duration-500">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 2 -->
+      <a href="#" data-hover class="proj group reveal glass rounded-3xl p-6 md:p-8 relative overflow-hidden">
+        <div class="cover aspect-[16/10] rounded-2xl mb-6 relative overflow-hidden" style="background: radial-gradient(circle at 70% 30%, #1a2a3a, #0b0b0f 70%);">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg viewBox="0 0 200 120" class="w-3/4 opacity-80">
+              <circle cx="100" cy="60" r="40" stroke="#a78bfa" stroke-width=".5" fill="none"/>
+              <circle cx="100" cy="60" r="25" stroke="#a78bfa" stroke-width=".5" fill="none"/>
+              <circle cx="100" cy="60" r="10" fill="#f472b6"/>
+              <path d="M100 20 L100 100 M60 60 L140 60" stroke="#e9e9ef" stroke-width=".5" opacity=".3"/>
+              <text x="15" y="20" fill="#e9e9ef" font-family="JetBrains Mono" font-size="8">HDG 090 · FL350</text>
+            </svg>
+          </div>
+          <div class="absolute top-4 right-4 chip"><span class="w-1.5 h-1.5 rounded-full bg-neon"></span> BETA</div>
+        </div>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <div class="snum mb-2">2025 · TOOL</div>
+            <h3 class="font-serif text-2xl md:text-3xl mb-2" data-en="Flightpath" data-fa="مسیر پرواز">Flightpath</h3>
+            <p class="text-ash text-sm max-w-md"
+               data-en="A minimalist METAR & TAF reader for aviation nerds — decoded, human-readable, and shockingly fast."
+               data-fa="خواننده‌ی مینیمالِ METAR و TAF برای دوست‌دارانِ هوانوردی — رمزگشایی‌شده، خوانا و به‌طرز شگفت‌آوری سریع.">A minimalist METAR & TAF reader for aviation nerds — decoded, human-readable, and shockingly fast.</p>
+          </div>
+          <div class="w-10 h-10 rounded-full border border-paper/15 flex items-center justify-center group-hover:border-neon group-hover:bg-neon/10 group-hover:rotate-45 transition-all duration-500">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 3 -->
+      <a href="#" data-hover class="proj group reveal glass rounded-3xl p-6 md:p-8 relative overflow-hidden">
+        <div class="cover aspect-[16/10] rounded-2xl mb-6 relative overflow-hidden" style="background: radial-gradient(circle at 50% 50%, #3a1a2a, #0b0b0f 70%);">
+          <div class="absolute inset-0 flex items-center justify-center px-8">
+            <div class="text-center">
+              <div class="font-serif italic text-2xl text-paper/90 leading-snug">"بنی آدم اعضای یکدیگرند"</div>
+              <div class="mt-2 text-[10px] font-mono text-neon tracking-widest">— SA'DI · 1258 CE</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <div class="snum mb-2">2024 · ARCHIVE</div>
+            <h3 class="font-serif text-2xl md:text-3xl mb-2" data-en="Divan.txt" data-fa="دیوان.txt">Divan.txt</h3>
+            <p class="text-ash text-sm max-w-md"
+               data-en="A quiet reading room for classical Persian poetry — Hafez, Rumi, Sa'di — rendered in typography that finally does them justice."
+               data-fa="اتاق مطالعه‌ای آرام برای شعرِ کلاسیکِ پارسی — حافظ، مولوی، سعدی — با تایپوگرافی‌ای که بالاخره حقشان را ادا می‌کند.">A quiet reading room for classical Persian poetry — Hafez, Rumi, Sa'di — rendered in typography that finally does them justice.</p>
+          </div>
+          <div class="w-10 h-10 rounded-full border border-paper/15 flex items-center justify-center group-hover:border-iris group-hover:bg-iris/10 group-hover:rotate-45 transition-all duration-500">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 4 -->
+      <a href="#" data-hover class="proj group reveal glass rounded-3xl p-6 md:p-8 relative overflow-hidden">
+        <div class="cover aspect-[16/10] rounded-2xl mb-6 relative overflow-hidden" style="background: radial-gradient(circle at 30% 70%, #1a1a3a, #0b0b0f 70%);">
+          <div class="absolute inset-0 p-6 font-mono text-[10px] leading-relaxed text-paper/70">
+            <div><span class="text-iris">const</span> edit = <span class="text-neon">async</span> () => {</div>
+            <div class="pl-4">await wiki.<span class="text-iris">login</span>();</div>
+            <div class="pl-4">const page = <span class="text-neon">await</span> wiki.get(<span class="text-paper">"R34 GT-R"</span>);</div>
+            <div class="pl-4">return page.<span class="text-iris">cite</span>(source);</div>
+            <div>}<span class="blink">|</span></div>
+          </div>
+        </div>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <div class="snum mb-2">2023 · TOOL</div>
+            <h3 class="font-serif text-2xl md:text-3xl mb-2" data-en="CiteKit" data-fa="سیت‌کیت">CiteKit</h3>
+            <p class="text-ash text-sm max-w-md"
+               data-en="An open-source helper that formats Wikipedia citations for Persian editors in a fraction of the time."
+               data-fa="ابزاری متن‌باز که ارجاعاتِ ویکی‌پدیا را برای ویراستارانِ فارسی در کسری از زمان قالب‌بندی می‌کند.">An open-source helper that formats Wikipedia citations for Persian editors in a fraction of the time.</p>
+          </div>
+          <div class="w-10 h-10 rounded-full border border-paper/15 flex items-center justify-center group-hover:border-neon group-hover:bg-neon/10 group-hover:rotate-45 transition-all duration-500">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WRITINGS -->
+<section id="writings" class="relative py-32 md:py-48 border-t border-paper/5">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+    <div class="grid md:grid-cols-12 gap-12 mb-16">
+      <div class="md:col-span-6 reveal">
+        <div class="snum mb-6">— 03 / <span data-en="WRITINGS & LINKS" data-fa="نوشته‌ها و پیوندها">WRITINGS & LINKS</span></div>
+        <h2 class="font-serif text-5xl md:text-7xl leading-none"
+            data-en="Words, links, and lately noticed things."
+            data-fa="کلمات، پیوندها، و چیزهایی که تازه دیده‌ام.">
+          Words, links, & lately <em class="grad">noticed</em> things.
+        </h2>
+      </div>
+    </div>
+
+    <div class="divide-y divide-paper/5 border-t border-b border-paper/5">
+      <a href="#" data-hover class="reveal group flex flex-col md:flex-row md:items-center gap-4 md:gap-8 py-8 hover:pl-4 md:hover:pl-6 transition-all duration-500">
+        <div class="snum md:w-32 shrink-0">2026 · 01</div>
+        <div class="flex-1">
+          <h3 class="font-serif text-2xl md:text-3xl mb-1 group-hover:text-iris transition-colors"
+              data-en="On the strange dignity of a well-cited paragraph"
+              data-fa="در بابِ شرافتِ عجیبِ یک پاراگرافِ خوش‌ارجاع">On the strange dignity of a well-cited paragraph</h3>
+          <p class="text-ash text-sm" data-en="Essay · 8 min read" data-fa="مقاله · ۸ دقیقه مطالعه">Essay · 8 min read</p>
+        </div>
+        <div class="hidden md:block text-iris opacity-0 group-hover:opacity-100 transition-opacity">→</div>
+      </a>
+
+      <a href="#" data-hover class="reveal group flex flex-col md:flex-row md:items-center gap-4 md:gap-8 py-8 hover:pl-4 md:hover:pl-6 transition-all duration-500">
+        <div class="snum md:w-32 shrink-0">2025 · 11</div>
+        <div class="flex-1">
+          <h3 class="font-serif text-2xl md:text-3xl mb-1 group-hover:text-iris transition-colors"
+              data-en="Why the R34 is engineering, not nostalgia"
+              data-fa="چرا R34 مهندسی است، نه نوستالژی">Why the R34 is engineering, not nostalgia</h3>
+          <p class="text-ash text-sm" data-en="Field note · 5 min read" data-fa="یادداشت میدانی · ۵ دقیقه">Field note · 5 min read</p>
+        </div>
+        <div class="hidden md:block text-iris opacity-0 group-hover:opacity-100 transition-opacity">→</div>
+      </a>
+
+      <a href="#" data-hover class="reveal group flex flex-col md:flex-row md:items-center gap-4 md:gap-8 py-8 hover:pl-4 md:hover:pl-6 transition-all duration-500">
+        <div class="snum md:w-32 shrink-0">2025 · 09</div>
+        <div class="flex-1">
+          <h3 class="font-serif text-2xl md:text-3xl mb-1 group-hover:text-iris transition-colors"
+              data-en="A page that loads before you finish blinking"
+              data-fa="صفحه‌ای که پیش از یک پلک زدن بارگذاری می‌شود">A page that loads before you finish blinking</h3>
+          <p class="text-ash text-sm" data-en="Technical · 12 min read" data-fa="فنی · ۱۲ دقیقه">Technical · 12 min read</p>
+        </div>
+        <div class="hidden md:block text-iris opacity-0 group-hover:opacity-100 transition-opacity">→</div>
+      </a>
+
+      <a href="#" data-hover class="reveal group flex flex-col md:flex-row md:items-center gap-4 md:gap-8 py-8 hover:pl-4 md:hover:pl-6 transition-all duration-500">
+        <div class="snum md:w-32 shrink-0">2025 · 06</div>
+        <div class="flex-1">
+          <h3 class="font-serif text-2xl md:text-3xl mb-1 group-hover:text-iris transition-colors"
+              data-en="Hafez in the terminal"
+              data-fa="حافظ در ترمینال">Hafez in the terminal</h3>
+          <p class="text-ash text-sm" data-en="Notebook · 4 min read" data-fa="دفترچه · ۴ دقیقه">Notebook · 4 min read</p>
+        </div>
+        <div class="hidden md:block text-iris opacity-0 group-hover:opacity-100 transition-opacity">→</div>
+      </a>
+
+      <a href="#" data-hover class="reveal group flex flex-col md:flex-row md:items-center gap-4 md:gap-8 py-8 hover:pl-4 md:hover:pl-6 transition-all duration-500">
+        <div class="snum md:w-32 shrink-0">2024 · 12</div>
+        <div class="flex-1">
+          <h3 class="font-serif text-2xl md:text-3xl mb-1 group-hover:text-iris transition-colors"
+              data-en="Notes on documenting a jet engine at 2 a.m."
+              data-fa="یادداشت‌هایی از مستندسازیِ یک موتور جت در ساعت ۲ بامداد">Notes on documenting a jet engine at 2 a.m.</h3>
+          <p class="text-ash text-sm" data-en="Essay · 10 min read" data-fa="مقاله · ۱۰ دقیقه">Essay · 10 min read</p>
+        </div>
+        <div class="hidden md:block text-iris opacity-0 group-hover:opacity-100 transition-opacity">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="relative py-32 md:py-48 border-t border-paper/5 overflow-hidden">
+  <div class="absolute inset-0 opacity-40">
+    <div class="aurora"></div>
+  </div>
+  <div class="relative max-w-[1400px] mx-auto px-6 md:px-10">
+    <div class="grid md:grid-cols-12 gap-12 md:gap-20">
+      <div class="md:col-span-5 reveal">
+        <div class="snum mb-6">— 04 / <span data-en="CONTACT" data-fa="تماس">CONTACT</span></div>
+        <h2 class="font-serif text-5xl md:text-7xl leading-none mb-8"
+            data-en="Let's talk. Softly."
+            data-fa="بیا حرف بزنیم. آرام.">
+          Let's <em class="grad">talk.</em><br/>Softly.
+        </h2>
+        <p class="text-ash text-lg leading-relaxed mb-10 max-w-md"
+           data-en="For collaborations, Wikipedia projects, quiet freelance work, or a nerdy conversation about Nissan flatplane cranks — I'm here."
+           data-fa="برای همکاری، پروژه‌های ویکی‌پدیا، کارهای فریلنسِ آرام، یا یک گفتگویِ عمیق درباره‌ی میل‌لنگِ فلت‌پلنِ نیسان — اینجایم.">
+          For collaborations, Wikipedia projects, quiet freelance work, or a nerdy conversation about Nissan flatplane cranks — I'm here.
+        </p>
+
+        <div class="space-y-4">
+          <a href="mailto:hello@goldenjdm.ir" class="ulink flex items-center gap-3 text-lg" data-hover>
+            <span class="w-8 h-px bg-iris"></span> hello@goldenjdm.ir
+          </a>
+          <div class="flex flex-wrap gap-2 pt-4">
+            <a href="#" data-hover class="chip hover:border-iris hover:text-paper transition-colors">Wikipedia ↗</a>
+            <a href="#" data-hover class="chip hover:border-iris hover:text-paper transition-colors">GitHub ↗</a>
+            <a href="#" data-hover class="chip hover:border-iris hover:text-paper transition-colors">X / Twitter ↗</a>
+            <a href="#" data-hover class="chip hover:border-iris hover:text-paper transition-colors">Telegram ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <form id="contactForm" class="md:col-span-7 reveal glass rounded-3xl p-8 md:p-10 space-y-8">
+        <div>
+          <label for="name" data-en="Your name" data-fa="نام شما">Your name</label>
+          <input id="name" type="text" required placeholder="Amirhossein …" />
+        </div>
+        <div>
+          <label for="email" data-en="Email" data-fa="ایمیل">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.com" />
+        </div>
+        <div>
+          <label for="msg" data-en="Message" data-fa="پیام">Message</label>
+          <textarea id="msg" rows="4" required placeholder="Tell me a little about what you have in mind…"></textarea>
+        </div>
+        <div class="flex items-center justify-between pt-4">
+          <div class="text-xs font-mono text-ash">
+            <span class="kb">↵</span> <span data-en="to send" data-fa="برای ارسال">to send</span>
+          </div>
+          <button type="submit" class="btn-primary" data-hover>
+            <span id="sendLabel" data-en="Send message" data-fa="ارسال پیام">Send message</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <div id="sent" class="hidden text-neon text-sm font-mono" data-en="✓ Message sent. I'll reply within a day or two." data-fa="✓ پیام ارسال شد. طی یک یا دو روز پاسخ می‌دهم.">✓ Message sent. I'll reply within a day or two.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative border-t border-paper/5 py-12">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-10 grid md:grid-cols-3 gap-8 items-center">
+    <div class="text-sm text-ash">
+      © 2026 Amirhossein Zarniyan · <span data-en="Made quietly in Tehran" data-fa="ساخته‌شده در آرامش، در تهران">Made quietly in Tehran</span>
+    </div>
+    <div class="text-center font-serif italic text-paper/60 text-lg">
+      "بنشین بر لب جوی و گذر عمر ببین"
+    </div>
+    <div class="md:text-right text-xs font-mono text-ash">
+      <span data-en="Built with care — no trackers, no cookies." data-fa="ساخته‌شده با دقت — بدون ردیاب، بدون کوکی.">Built with care — no trackers, no cookies.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Loader
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('done'), 1400);
+  });
+
+  // Cursor
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`; });
+  const loop = () => { rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15; ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`; requestAnimationFrame(loop); };
+  loop();
+  document.querySelectorAll('[data-hover]').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+  // Reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Clock
+  const clock = document.getElementById('clock');
+  const tick = () => {
+    const d = new Date();
+    clock.textContent = d.toLocaleTimeString('en-GB', { timeZone: 'Asia/Tehran' }) + ' IRST';
+  };
+  tick(); setInterval(tick, 1000);
+
+  // Language toggle
+  let lang = 'en';
+  const langBtn = document.getElementById('langBtn');
+  const langLabel = document.getElementById('langLabel');
+  const applyLang = () => {
+    document.documentElement.lang = lang === 'en' ? 'en' : 'fa';
+    document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const t = lang === 'en' ? el.dataset.en : (el.dataset.fa || el.dataset.en);
+      // preserve inner html when there's italic markup? Simple text swap:
+      el.textContent = t;
+    });
+    langLabel.textContent = lang === 'en' ? 'FA / فارسی' : 'EN / English';
+  };
+  langBtn.addEventListener('click', () => { lang = lang === 'en' ? 'fa' : 'en'; applyLang(); });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mob = document.getElementById('mobmenu');
+  menuBtn.addEventListener('click', () => mob.classList.toggle('hidden-menu'));
+  document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => mob.classList.add('hidden-menu')));
+
+  // Form
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    document.getElementById('sent').classList.remove('hidden');
+    e.target.reset();
+  });
+
+  // spin keyframes injected
+  const s = document.createElement('style');
+  s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+  document.head.appendChild(s);
+</script>
+</body>
+</html>
