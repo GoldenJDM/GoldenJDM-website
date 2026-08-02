@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>نیروی هوایی ارتش جمهوری اسلامی ایران | IRIAAF</title>
+<meta name="description" content="پایگاه رسمی نیروی هوایی ارتش جمهوری اسلامی ایران — شکوه پرواز، قدرت دفاع، افتخار ملی" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Cinzel:wght@500;700;900&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+  :root{
+    --bg-0:#04060b;
+    --bg-1:#070b14;
+    --bg-2:#0b1222;
+    --navy:#0a1a33;
+    --navy-2:#102a4a;
+    --gunmetal:#2a3340;
+    --silver:#c9d1dc;
+    --silver-2:#8a94a6;
+    --gold:#d4af37;
+    --gold-2:#f2d27b;
+    --gold-deep:#8a6d1c;
+    --neon:#6fd1ff;
+    --neon-2:#b8ecff;
+    --white:#f5f7fb;
+    --line:rgba(201,209,220,0.08);
+    --glass:rgba(10,26,51,0.45);
+    --glass-strong:rgba(7,11,20,0.75);
+    --shadow-blue:0 0 40px rgba(111,209,255,0.15);
+    --shadow-gold:0 0 40px rgba(212,175,55,0.25);
+  }
+  html[data-theme="light"]{
+    --bg-0:#f2f4f8;
+    --bg-1:#e6ebf3;
+    --bg-2:#d9e1ee;
+    --navy:#c7d3e6;
+    --navy-2:#b6c5dc;
+    --gunmetal:#5a6475;
+    --silver:#2b3342;
+    --silver-2:#4a5364;
+    --white:#0a1220;
+    --line:rgba(10,18,32,0.12);
+    --glass:rgba(255,255,255,0.55);
+    --glass-strong:rgba(255,255,255,0.8);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn','Inter',sans-serif;
+    background:var(--bg-0);
+    color:var(--silver);
+    overflow-x:hidden;
+    line-height:1.7;
+    cursor:none;
+  }
+  html[data-theme="light"] body{color:var(--silver)}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:none;border:none;background:none;color:inherit}
+
+  /* Custom Cursor */
+  .cursor-dot,.cursor-ring{
+    position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%);mix-blend-mode:difference;
+  }
+  .cursor-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;transition:width .2s,height .2s,background .2s}
+  .cursor-ring{width:36px;height:36px;border:1px solid var(--neon);border-radius:50%;transition:width .25s,height .25s,border-color .25s}
+  .cursor-ring.hover{width:60px;height:60px;border-color:var(--gold)}
+  @media (max-width:900px){.cursor-dot,.cursor-ring{display:none}body,button,a{cursor:auto}}
+
+  /* Preloader */
+  .preloader{
+    position:fixed;inset:0;background:var(--bg-0);z-index:10000;
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:28px;
+    transition:opacity .8s ease,visibility .8s;
+  }
+  .preloader.hidden{opacity:0;visibility:hidden}
+  .preloader-emblem{
+    width:90px;height:90px;position:relative;animation:spin 3s linear infinite;
+  }
+  .preloader-emblem svg{width:100%;height:100%}
+  .preloader-bar{width:220px;height:2px;background:rgba(255,255,255,0.08);overflow:hidden;border-radius:2px}
+  .preloader-bar::after{
+    content:'';display:block;height:100%;width:40%;
+    background:linear-gradient(90deg,transparent,var(--gold),var(--neon),transparent);
+    animation:load 1.4s ease-in-out infinite;
+  }
+  .preloader-text{
+    font-family:'Cinzel',serif;letter-spacing:.5em;font-size:11px;
+    color:var(--silver-2);text-transform:uppercase;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes load{0%{margin-left:-40%}100%{margin-left:100%}}
+
+  /* Ambient background layers */
+  .bg-grid{
+    position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
+    background-image:
+      linear-gradient(rgba(111,209,255,0.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(111,209,255,0.04) 1px,transparent 1px);
+    background-size:80px 80px;
+    mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%);
+  }
+  .bg-glow{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(600px 400px at 15% 20%,rgba(16,42,74,0.55),transparent 60%),
+      radial-gradient(500px 500px at 85% 70%,rgba(212,175,55,0.08),transparent 60%),
+      radial-gradient(800px 600px at 50% 100%,rgba(111,209,255,0.08),transparent 70%);
+  }
+  .flight-trails{
+    position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  }
+  .trail{
+    position:absolute;height:1px;width:300px;
+    background:linear-gradient(90deg,transparent,var(--neon),transparent);
+    opacity:0;filter:blur(.5px);
+  }
+
+  /* Header */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:18px 48px;
+    display:flex;align-items:center;justify-content:space-between;
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    background:linear-gradient(180deg,rgba(4,6,11,0.55),rgba(4,6,11,0.15));
+    border-bottom:1px solid var(--line);
+    transition:padding .3s ease,background .3s ease;
+  }
+  html[data-theme="light"] header{background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.3))}
+  header.scrolled{padding:10px 48px;background:var(--glass-strong)}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand-emblem{
+    width:48px;height:48px;position:relative;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .brand-emblem svg{width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(212,175,55,0.5))}
+  .brand-text{display:flex;flex-direction:column;line-height:1.1}
+  .brand-text .fa{font-weight:800;font-size:15px;color:var(--white);letter-spacing:.5px}
+  .brand-text .en{font-family:'Cinzel',serif;font-size:10px;color:var(--gold);letter-spacing:3px;margin-top:3px}
+
+  nav ul{display:flex;gap:34px;list-style:none}
+  nav a{
+    font-size:13px;font-weight:500;color:var(--silver);position:relative;
+    padding:6px 0;transition:color .3s;
+  }
+  nav a::after{
+    content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:linear-gradient(90deg,var(--gold),var(--neon));
+    transform:scaleX(0);transform-origin:right;transition:transform .4s cubic-bezier(.7,0,.3,1);
+  }
+  nav a:hover{color:var(--white)}
+  nav a:hover::after{transform:scaleX(1);transform-origin:left}
+
+  .header-actions{display:flex;align-items:center;gap:14px}
+  .icon-btn{
+    width:40px;height:40px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,0.04);border:1px solid var(--line);
+    transition:all .3s;
+  }
+  .icon-btn:hover{background:rgba(212,175,55,0.1);border-color:var(--gold);transform:translateY(-2px)}
+  .icon-btn svg{width:16px;height:16px;stroke:var(--silver)}
+  .menu-btn{display:none}
+  @media(max-width:900px){
+    header{padding:14px 20px}
+    header.scrolled{padding:10px 20px}
+    nav{display:none}
+    .menu-btn{display:flex}
+  }
+
+  /* Hero */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    overflow:hidden;z-index:1;
+  }
+  .hero-video-wrap{
+    position:absolute;inset:0;z-index:0;overflow:hidden;
+  }
+  .hero-video-wrap::after{
+    content:'';position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(4,6,11,0.5) 0%,rgba(4,6,11,0.3) 40%,rgba(4,6,11,0.85) 100%),
+      radial-gradient(ellipse at center,transparent 30%,rgba(4,6,11,0.7) 100%);
+    z-index:2;
+  }
+  .hero-video{
+    width:100%;height:100%;object-fit:cover;
+    filter:saturate(1.1) contrast(1.05) brightness(.9);
+  }
+  .hero-fallback{
+    position:absolute;inset:0;z-index:1;
+    background:
+      radial-gradient(circle at 30% 40%,rgba(212,175,55,0.15),transparent 50%),
+      radial-gradient(circle at 70% 60%,rgba(111,209,255,0.2),transparent 50%),
+      linear-gradient(135deg,#04060b 0%,#0a1a33 50%,#04060b 100%);
+  }
+  .hero-fallback::before{
+    content:'';position:absolute;inset:0;
+    background-image:url('https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=1920&q=80');
+    background-size:cover;background-position:center;
+    opacity:.55;mix-blend-mode:luminosity;
+  }
+
+  .hero-content{
+    position:relative;z-index:3;text-align:center;padding:0 24px;max-width:1200px;
+  }
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:12px;
+    padding:8px 20px;border:1px solid rgba(212,175,55,0.3);
+    background:rgba(212,175,55,0.06);backdrop-filter:blur(10px);
+    border-radius:100px;font-size:11px;letter-spacing:4px;color:var(--gold-2);
+    text-transform:uppercase;margin-bottom:32px;
+  }
+  .hero-tag::before{
+    content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 10px var(--gold);animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  .hero h1{
+    font-size:clamp(40px,7vw,104px);font-weight:900;line-height:1.05;
+    color:var(--white);letter-spacing:-1px;
+    text-shadow:0 4px 40px rgba(0,0,0,0.6);
+    margin-bottom:16px;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(135deg,var(--gold-2) 0%,var(--gold) 50%,var(--neon) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    display:inline-block;
+  }
+  .hero .subtitle{
+    font-family:'Cinzel',serif;font-size:clamp(14px,1.6vw,20px);
+    letter-spacing:.4em;color:var(--silver);text-transform:uppercase;
+    margin-bottom:20px;opacity:.85;
+  }
+  .hero .desc{
+    max-width:640px;margin:0 auto 48px;font-size:16px;color:var(--silver-2);
+    line-height:1.9;
+  }
+  .hero-ctas{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    position:relative;padding:16px 36px;font-size:14px;font-weight:600;
+    letter-spacing:2px;text-transform:uppercase;
+    border-radius:2px;transition:all .4s cubic-bezier(.7,0,.3,1);
+    display:inline-flex;align-items:center;gap:12px;overflow:hidden;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);
+    color:#0a0a0a;
+    box-shadow:0 0 0 1px rgba(212,175,55,0.4),0 10px 40px rgba(212,175,55,0.3);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--gold),0 20px 60px rgba(212,175,55,0.5)}
+  .btn-primary::before{
+    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+    transition:left .6s;
+  }
+  .btn-primary:hover::before{left:100%}
+  .btn-ghost{
+    background:rgba(255,255,255,0.04);color:var(--white);
+    border:1px solid rgba(111,209,255,0.3);backdrop-filter:blur(10px);
+  }
+  .btn-ghost:hover{background:rgba(111,209,255,0.08);border-color:var(--neon);box-shadow:var(--shadow-blue)}
+  .btn svg{width:14px;height:14px;transition:transform .3s}
+  .btn:hover svg{transform:translateX(-4px)}
+
+  .hero-scroll{
+    position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+    z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;
+    color:var(--silver-2);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  }
+  .hero-scroll .line{width:1px;height:50px;background:linear-gradient(180deg,var(--gold),transparent);animation:scrollLine 2s infinite}
+  @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* Sections */
+  section{position:relative;z-index:1;padding:140px 48px}
+  @media(max-width:900px){section{padding:90px 20px}}
+  .container{max-width:1400px;margin:0 auto}
+
+  .section-head{text-align:center;margin-bottom:80px}
+  .section-eyebrow{
+    display:inline-flex;align-items:center;gap:14px;
+    font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;
+    color:var(--gold);text-transform:uppercase;margin-bottom:18px;
+  }
+  .section-eyebrow::before,.section-eyebrow::after{
+    content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));
+  }
+  .section-eyebrow::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .section-title{
+    font-size:clamp(32px,4.5vw,56px);font-weight:800;color:var(--white);
+    line-height:1.2;margin-bottom:16px;
+  }
+  .section-title .accent{
+    background:linear-gradient(135deg,var(--gold-2),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .section-sub{max-width:640px;margin:0 auto;color:var(--silver-2);font-size:15px}
+
+  /* Fleet */
+  .fleet-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;
+  }
+  .jet-card{
+    position:relative;border-radius:14px;overflow:hidden;
+    background:var(--glass);backdrop-filter:blur(20px);
+    border:1px solid var(--line);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s;
+    transform-style:preserve-3d;
+  }
+  .jet-card:hover{
+    border-color:rgba(111,209,255,0.3);
+    box-shadow:0 30px 80px rgba(0,0,0,0.5),0 0 60px rgba(111,209,255,0.1);
+  }
+  .jet-card-img{
+    position:relative;height:260px;overflow:hidden;
+  }
+  .jet-card-img img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .4s;
+    filter:saturate(.9) contrast(1.05);
+  }
+  .jet-card:hover .jet-card-img img{transform:scale(1.08);filter:saturate(1.1) contrast(1.1)}
+  .jet-card-img::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 40%,rgba(4,6,11,0.95) 100%);
+  }
+  .jet-badge{
+    position:absolute;top:16px;right:16px;z-index:2;
+    padding:6px 12px;background:rgba(4,6,11,0.7);backdrop-filter:blur(10px);
+    border:1px solid rgba(212,175,55,0.3);border-radius:100px;
+    font-size:10px;letter-spacing:2px;color:var(--gold-2);text-transform:uppercase;
+  }
+  .jet-card-body{padding:28px;position:relative}
+  .jet-code{
+    font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:var(--neon);
+    margin-bottom:8px;
+  }
+  .jet-card h3{font-size:24px;font-weight:700;color:var(--white);margin-bottom:10px}
+  .jet-card p{font-size:13px;color:var(--silver-2);margin-bottom:20px;line-height:1.8}
+  .jet-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-top:20px;border-top:1px solid var(--line)}
+  .jet-spec{text-align:center}
+  .jet-spec .val{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);font-weight:700}
+  .jet-spec .lbl{font-size:10px;letter-spacing:1px;color:var(--silver-2);text-transform:uppercase;margin-top:4px}
+
+  /* Timeline */
+  .timeline{position:relative;max-width:1000px;margin:0 auto;padding:40px 0}
+  .timeline::before{
+    content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;
+    background:linear-gradient(180deg,transparent,var(--gold),var(--neon),var(--gold),transparent);
+    transform:translateX(-50%);
+  }
+  .tl-item{
+    position:relative;width:50%;padding:30px 50px;
+  }
+  .tl-item:nth-child(odd){margin-right:auto;text-align:left;padding-left:0}
+  .tl-item:nth-child(even){margin-left:auto;text-align:right;padding-right:0}
+  .tl-item::before{
+    content:'';position:absolute;top:40px;width:14px;height:14px;border-radius:50%;
+    background:var(--bg-0);border:2px solid var(--gold);
+    box-shadow:0 0 20px rgba(212,175,55,0.6);
+  }
+  .tl-item:nth-child(odd)::before{right:-7px}
+  .tl-item:nth-child(even)::before{left:-7px}
+  .tl-card{
+    background:var(--glass);backdrop-filter:blur(20px);
+    border:1px solid var(--line);border-radius:12px;padding:28px;
+    transition:all .4s;
+  }
+  .tl-card:hover{border-color:rgba(212,175,55,0.3);transform:translateY(-4px)}
+  .tl-year{
+    font-family:'Cinzel',serif;font-size:32px;font-weight:700;
+    background:linear-gradient(135deg,var(--gold-2),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:8px;
+  }
+  .tl-card h4{font-size:18px;color:var(--white);margin-bottom:10px;font-weight:700}
+  .tl-card p{font-size:13px;color:var(--silver-2);line-height:1.9}
+  @media(max-width:768px){
+    .timeline::before{left:20px}
+    .tl-item{width:100%;padding:20px 20px 20px 50px;text-align:right !important}
+    .tl-item:nth-child(odd),.tl-item:nth-child(even){margin:0;text-align:right !important;padding-left:50px;padding-right:0}
+    .tl-item::before,.tl-item:nth-child(odd)::before,.tl-item:nth-child(even)::before{left:13px;right:auto}
+  }
+
+  /* Capabilities */
+  .cap-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;
+  }
+  .cap-card{
+    position:relative;padding:40px 30px;border-radius:14px;
+    background:var(--glass);backdrop-filter:blur(20px);
+    border:1px solid var(--line);overflow:hidden;
+    transition:all .4s;
+  }
+  .cap-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--neon),transparent);
+    opacity:0;transition:opacity .4s;
+  }
+  .cap-card:hover{transform:translateY(-6px);border-color:rgba(111,209,255,0.3)}
+  .cap-card:hover::before{opacity:1}
+  .cap-icon{
+    width:56px;height:56px;border-radius:12px;
+    background:linear-gradient(135deg,rgba(111,209,255,0.1),rgba(212,175,55,0.05));
+    border:1px solid rgba(111,209,255,0.2);
+    display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+    position:relative;
+  }
+  .cap-icon svg{width:26px;height:26px;stroke:var(--neon)}
+  .cap-icon::after{
+    content:'';position:absolute;inset:-1px;border-radius:12px;
+    background:linear-gradient(135deg,var(--neon),var(--gold));
+    opacity:0;transition:opacity .4s;z-index:-1;filter:blur(12px);
+  }
+  .cap-card:hover .cap-icon::after{opacity:.4}
+  .cap-num{
+    font-family:'Cinzel',serif;font-size:48px;font-weight:700;
+    background:linear-gradient(135deg,var(--gold-2),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    line-height:1;margin-bottom:8px;
+  }
+  .cap-num .plus{color:var(--neon);font-size:32px}
+  .cap-card h4{font-size:15px;color:var(--white);margin-bottom:8px;font-weight:600}
+  .cap-card p{font-size:12px;color:var(--silver-2);line-height:1.8}
+
+  /* Gallery */
+  .gallery{
+    column-count:3;column-gap:16px;
+  }
+  @media(max-width:900px){.gallery{column-count:2}}
+  @media(max-width:560px){.gallery{column-count:1}}
+  .g-item{
+    position:relative;break-inside:avoid;margin-bottom:16px;
+    border-radius:10px;overflow:hidden;cursor:none;
+    border:1px solid var(--line);
+  }
+  .g-item img{
+    width:100%;height:auto;display:block;
+    transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .4s;
+    filter:saturate(.9);
+  }
+  .g-item:hover img{transform:scale(1.06);filter:saturate(1.1)}
+  .g-item::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 50%,rgba(4,6,11,0.85));
+    opacity:0;transition:opacity .4s;
+  }
+  .g-item:hover::after{opacity:1}
+  .g-caption{
+    position:absolute;bottom:16px;left:16px;right:16px;z-index:2;
+    color:var(--white);font-size:13px;font-weight:600;
+    opacity:0;transform:translateY(10px);transition:all .4s;
+  }
+  .g-item:hover .g-caption{opacity:1;transform:translateY(0)}
+  .g-caption span{display:block;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:4px}
+
+  /* Lightbox */
+  .lightbox{
+    position:fixed;inset:0;z-index:9998;background:rgba(4,6,11,0.95);
+    backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;
+    padding:40px;
+  }
+  .lightbox.active{display:flex}
+  .lightbox img{max-width:90%;max-height:90vh;border-radius:8px;box-shadow:0 40px 100px rgba(0,0,0,0.8)}
+  .lightbox-close{
+    position:absolute;top:30px;right:30px;width:50px;height:50px;border-radius:50%;
+    background:rgba(255,255,255,0.05);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lightbox-close svg{width:18px;height:18px;stroke:var(--white)}
+
+  /* Recruitment */
+  .recruit{
+    position:relative;overflow:hidden;
+  }
+  .recruit-wrap{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+  }
+  @media(max-width:900px){.recruit-wrap{grid-template-columns:1fr;gap:40px}}
+  .recruit-visual{
+    position:relative;height:560px;border-radius:16px;overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .recruit-visual img{width:100%;height:100%;object-fit:cover}
+  .recruit-visual::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(4,6,11,0.4),rgba(10,26,51,0.6));
+  }
+  .recruit-quote{
+    position:absolute;bottom:40px;left:40px;right:40px;z-index:2;
+    color:var(--white);
+  }
+  .recruit-quote .q{
+    font-size:22px;font-weight:600;line-height:1.6;margin-bottom:14px;
+  }
+  .recruit-quote .a{
+    font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;
+  }
+
+  .recruit-form{
+    background:var(--glass);backdrop-filter:blur(20px);
+    border:1px solid var(--line);border-radius:16px;padding:44px;
+  }
+  .recruit-form h3{font-size:28px;color:var(--white);margin-bottom:10px;font-weight:700}
+  .recruit-form .lead{font-size:13px;color:var(--silver-2);margin-bottom:30px;line-height:1.9}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  @media(max-width:560px){.form-row{grid-template-columns:1fr}}
+  .form-field{position:relative;margin-bottom:16px}
+  .form-field label{
+    display:block;font-size:11px;letter-spacing:2px;color:var(--silver-2);
+    text-transform:uppercase;margin-bottom:8px;
+  }
+  .form-field input,.form-field select,.form-field textarea{
+    width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);
+    border:1px solid var(--line);border-radius:8px;color:var(--white);
+    font-family:inherit;font-size:14px;transition:all .3s;
+  }
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{
+    outline:none;border-color:var(--gold);background:rgba(212,175,55,0.04);
+    box-shadow:0 0 0 3px rgba(212,175,55,0.1);
+  }
+  .form-field textarea{resize:vertical;min-height:100px}
+  .form-submit{width:100%;margin-top:10px;justify-content:center}
+
+  /* News */
+  .news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+  .news-card{
+    background:var(--glass);backdrop-filter:blur(20px);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    transition:all .4s;
+  }
+  .news-card:hover{transform:translateY(-6px);border-color:rgba(212,175,55,0.3)}
+  .news-img{height:220px;overflow:hidden;position:relative}
+  .news-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .news-card:hover .news-img img{transform:scale(1.08)}
+  .news-date{
+    position:absolute;top:16px;right:16px;padding:8px 14px;
+    background:rgba(4,6,11,0.85);backdrop-filter:blur(10px);
+    border:1px solid rgba(212,175,55,0.3);border-radius:4px;
+    font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold);
+  }
+  .news-body{padding:26px}
+  .news-cat{font-size:10px;letter-spacing:3px;color:var(--neon);text-transform:uppercase;margin-bottom:10px}
+  .news-card h4{font-size:17px;color:var(--white);margin-bottom:10px;line-height:1.5;font-weight:700}
+  .news-card p{font-size:13px;color:var(--silver-2);line-height:1.8;margin-bottom:16px}
+  .news-link{
+    font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:8px;transition:gap .3s;
+  }
+  .news-link:hover{gap:14px}
+
+  /* Footer */
+  footer{
+    position:relative;z-index:1;padding:100px 48px 30px;
+    background:linear-gradient(180deg,transparent 0%,rgba(4,6,11,0.8) 30%,var(--bg-0) 100%);
+    border-top:1px solid var(--line);
+  }
+  @media(max-width:900px){footer{padding:70px 20px 30px}}
+  .footer-grid{
+    display:grid;grid-template-columns:1.5fr 1fr 1fr 1.5fr;gap:50px;
+    max-width:1400px;margin:0 auto 60px;
+  }
+  @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:40px}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+  .foot-col h5{
+    font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;color:var(--gold);
+    text-transform:uppercase;margin-bottom:20px;
+  }
+  .foot-col p,.foot-col a{font-size:13px;color:var(--silver-2);line-height:2;display:block;transition:color .3s}
+  .foot-col a:hover{color:var(--gold)}
+  .foot-brand{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+  .foot-brand .brand-text .fa{font-size:14px}
+  .foot-map{
+    position:relative;height:180px;border-radius:10px;overflow:hidden;
+    border:1px solid var(--line);background:var(--navy);
+  }
+  .foot-map svg{width:100%;height:100%}
+  .map-pin{
+    position:absolute;width:10px;height:10px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 0 4px rgba(212,175,55,0.2),0 0 20px var(--gold);
+    animation:pinPulse 2s infinite;
+  }
+  @keyframes pinPulse{0%,100%{box-shadow:0 0 0 4px rgba(212,175,55,0.2),0 0 20px var(--gold)}50%{box-shadow:0 0 0 10px rgba(212,175,55,0),0 0 30px var(--gold)}}
+  .socials{display:flex;gap:10px;margin-top:16px}
+  .socials a{
+    width:38px;height:38px;border-radius:50%;
+    background:rgba(255,255,255,0.04);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  .socials a:hover{background:rgba(212,175,55,0.1);border-color:var(--gold);transform:translateY(-3px)}
+  .socials svg{width:14px;height:14px;stroke:var(--silver)}
+  .foot-bottom{
+    max-width:1400px;margin:0 auto;padding-top:30px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+    font-size:11px;letter-spacing:2px;color:var(--silver-2);text-transform:uppercase;
+  }
+
+  /* Audio toggle */
+  .audio-toggle{
+    position:fixed;bottom:30px;left:30px;z-index:90;
+    width:50px;height:50px;border-radius:50%;
+    background:var(--glass-strong);backdrop-filter:blur(20px);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  .audio-toggle:hover{border-color:var(--gold);transform:scale(1.05)}
+  .audio-toggle svg{width:18px;height:18px;stroke:var(--silver)}
+  .audio-bars{display:flex;gap:2px;align-items:center;height:16px}
+  .audio-bars span{width:2px;background:var(--neon);border-radius:2px;animation:bar 1s infinite ease-in-out}
+  .audio-bars span:nth-child(1){height:40%;animation-delay:0s}
+  .audio-bars span:nth-child(2){height:80%;animation-delay:.15s}
+  .audio-bars span:nth-child(3){height:60%;animation-delay:.3s}
+  .audio-bars span:nth-child(4){height:100%;animation-delay:.45s}
+  .audio-toggle.muted .audio-bars span{animation:none;height:2px;background:var(--silver-2)}
+  @keyframes bar{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+
+  /* Scroll reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Selection */
+  ::selection{background:var(--gold);color:#000}
+  ::-webkit-scrollbar{width:8px}
+  ::-webkit-scrollbar-track{background:var(--bg-0)}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold-deep),var(--navy-2));border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor-ring"></div>
+<div class="cursor-dot"></div>
+
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-emblem">
+    <svg viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="46" stroke="#d4af37" stroke-width="1" opacity=".4"/>
+      <circle cx="50" cy="50" r="36" stroke="#6fd1ff" stroke-width="1" opacity=".3"/>
+      <path d="M50 14 L58 46 L90 50 L58 54 L50 86 L42 54 L10 50 L42 46 Z" fill="#d4af37"/>
+      <circle cx="50" cy="50" r="6" fill="#0a1a33" stroke="#d4af37" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="preloader-bar"></div>
+  <div class="preloader-text">Initializing Airspace</div>
+</div>
+
+<!-- Ambient layers -->
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="flight-trails" id="trails"></div>
+
+<!-- Header -->
+<header id="header">
+  <div class="brand">
+    <div class="brand-emblem">
+      <svg viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="46" stroke="#d4af37" stroke-width="1.2" opacity=".6"/>
+        <path d="M50 14 L58 46 L90 50 L58 54 L50 86 L42 54 L10 50 L42 46 Z" fill="#d4af37"/>
+        <circle cx="50" cy="50" r="6" fill="#0a1a33" stroke="#d4af37" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="fa">نهاجا — نیروی هوایی ارتش</span>
+      <span class="en">IRIAAF · OFFICIAL</span>
+    </div>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="#home">خانه</a></li>
+      <li><a href="#fleet">ناوگان</a></li>
+      <li><a href="#history">تاریخچه</a></li>
+      <li><a href="#capabilities">توانمندی</a></li>
+      <li><a href="#gallery">گالری</a></li>
+      <li><a href="#recruit">استخدام</a></li>
+      <li><a href="#news">اخبار</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-actions">
+    <button class="icon-btn" id="themeToggle" title="تغییر تم">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menuBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-video-wrap">
+    <div class="hero-fallback"></div>
+    <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=1920&q=80">
+      <source src="https://cdn.coverr.co/videos/coverr-fighter-jet-flying-1573/1080p.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Since 1925 · A Century of Guardianship</div>
+    <div class="subtitle">The Islamic Republic of Iran Army Air Force</div>
+    <h1>شکوه <span class="accent">پرواز</span><br/>دفاعی بی‌پایان</h1>
+    <p class="desc">نیروی هوایی ارتش جمهوری اسلامی ایران، نگهبان آسمان سرزمین پارس؛ ترکیبی از اصالت، فناوری پیشرفته و عزمی استوار در دفاع از حریم ملی.</p>
+    <div class="hero-ctas">
+      <a href="#fleet" class="btn btn-primary">
+        ورود به پایگاه
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+      <a href="#recruit" class="btn btn-ghost">
+        پیوستن به نیروی هوایی
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- Fleet -->
+<section id="fleet">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Fleet · ناوگان هوایی</div>
+      <h2 class="section-title">ناوگانی از <span class="accent">اقتدار</span></h2>
+      <p class="section-sub">ترکیبی از جنگنده‌های کلاسیک و مدرن، هر یک نمادی از مهندسی دقیق، سرعت مافوق صوت و تسلط بر آسمان.</p>
+    </div>
+
+    <div class="fleet-grid">
+      <div class="jet-card reveal" data-tilt>
+        <div class="jet-card-img">
+          <span class="jet-badge">Fighter</span>
+          <img src="https://images.unsplash.com/photo-1614028674026-a65e3182b16d?w=900&q=80" alt="F-14 Tomcat" loading="lazy">
+        </div>
+        <div class="jet-card-body">
+          <div class="jet-code">F-14A · TOMCAT</div>
+          <h3>اف-۱۴ تام‌کت</h3>
+          <p>جنگنده برتری هوایی با قابلیت‌های رهگیری پیشرفته و بال‌های متغیر، نماد قدرت آسمان ایران.</p>
+          <div class="jet-specs">
+            <div class="jet-spec"><div class="val">M2.3</div><div class="lbl">سرعت</div></div>
+            <div class="jet-spec"><div class="val">1600</div><div class="lbl">برد (km)</div></div>
+            <div class="jet-spec"><div class="val">2x</div><div class="lbl">محرک</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jet-card reveal" data-tilt>
+        <div class="jet-card-img">
+          <span class="jet-badge">Interceptor</span>
+          <img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=900&q=80" alt="MiG-29" loading="lazy">
+        </div>
+        <div class="jet-card-body">
+          <div class="jet-code">MiG-29 · FULCRUM</div>
+          <h3>میگ-۲۹ فلکرم</h3>
+          <p>جنگنده چابک و مانورپذیر نسل چهارم، طراحی‌شده برای نبردهای هوایی نزدیک و برتری تاکتیکی.</p>
+          <div class="jet-specs">
+            <div class="jet-spec"><div class="val">M2.2</div><div class="lbl">سرعت</div></div>
+            <div class="jet-spec"><div class="val">1430</div><div class="lbl">برد (km)</div></div>
+            <div class="jet-spec"><div class="val">2x</div><div class="lbl">محرک</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jet-card reveal" data-tilt>
+        <div class="jet-card-img">
+          <span class="jet-badge">Bomber</span>
+          <img src="https://images.unsplash.com/photo-1592365325009-45d0e67bab8a?w=900&q=80" alt="Su-24" loading="lazy">
+        </div>
+        <div class="jet-card-body">
+          <div class="jet-code">Su-24 · FENCER</div>
+          <h3>سوخو-۲۴ فنسر</h3>
+          <p>بمب‌افکن استراتژیک تمام‌Weather با قابلیت عملیات در ارتفاع پایین و نفوذ به عمق خاک دشمن.</p>
+          <div class="jet-specs">
+            <div class="jet-spec"><div class="val">M1.3</div><div class="lbl">سرعت</div></div>
+            <div class="jet-spec"><div class="val">3000</div><div class="lbl">برد (km)</div></div>
+            <div class="jet-spec"><div class="val">8t</div><div class="lbl">سلاح</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jet-card reveal" data-tilt>
+        <div class="jet-card-img">
+          <span class="jet-badge">Domestic</span>
+          <img src="https://images.unsplash.com/photo-1573713113866-3a3c17a8d6f5?w=900&q=80" alt="Kowsar" loading="lazy">
+        </div>
+        <div class="jet-card-body">
+          <div class="jet-code">KOWSAR · نسل چهارم</div>
+          <h3>جنگنده کوثر</h3>
+          <p>جنگنده تمام‌ایرانی نسل چهارم با اویونیک پیشرفته، نماد خودکفایی و غرور ملی در صنعت هوافضا.</p>
+          <div class="jet-specs">
+            <div class="jet-spec"><div class="val">M1.6</div><div class="lbl">سرعت</div></div>
+            <div class="jet-spec"><div class="val">1800</div><div class="lbl">برد (km)</div></div>
+            <div class="jet-spec"><div class="val">IR</div><div class="lbl">ساخت</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jet-card reveal" data-tilt>
+        <div class="jet-card-img">
+          <span class="jet-badge">Transport</span>
+          <img src="https://images.unsplash.com/photo-1542296950-a466c1f4f024?w=900&q=80" alt="C-130" loading="lazy">
+        </div>
+        <div class="jet-card-body">
+          <div class="jet-code">C-130 · HERCULES</div>
+          <h3>سی-۱۳۰ هرکولس</h3>
+          <p>هواپیمای ترابری نظامی چندمنظوره، ستون فقرات لجستیک هوایی و عملیات‌های راهبردی.</p>
+          <div class="jet-specs">
+            <div class="jet-spec"><div class="val">540</div><div class="lbl">km/h</div></div>
+            <div class="jet-spec"><div class="val">3800</div><div class="lbl">برد (km)</div></div>
+            <div class="jet-spec"><div class="val">20t</div><div class="lbl">بار</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jet-card reveal" data-tilt>
+        <div class="jet-card-img">
+          <span class="jet-badge">UAV</span>
+          <img src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=900&q=80" alt="Shahed" loading="lazy">
+        </div>
+        <div class="jet-card-body">
+          <div class="jet-code">SHAHED · پهپاد</div>
+          <h3>پهپاد شاهد</h3>
+          <p>نسل پیشرفته پهپادهای شناسایی و تهاجمی، تلفیق هوش مصنوعی و دقت استراتژیک.</p>
+          <div class="jet-specs">
+            <div class="jet-spec"><div class="val">200</div><div class="lbl">km/h</div></div>
+            <div class="jet-spec"><div class="val">2500</div><div class="lbl">برد (km)</div></div>
+            <div class="jet-spec"><div class="val">24h</div><div class="lbl">پرواز</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- History -->
+<section id="history">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Heritage · تاریخچه</div>
+      <h2 class="section-title">یک قرن <span class="accent">افتخار</span></h2>
+      <p class="section-sub">سفری در زمان از نخستین پرواز تا امروز؛ روایتی از دلاوری، نوآوری و دفاع مقدس.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-card">
+          <div class="tl-year">1925</div>
+          <h4>تأسیس نیروی هوایی</h4>
+          <p>آغاز رسمی نیروی هوایی ایران با نخستین ناوگان هواپیماهای آموزشی و عملیاتی.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-card">
+          <div class="tl-year">1979</div>
+          <h4>انقلاب و بازآفرینی</h4>
+          <p>تحول ساختاری و شکل‌گیری هویت جدید نیروی هوایی ارتش جمهوری اسلامی ایران.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-card">
+          <div class="tl-year">1980</div>
+          <h4>دفاع مقدس — عملیات کمان ۹۰</h4>
+          <p>بزرگ‌ترین عملیات هوایی تاریخ ایران؛ ضربه‌ای استراتژیک که سرنوشت جنگ را تغییر داد.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-card">
+          <div class="tl-year">2000</div>
+          <h4>عصر خودکفایی</h4>
+          <p>آغاز تولید جنگنده‌های بومی و توسعه سامانه‌های اویونیک پیشرفته در داخل کشور.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-card">
+          <div class="tl-year">2025</div>
+          <h4>یک قرن اقتدار</h4>
+          <p>ورود به قرن دوم با ناوگانی مدرن، پهپادهای راهبردی و سامانه‌های پدافندی یکپارچه.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities -->
+<section id="capabilities">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Power · توانمندی</div>
+      <h2 class="section-title">قدرت در <span class="accent">اعداد</span></h2>
+      <p class="section-sub">آمار و ارقامی که گویای عمق راهبردی، آمادگی عملیاتی و برتری تکنولوژیک نیروی هوایی است.</p>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-card reveal">
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+          </svg>
+        </div>
+        <div class="cap-num"><span class="counter" data-target="350">0</span><span class="plus">+</span></div>
+        <h4>هواپیمای عملیاتی</h4>
+        <p>ناوگانی متنوع از جنگنده، بمب‌افکن، ترابری و پهپاد.</p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+          </svg>
+        </div>
+        <div class="cap-num"><span class="counter" data-target="98">0</span><span class="plus">%</span></div>
+        <h4>آمادگی عملیاتی</h4>
+        <p>نرخ آمادگی ناوگان برای مأموریت‌های فوری و راهبردی.</p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="cap-num"><span class="counter" data-target="120">0</span><span class="plus">+</span></div>
+        <h4>پایگاه هوایی</h4>
+        <p>شبکه‌ای گسترده از پایگاه‌های راهبردی در سراسر کشور.</p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div class="cap-num"><span class="counter" data-target="24">0</span><span class="plus">/7</span></div>
+        <h4>پایش هوایی</h4>
+        <p>حضور دائمی و یکپارچه در آسمان کشور، شبانه‌روز.</p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="cap-num"><span class="counter" data-target="100">0</span><span class="plus">%</span></div>
+        <h4>پدافند یکپارچه</h4>
+        <p>سامانه‌های راداری و موشکی پیشرفته برای دفاع چندلایه.</p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12h20M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/>
+          </svg>
+        </div>
+        <div class="cap-num"><span class="counter" data-target="50">0</span><span class="plus">+</span></div>
+        <h4>سال تجربه</h4>
+        <p>نیم‌قرن عملیات، آموزش و توسعه توانمندی‌های بومی.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Gallery · گالری پرواز</div>
+      <h2 class="section-title">لحظه‌هایی از <span class="accent">آسمان</span></h2>
+      <p class="section-sub">تصاویری منتخب از مأموریت‌ها، رزمایش‌ها و لحظات تاریخی نیروی هوایی ارتش.</p>
+    </div>
+
+    <div class="gallery" id="galleryGrid">
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 01</span>پرواز بر فراز ابرها</div>
+      </div>
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1614028674026-a65e3182b16d?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1614028674026-a65e3182b16d?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 02</span>لحظه فرود</div>
+      </div>
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1592365325009-45d0e67bab8a?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1592365325009-45d0e67bab8a?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 03</span>غروب عملیاتی</div>
+      </div>
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1573713113866-3a3c17a8d6f5?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1573713113866-3a3c17a8d6f5?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 04</span>در آشیانه</div>
+      </div>
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1542296950-a466c1f4f024?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1542296950-a466c1f4f024?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 05</span>ناوگان ترابری</div>
+      </div>
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 06</span>پهپاد راهبردی</div>
+      </div>
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 07</span>آسمان شب</div>
+      </div>
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1530631141493-a8b8f73a4a6a?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1530631141493-a8b8f73a4a6a?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 08</span>رزمایش مشترک</div>
+      </div>
+      <div class="g-item reveal" data-src="https://images.unsplash.com/photo-1517976486722-6a53b8c335e5?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1517976486722-6a53b8c335e5?w=800&q=80" alt="" loading="lazy">
+        <div class="g-caption"><span>Mission 09</span>پرواز تشکیلاتی</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Recruitment -->
+<section id="recruit" class="recruit">
+  <div class="container">
+    <div class="recruit-wrap">
+      <div class="recruit-visual reveal">
+        <img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=1200&q=85" alt="">
+        <div class="recruit-quote">
+          <div class="q">«آسمان، سرزمین کسانی است که جرأت پرواز دارند.»</div>
+          <div class="a">— فرماندهی نیروی هوایی ارتش</div>
+        </div>
+      </div>
+
+      <form class="recruit-form reveal" onsubmit="event.preventDefault();alert('درخواست شما ثبت شد. با شما تماس خواهیم گرفت.')">
+        <h3>به خلبازان بپیوندید</h3>
+        <p class="lead">اگر رویای پرواز در سر دارید و آماده‌اید در خدمت میهن، آسمان را به میدان اقتدار تبدیل کنید. فرم زیر را تکمیل نمایید.</p>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>نام</label>
+            <input type="text" required placeholder="نام کامل">
+          </div>
+          <div class="form-field">
+            <label>نام خانوادگی</label>
+            <input type="text" required placeholder="نام خانوادگی">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>کد ملی</label>
+            <input type="text" required placeholder="۰۰۰۰۰۰۰۰۰۰">
+          </div>
+          <div class="form-field">
+            <label>سن</label>
+            <input type="number" required min="18" max="35" placeholder="۱۸ تا ۳۵">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>تخصص مورد نظر</label>
+          <select required>
+            <option value="">انتخاب کنید...</option>
+            <option>خلبانی جنگنده</option>
+            <option>مهندسی هوافضا</option>
+            <option>کنترل ترافیک هوایی</option>
+            <option>پدافند هوایی</option>
+            <option>پهپاد</option>
+            <option>تعمیر و نگهداری</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label>شماره تماس</label>
+          <input type="tel" required placeholder="۰۹۱۲۰۰۰۰۰۰۰">
+        </div>
+
+        <div class="form-field">
+          <label>پیام (اختیاری)</label>
+          <textarea placeholder="چرا می‌خواهید بپیوندید؟"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit">
+          ارسال درخواست
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section id="news">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">News · اخبار و رویدادها</div>
+      <h2 class="section-title">آخرین <span class="accent">تحولات</span></h2>
+      <p class="section-sub">گزارش‌ها، رزمایش‌ها و رویدادهای راهبردی نیروی هوایی ارتش جمهوری اسلامی ایران.</p>
+    </div>
+
+    <div class="news-grid">
+      <article class="news-card reveal">
+        <div class="news-img">
+          <span class="news-date">14 · 03</span>
+          <img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=800&q=80" alt="" loading="lazy">
+        </div>
+        <div class="news-body">
+          <div class="news-cat">رزمایش</div>
+          <h4>رزمایش مشترک پدافند هوایی در مرکز کشور</h4>
+          <p>با موفقیت کامل؛ سامانه‌های یکپارچه راداری و موشکی در سناریوی دفاع چندلایه آزمایش شدند.</p>
+          <a href="#" class="news-link">ادامه مطلب ←</a>
+        </div>
+      </article>
+
+      <article class="news-card reveal">
+        <div class="news-img">
+          <span class="news-date">08 · 03</span>
+          <img src="https://images.unsplash.com/photo-1614028674026-a65e3182b16d?w=800&q=80" alt="" loading="lazy">
+        </div>
+        <div class="news-body">
+          <div class="news-cat">فناوری</div>
+          <h4>رونمایی از اویونیک نسل جدید جنگنده کوثر</h4>
+          <p>سامانه‌های بومی ناوبری، رادار و جنگ الکترونیک بر روی جنگنده تمام‌ایرانی نصب شد.</p>
+          <a href="#" class="news-link">ادامه مطلب ←</a>
+        </div>
+      </article>
+
+      <article class="news-card reveal">
+        <div class="news-img">
+          <span class="news-date">02 · 03</span>
+          <img src="https://images.unsplash.com/photo-1592365325009-45d0e67bab8a?w=800&q=80" alt="" loading="lazy">
+        </div>
+        <div class="news-body">
+          <div class="news-cat">آموزش</div>
+          <h4>دوره پیشرفته خلبانی جنگنده آغاز شد</h4>
+          <p>نسل جدیدی از خلبازان جوان در آکادمی نیروی هوایی آموزش‌های تخصصی خود را آغاز کردند.</p>
+          <a href="#" class="news-link">ادامه مطلب ←</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="foot-col">
+      <div class="foot-brand">
+        <div class="brand-emblem" style="width:42px;height:42px">
+          <svg viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="46" stroke="#d4af37" stroke-width="1.2" opacity=".6"/>
+            <path d="M50 14 L58 46 L90 50 L58 54 L50 86 L42 54 L10 50 L42 46 Z" fill="#d4af37"/>
+            <circle cx="50" cy="50" r="6" fill="#0a1a33" stroke="#d4af37" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="fa">نهاجا</span>
+          <span class="en">IRIAAF</span>
+        </div>
+      </div>
+      <p>نیروی هوایی ارتش جمهوری اسلامی ایران؛ نگهبان آسمان میهن، با تکیه بر ایمان، فناوری و عزم ملی.</p>
+      <div class="socials">
+        <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z"/></svg></a>
+        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="foot-col">
+      <h5>دسترسی سریع</h5>
+      <a href="#home">خانه</a>
+      <a href="#fleet">ناوگان هوایی</a>
+      <a href="#history">تاریخچه</a>
+      <a href="#capabilities">توانمندی‌ها</a>
+      <a href="#gallery">گالری</a>
+    </div>
+
+    <div class="foot-col">
+      <h5>ارتباط با ما</h5>
+      <a href="#">تهران، ستاد نهاجا</a>
+      <a href="#">021-0000-0000</a>
+      <a href="#">info@iriaaf.ir</a>
+      <a href="#">پایگاه‌های هوایی</a>
+    </div>
+
+    <div class="foot-col">
+      <h5>نقشه پایگاه‌ها</h5>
+      <div class="foot-map">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="mapGrad" x1="0" x2="1">
+              <stop offset="0" stop-color="#102a4a"/>
+              <stop offset="1" stop-color="#0a1a33"/>
+            </linearGradient>
+          </defs>
+          <path d="M40,100 Q80,60 140,80 T260,70 Q320,60 360,100 Q340,140 280,150 T140,160 Q80,150 40,100 Z"
+                fill="url(#mapGrad)" stroke="#d4af37" stroke-width="1" opacity=".6"/>
+          <path d="M80,90 Q120,70 180,85 T300,80" fill="none" stroke="#6fd1ff" stroke-width=".5" opacity=".4" stroke-dasharray="2 3"/>
+        </svg>
+        <div class="map-pin" style="top:40%;left:30%"></div>
+        <div class="map-pin" style="top:55%;left:50%"></div>
+        <div class="map-pin" style="top:35%;left:70%"></div>
+        <div class="map-pin" style="top:65%;left:25%"></div>
+        <div class="map-pin" style="top:45%;left:85%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot-bottom">
+    <div>© 2025 IRIAAF · تمامی حقوق محفوظ است</div>
+    <div>Designed with precision · Powered by national pride</div>
+  </div>
+</footer>
+
+<!-- Audio Toggle -->
+<button class="audio-toggle muted" id="audioToggle" title="صدای محیط">
+  <div class="audio-bars">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</button>
+
+<audio id="ambientAudio" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_13a8f5f6e0.mp3?filename=jet-engine-ambient-129031.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  // Preloader
+  window.addEventListener('load',()=>{
+    setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),900);
+  });
+
+  // Custom cursor
+  const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  (function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+  document.querySelectorAll('a,button,.jet-card,.g-item,.news-card,.cap-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+  });
+
+  // Header scroll
+  const header=document.getElementById('header');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>50));
+
+  // Theme toggle
+  const themeBtn=document.getElementById('themeToggle');
+  themeBtn.addEventListener('click',()=>{
+    const cur=document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme',cur==='light'?'dark':'light');
+  });
+
+  // Flight trails
+  const trailsWrap=document.getElementById('trails');
+  function spawnTrail(){
+    const t=document.createElement('div');t.className='trail';
+    const y=Math.random()*100;const dur=4+Math.random()*6;
+    t.style.top=y+'%';t.style.left='-300px';
+    t.style.transform=`rotate(${-5+Math.random()*10}deg)`;
+    trailsWrap.appendChild(t);
+    gsap.to(t,{x:window.innerWidth+400,opacity:1,duration:dur*.3,ease:'power1.in'});
+    gsap.to(t,{x:window.innerWidth+400,opacity:0,duration:dur*.7,delay:dur*.3,ease:'power1.out',onComplete:()=>t.remove()});
+    setTimeout(spawnTrail,2000+Math.random()*4000);
+  }
+  spawnTrail();
+
+  // Reveal on scroll
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // 3D tilt on jet cards
+  document.querySelectorAll('[data-tilt]').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(1000px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave',()=>card.style.transform='');
+  });
+
+  // Counter animation
+  const counters=document.querySelectorAll('.counter');
+  const cIO=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target;const target=+el.dataset.target;
+        let cur=0;const step=Math.max(1,Math.ceil(target/60));
+        const iv=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(iv)}el.textContent=cur},25);
+        cIO.unobserve(el);
+      }
+    });
+  },{threshold:.5});
+  counters.forEach(c=>cIO.observe(c));
+
+  // Lightbox
+  const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightboxImg');
+  document.querySelectorAll('.g-item').forEach(it=>{
+    it.addEventListener('click',()=>{lbImg.src=it.dataset.src;lb.classList.add('active')});
+  });
+  document.getElementById('lightboxClose').addEventListener('click',()=>lb.classList.remove('active'));
+  lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('active')});
+
+  // Audio toggle
+  const audioBtn=document.getElementById('audioToggle'),audio=document.getElementById('ambientAudio');
+  audio.volume=.25;
+  audioBtn.addEventListener('click',()=>{
+    audioBtn.classList.toggle('muted');
+    if(audioBtn.classList.contains('muted'))audio.pause();else audio.play().catch(()=>{});
+  });
+
+  // Hero parallax
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.to('.hero-content',{y:100,opacity:.3,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.hero-video-wrap',{scale:1.1,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+  // Section parallax
+  gsap.utils.toArray('section').forEach(s=>{
+    if(s.classList.contains('hero'))return;
+    gsap.fromTo(s.querySelector('.section-head'),{y:30,opacity:0},{y:0,opacity:1,duration:1,ease:'power3.out',scrollTrigger:{trigger:s,start:'top 80%'}});
+  });
+
+  // Hero entrance
+  gsap.from('.hero-tag',{y:30,opacity:0,duration:1,delay:1.1,ease:'power3.out'});
+  gsap.from('.hero .subtitle',{y:30,opacity:0,duration:1,delay:1.3,ease:'power3.out'});
+  gsap.from('.hero h1',{y:50,opacity:0,duration:1.2,delay:1.5,ease:'power3.out'});
+  gsap.from('.hero .desc',{y:30,opacity:0,duration:1,delay:1.8,ease:'power3.out'});
+  gsap.from('.hero-ctas .btn',{y:30,opacity:0,duration:.8,delay:2,stagger:.15,ease:'power3.out'});
+</script>
+</body>
+</html>
