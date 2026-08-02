@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ناوگان هوایی — نیروی هوایی ارتش جمهوری اسلامی ایران</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link href="https://cdn.fontsource.org/fonts/space-grotesk@5.0.0/latin-700-normal.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--obsidian:#05070B;--navy:#071426;--gunmetal:#252A32;--titanium:#C7CDD6;
+--gold:#C9A227;--blue:#00BFFF;--plasma:#EAF8FF;
+--glass:rgba(7,20,38,0.65);--glass-border:rgba(199,205,214,0.1);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Vazirmatn','Inter',sans-serif;background:var(--obsidian);color:var(--titanium);overflow-x:hidden;line-height:1.8}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--obsidian)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--blue));border-radius:3px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2.5rem;backdrop-filter:blur(25px);background:rgba(5,7,11,0.75);border-bottom:1px solid var(--glass-border);transition:all .4s}
+.nav.scrolled{padding:.6rem 2.5rem;background:rgba(5,7,11,0.95)}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:14px}
+.nav-brand svg{width:40px;height:40px;filter:drop-shadow(0 0 8px rgba(201,162,39,.4))}
+.nav-brand-text{font-family:'Space Grotesk',sans-serif;font-size:.8rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--titanium);text-decoration:none;font-size:.85rem;letter-spacing:1px;transition:all .3s;position:relative;padding:4px 0}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;right:0;width:0;height:1px;background:var(--blue);transition:width .3s}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a:hover::after{width:100%}
+.nav-line{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.5}
+
+/* HERO */
+.hero{position:relative;height:70vh;min-height:500px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.4) contrast(1.1)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,11,.4) 0%,rgba(5,7,11,.2) 40%,rgba(5,7,11,.7) 70%,var(--obsidian) 100%)}
+.hero-content{position:relative;z-index:3;text-align:center;max-width:900px;padding:0 2rem}
+.hero-label{font-family:'Space Grotesk',sans-serif;font-size:.75rem;color:var(--gold);letter-spacing:5px;text-transform:uppercase;margin-bottom:1.5rem;display:inline-flex;align-items:center;gap:10px}
+.hero-label .line{width:40px;height:1px;background:var(--gold)}
+.hero-title{font-size:clamp(2.2rem,5vw,4rem);font-weight:900;color:var(--plasma);line-height:1.3;margin-bottom:1rem}
+.hero-subtitle{font-family:'Space Grotesk',sans-serif;font-size:clamp(1rem,2vw,1.4rem);color:var(--blue);letter-spacing:3px;margin-bottom:1.5rem}
+.hero-desc{font-size:1rem;color:var(--titanium);opacity:.7;max-width:600px;margin:0 auto}
+
+/* STATS BAR */
+.stats-bar{position:relative;z-index:4;max-width:1200px;margin:-3rem auto 0;padding:2rem 3rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;backdrop-filter:blur(20px);display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.stat-item{text-align:center;position:relative}
+.stat-item:not(:last-child)::after{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:var(--glass-border)}
+.stat-number{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;color:var(--blue);display:block}
+.stat-label{font-size:.8rem;color:var(--titanium);opacity:.6;margin-top:.3rem}
+
+/* SECTION */
+.section{padding:6rem 2rem;position:relative}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-label{font-family:'Space Grotesk',sans-serif;font-size:.7rem;color:var(--gold);letter-spacing:5px;text-transform:uppercase;margin-bottom:1rem;display:block}
+.section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;color:var(--plasma);margin-bottom:1rem}
+.section-line{width:60px;height:2px;background:linear-gradient(90deg,var(--gold),var(--blue));margin:0 auto}
+
+/* FILTER TABS */
+.filter-tabs{max-width:1200px;margin:0 auto 3rem;display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap}
+.filter-tab{padding:10px 28px;background:var(--glass);border:1px solid var(--glass-border);border-radius:30px;color:var(--titanium);font-family:'Vazirmatn',sans-serif;font-size:.85rem;cursor:pointer;transition:all .4s;letter-spacing:1px}
+.filter-tab:hover{border-color:rgba(0,191,255,.3);color:var(--blue)}
+.filter-tab.active{background:linear-gradient(135deg,rgba(0,191,255,.15),rgba(201,162,39,.08));border-color:var(--blue);color:var(--plasma);box-shadow:0 0 25px rgba(0,191,255,.15)}
+
+/* FLEET GRID */
+.fleet-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:2rem}
+
+/* AIRCRAFT CARD */
+.aircraft-card{position:relative;background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);transform-style:preserve-3d;cursor:pointer}
+.aircraft-card:hover{transform:translateY(-8px);border-color:rgba(0,191,255,.25);box-shadow:0 25px 60px rgba(0,191,255,.08),0 0 0 1px rgba(0,191,255,.1)}
+.aircraft-card.hidden{display:none}
+
+.card-visual{position:relative;height:240px;overflow:hidden;background:linear-gradient(135deg,var(--navy),var(--obsidian))}
+.card-visual img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);filter:brightness(.85) contrast(1.05)}
+.aircraft-card:hover .card-visual img{transform:scale(1.08);filter:brightness(1) contrast(1.1)}
+.card-visual::after{content:'';position:absolute;bottom:0;left:0;right:0;height:70%;background:linear-gradient(to top,var(--glass) 0%,transparent 100%)}
+.card-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .4s}
+.aircraft-card:hover .card-visual::before{opacity:1}
+
+.card-origin{position:absolute;top:1rem;right:1rem;padding:5px 14px;background:rgba(5,7,11,.8);border:1px solid var(--glass-border);border-radius:20px;font-size:.7rem;color:var(--gold);letter-spacing:2px;backdrop-filter:blur(10px);z-index:2}
+.card-status{position:absolute;top:1rem;left:1rem;display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(5,7,11,.8);border:1px solid rgba(0,191,255,.2);border-radius:20px;font-size:.65rem;color:var(--blue);letter-spacing:1px;z-index:2;backdrop-filter:blur(10px)}
+.card-status .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.card-body{padding:1.5rem 1.8rem 1.8rem}
+.card-name{font-size:1.4rem;font-weight:800;color:var(--plasma);margin-bottom:.2rem}
+.card-codename{font-family:'Space Grotesk',sans-serif;font-size:.8rem;color:var(--gold);letter-spacing:2px;margin-bottom:.8rem}
+.card-role{font-size:.85rem;color:var(--titanium);opacity:.7;margin-bottom:1.2rem;line-height:1.8}
+
+.card-specs{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-bottom:1.2rem}
+.spec{display:flex;flex-direction:column;gap:2px;padding:.6rem .8rem;background:rgba(5,7,11,.4);border-radius:8px;border:1px solid rgba(199,205,214,.05)}
+.spec-label{font-size:.6rem;color:var(--titanium);opacity:.4;text-transform:uppercase;letter-spacing:1.5px;font-family:'Space Grotesk',sans-serif}
+.spec-value{font-family:'Space Grotesk',sans-serif;font-size:.95rem;color:var(--blue);font-weight:700}
+
+.card-tags{display:flex;gap:.5rem;flex-wrap:wrap}
+.card-tag{padding:3px 10px;background:rgba(0,191,255,.06);border:1px solid rgba(0,191,255,.12);border-radius:15px;font-size:.65rem;color:var(--blue);letter-spacing:.5px}
+.card-tag.gold{background:rgba(201,162,39,.06);border-color:rgba(201,162,39,.15);color:var(--gold)}
+
+/* DETAIL MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(5,7,11,.95);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(20px);padding:2rem}
+.modal-overlay.active{display:flex}
+.modal{max-width:900px;width:100%;max-height:90vh;overflow-y:auto;background:var(--navy);border:1px solid var(--glass-border);border-radius:20px;position:relative}
+.modal::-webkit-scrollbar{width:4px}
+.modal::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+.modal-close{position:absolute;top:1.5rem;left:1.5rem;width:40px;height:40px;border-radius:50%;background:rgba(5,7,11,.8);border:1px solid var(--glass-border);color:var(--titanium);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:all .3s}
+.modal-close:hover{border-color:var(--blue);color:var(--blue)}
+.modal-hero{height:300px;position:relative;overflow:hidden}
+.modal-hero img{width:100%;height:100%;object-fit:cover;filter:brightness(.7)}
+.modal-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,var(--navy),transparent)}
+.modal-info{position:absolute;bottom:2rem;right:2rem;z-index:2}
+.modal-name{font-size:2rem;font-weight:900;color:var(--plasma)}
+.modal-codename{font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--gold);letter-spacing:3px}
+.modal-body{padding:2rem 2.5rem 2.5rem}
+.modal-desc{font-size:.95rem;color:var(--titanium);opacity:.8;line-height:2;margin-bottom:2rem}
+.modal-specs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.modal-spec{padding:1.2rem;background:rgba(5,7,11,.5);border:1px solid var(--glass-border);border-radius:10px}
+.modal-spec-label{font-size:.65rem;color:var(--titanium);opacity:.4;text-transform:uppercase;letter-spacing:2px;font-family:'Space Grotesk',sans-serif;margin-bottom:.3rem}
+.modal-spec-value{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;color:var(--blue);font-weight:700}
+.modal-history{padding:1.5rem;background:rgba(201,162,39,.04);border:1px solid rgba(201,162,39,.15);border-radius:10px}
+.modal-history h4{font-size:.9rem;color:var(--gold);margin-bottom:.8rem;letter-spacing:1px}
+.modal-history p{font-size:.85rem;color:var(--titanium);opacity:.7;line-height:2}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* FOOTER */
+.footer{padding:3rem 2rem;border-top:1px solid var(--glass-border);text-align:center}
+.footer p{font-size:.75rem;color:var(--titanium);opacity:.3}
+
+/* RESPONSIVE */
+@media(max-width:968px){
+.nav-links{display:none}
+.stats-bar{grid-template-columns:repeat(2,1fr);margin:-2rem 1rem 0;padding:1.5rem}
+.stat-item:nth-child(2)::after{display:none}
+.fleet-grid{grid-template-columns:1fr}
+.modal-hero{height:200px}
+.modal-body{padding:1.5rem}
+}
+@media(max-width:640px){
+.stats-bar{grid-template-columns:1fr 1fr;gap:1rem}
+.stat-item::after{display:none !important}
+.filter-tabs{gap:.5rem}
+.filter-tab{padding:8px 16px;font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+<div class="nav-inner">
+<div class="nav-brand">
+<svg viewBox="0 0 100 100" fill="none">
+<circle cx="50" cy="50" r="45" stroke="#C9A227" stroke-width="1.5" opacity=".6"/>
+<circle cx="50" cy="50" r="38" stroke="#00BFFF" stroke-width=".5" opacity=".4"/>
+<path d="M50 12 L56 38 L82 44 L56 50 L50 78 L44 50 L18 44 L44 38 Z" fill="#C9A227" opacity=".9"/>
+<circle cx="50" cy="50" r="8" fill="#00BFFF" opacity=".6"/>
+</svg>
+<span class="nav-brand-text">IRIAF Fleet</span>
+</div>
+<ul class="nav-links">
+<li><a href="#fleet">ناوگان هوایی</a></li>
+<li><a href="#" style="color:var(--blue)">جنگنده‌ها</a></li>
+<li><a href="#">ترابری</a></li>
+<li><a href="#">بالگردها</a></li>
+<li><a href="#">آموزشی</a></li>
+</ul>
+</div>
+<div class="nav-line"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-bg">
+<img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=1920&q=80" alt="Military aircraft">
+</div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-label"><span class="line"></span> AIRCRAFT FLEET <span class="line"></span></div>
+<h1 class="hero-title">ناوگان هوایی</h1>
+<p class="hero-subtitle">Islamic Republic of Iran Air Force Fleet</p>
+<p class="hero-desc">مجموعه‌ای از پیشرفته‌ترین جنگنده‌ها، هواپیماهای ترابری، بالگردها و سامانه‌های بومی در خدمت دفاع از آسمان ایران</p>
+</div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar reveal">
+<div class="stat-item">
+<span class="stat-number" data-target="300">0</span>
+<span class="stat-label">فروند هواگرد فعال</span>
+</div>
+<div class="stat-item">
+<span class="stat-number" data-target="12">0</span>
+<span class="stat-label">پایگاه هوایی عملیاتی</span>
+</div>
+<div class="stat-item">
+<span class="stat-number" data-target="8">0</span>
+<span class="stat-label">نوع جنگنده</span>
+</div>
+<div class="stat-item">
+<span class="stat-number" data-target="75">0</span>
+<span class="stat-label">+ سال سابقه پرواز</span>
+</div>
+</div>
+
+<!-- FLEET SECTION -->
+<section class="section" id="fleet">
+<div class="section-header">
+<span class="section-label reveal">Complete Fleet Inventory — فهرست کامل ناوگان</span>
+<h2 class="section-title reveal">هواگردهای عملیاتی</h2>
+<div class="section-line reveal"></div>
+</div>
+
+<div class="filter-tabs reveal">
+<button class="filter-tab active" data-filter="all">همه هواگردها</button>
+<button class="filter-tab" data-filter="fighter">جنگنده‌ها</button>
+<button class="filter-tab" data-filter="transport">ترابری</button>
+<button class="filter-tab" data-filter="helicopter">بالگردها</button>
+<button class="filter-tab" data-filter="trainer">آموزشی</button>
+<button class="filter-tab" data-filter="tanker">سوخت‌رسان</button>
+<button class="filter-tab" data-filter="indigenous">بومی‌سازی شده</button>
+</div>
+
+<div class="fleet-grid" id="fleetGrid">
+
+<!-- F-14 Tomcat -->
+<div class="aircraft-card reveal" data-category="fighter" data-name="F-14 Tomcat" data-codename="تامکت" data-role="جنگنده برتری هوایی / رهگیر" data-origin="آمریکا" data-status="عملیاتی" data-speed="Mach 2.34" data-range="۲,۹۶۰ کیلومتر" data-ceiling="۱۶,۱۵۰ متر" data-engines="۲ × Pratt & Whitney TF30" data-entered="۱۳۵۴" data-desc="اف-۱۴ تامکت یکی از پیشرفته‌ترین جنگنده‌های نیروی هوایی ایران است که در دهه ۱۳۵۰ شمسی از آمریکا خریداری شد. این جنگنده با قابلیت حمل موشک فونیکس و رادار قدرتمند AWG-9، در دوران جنگ تحمیلی نقش حیاتی در دفاع هوایی ایران ایفا کرد. ایران تنها کشوری است که خارج از آمریکا از این جنگنده استفاده عملیاتی می‌کند." data-history="در جنگ تحمیلی، خلبانان ایرانی با F-14 موفق به سرنگونی ده‌ها هواپیمای عراقی شدند. پس از انقلاب و قطع روابط با آمریکا، مهندسان ایرانی با مهندسی معکوس توانستند این جنگنده را operational نگه دارند. قطعات یدکی و تسلیحات آن بومی‌سازی شده است.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1614029263798-1cdc07660b30?w=800&q=80" alt="F-14 Tomcat">
+<span class="card-origin">🇺🇸 USA</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">F-14 Tomcat</h3>
+<div class="card-codename">تامکت — Grumman</div>
+<p class="card-role">جنگنده برتری هوایی / رهگیر دوربرد</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 2.34</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">2,960 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">16,150 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1976</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">رهگیر</span>
+<span class="card-tag gold">بال متغیر</span>
+<span class="card-tag">موشک فونیکس</span>
+</div>
+</div>
+</div>
+
+<!-- F-4 Phantom II -->
+<div class="aircraft-card reveal" data-category="fighter" data-name="F-4 Phantom II" data-codename="فانتوم" data-role="جنگنده-بمب‌افکن / شناسایی" data-origin="آمریکا" data-status="عملیاتی" data-speed="Mach 2.23" data-range="۲,۶۰۰ کیلومتر" data-ceiling="۱۸,۳۰۰ متر" data-engines="۲ × GE J79" data-entered="۱۳۴۷" data-desc="اف-۴ فانتوم II ستون فقرات نیروی هوایی ایران در دوران جنگ تحمیلی بود. این جنگنده چندمنظوره قابلیت حمل طیف گسترده‌ای از تسلیحات هوا به هوا و هوا به زمین را دارد. ایران یکی از بزرگ‌ترین ناوگان فانتوم جهان را در اختیار دارد." data-history="فانتوم‌ها در طول جنگ تحمیلی بیشترین سورتی پرواز را среди جنگنده‌های ایرانی انجام دادند. عملیات‌های بمباران استراتژیک و دفاع هوایی از مهم‌ترین نقش‌های این جنگنده بود.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&q=80" alt="F-4 Phantom">
+<span class="card-origin">🇺🇸 USA</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">F-4 Phantom II</h3>
+<div class="card-codename">فانتوم — McDonnell Douglas</div>
+<p class="card-role">جنگنده-بمب‌افکن / شناسایی</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 2.23</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">2,600 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">18,300 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1968</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">چندمنظوره</span>
+<span class="card-tag gold">بمب‌افکن</span>
+<span class="card-tag">شناسایی</span>
+</div>
+</div>
+</div>
+
+<!-- F-5 Tiger II -->
+<div class="aircraft-card reveal" data-category="fighter" data-name="F-5 Tiger II" data-codename="تایگر" data-role="جنگنده سبک / تهاجمی" data-origin="آمریکا" data-status="عملیاتی" data-speed="Mach 1.63" data-range="۲,۲۶۰ کیلومتر" data-ceiling="۱۵,۸۰۰ متر" data-engines="۲ × GE J85" data-entered="۱۳۴۵" data-desc="اف-۵ تایگر یک جنگنده سبک و چابک است که در نیروی هوایی ایران به صورت گسترده استفاده شده. این جنگنده به دلیل سادگی نگهداری و قابلیت مانور بالا، همچنان در خدمت فعال است. ایران نسخه بهبود یافته آن را با نام «صعقه» بومی‌سازی کرده است." data-history="اف-۵ در جنگ تحمیلی نقش مهمی در عملیات‌های تهاجمی و پشتیبانی نزدیک هوایی داشت. بیش از ۱۰۰ فروند از این جنگنده قبل از انقلاب خریداری شد.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80" alt="F-5 Tiger">
+<span class="card-origin">🇺🇸 USA</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">F-5 Tiger II</h3>
+<div class="card-codename">تایگر — Northrop</div>
+<p class="card-role">جنگنده سبک / تهاجمی سبک</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 1.63</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">2,260 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">15,800 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1966</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">سبک</span>
+<span class="card-tag gold">چابک</span>
+<span class="card-tag">پشتیبانی هوایی</span>
+</div>
+</div>
+</div>
+
+<!-- MiG-29 Fulcrum -->
+<div class="aircraft-card reveal" data-category="fighter" data-name="MiG-29 Fulcrum" data-codename="فالکرام" data-role="جنگنده برتری هوایی / چندمنظوره" data-origin="روسیه" data-status="عملیاتی" data-speed="Mach 2.25" data-range="۱,۴۳۰ کیلومتر" data-ceiling="۱۸,۰۰۰ متر" data-engines="۲ × Klimov RD-33" data-entered="۱۳۶۹" data-desc="میگ-۲۹ فالکرام یک جنگنده برتری هوایی نسل چهارم ساخت روسیه است که پس از انقلاب و در دوران جنگ تحمیلی به ایران تحویل داده شد. این جنگنده با قابلیت مانور فوق‌العاده و سیستم‌های پیشرفته، یکی از ستون‌های دفاع هوایی ایران محسوب می‌شود." data-history="میگ-۲۹‌ها در اواخر جنگ تحمیلی وارد خدمت شدند. ایران تعداد قابل توجهی از این جنگنده را از روسیه خریداری کرده و توانسته با پشتیبانی فنی روسیه آنها را عملیاتی نگه دارد.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1569949381669-ecf31ae8e613?w=800&q=80" alt="MiG-29">
+<span class="card-origin">🇷🇺 Russia</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">MiG-29 Fulcrum</h3>
+<div class="card-codename">فالکرام — Mikoyan</div>
+<p class="card-role">جنگنده برتری هوایی / چندمنظوره</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 2.25</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">1,430 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">18,000 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1990</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">نسل ۴</span>
+<span class="card-tag gold">مانور بالا</span>
+<span class="card-tag">R-73</span>
+</div>
+</div>
+</div>
+
+<!-- Su-24 Fencer -->
+<div class="aircraft-card reveal" data-category="fighter" data-name="Su-24 Fencer" data-codename="فنسر" data-role="جنگنده تهاجمی / بمب‌افکن تاکتیکی" data-origin="روسیه" data-status="عملیاتی" data-speed="Mach 1.35" data-range="۲,۷۷۵ کیلومتر" data-ceiling="۱۷,۵۰۰ متر" data-engines="۲ × Lyulka AL-21F" data-entered="۱۳۷۰" data-desc="سو-۲۴ فنسر یک جنگنده تهاجمی تمام‌عیار با قابلیت پرواز در تمام شرایط آب و هوایی و در شب است. این هواپیما با بال‌های متغیر هندسی، قابلیت حمل حجم بالایی از مهمات را دارد و برای ماموریت‌های بمباران استراتژیک و تهاجمی طراحی شده است." data-history="سو-۲۴‌ها در دوران جنگ تحمیلی از عراق علیه ایران استفاده شدند. پس از جنگ، ایران تعدادی از این هواپیماها را از روسیه و لیبی دریافت کرد.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=800&q=80" alt="Su-24">
+<span class="card-origin">🇷🇺 Russia</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">Su-24 Fencer</h3>
+<div class="card-codename">فنسر — Sukhoi</div>
+<p class="card-role">جنگنده تهاجمی / بمب‌افکن تاکتیکی</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 1.35</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">2,775 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">17,500 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1991</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">بمب‌افکن</span>
+<span class="card-tag gold">بال متغیر</span>
+<span class="card-tag">تمام‌weather</span>
+</div>
+</div>
+</div>
+
+<!-- Su-25 Frogfoot -->
+<div class="aircraft-card reveal" data-category="fighter" data-name="Su-25 Frogfoot" data-codename="فراگ‌فوت" data-role="پشتیبانی نزدیک هوایی / حمله‌ای" data-origin="روسیه" data-status="عملیاتی" data-speed="Mach 0.82" data-range="۱,۰۰۰ کیلومتر" data-ceiling="۱۲,۰۰۰ متر" data-engines="۲ × Tumansky R-195" data-entered="۱۳۷۰" data-desc="سو-۲۵ فراگ‌فوت یک هواپیمای حمله‌ای و پشتیبانی نزدیک هوایی است که برای نابودی اهداف زمینی در خط مقدم طراحی شده. زره‌بندی قوی و قابلیت بقای بالا از ویژگی‌های بارز این هواپیماست." data-history="ایران تعدادی سو-۲۵ را از عراق (هواپیماهای فراری دوران جنگ خلیج فارس) و همچنین از روسیه دریافت کرده است.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80" alt="Su-25">
+<span class="card-origin">🇷🇺 Russia</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">Su-25 Frogfoot</h3>
+<div class="card-codename">فراگ‌فوت — Sukhoi</div>
+<p class="card-role">پشتیبانی نزدیک هوایی / حمله‌ای</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 0.82</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">1,000 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">12,000 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1991</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">زره‌بند</span>
+<span class="card-tag gold">CAS</span>
+<span class="card-tag">ضد زره</span>
+</div>
+</div>
+</div>
+
+<!-- Azarakhsh (Indigenous) -->
+<div class="aircraft-card reveal" data-category="indigenous" data-name="آذرخش" data-codename="Azarakhsh" data-role="جنگنده سبک بومی" data-origin="ایران" data-status="توسعه/عملیاتی" data-speed="Mach 1.2" data-range="۱,۵۰۰ کیلومتر" data-ceiling="۱۲,۰۰۰ متر" data-engines="۲ × J85 (بومی‌سازی)" data-entered="۱۳۷۶" data-desc="آذرخش یک جنگنده سبک بومی ایران است که بر پایه اف-۵ طراحی و ساخته شده. این پروژه نشان‌دهنده توانمندی صنعت هوانوردی ایران در مهندسی معکوس و بومی‌سازی فناوری‌های پیشرفته نظامی است." data-history="پروژه آذرخش از اواسط دهه ۷۰ شمسی آغاز شد و نمونه اولیه آن در سال ۱۳۷۶ رونمایی شد. این جنگنده بر اساس بدنه اف-۵ با بهبودهای داخلی طراحی شده است.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=800&q=80" alt="Azarakhsh">
+<span class="card-origin">🇮🇷 Iran</span>
+<span class="card-status"><span class="dot"></span> بومی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">آذرخش</h3>
+<div class="card-codename">Azarakhsh — صاعقه</div>
+<p class="card-role">جنگنده سبک بومی / توسعه‌یافته از F-5</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 1.2</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">~1,500 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">~12,000 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1997</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag gold">بومی</span>
+<span class="card-tag">مهندسی معکوس</span>
+<span class="card-tag">صنعت ملی</span>
+</div>
+</div>
+</div>
+
+<!-- Saeqeh -->
+<div class="aircraft-card reveal" data-category="indigenous" data-name="صعقه" data-codename="Saeqeh" data-role="جنگنده سبک بومی / نسل بهبود یافته" data-origin="ایران" data-status="عملیاتی" data-speed="Mach 1.4" data-range="۱,۸۰۰ کیلومتر" data-ceiling="۱۴,۰۰۰ متر" data-engines="۲ × Owj (بومی)" data-entered="۱۳۸۵" data-desc="صعقه نسخه بهبود یافته آذرخش است که با سیستم‌های اویونیک پیشرفته‌تر، رادار بهبود یافته و قابلیت حمل تسلیحات جدیدتر توسعه یافته. این جنگنده نمادی از خودکفایی ایران در صنعت هوانوردی نظامی است." data-history="صعقه در سال ۱۳۸۵ رونمایی شد و دارای کابین خلبان شیشه‌ای (glass cockpit)، سیستم‌های ناوبری پیشرفته و قابلیت حمل موشک‌های بومی است.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1530538987395-032d1800f647?w=800&q=80" alt="Saeqeh">
+<span class="card-origin">🇮🇷 Iran</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">صعقه</h3>
+<div class="card-codename">Saeqeh — Thunderbolt</div>
+<p class="card-role">جنگنده سبک بومی / نسل بهبود یافته</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 1.4</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">~1,800 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">~14,000 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">2006</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag gold">بومی</span>
+<span class="card-tag">اویونیک پیشرفته</span>
+<span class="card-tag">موشک بومی</span>
+</div>
+</div>
+</div>
+
+<!-- Kowsar -->
+<div class="aircraft-card reveal" data-category="indigenous" data-name="کوثر" data-codename="Kowsar" data-role="جنگنده سبک بومی / نسل جدید" data-origin="ایران" data-status="عملیاتی" data-speed="Mach 1.4" data-range="۱,۸۰۰ کیلومتر" data-ceiling="۱۴,۵۰۰ متر" data-engines="۲ × Owj" data-entered="۱۳۹۷" data-desc="کوثر جدیدترین جنگنده بومی ایران است که در سال ۱۳۹۷ رونمایی شد. این جنگنده دارای سیستم‌های اویونیک نسل جدید، کابین شیشه‌ای، HUD و قابلیت حمل تسلیحات پیشرفته بومی است. کوثر نماد بلوغ صنعت هوانوردی نظامی ایران است." data-history="جنگنده کوثر در مرداد ۱۳۹۷ با حضور مقامات ارشد نظامی رونمایی شد. این هواپیما مجهز به رادار پیشرفته، سیستم جنگ الکترونیک و قابلیت حمل انواع موشک‌های هوا به هوا و هوا به زمین بومی است.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1517960619-a126e6f03a54?w=800&q=80" alt="Kowsar">
+<span class="card-origin">🇮🇷 Iran</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">کوثر</h3>
+<div class="card-codename">Kowsar — نسل جدید</div>
+<p class="card-role">جنگنده سبک بومی / نسل چهارم+</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 1.4</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">~1,800 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">~14,500 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">2018</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag gold">بومی</span>
+<span class="card-tag">HUD</span>
+<span class="card-tag">Glass Cockpit</span>
+<span class="card-tag">EW</span>
+</div>
+</div>
+</div>
+
+<!-- C-130 Hercules -->
+<div class="aircraft-card reveal" data-category="transport" data-name="C-130 Hercules" data-codename="هرکولس" data-role="هواپیمای ترابری نظامی" data-origin="آمریکا" data-status="عملیاتی" data-speed="۵۴۰ کیلومتر/ساعت" data-range="۳,۸۰۰ کیلومتر" data-ceiling="۱۰,۰۰۰ متر" data-engines="۴ × Allison T56" data-entered="۱۳۴۵" data-desc="سی-۱۳۰ هرکولس هواپیمای ترابری نظامی اصلی نیروی هوایی ایران است. این هواپیما با بیش از ۵۰ سال خدمت، نقش حیاتی در لجستیک نظامی، حمل نیرو و تجهیزات، و عملیات‌های بشردوستانه ایفا می‌کند." data-history="هرکولس‌ها در جنگ تحمیلی نقش بسیار مهمی در انتقال تجهیزات و نیرو به جبهه‌ها داشتند. ایران توانسته با مهندسی معکوس و تعمیرات اساسی، این هواپیماها را عملیاتی نگه دارد.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=800&q=80" alt="C-130">
+<span class="card-origin">🇺🇸 USA</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">C-130 Hercules</h3>
+<div class="card-codename">هرکولس — Lockheed</div>
+<p class="card-role">هواپیمای ترابری نظامی / لجستیک</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">540 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">3,800 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">10,000 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1966</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">ترابری</span>
+<span class="card-tag gold">لجستیک</span>
+<span class="card-tag">۴ موتور</span>
+</div>
+</div>
+</div>
+
+<!-- Boeing 707 -->
+<div class="aircraft-card reveal" data-category="transport tanker" data-name="Boeing 707" data-codename" data-role="ترابری / سوخت‌رسان هوایی" data-origin="آمریکا" data-status="عملیاتی" data-speed="۹۸۰ کیلومتر/ساعت" data-range="۹,۰۰۰ کیلومتر" data-ceiling="۱۲,۸۰۰ متر" data-engines="۴ × JT3D" data-entered="۱۳۴۸" data-desc="بوئینگ ۷۰۷ در نیروی هوایی ایران هم به عنوان هواپیمای ترابری و هم به عنوان سوخت‌رسان هوایی (Tanker) استفاده می‌شود. این هواپیما قابلیت سوخت‌رسانی به جنگنده‌ها در حین پرواز را دارد و برد عملیاتی ناوگان را به شدت افزایش می‌دهد." data-history="بوئینگ ۷۰۷‌ها از ابتدا به عنوان هواپیمای ترابری وارد خدمت شدند. بعدها برخی از آنها به سوخت‌رسان هوایی تبدیل شدند و در عملیات‌های دوربرد نقش کلیدی دارند.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=800&q=80" alt="Boeing 707">
+<span class="card-origin">🇺🇸 USA</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">Boeing 707</h3>
+<div class="card-codename">ترابری / سوخت‌رسان</div>
+<p class="card-role">هواپیمای ترابری / سوخت‌رسان هوایی</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">980 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">9,000 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">12,800 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1969</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">ترابری</span>
+<span class="card-tag gold">سوخت‌رسان</span>
+<span class="card-tag">دوربرد</span>
+</div>
+</div>
+</div>
+
+<!-- Fokker F27 -->
+<div class="aircraft-card reveal" data-category="transport" data-name="Fokker F27" data-codename="فرندشیپ" data-role="ترابری سبک / ارتباطی" data-origin="هلند" data-status="عملیاتی" data-speed="۴۶۰ کیلومتر/ساعت" data-range="۱,۸۰۰ کیلومتر" data-ceiling="۸,۲۰۰ متر" data-engines="۲ × Rolls-Royce Dart" data-entered="۱۳۵۰" data-desc="فوکر اف-۲۷ فرندشیپ یک هواپیمای ترابری سبک دو موتوره توربوپراپ است که برای ماموریت‌های ترابری سبک، ارتباطی و آموزشی استفاده می‌شود." data-history="فوکرها از دهه ۱۳۵۰ در نیروی هوایی ایران خدمت می‌کنند و برای انتقال پرسنل و محموله‌های سبک بین پایگاه‌ها استفاده می‌شوند.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800&q=80" alt="Fokker F27">
+<span class="card-origin">🇳🇱 Netherlands</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">Fokker F27</h3>
+<div class="card-codename">فرندشیپ — Fokker</div>
+<p class="card-role">ترابری سبک / ارتباطی</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">460 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">1,800 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">8,200 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1971</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">ترابری سبک</span>
+<span class="card-tag">توربوپراپ</span>
+</div>
+</div>
+</div>
+
+<!-- AH-1J SeaCobra -->
+<div class="aircraft-card reveal" data-category="helicopter" data-name="AH-1J SeaCobra" data-codename="سی‌کبرا" data-role="بالگرد تهاجمی" data-origin="آمریکا" data-status="عملیاتی" data-speed="۲۷۷ کیلومتر/ساعت" data-range="۵۰۷ کیلومتر" data-ceiling="۵,۶۰۰ متر" data-engines="۱ × GE T700" data-entered="۱۳۵۱" data-desc="ای‌اچ-۱ جی سی‌کبرا یک بالگرد تهاجمی تک‌موتوره است که برای ماموریت‌های ضدزره و پشتیبانی آتش طراحی شده. ایران بزرگ‌ترین ناوگان سی‌کبرا خارج از آمریکا را در اختیار دارد و در جنگ تحمیلی نقش بسیار مؤثری ایفا کرد." data-history="سی‌کبراها در جنگ تحمیلی علیه زره‌پوش‌های عراقی استفاده شدند و ده‌ها تانک و خودروی زرهی عراق را منهدم کردند. موشک تاو از تسلیحات اصلی این بالگرد بود.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=800&q=80" alt="AH-1J">
+<span class="card-origin">🇺🇸 USA</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">AH-1J SeaCobra</h3>
+<div class="card-codename">سی‌کبرا — Bell</div>
+<p class="card-role">بالگرد تهاجمی / ضدزره</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">277 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">507 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">5,600 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1972</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">تهاجمی</span>
+<span class="card-tag gold">ضدزره</span>
+<span class="card-tag">موشک تاو</span>
+</div>
+</div>
+</div>
+
+<!-- Bell 212 -->
+<div class="aircraft-card reveal" data-category="helicopter" data-name="Bell 212" data-codename="یو‌اچ-۱" data-role="بالگرد ترابری / چندمنظوره" data-origin="آمریکا" data-status="عملیاتی" data-speed="۲۰۴ کیلومتر/ساعت" data-range="۴۴۰ کیلومتر" data-ceiling="۵,۱۰۰ متر" data-engines="۲ × P&WC PT6T" data-entered="۱۳۵۰" data-desc="بل ۲۱۲ یک بالگرد دو موتوره چندمنظوره است که برای ماموریت‌های ترابری، جستجو و نجات، و پشتیبانی عمومی استفاده می‌شود." data-history="بل ۲۱۲‌ها در جنگ تحمیلی برای انتقال مجروحین، حمل تجهیزات و عملیات‌های ویژه استفاده شدند.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1530538987395-032d1800f647?w=800&q=80" alt="Bell 212">
+<span class="card-origin">🇺🇸 USA</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">Bell 212</h3>
+<div class="card-codename">یو‌اچ-۱ — Bell</div>
+<p class="card-role">بالگرد ترابری / چندمنظوره</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">204 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">440 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">5,100 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1971</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">ترابری</span>
+<span class="card-tag">SAR</span>
+<span class="card-tag gold">دوموتوره</span>
+</div>
+</div>
+</div>
+
+<!-- CH-47 Chinook -->
+<div class="aircraft-card reveal" data-category="helicopter" data-name="CH-47 Chinook" data-codename="شینوک" data-role="بالگرد ترابری سنگین" data-origin="آمریکا" data-status="عملیاتی" data-speed="۲۹۸ کیلومتر/ساعت" data-range="۷۴۰ کیلومتر" data-ceiling="۶,۱۰۰ متر" data-engines="۲ × Lycoming T55" data-entered="۱۳۵۰" data-desc="سی‌اچ-۴۷ شینوک یک بالگرد ترابری سنگین دو روتوره است که قابلیت حمل بارهای سنگین و تعداد زیادی نیرو را دارد. این بالگرد برای عملیات‌های لجستیکی و انتقال نیرو و تجهیزات سنگین استفاده می‌شود." data-history="شینوک‌ها در جنگ تحمیلی نقش مهمی در انتقال تجهیزات سنگین و نیرو به مناطق عملیاتی داشتند.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80" alt="CH-47">
+<span class="card-origin">🇺🇸 USA</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">CH-47 Chinook</h3>
+<div class="card-codename">شینوک — Boeing</div>
+<p class="card-role">بالگرد ترابری سنگین</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">298 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">740 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">6,100 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1971</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">سنگین</span>
+<span class="card-tag gold">دو روتور</span>
+<span class="card-tag">حمل بار</span>
+</div>
+</div>
+</div>
+
+<!-- Mi-17 -->
+<div class="aircraft-card reveal" data-category="helicopter" data-name="Mi-17 Hip" data-codename="هیپ" data-role="بالگرد ترابری / چندمنظوره" data-origin="روسیه" data-status="عملیاتی" data-speed="۲۵۰ کیلومتر/ساعت" data-range="۴۶۵ کیلومتر" data-ceiling="۶,۰۰۰ متر" data-engines="۲ × Klimov TV3-117" data-entered="۱۳۷۰" data-desc="می-۱۷ یک بالگرد ترابری چندمنظوره روسی است که در شرایط سخت آب و هوایی و ارتفاعات بالا عملکرد خوبی دارد. این بالگرد برای ماموریت‌های ترابری، SAR و عملیات در مناطق کوهستانی استفاده می‌شود." data-history="می-۱۷‌ها پس از جنگ تحمیلی از روسیه خریداری شدند و برای تکمیل ناوگان بالگردی نیروی هوایی وارد خدمت شدند.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=80" alt="Mi-17">
+<span class="card-origin">🇷🇺 Russia</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">Mi-17 Hip</h3>
+<div class="card-codename">هیپ — Mil</div>
+<p class="card-role">بالگرد ترابری / چندمنظوره</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">250 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">465 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">6,000 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1991</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">ترابری</span>
+<span class="card-tag">کوهستانی</span>
+<span class="card-tag gold">SAR</span>
+</div>
+</div>
+</div>
+
+<!-- PC-7 Trainer -->
+<div class="aircraft-card reveal" data-category="trainer" data-name="Pilatus PC-7" data-codename="تکسن" data-role="هواپیمای آموزشی پایه" data-origin="سوئیس" data-status="عملیاتی" data-speed="۴۱۲ کیلومتر/ساعت" data-range="۱,۲۶۰ کیلومتر" data-ceiling="۱۰,۰۰۰ متر" data-engines="۱ × P&WC PT6A" data-entered="۱۳۸۰" data-desc="پیلاتوس پی‌سی-۷ یک هواپیمای آموزشی تک‌موتوره توربوپراپ ساخت سوئیس است که برای آموزش اولیه خلبانان نیروی هوایی استفاده می‌شود. این هواپیما به دلیل قابلیت‌های آموزشی عالی و هزینه عملیاتی پایین انتخاب شده است." data-history="پی‌سی-۷‌ها در دهه ۱۳۸۰ وارد خدمت شدند و خلبانان جوان نیروی هوایی اولین مراحل آموزش پرواز خود را با این هواپیما طی می‌کنند.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=800&q=80" alt="PC-7">
+<span class="card-origin">🇨🇭 Switzerland</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">Pilatus PC-7</h3>
+<div class="card-codename">تکسن — Pilatus</div>
+<p class="card-role">هواپیمای آموزشی پایه / توربوپراپ</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">412 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">1,260 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">10,000 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">2001</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">آموزشی</span>
+<span class="card-tag gold">پایه</span>
+<span class="card-tag">توربوپراپ</span>
+</div>
+</div>
+</div>
+
+<!-- YFT-7 / FT-7 -->
+<div class="aircraft-card reveal" data-category="trainer" data-name="FT-7 N-7 Azarakhsh" data-codename="آموزشی پیشرفته" data-role="هواپیمای آموزشی پیشرفته / جنگی" data-origin="چین/ایران" data-status="عملیاتی" data-speed="Mach 1.5" data-range="۱,۴۰۰ کیلومتر" data-ceiling="۱۵,۰۰۰ متر" data-engines="۱ × WP-13" data-entered="۱۳۷۵" data-desc="اف‌تی-۷ یک هواپیمای آموزشی پیشرفته و جنگی سبک است که برای آموزش خلبانان جنگنده و همچنین ماموریت‌های سبک تهاجمی استفاده می‌شود. این هواپیما پل ارتباطی بین آموزش پایه و پرواز با جنگنده‌های عملیاتی است." data-history="اف‌تی-۷‌ها از چین خریداری شدند و خلبانان قبل از انتقال به جنگنده‌های پیشرفته، آموزش‌های خود را با این هواپیما تکمیل می‌کنند.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=800&q=80" alt="FT-7">
+<span class="card-origin">🇨🇳 China</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">FT-7 / YFT-7</h3>
+<div class="card-codename">آموزشی پیشرفته — Guizhou</div>
+<p class="card-role">آموزشی پیشرفته / جنگی سبک</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">Mach 1.5</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">1,400 km</span></div>
+<div class="spec"><span class="spec-label">Ceiling</span><span class="spec-value">15,000 m</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1996</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">آموزشی</span>
+<span class="card-tag gold">پیشرفته</span>
+<span class="card-tag">جنگی</span>
+</div>
+</div>
+</div>
+
+<!-- Il-76 -->
+<div class="aircraft-card reveal" data-category="transport" data-name="Il-76 Candid" data-codename="کندید" data-role="ترابری سنگین استراتژیک" data-origin="روسیه" data-status="عملیاتی" data-speed="۸۵۰ کیلومتر/ساعت" data-range="۵,۰۰۰ کیلومتر" data-ceiling="۱۳,۰۰۰ متر" data-engines="۴ × Soloviev D-30KP" data-entered="۱۳۷۰" data-desc="ایل-۷۶ یک هواپیمای ترابری سنگین چهارموتوره روسی است که قابلیت حمل بارهای بسیار سنگین تا ۴۰ تن را دارد. این هواپیما برای عملیات‌های لجستیکی بزرگ و انتقال تجهیزات سنگین نظامی استفاده می‌شود." data-history="ایل-۷۶‌ها در دهه ۱۳۷۰ وارد خدمت شدند و نقش مهمی در لجستیک نیروهای مسلح ایران دارند.">
+<div class="card-visual">
+<img src="https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800&q=80" alt="Il-76">
+<span class="card-origin">🇷🇺 Russia</span>
+<span class="card-status"><span class="dot"></span> عملیاتی</span>
+</div>
+<div class="card-body">
+<h3 class="card-name">Il-76 Candid</h3>
+<div class="card-codename">کندید — Ilyushin</div>
+<p class="card-role">ترابری سنگین استراتژیک</p>
+<div class="card-specs">
+<div class="spec"><span class="spec-label">Max Speed</span><span class="spec-value">850 km/h</span></div>
+<div class="spec"><span class="spec-label">Range</span><span class="spec-value">5,000 km</span></div>
+<div class="spec"><span class="spec-label">Payload</span><span class="spec-value">40 ton</span></div>
+<div class="spec"><span class="spec-label">Entered</span><span class="spec-value">1991</span></div>
+</div>
+<div class="card-tags">
+<span class="card-tag">استراتژیک</span>
+<span class="card-tag gold">سنگین</span>
+<span class="card-tag">۴ موتور</span>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+<div class="modal" id="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<div class="modal-hero">
+<img id="modalImg" src="" alt="">
+<div class="modal-info">
+<h2 class="modal-name" id="modalName"></h2>
+<div class="modal-codename" id="modalCodename"></div>
+</div>
+</div>
+<div class="modal-body">
+<p class="modal-desc" id="modalDesc"></p>
+<div class="modal-specs-grid" id="modalSpecs"></div>
+<div class="modal-history">
+<h4>📋 تاریخچه عملیاتی</h4>
+<p id="modalHistory"></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<p>© ۱۴۰۳ نیروی هوایی ارتش جمهوری اسلامی ایران — IRIAF Aircraft Fleet Database</p>
+</footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>{
+document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+});
+
+// Reveal
+const ro=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}});
+},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// Counter
+const co=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+const el=e.target;const t=parseInt(el.dataset.target);let c=0;
+const inc=t/50;
+const timer=setInterval(()=>{c+=inc;if(c>=t){c=t;clearInterval(timer)}el.textContent=Math.floor(c).toLocaleString('fa-IR')},35);
+co.unobserve(el);
+}
+});
+},{threshold:0.5});
+document.querySelectorAll('.stat-number').forEach(el=>co.observe(el));
+
+// Filter tabs
+const tabs=document.querySelectorAll('.filter-tab');
+const cards=document.querySelectorAll('.aircraft-card');
+tabs.forEach(tab=>{
+tab.addEventListener('click',()=>{
+tabs.forEach(t=>t.classList.remove('active'));
+tab.classList.add('active');
+const filter=tab.dataset.filter;
+cards.forEach(card=>{
+if(filter==='all'){
+card.classList.remove('hidden');
+card.style.display='';
+}else{
+const cats=card.dataset.category.split(' ');
+if(cats.includes(filter)){
+card.classList.remove('hidden');
+card.style.display='';
+}else{
+card.classList.add('hidden');
+card.style.display='none';
+}
+}
+});
+});
+});
+
+// Modal
+cards.forEach(card=>{
+card.addEventListener('click',()=>{
+const d=card.dataset;
+document.getElementById('modalName').textContent=d.name;
+document.getElementById('modalCodename').textContent=d.codename;
+document.getElementById('modalDesc').textContent=d.desc;
+document.getElementById('modalHistory').textContent=d.history;
+document.getElementById('modalImg').src=card.querySelector('.card-visual img').src;
+const specsGrid=document.getElementById('modalSpecs');
+specsGrid.innerHTML=`
+<div class="modal-spec"><div class="modal-spec-label">نقش / Role</div><div class="modal-spec-value" style="font-size:.9rem">${d.role}</div></div>
+<div class="modal-spec"><div class="modal-spec-label">سرعت / Speed</div><div class="modal-spec-value">${d.speed}</div></div>
+<div class="modal-spec"><div class="modal-spec-label">برد / Range</div><div class="modal-spec-value">${d.range}</div></div>
+<div class="modal-spec"><div class="modal-spec-label">سقف / Ceiling</div><div class="modal-spec-value">${d.ceiling}</div></div>
+<div class="modal-spec"><div class="modal-spec-label">موتور / Engine</div><div class="modal-spec-value" style="font-size:.85rem">${d.engines}</div></div>
+<div class="modal-spec"><div class="modal-spec-label">ورود به خدمت</div><div class="modal-spec-value">${d.entered}</div></div>
+<div class="modal-spec"><div class="modal-spec-label">کشور سازنده</div><div class="modal-spec-value">${d.origin}</div></div>
+<div class="modal-spec"><div class="modal-spec-label">وضعیت</div><div class="modal-spec-value">${d.status}</div></div>
+`;
+document.getElementById('modalOverlay').classList.add('active');
+document.body.style.overflow='hidden';
+});
+});
+
+function closeModal(){
+document.getElementById('modalOverlay').classList.remove('active');
+document.body.style.overflow='';
+}
+document.getElementById('modalOverlay').addEventListener('click',e=>{
+if(e.target===document.getElementById('modalOverlay'))closeModal();
+});
+
+// 3D tilt
+cards.forEach(card=>{
+card.addEventListener('mousemove',e=>{
+const r=card.getBoundingClientRect();
+const x=(e.clientX-r.left)/r.width-.5;
+const y=(e.clientY-r.top)/r.height-.5;
+card.style.transform=`perspective(1000px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-8px)`;
+});
+card.addEventListener('mouseleave',()=>{
+card.style.transform='';
+});
+});
+
+// GSAP
+gsap.registerPlugin(ScrollTrigger);
+gsap.from('.hero-content',{opacity:0,y:60,duration:1.2,delay:.3,ease:'power3.out'});
+gsap.from('.stats-bar',{opacity:0,y:40,duration:1,delay:.6,ease:'power3.out',scrollTrigger:{trigger:'.stats-bar',start:'top 85%'}});
+</script>
+</body>
+</html>
