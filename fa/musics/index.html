@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4B8TR0WWKR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-4B8TR0WWKR');
-</script>
+  <!-- Analytics (Google Analytics, Clarity, Vercel Speed Insights) -->
+  <script src="/js/analytics.js" data-clarity-id="vnyjem18db"></script>
   <meta charset="utf-8" />
   <meta name="theme-color" content="#0b0b0f">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -214,13 +207,6 @@
       }
     }
   </style>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vnyjem18db");
-</script>
 </head>
 
 <body>
@@ -732,39 +718,12 @@
   </div>
 
   <!-- ✅ Hamburger Menu Script -->
-  <script>
-    const hamburger = document.getElementById("hamburger");
-    const navMenu = document.getElementById("navMenu");
-    if (hamburger && navMenu) {
-      hamburger.addEventListener("click", () => {
-        const active = hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
-        hamburger.setAttribute("aria-expanded", active);
-      });
-      navMenu.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-          navMenu.classList.remove("active");
-          hamburger.classList.remove("active");
-          hamburger.setAttribute("aria-expanded", "false");
-        });
-      });
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest("nav") && navMenu.classList.contains("active")) {
-          navMenu.classList.remove("active");
-          hamburger.classList.remove("active");
-          hamburger.setAttribute("aria-expanded", "false");
-        }
-      });
-    }
-  </script>
+  <script src="/js/nav-menu.js" defer></script>
   
   <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
 
   <!-- Vercel Speed Insights -->
-  <script>
-    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
