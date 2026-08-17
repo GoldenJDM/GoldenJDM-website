@@ -171,7 +171,13 @@ window.addEventListener('scroll', () => {
   if (!splash) return;
   
   // If user has seen splash before, remove it
-  if (localStorage.getItem('goldenjdm_splash_seen_en')) {
+  let splashSeen = false;
+  try {
+    splashSeen = !!localStorage.getItem('goldenjdm_splash_seen_en');
+  } catch (e) {
+    console.warn('localStorage not available:', e);
+  }
+  if (splashSeen) {
     splash.remove();
     return;
   }
@@ -193,7 +199,7 @@ window.addEventListener('scroll', () => {
       try {
         localStorage.setItem('goldenjdm_splash_seen_en', 'true');
       } catch(e) {
-        console.log('localStorage not available');
+        console.warn('localStorage not available:', e);
       }
     }, 600); // Match CSS transition duration
     

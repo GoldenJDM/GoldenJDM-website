@@ -1329,7 +1329,7 @@
   audio.volume=.25;
   audioBtn.addEventListener('click',()=>{
     audioBtn.classList.toggle('muted');
-    if(audioBtn.classList.contains('muted'))audio.pause();else audio.play().catch(()=>{});
+    if(audioBtn.classList.contains('muted'))audio.pause();else audio.play().catch(err=>{audioBtn.classList.add('muted');console.warn('Ambient audio playback failed:',err)});
   });
 
   // Hero parallax
