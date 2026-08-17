@@ -1345,13 +1345,24 @@
       }
 
       // === PLAY/PAUSE ===
+      function handlePlaybackFailure(err) {
+        console.warn('Playback failed:', err);
+        isPlaying = false;
+        player.classList.remove('playing');
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+      }
+
+      function safePlay() {
+        audio.play().catch(handlePlaybackFailure);
+      }
+
       function togglePlay() {
         if (audio.paused) {
           audio.play().then(() => {
             isPlaying = true;
             player.classList.add('playing');
             animateProgress();
-          }).catch(e => console.log('Playback error:', e));
+          }).catch(handlePlaybackFailure);
         } else {
           audio.pause();
           isPlaying = false;
@@ -1475,7 +1486,7 @@
           nextIndex = (currentTrackIndex + 1) % tracks.length;
         }
         loadTrack(nextIndex);
-        if (isPlaying) audio.play();
+        if (isPlaying) safePlay();
       }
 
       function playPrev() {
@@ -1484,7 +1495,7 @@
         } else {
           const prevIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
           loadTrack(prevIndex);
-          if (isPlaying) audio.play();
+          if (isPlaying) safePlay();
         }
       }
 
@@ -1495,7 +1506,7 @@
       audio.addEventListener('ended', () => {
         if (repeatMode === 2) {
           audio.currentTime = 0;
-          if (isPlaying) audio.play();
+          if (isPlaying) safePlay();
         } else if (repeatMode === 1 || isShuffle) {
           playNext();
         } else {
@@ -1508,6 +1519,11 @@
 
       audio.addEventListener('loadedmetadata', () => {
         durationEl.textContent = formatTime(audio.duration);
+      });
+
+      audio.addEventListener('error', () => {
+        console.warn('Audio failed to load:', tracks[currentTrackIndex].src, audio.error);
+        handlePlaybackFailure(audio.error);
       });
 
       // === KEYBOARD SHORTCUTS ===
