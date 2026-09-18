@@ -1,0 +1,1816 @@
+
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="وب‌سایت رسمی دانشگاه علوم و فنون هوایی شهید ستاری؛ دانشگاه هوایی"
+  />
+
+  <meta
+    name="keywords"
+    content="دانشگاه هوایی، دانشگاه شهید ستاری، نیروی هوایی، پذیرش دانشگاه هوایی، علوم و فنون هوایی"
+  />
+
+  <meta name="theme-color" content="#071525" />
+
+  <title>دانشگاه علوم و فنون هوایی شهید ستاری</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap");
+
+    :root {
+      --navy-950: #06111f;
+      --navy-900: #0a1d32;
+      --navy-800: #123858;
+      --navy-700: #174a72;
+
+      --blue: #2588bd;
+      --blue-light: #71c5eb;
+      --blue-pale: #eaf6fb;
+
+      --silver: #aebbc7;
+      --steel: #5e7182;
+
+      --white: #ffffff;
+      --surface: #f4f7f9;
+      --surface-dark: #e9eef2;
+      --border: #dce5eb;
+
+      --text: #182733;
+      --muted: #657482;
+
+      --gold: #c69b45;
+      --red: #a8393d;
+
+      --shadow-sm: 0 4px 16px rgba(7, 28, 48, 0.07);
+      --shadow-md: 0 12px 35px rgba(7, 28, 48, 0.13);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+
+      --container: 1200px;
+    }
+
+    body.dark-mode {
+      --surface: #0c1927;
+      --surface-dark: #122437;
+      --white: #122437;
+      --text: #edf5f8;
+      --muted: #b5c4ce;
+      --border: #294157;
+      --blue-pale: #12344d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--surface);
+      color: var(--text);
+      font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+      line-height: 1.8;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      right: 20px;
+      z-index: 1000;
+      padding: 10px 16px;
+      background: var(--gold);
+      color: var(--navy-950);
+      border-radius: var(--radius-sm);
+    }
+
+    .skip-link:focus {
+      top: 20px;
+    }
+
+    .topbar {
+      min-height: 38px;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: var(--navy-950);
+      color: #c4d1da;
+      font-size: 0.78rem;
+    }
+
+    .topbar-right,
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .topbar a {
+      transition: color 0.2s ease;
+    }
+
+    .topbar a:hover {
+      color: var(--blue-light);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      color: var(--white);
+      background: rgba(10, 29, 50, 0.97);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .navbar {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 255px;
+      color: white;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .brand-symbol {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      color: var(--gold);
+      font-size: 1.8rem;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .brand span {
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--blue-light);
+      font-size: 0.76rem;
+      font-weight: 500;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex: 1;
+      font-size: 0.87rem;
+    }
+
+    .main-nav > a,
+    .dropdown-toggle {
+      position: relative;
+      padding: 8px 0;
+      color: #e5edf2;
+      background: transparent;
+      border: 0;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .main-nav > a::after,
+    .dropdown-toggle::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      content: "";
+      background: var(--blue-light);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.2s ease;
+    }
+
+    .main-nav > a:hover,
+    .dropdown-toggle:hover {
+      color: var(--blue-light);
+    }
+
+    .main-nav > a:hover::after,
+    .dropdown-toggle:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 15px);
+      right: -15px;
+      min-width: 210px;
+      padding: 10px;
+      display: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      background: var(--navy-900);
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: #d9e5ec;
+      font-size: 0.83rem;
+    }
+
+    .dropdown-menu a:hover {
+      color: white;
+      background: var(--navy-700);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-button {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 50%;
+      color: white;
+      background: transparent;
+      font-size: 1.05rem;
+    }
+
+    .icon-button:hover {
+      border-color: var(--blue-light);
+      color: var(--blue-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: white;
+      background: transparent;
+      font-size: 1.3rem;
+    }
+
+    .btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.86rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--blue);
+    }
+
+    .btn-primary:hover {
+      background: #1e719f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 136, 189, 0.25);
+    }
+
+    .btn-outline {
+      border-color: rgba(255, 255, 255, 0.6);
+      color: white;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-dark {
+      color: white;
+      background: var(--navy-800);
+    }
+
+    .btn-gold {
+      color: var(--navy-950);
+      background: var(--gold);
+    }
+
+    .btn-gold:hover {
+      background: #d4ad60;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 610px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(5, 18, 32, 0.96), rgba(5, 18, 32, 0.32)),
+        url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=85")
+        center / cover;
+    }
+
+    .hero::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      opacity: 0.2;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 55px 55px;
+      mask-image: linear-gradient(90deg, black, transparent);
+    }
+
+    .hero::after {
+      position: absolute;
+      right: 0;
+      bottom: -120px;
+      width: 600px;
+      height: 600px;
+      content: "";
+      border: 1px solid rgba(113, 197, 235, 0.2);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 55px rgba(113, 197, 235, 0.06),
+        0 0 0 110px rgba(113, 197, 235, 0.04);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 730px;
+      padding: 95px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .hero .eyebrow {
+      color: var(--blue-light);
+    }
+
+    .hero h1 {
+      max-width: 700px;
+      margin: 12px 0 20px;
+      font-size: clamp(2.35rem, 5vw, 4.9rem);
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--blue-light);
+    }
+
+    .hero-description {
+      max-width: 620px;
+      color: #dae6ed;
+      font-size: 1.1rem;
+      line-height: 2;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 42px;
+      color: #cfdee7;
+      font-size: 0.84rem;
+    }
+
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-meta span::before {
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      content: "";
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .notice-bar {
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .notice-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .notice-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 11px;
+      border-radius: 50px;
+      color: white;
+      background: var(--red);
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .notice-badge::before {
+      width: 7px;
+      height: 7px;
+      content: "";
+      border-radius: 50%;
+      background: #ffb5b5;
+    }
+
+    .notice-text {
+      overflow: hidden;
+      color: var(--text);
+      font-size: 0.9rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .notice-link {
+      margin-right: auto;
+      color: var(--blue);
+      font-size: 0.84rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-light {
+      background: var(--white);
+    }
+
+    .section-heading {
+      margin-bottom: 36px;
+    }
+
+    .section-heading h2 {
+      margin-top: 5px;
+      color: var(--text);
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      line-height: 1.4;
+    }
+
+    .section-heading p {
+      max-width: 670px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .heading-row {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .heading-row .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .quick-card {
+      position: relative;
+      min-height: 190px;
+      padding: 25px 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+    }
+
+    .quick-card::after {
+      position: absolute;
+      right: -35px;
+      bottom: -55px;
+      width: 135px;
+      height: 135px;
+      content: "";
+      border: 1px solid rgba(37, 136, 189, 0.14);
+      border-radius: 50%;
+    }
+
+    .quick-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .quick-icon {
+      width: 51px;
+      height: 51px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      color: var(--blue);
+      background: var(--blue-pale);
+      font-size: 1.5rem;
+    }
+
+    .quick-card h3 {
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .quick-card p {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .about-section {
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(234, 246, 251, 0.75), transparent),
+        var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .about-image {
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, transparent 35%, rgba(7, 21, 37, 0.78)),
+        url("https://images.unsplash.com/photo-1517976547714-720226b864c1?auto=format&fit=crop&w=1100&q=85")
+        center / cover;
+      box-shadow: var(--shadow-md);
+    }
+
+    .about-image-label {
+      position: absolute;
+      right: 24px;
+      bottom: 22px;
+      left: 24px;
+      color: white;
+    }
+
+    .about-image-label strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.4rem;
+    }
+
+    .about-image-label span {
+      color: #d8e5eb;
+      font-size: 0.85rem;
+    }
+
+    .about-content h2 {
+      margin: 6px 0 18px;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      line-height: 1.45;
+    }
+
+    .about-content > p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 2.1;
+    }
+
+    .about-list {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0 28px;
+      list-style: none;
+    }
+
+    .about-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .about-list li::before {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      content: "✓";
+      border-radius: 50%;
+      color: white;
+      background: var(--blue);
+      font-size: 0.7rem;
+    }
+
+    .stats-section {
+      position: relative;
+      overflow: hidden;
+      padding: 58px 0;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(6, 17, 31, 0.96), rgba(18, 56, 88, 0.9)),
+        url("https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1800&q=80")
+        center / cover;
+    }
+
+    .stats-section::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      opacity: 0.15;
+      background-image:
+        linear-gradient(rgba(113, 197, 235, 0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(113, 197, 235, 0.35) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .stats-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .stat {
+      padding: 15px;
+      text-align: center;
+      border-left: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .stat:last-child {
+      border-left: 0;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--blue-light);
+      font-size: 2.65rem;
+      line-height: 1.2;
+    }
+
+    .stat span {
+      color: #d4e0e7;
+      font-size: 0.88rem;
+    }
+
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .faculty-card {
+      position: relative;
+      min-height: 245px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      color: white;
+      background-position: center;
+      background-size: cover;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease;
+    }
+
+    .faculty-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .faculty-card::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(0deg, rgba(5, 17, 30, 0.92), transparent 70%);
+    }
+
+    .faculty-card-content {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
+    }
+
+    .faculty-card small {
+      color: var(--blue-light);
+      font-size: 0.75rem;
+    }
+
+    .faculty-card h3 {
+      margin-top: 5px;
+      font-size: 1.05rem;
+    }
+
+    .faculty-card p {
+      margin-top: 4px;
+      color: #d7e3e9;
+      font-size: 0.75rem;
+      line-height: 1.7;
+    }
+
+    .faculty-1 {
+      background-image: url("https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .faculty-2 {
+      background-image: url("https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .faculty-3 {
+      background-image: url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .faculty-4 {
+      background-image: url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .faculty-5 {
+      background-image: url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .faculty-6 {
+      background-image: url("https://images.unsplash.com/photo-1517976547714-720226b864c1?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .faculty-7 {
+      background-image: url("https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .news-section {
+      background: var(--white);
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .news-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .news-image {
+      height: 190px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .news-card:first-child .news-image {
+      height: 240px;
+    }
+
+    .news-1 {
+      background-image: url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=80");
+    }
+
+    .news-2 {
+      background-image: url("https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80");
+    }
+
+    .news-3 {
+      background-image: url("https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80");
+    }
+
+    .news-content {
+      padding: 19px;
+    }
+
+    .news-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.73rem;
+    }
+
+    .news-category {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .news-content h3 {
+      margin: 10px 0 6px;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .news-content p {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .news-more {
+      display: inline-block;
+      margin-top: 13px;
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .research-card {
+      min-height: 270px;
+      padding: 30px;
+      border-radius: var(--radius-md);
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(10, 29, 50, 0.97), rgba(18, 74, 114, 0.8)),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80")
+        center / cover;
+    }
+
+    .research-card.light {
+      color: var(--text);
+      background:
+        linear-gradient(135deg, rgba(234, 246, 251, 0.96), rgba(255, 255, 255, 0.88)),
+        url("https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=1200&q=80")
+        center / cover;
+    }
+
+    .research-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      color: var(--blue-light);
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 1.7rem;
+    }
+
+    .research-card.light .research-icon {
+      color: var(--blue);
+      background: var(--blue-pale);
+    }
+
+    .research-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.25rem;
+    }
+
+    .research-card p {
+      max-width: 500px;
+      color: #cfdee6;
+      font-size: 0.88rem;
+    }
+
+    .research-card.light p {
+      color: var(--muted);
+    }
+
+    .facility-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .facility-card {
+      padding: 25px 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--white);
+      transition: 0.25s ease;
+    }
+
+    .facility-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+    }
+
+    .facility-icon {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      color: var(--blue);
+      background: var(--blue-pale);
+      font-size: 1.5rem;
+    }
+
+    .facility-card h3 {
+      margin-bottom: 5px;
+      font-size: 0.98rem;
+    }
+
+    .facility-card p {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .admission-section {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background:
+        linear-gradient(100deg, rgba(7, 21, 37, 0.98), rgba(18, 74, 114, 0.88)),
+        url("https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=1600&q=80")
+        center / cover;
+    }
+
+    .admission-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .admission-content h2 {
+      margin: 8px 0 12px;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+    }
+
+    .admission-content p {
+      max-width: 700px;
+      color: #d5e2e9;
+      font-size: 0.93rem;
+    }
+
+    .admission-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 24px;
+    }
+
+    .contact-info,
+    .contact-form {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-info h3,
+    .contact-form h3 {
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .contact-item-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 9px;
+      color: var(--blue);
+      background: var(--blue-pale);
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.86rem;
+    }
+
+    .contact-item span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      color: var(--text);
+      background: var(--surface);
+      transition: 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37, 136, 189, 0.13);
+    }
+
+    textarea.form-control {
+      min-height: 115px;
+      resize: vertical;
+    }
+
+    .footer {
+      padding: 60px 0 20px;
+      color: #cfdae2;
+      background: var(--navy-950);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.1fr;
+      gap: 35px;
+      padding-bottom: 42px;
+    }
+
+    .footer-brand {
+      max-width: 340px;
+    }
+
+    .footer-brand .brand {
+      margin-bottom: 17px;
+    }
+
+    .footer-brand p {
+      color: #9eb0bd;
+      font-size: 0.82rem;
+      line-height: 2;
+    }
+
+    .footer h3 {
+      margin-bottom: 16px;
+      color: white;
+      font-size: 0.98rem;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 9px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: #aebdc8;
+      font-size: 0.8rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue-light);
+    }
+
+    .footer-contact {
+      display: grid;
+      gap: 10px;
+      color: #aebdc8;
+      font-size: 0.8rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 8px;
+      margin-top: 17px;
+    }
+
+    .social-links a {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #3c5265;
+      border-radius: 50%;
+      color: #c9d8e1;
+      font-size: 0.75rem;
+    }
+
+    .social-links a:hover {
+      border-color: var(--blue-light);
+      color: var(--blue-light);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding-top: 18px;
+      border-top: 1px solid #23394d;
+      color: #8da0ae;
+      font-size: 0.73rem;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .footer-bottom a:hover {
+      color: white;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      color: white;
+      background: var(--blue);
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(3, 12, 22, 0.7);
+    }
+
+    .modal-overlay.active {
+      display: grid;
+    }
+
+    .modal {
+      position: relative;
+      width: min(540px, 100%);
+      padding: 28px;
+      border-radius: var(--radius-md);
+      color: var(--text);
+      background: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .modal h2 {
+      margin-bottom: 8px;
+      font-size: 1.4rem;
+    }
+
+    .modal p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 50%;
+      color: var(--text);
+      background: var(--surface-dark);
+      font-size: 1.1rem;
+    }
+
+    .portal-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .portal-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      background: var(--surface);
+      font-size: 0.86rem;
+    }
+
+    .portal-list a:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+
+    @media (max-width: 1100px) {
+      .main-nav {
+        gap: 12px;
+      }
+
+      .main-nav > a,
+      .dropdown-toggle {
+        font-size: 0.8rem;
+      }
+
+      .brand {
+        min-width: 225px;
+      }
+
+      .faculty-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .navbar {
+        min-height: 72px;
+      }
+
+      .main-nav,
+      .desktop-portal {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: grid;
+        place-items: center;
+        margin-right: auto;
+      }
+
+      .header-actions {
+        order: 3;
+      }
+
+      .mobile-nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        padding: 15px 16px 20px;
+        background: var(--navy-900);
+        box-shadow: var(--shadow-md);
+      }
+
+      .mobile-nav.active {
+        display: block;
+      }
+
+      .mobile-nav a,
+      .mobile-nav button {
+        display: block;
+        width: 100%;
+        padding: 11px 8px;
+        border: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        color: #e5edf2;
+        background: transparent;
+        text-align: right;
+        font-size: 0.88rem;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .about-image {
+        min-height: 390px;
+      }
+
+      .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .faculty-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .news-card:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat:nth-child(2) {
+        border-left: 0;
+      }
+
+      .admission-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        min-height: 35px;
+        justify-content: center;
+        font-size: 0.7rem;
+      }
+
+      .topbar-left {
+        display: none;
+      }
+
+      .brand {
+        min-width: auto;
+      }
+
+      .brand-symbol {
+        width: 44px;
+        height: 44px;
+        font-size: 1.4rem;
+      }
+
+      .brand span {
+        font-size: 0.76rem;
+      }
+
+      .brand small {
+        font-size: 0.65rem;
+      }
+
+      .hero {
+        min-height: 590px;
+      }
+
+      .hero-content {
+        padding: 75px 0;
+      }
+
+      .hero h1 {
+        font-size: 2.45rem;
+      }
+
+      .hero-description {
+        font-size: 0.92rem;
+      }
+
+      .hero-meta {
+        display: grid;
+        gap: 8px;
+        margin-top: 30px;
+      }
+
+      .notice-inner {
+        min-height: 82px;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+      }
+
+      .notice-link {
+        margin-right: 0;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .heading-row {
+        display: block;
+      }
+
+      .heading-row .btn {
+        margin-top: -10px;
+        margin-bottom: 24px;
+      }
+
+      .quick-grid,
+      .faculty-grid,
+      .news-grid,
+      .stats-grid,
+      .facility-grid,
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .news-card:first-child {
+        grid-column: auto;
+      }
+
+      .news-card:first-child .news-image,
+      .news-image {
+        height: 200px;
+      }
+
+      .stat {
+        border-left: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+      }
+
+      .stat:last-child {
+        border-bottom: 0;
+      }
+
+      .about-image {
+        min-height: 310px;
+      }
+
+      .research-card {
+        min-height: 240px;
+      }
+
+      .admission-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .topbar-left,
+      .topbar-right {
+        gap: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main-content">
+    پرش به محتوای اصلی
+  </a>
+
+  <!-- نوار بالایی -->
+  <div class="topbar">
+    <div class="topbar-right">
+      <span>سامانه رسمی دانشگاه علوم و فنون هوایی شهید ستاری</span>
+    </div>
+
+    <div class="topbar-left">
+      <a href="#contact">تماس با ما</a>
+      <a href="#news">اخبار</a>
+      <a href="#" lang="en" dir="ltr">English</a>
+    </div>
+  </div>
+
+  <!-- هدر -->
+  <header class="site-header">
+    <div class="container navbar">
+
+      <a class="brand" href="#home" aria-label="صفحه اصلی دانشگاه">
+        <div class="brand-symbol" aria-hidden="true">✈</div>
+
+        <span>
+          دانشگاه علوم و فنون هوایی
+          <small>شهید ستاری | دانشگاه هوایی</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="منوی اصلی">
+        <a href="#home">صفحه اصلی</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-toggle" type="button">
+            درباره دانشگاه
+          </button>
+
+          <div class="dropdown-menu">
+            <a href="#about">معرفی دانشگاه</a>
+            <a href="#history">تاریخچه</a>
+            <a href="#mission">مأموریت و چشم‌انداز</a>
+            <a href="#facilities">امکانات دانشگاه</a>
+          </div>
+        </div>
+
+        <a href="#faculties">دانشکده‌ها</a>
+        <a href="#admission">پذیرش و ثبت‌نام</a>
+        <a href="#research">پژوهش و فناوری</a>
+        <a href="#news">اخبار و رویدادها</a>
+        <a href="#contact">تماس با ما</a>
+      </nav>
+
+      <div class="header-actions">
+        <button
+          class="icon-button"
+          id="themeToggle"
+          type="button"
+          aria-label="تغییر حالت نمایش"
+          title="تغییر حالت نمایش"
+        >
+          ☾
+        </button>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="باز کردن منوی موبایل"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+        <button
+          class="btn btn-primary desktop-portal"
+          id="portalButton"
+          type="button"
+        >
+          ورود به سامانه‌ها
+        </button>
+      </div>
+    </div>
+
+    <!-- منوی موبایل -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="منوی موبایل">
+      <a href="#home">صفحه اصلی</a>
+      <a href="#about">درباره دانشگاه</a>
+      <a href="#faculties">دانشکده‌ها</a>
+      <a href="#admission">پذیرش و ثبت‌نام</a>
+      <a href="#research">پژوهش و فناوری</a>
+      <a href="#news">اخبار و رویدادها</a>
+      <a href="#facilities">امکانات</a>
+      <a href="#contact">تماس با ما</a>
+      <button type="button" id="mobilePortalButton">
+        ورود به سامانه‌ها
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- هیرو -->
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <span class="eyebrow">دانشگاه علوم و فنون هوایی شهید ستاری</span>
+
+        <h1>
+          دانش، انضباط،
+          <span>پرواز</span>
+        </h1>
+
+        <p class="hero-description">
+          دانشگاهی برای تربیت افسران، خلبانان، مهندسان و متخصصان متعهد
+          در حوزه‌های هوافضا، فناوری‌های نوین دفاعی و علوم مورد نیاز
+          نیروی هوایی ارتش جمهوری اسلامی ایران.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#admission">
+            راهنمای پذیرش
+            <span aria-hidden="true">←</span>
+          </a>
+
+          <a class="btn btn-outline" href="#about">
+            معرفی دانشگاه
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span>آموزش علمی و نظامی</span>
+          <span>دانشگاه شبانه‌روزی</span>
+          <span>فناوری‌های پیشرفته هوافضایی</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- اطلاعیه فوری -->
+    <section class="notice-bar" aria-label="اطلاعیه‌های فوری">
+      <div class="container notice-inner">
+        <span class="notice-badge">اطلاعیه مهم</span>
+
+        <span class="notice-text">
+          آخرین اطلاعیه‌های پذیرش، ثبت‌نام و تقویم آموزشی دانشگاه را مشاهده کنید.
+        </span>
+
+        <a class="notice-link" href="#admission">
+          مشاهده جزئیات ←
+        </a>
+      </div>
+    </section>
+
+    <!-- دسترسی سریع -->
+    <section class="section" id="quick-access">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">خدمات دانشگاه</span>
+          <h2>دسترسی سریع</h2>
+          <p>
+            دسترسی مستقیم به پرکاربردترین بخش‌ها و خدمات دانشگاه.
+          </p>
+        </div>
+
+        <div class="quick-grid">
+
+          <a class="quick-card" href="#admission">
+            <div class="quick-icon" aria-hidden="true">✈</div>
+            <h3>پذیرش و ثبت‌نام</h3>
+            <p>شرایط ورود، مراحل گزینش و دفترچه‌های پذیرش</p>
+          </a>
+
+          <a class="quick-card" href="#faculties">
+            <div class="quick-icon" aria-hidden="true">⌬</div>
+            <h3>دانشکده‌ها و رشته‌ها</h3>
+            <p>آشنایی با حوزه‌های تخصصی و گروه‌های آموزشی</p>
+          </a>
+
+          <a class="quick-card" href="#portals">
+            <div class="quick-icon" aria-hidden="true">▣</div>
+            <h3>سامانه‌های الکترونیکی</h3>
+            <p>سامانه دانشجویی، اساتید و خدمات آموزشی</p>
+          </a>
+
+          <a class="quick-card" href="#research">
+            <div class="quick-icon" aria-hidden="true">⌁</div>
+            <h3>پژوهش و فناوری</h3>
+            <p>مراکز پژوهشی، مجلات علمی و دستاوردهای دانشگاه</p>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- معرفی دانشگاه -->
+    <section class="section about-section" id="about">
+      <div class="container about-grid">
+
+        <div class="about-image" role="img" aria-label="تصویر نمایی از فعالیت‌های هوافضایی">
+          <div class="about-image-label">
+            <strong>دانشگاه هوایی</strong>
+            <span>مرکز تربیت نیروی انسانی متخصص و متعهد</span>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <span class="eyebrow">درباره دانشگاه</span>
+
+          <h2>
+            از دانش تا آسمان،
+            <br />
+            در مسیر اقتدار ملی
+          </h2>
+
+          <p>
+            دانشگاه علوم و فنون هوایی شهید ستاری با مأموریت تربیت نیروی انسانی
+            متخصص و متعهد، آموزش‌های علمی، تخصصی و نظامی را در محی
