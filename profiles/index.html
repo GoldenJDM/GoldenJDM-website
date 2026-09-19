@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لینک‌های پروفایل</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/vazirmatn@5.0.0/index.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* پاپ‌آپ هشدار */
+        .alert-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(255, 68, 68, 0.4);
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .alert-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .alert-text {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .alert-icon {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .alert-message {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .alert-message .domain {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 0 5px;
+            direction: ltr;
+        }
+
+        .close-alert {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .close-alert:hover {
+            background: white;
+            color: #cc0000;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            margin-top: 100px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-card:hover::before {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        .link-card i {
+            font-size: 1.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-card span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* رنگ‌های اختصاصی هر پلتفرم */
+        .mastodon { background: linear-gradient(135deg, #6364FF 0%, #563ACC 100%); }
+        .telegram { background: linear-gradient(135deg, #0088cc 0%, #0066aa 100%); }
+        .tiktok { background: linear-gradient(135deg, #000000 0%, #25F4EE 100%); }
+        .rubika { background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%); }
+        .bale { background: linear-gradient(135deg, #00BFA5 0%, #00897B 100%); }
+        .eitaa { background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); }
+        .pinterest { background: linear-gradient(135deg, #E60023 0%, #BD001C 100%); }
+        .vk { background: linear-gradient(135deg, #4C75A3 0%, #3B5998 100%); }
+        .signal { background: linear-gradient(135deg, #3A76F0 0%, #2C5FCC 100%); }
+        .bluesky { background: linear-gradient(135deg, #0085FF 0%, #0066CC 100%); }
+        .mydot { background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%); }
+        .x { background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin-top: 120px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .links-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .link-card {
+                padding: 15px;
+            }
+
+            .link-card i {
+                font-size: 1.5rem;
+            }
+
+            .link-card span {
+                font-size: 1rem;
+            }
+
+            .alert-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .alert-text {
+                flex-direction: column;
+            }
+
+            .alert-message {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- پاپ‌آپ هشدار -->
+    <div class="alert-popup" id="alertPopup">
+        <div class="alert-content">
+            <div class="alert-text">
+                <div class="alert-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="alert-message">
+                    برای صحت لینک پروفایل‌ها حتماً به دامنه <span class="domain">GoldenJDM.ir/profiles</span> دقت کنید
+                </div>
+            </div>
+            <button class="close-alert" onclick="closeAlert()">بستن</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🔗 لینک‌های پروفایل</h1>
+            <p>شبکه‌های اجتماعی من را دنبال کنید</p>
+        </div>
+
+        <div class="links-grid">
+            <a href="https://mastodon.social/@GoldenJDM" class="link-card mastodon" target="_blank">
+                <i class="fab fa-mastodon"></i>
+                <span>Mastodon</span>
+            </a>
+
+            <a href="https://t.me/GoldenJDM" class="link-card telegram" target="_blank">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram</span>
+            </a>
+
+            <a href="https://tiktok.com/@GoldenJDM.ir" class="link-card tiktok" target="_blank">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </a>
+
+            <a href="https://rubika.ir/GoldenJDM" class="link-card rubika" target="_blank">
+                <i class="fas fa-circle"></i>
+                <span>Rubika</span>
+            </a>
+
+            <a href="https://bale.ai/Goldenjdm" class="link-card bale" target="_blank">
+                <i class="fas fa-paper-plane"></i>
+                <span>Bale</span>
+            </a>
+
+            <a href="https://eitaa.com/gldenjdm" class="link-card eitaa" target="_blank">
+                <i class="fas fa-comment-dots"></i>
+                <span>Eitaa</span>
+            </a>
+
+            <a href="https://pinterest.com/GoldenJDM_ir" class="link-card pinterest" target="_blank">
+                <i class="fab fa-pinterest"></i>
+                <span>Pinterest</span>
+            </a>
+
+            <a href="https://vk.com/goldenjdm" class="link-card vk" target="_blank">
+                <i class="fab fa-vk"></i>
+                <span>VK</span>
+            </a>
+
+            <a href="https://signal.me/#eu/h5Vd6Q_rSvRXZn9idz0sOrrB4T1B5tq-ohrFvIKiAlfYLDC-vmpEFYbwnkwe_tb0" class="link-card signal" target="_blank">
+                <i class="fas fa-lock"></i>
+                <span>Signal</span>
+            </a>
+
+            <a href="https://bsky.app/profile/goldenjdm.ir" class="link-card bluesky" target="_blank">
+                <i class="fas fa-cloud"></i>
+                <span>Bluesky</span>
+            </a>
+
+            <a href="https://mydot.one/profile/GoldenJDM" class="link-card mydot" target="_blank">
+                <i class="fas fa-dot-circle"></i>
+                <span>MyDot</span>
+            </a>
+
+            <a href="https://x.com/GoldenJDM_ir" class="link-card x" target="_blank">
+                <i class="fab fa-x-twitter"></i>
+                <span>X</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function closeAlert() {
+            const alertPopup = document.getElementById('alertPopup');
+            alertPopup.style.animation = 'slideUp 0.3s ease-in';
+            setTimeout(() => {
+                alertPopup.style.display = 'none';
+            }, 300);
+        }
+
+        // اضافه کردن انیمیشن slideUp
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateY(-100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
